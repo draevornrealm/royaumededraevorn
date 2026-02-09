@@ -60,5 +60,121 @@ a:hover {
 .list-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
 .list-item { padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.04); text-decoration:none; display:block; }
 .list-item:hover { background: rgba(255,255,255,.07); }
+
+/* =========================
+   INFOBOX (FANDOM STYLE)
+   ========================= */
+
+.infobox {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.infobox .ibox-head {
+  padding: 14px 14px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+  background: linear-gradient(135deg, rgba(141,183,255,0.18), rgba(255,255,255,0.04));
+}
+
+.infobox .ibox-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.infobox .ibox-sub {
+  margin-top: 6px;
+  opacity: 0.85;
+  font-size: 13px;
+}
+
+.infobox .ibox-badges {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ibadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.06);
+}
+
+.ibadge.marine {
+  background: rgba(141,183,255,0.14);
+  border-color: rgba(141,183,255,0.30);
+}
+
+.ibadge.danger {
+  background: rgba(255,120,120,0.12);
+  border-color: rgba(255,120,120,0.25);
+}
+
+.infobox .ibox-media {
+  padding: 14px;
+}
+
+.infobox .ibox-media img {
+  width: 100%;
+  display: block;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+}
+
+.infobox .ibox-table {
+  padding: 0 14px 14px;
+}
+
+.infobox table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.infobox th, .infobox td {
+  padding: 10px 8px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+  vertical-align: top;
+}
+
+.infobox th {
+  width: 42%;
+  opacity: 0.85;
+  font-weight: 700;
+}
+
+.infobox td {
+  opacity: 0.92;
+}
+
+.infobox td a {
+  font-weight: 700;
+}
+
+.infobox .ibox-footer {
+  padding: 12px 14px 14px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+  display: grid;
+  gap: 8px;
+}
+
+.infobox .mini-note {
+  opacity: 0.80;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
 .list-item .title { font-weight: 700; }
 .list-item .meta { opacity:.8; font-size: 13px; margin-top: 6px; }
