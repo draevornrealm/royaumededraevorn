@@ -1,26 +1,31 @@
 <!doctype html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Wiki de l’Univers</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Kaelros Viremont — Wiki</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Police moderne -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <!-- Police moderne -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
-    <!-- CSS WIKI (CHEMIN CORRIGÉ) -->
-    <link rel="stylesheet" href="/royaumededraevorn/css/wiki.css">
+  <!-- CSS WIKI -->
+  <link rel="stylesheet" href="/royaumededraevorn/css/wiki.css">
 </head>
-<script src="/royaumededraevorn/js/wiki-search.js"></script>
+
 <body>
   <div class="wiki-container">
     <div class="wiki-hero">
       <div>
         <h1>Kaelros Viremont</h1>
-        <p><span class="badge">Marine</span> <span class="badge">Grand Amiral Suprême</span> <span class="badge">Antagoniste</span></p>
+        <p>
+          <span class="badge">Marine</span>
+          <span class="badge">Grand Amiral Suprême</span>
+          <span class="badge">Antagoniste</span>
+        </p>
       </div>
+
       <div class="wiki-search">
         <input id="q" placeholder="Rechercher..." />
         <button id="go">OK</button>
@@ -58,48 +63,51 @@
         </div>
       </main>
 
-<aside class="infobox">
-  <div class="ibox-head">
-    <h3 class="ibox-title">Informations</h3>
-    <div class="ibox-sub">Fiche officielle</div>
+      <aside class="infobox">
+        <div class="ibox-head">
+          <h3 class="ibox-title">Informations</h3>
+          <div class="ibox-sub">Fiche officielle</div>
 
-    <div class="ibox-badges">
-      <span class="ibadge marine">⚓ Marine</span>
-      <span class="ibadge danger">👑 Antagoniste</span>
+          <div class="ibox-badges">
+            <span class="ibadge marine">⚓ Marine</span>
+            <span class="ibadge danger">👑 Antagoniste</span>
+          </div>
+        </div>
+
+        <div class="ibox-media">
+          <img src="/royaumededraevorn/images/kaelros.png" alt="Kaelros Viremont">
+        </div>
+
+        <div class="ibox-table">
+          <table>
+            <tr><th>Nom</th><td>Kaelros Viremont</td></tr>
+            <tr><th>Titre</th><td>Grand Amiral Suprême</td></tr>
+            <tr><th>Surnom</th><td>Le Régent des Mers</td></tr>
+            <tr><th>Faction</th><td><a href="faction-marine.html">Marine</a></td></tr>
+            <tr><th>Idéologie</th><td>Justice de Domination</td></tr>
+            <tr><th>Pouvoir</th><td>Kōsei Kōsei no Mi</td></tr>
+            <tr><th>Statut</th><td>Vivant</td></tr>
+          </table>
+        </div>
+
+        <div class="ibox-footer">
+          <div class="mini-note">Conseil RP : Kaelros ne tolère ni l’insubordination ni l’échec. Chaque ordre est une condamnation.</div>
+        </div>
+      </aside>
     </div>
   </div>
 
-  <div class="ibox-media">
-    <img src="/royaumededraevorn/images/kaelros.png" alt="Kaelros Viremont">
-  </div>
-
-  <div class="ibox-table">
-    <table>
-      <tr><th>Nom</th><td>Kaelros Viremont</td></tr>
-      <tr><th>Titre</th><td>Grand Amiral Suprême</td></tr>
-      <tr><th>Surnom</th><td>Le Régent des Mers</td></tr>
-      <tr><th>Faction</th><td><a href="faction-marine.html">Marine</a></td></tr>
-      <tr><th>Idéologie</th><td>Justice de Domination</td></tr>
-      <tr><th>Pouvoir</th><td>Kōsei Kōsei no Mi</td></tr>
-      <tr><th>Statut</th><td>Vivant</td></tr>
-    </table>
-  </div>
-
-  <div class="ibox-footer">
-    <div class="mini-note">Conseil RP : Kaelros ne tolère ni l’insubordination ni l’échec. Chaque ordre est une condamnation.</div>
-  </div>
-</aside>
-        
-  <script src="../js/wiki-search.js"></script>
+  <!-- JS (UNE SEULE FOIS, AU BON ENDROIT) -->
+  <script src="/royaumededraevorn/js/wiki-search.js"></script>
   <script>
     const q = document.getElementById("q");
-    document.getElementById("go").addEventListener("click", ()=> {
+    document.getElementById("go").addEventListener("click", () => {
       const res = WIKI_SEARCH.searchWiki(q.value);
-      if(res[0]) location.href = res[0].url;
+      if (res[0]) location.href = res[0].url;
     });
-    q.addEventListener("keydown",(e)=>{ if(e.key==="Enter") document.getElementById("go").click(); });
+    q.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") document.getElementById("go").click();
+    });
   </script>
 </body>
 </html>
-
-
