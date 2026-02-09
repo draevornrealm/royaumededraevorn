@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lore & Chronologie — Wiki</title>
+  <link rel="stylesheet" href="../css/wiki.css" />
+</head>
+<body>
+  <div class="wiki-container">
+    <div class="wiki-hero">
+      <div>
+        <h1>Lore & Chronologie</h1>
+        <p>Événements, arcs RP, repères.</p>
+      </div>
+      <div class="wiki-search">
+        <input id="q" placeholder="Rechercher..." />
+        <button id="go">OK</button>
+      </div>
+    </div>
+
+    <div class="wiki-grid">
+      <aside class="wiki-card wiki-sidebar">
+        <h3>Navigation</h3>
+        <div class="content">
+          <a href="index.html">🏠 Accueil</a>
+          <a href="personnages.html">👤 Personnages</a>
+          <a href="faction-marine.html">⚓ Factions</a>
+          <a href="lore.html">📜 Lore & Chronologie</a>
+        </div>
+      </aside>
+
+      <main class="wiki-card wiki-article">
+        <h3>Chronologie</h3>
+        <div class="content">
+          <h2>Arc 1 — Mise en place</h2>
+          <p>Décris ici les premiers événements majeurs.</p>
+
+          <h2>Arc 2 — Chasse marine</h2>
+          <p>Kaelros déclare une opération globale, Kizaru intervient en exécution.</p>
+
+          <h2>Arc 3 — Guerre ouverte</h2>
+          <p>Ajoute tes batailles, alliances, trahisons.</p>
+        </div>
+      </main>
+
+      <aside class="wiki-card">
+        <h3>Conseil</h3>
+        <div class="content">
+          <p style="opacity:.9">Crée une page par Arc RP quand tu en as assez : <b>arc-1.html</b>, <b>arc-2.html</b>, etc.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="../js/wiki-search.js"></script>
+  <script>
+    const q = document.getElementById("q");
+    document.getElementById("go").addEventListener("click", ()=> {
+      const res = WIKI_SEARCH.searchWiki(q.value);
+      if(res[0]) location.href = res[0].url;
+    });
+    q.addEventListener("keydown",(e)=>{ if(e.key==="Enter") document.getElementById("go").click(); });
+  </script>
+</body>
+</html>

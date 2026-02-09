@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Wiki — Accueil</title>
+  <link rel="stylesheet" href="../css/wiki.css" />
+</head>
+<body>
+  <div class="wiki-container">
+    <div class="wiki-hero">
+      <div>
+        <h1>Wiki de l’Univers</h1>
+        <p>Encyclopédie officielle : personnages, factions, chronologie et arcs RP.</p>
+      </div>
+      <div class="wiki-search">
+        <input id="q" placeholder="Rechercher un personnage, une faction..." />
+        <button id="go">Rechercher</button>
+      </div>
+    </div>
+
+    <div class="wiki-grid">
+      <aside class="wiki-card wiki-sidebar">
+        <h3>Navigation</h3>
+        <div class="content">
+          <a href="index.html">🏠 Accueil</a>
+          <a href="personnages.html">👤 Personnages</a>
+          <a href="faction-marine.html">⚓ Factions</a>
+          <a href="lore.html">📜 Lore & Chronologie</a>
+        </div>
+      </aside>
+
+      <main class="wiki-card wiki-article">
+        <h3>À la une</h3>
+        <div class="content">
+          <div class="badge">Marine</div>
+          <div class="badge">Arc principal</div>
+          <h2>Kaelros Viremont — “Le Régent des Mers”</h2>
+          <p>Grand Amiral Suprême, incarnation de la Justice de Domination. Antagoniste central face aux pirates et à la liberté.</p>
+          <p><a href="personnage-kaelros.html">Lire l’article →</a></p>
+
+          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
+
+          <h2>Recherche rapide</h2>
+          <div id="results"></div>
+        </div>
+      </main>
+
+      <aside class="wiki-card">
+        <h3>Catégories</h3>
+        <div class="content">
+          <div class="list-grid">
+            <a class="list-item" href="personnages.html">
+              <div class="title">Personnages</div>
+              <div class="meta">Amiraux, pirates, alliés</div>
+            </a>
+            <a class="list-item" href="faction-marine.html">
+              <div class="title">Factions</div>
+              <div class="meta">Marine, royaumes, équipages</div>
+            </a>
+            <a class="list-item" href="lore.html">
+              <div class="title">Lore</div>
+              <div class="meta">Chronologie, événements</div>
+            </a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="../js/wiki-search.js"></script>
+  <script>
+    const q = document.getElementById("q");
+    const go = document.getElementById("go");
+    const results = document.getElementById("results");
+
+    function run(){
+      const res = WIKI_SEARCH.searchWiki(q.value);
+      WIKI_SEARCH.renderResults(results, res.map(r => ({...r, url: r.url})));
+    }
+    go.addEventListener("click", run);
+    q.addEventListener("keydown", (e)=>{ if(e.key==="Enter") run(); });
+
+    // résultats par défaut
+    WIKI_SEARCH.renderResults(results, WIKI_SEARCH.searchWiki(""));
+  </script>
+</body>
+</html>

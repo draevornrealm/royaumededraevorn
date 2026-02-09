@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Wiki — Personnages</title>
+  <link rel="stylesheet" href="../css/wiki.css" />
+</head>
+<body>
+  <div class="wiki-container">
+    <div class="wiki-hero">
+      <div>
+        <h1>Personnages</h1>
+        <p>Liste des personnages importants de l’univers.</p>
+      </div>
+      <div class="wiki-search">
+        <input id="q" placeholder="Rechercher..." />
+        <button id="go">Rechercher</button>
+      </div>
+    </div>
+
+    <div class="wiki-grid">
+      <aside class="wiki-card wiki-sidebar">
+        <h3>Navigation</h3>
+        <div class="content">
+          <a href="index.html">🏠 Accueil</a>
+          <a href="personnages.html">👤 Personnages</a>
+          <a href="faction-marine.html">⚓ Factions</a>
+          <a href="lore.html">📜 Lore & Chronologie</a>
+        </div>
+      </aside>
+
+      <main class="wiki-card">
+        <h3>Liste</h3>
+        <div class="content">
+          <div id="results"></div>
+        </div>
+      </main>
+
+      <aside class="wiki-card">
+        <h3>Filtres</h3>
+        <div class="content">
+          <span class="badge">Marine</span>
+          <span class="badge">Pirates</span>
+          <span class="badge">Alliés</span>
+          <p style="opacity:.85;margin-top:10px">Astuce : utilise la recherche pour filtrer par tags (ex: “amiral”, “lumiere”).</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="../js/wiki-search.js"></script>
+  <script>
+    const q = document.getElementById("q");
+    const go = document.getElementById("go");
+    const results = document.getElementById("results");
+
+    function run(){
+      const res = WIKI_SEARCH.searchWiki(q.value);
+      WIKI_SEARCH.renderResults(results, res);
+    }
+    go.addEventListener("click", run);
+    q.addEventListener("keydown", (e)=>{ if(e.key==="Enter") run(); });
+
+    run();
+  </script>
+</body>
+</html>
