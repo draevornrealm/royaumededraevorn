@@ -1,0 +1,36 @@
+/* === Wiki layout === */
+.wiki-container { max-width: 1150px; margin: 0 auto; padding: 24px; }
+.wiki-grid { display: grid; grid-template-columns: 260px 1fr 320px; gap: 18px; }
+@media (max-width: 1100px){ .wiki-grid{ grid-template-columns: 1fr; } }
+
+.wiki-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.10); border-radius: 12px; overflow: hidden; }
+.wiki-card h3 { margin: 0; padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,.10); font-size: 15px; }
+.wiki-card .content { padding: 14px; }
+
+.wiki-sidebar a { display:block; padding:10px 12px; border-radius:10px; text-decoration:none; margin: 6px 0; }
+.wiki-sidebar a:hover { background: rgba(255,255,255,.06); }
+
+.wiki-hero { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom: 18px; }
+.wiki-hero h1 { margin: 0; font-size: 28px; }
+.wiki-hero p { margin: 6px 0 0; opacity:.85; }
+
+.wiki-search { display:flex; gap:10px; }
+.wiki-search input { flex:1; padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.15); background: rgba(0,0,0,.25); color: inherit; }
+.wiki-search button { padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.15); background: rgba(255,255,255,.06); color: inherit; cursor:pointer; }
+.wiki-search button:hover { background: rgba(255,255,255,.10); }
+
+.wiki-article h2 { margin-top: 18px; }
+.wiki-article p { line-height: 1.6; opacity:.9; }
+
+.infobox { display:grid; grid-template-columns: 1fr; }
+.infobox img { width:100%; height:auto; display:block; }
+.infobox table { width:100%; border-collapse: collapse; font-size: 14px; }
+.infobox th, .infobox td { padding: 10px; border-top: 1px solid rgba(255,255,255,.10); vertical-align: top; }
+.infobox th { width: 40%; opacity:.85; text-align:left; }
+
+.badge { display:inline-block; padding:4px 8px; border-radius:999px; border:1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.06); font-size: 12px; margin-right: 6px; }
+.list-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.list-item { padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.04); text-decoration:none; display:block; }
+.list-item:hover { background: rgba(255,255,255,.07); }
+.list-item .title { font-weight: 700; }
+.list-item .meta { opacity:.8; font-size: 13px; margin-top: 6px; }
