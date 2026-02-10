@@ -1,19 +1,19 @@
 <!doctype html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Wiki de l’Univers</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Wiki de l’Univers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Police moderne -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <!-- Police moderne -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
-    <!-- CSS WIKI (CHEMIN CORRIGÉ) -->
-    <link rel="stylesheet" href="/royaumededraevorn/css/wiki.css">
+  <!-- CSS WIKI -->
+  <link rel="stylesheet" href="/royaumededraevorn/css/wiki.css">
 </head>
-<script src="/royaumededraevorn/js/wiki-search.js"></script>
+
 <body>
   <div class="wiki-container">
     <div class="wiki-hero">
@@ -41,6 +41,8 @@
       <main class="wiki-card wiki-article">
         <h3>À la une</h3>
         <div class="content">
+
+          <!-- À LA UNE : KAELROS -->
           <div class="badge">Marine</div>
           <div class="badge">Arc principal</div>
           <h2>Kaelros Viremont — “Le Régent des Mers”</h2>
@@ -49,6 +51,26 @@
 
           <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
 
+          <!-- À LA UNE : BRYWORN -->
+          <div class="badge">Pirates</div>
+          <div class="badge">Roi des Pirates</div>
+          <h2>Roi Bryworn — “Souverain de Draevorn”</h2>
+          <p>Roi des Pirates et chef du Royaume Pirate de Draevorn. Porte l’étendard de la liberté face à la Justice de Domination.</p>
+
+          <!-- Mini visuel (optionnel, mais ça fait + wiki) -->
+          <p style="margin:12px 0;">
+            <img
+              src="/royaumededraevorn/images/bryworn.png"
+              alt="Roi Bryworn"
+              style="width:100%;max-width:320px;border-radius:12px;display:block;box-shadow:0 12px 30px rgba(0,0,0,.45);"
+            />
+          </p>
+
+          <p><a href="personnage-bryworn.html">Lire l’article →</a></p>
+
+          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
+
+          <!-- RECHERCHE RAPIDE -->
           <h2>Recherche rapide</h2>
           <div id="results"></div>
         </div>
@@ -76,7 +98,8 @@
     </div>
   </div>
 
-  <script src="../js/wiki-search.js"></script>
+  <!-- JS (UNE SEULE FOIS + bon chemin GitHub Pages) -->
+  <script src="/royaumededraevorn/js/wiki-search.js"></script>
   <script>
     const q = document.getElementById("q");
     const go = document.getElementById("go");
@@ -94,5 +117,3 @@
   </script>
 </body>
 </html>
-
-
