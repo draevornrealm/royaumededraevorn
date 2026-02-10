@@ -11,10 +11,40 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
   <!-- CSS global -->
-  <link rel="stylesheet" href="/royaumededraevorn/css/wiki.css">
+  <link rel="stylesheet" href="/royaumededraevorn/css/wiki.css?v=20260210-1">
 
-  <!-- CSS spécifique page (OK dans le head) -->
   <style>
+    /* =========================================================
+       PAGE PERSONNAGES : LAYOUT LARGE (le main prend 2 colonnes)
+       ========================================================= */
+
+    /* élargit la page (au cas où le css global reste limité) */
+    .wiki-container{
+      max-width: min(1600px, calc(100vw - 48px)) !important;
+    }
+
+    /* on garde la grille globale, mais on "étale" le contenu */
+    .wiki-grid{ align-items: start; }
+    .wiki-grid > *{ min-width: 0; } /* important en CSS Grid */
+
+    /* le MAIN prend colonne 2 -> 4 (milieu + droite) */
+    .wiki-article{
+      grid-column: 2 / 4;
+    }
+
+    /* la carte filtres passe en dessous, pleine largeur du contenu */
+    .filters-card{
+      grid-column: 2 / 4;
+    }
+
+    @media (max-width: 1100px){
+      .wiki-article{ grid-column: auto; }
+      .filters-card{ grid-column: auto; }
+    }
+
+    /* =========================================================
+       UI "Marine VS Pirates"
+       ========================================================= */
     .faction-split{
       display:grid;
       grid-template-columns: 1fr 92px 1fr;
@@ -183,6 +213,9 @@
       padding-top: 14px;
       border-top: 1px solid rgba(255,255,255,.10);
     }
+
+    /* petit confort : la colonne navigation ne doit pas s’étirer inutilement */
+    .wiki-sidebar{ align-self: start; }
   </style>
 </head>
 
@@ -309,7 +342,8 @@
         </div>
       </main>
 
-      <aside class="wiki-card">
+      <!-- IMPORTANT : on garde la carte filtres mais on la place en dessous via .filters-card -->
+      <aside class="wiki-card filters-card">
         <h3>Filtres</h3>
         <div class="content">
           <span class="badge">Marine</span>
@@ -323,7 +357,6 @@
     </div>
   </div>
 
-  <!-- ✅ Scripts uniquement en bas du body -->
   <script src="/royaumededraevorn/js/wiki-search.js"></script>
   <script>
     const q = document.getElementById("q");
@@ -342,7 +375,6 @@
       const value = q.value;
       filterCards(value);
 
-      // Résultats wiki-search.js
       if (typeof WIKI_SEARCH !== "undefined") {
         const res = WIKI_SEARCH.searchWiki(value);
         WIKI_SEARCH.renderResults(results, res);
