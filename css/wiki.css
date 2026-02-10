@@ -813,6 +813,9 @@ body[data-faction="neutral"]{
 .badge::first-letter,
 .tag::first-letter{
   line-height: 1;
+.tag.deity-dragon{
+  line-height: 1;
 }
+
 
 
