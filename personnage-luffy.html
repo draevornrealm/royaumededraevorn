@@ -21,7 +21,7 @@
         <h1>Monkey D. Luffy</h1>
         <p>
           <span class="badge">Pirate</span>
-          <span class="badge">Capitaine</span>
+          <span class="badge">Empereur</span>
           <span class="badge">Liberté</span>
         </p>
       </div>
@@ -49,7 +49,7 @@
         <h3>Article</h3>
         <div class="content">
           <p>
-            <b>Monkey D. Luffy</b> est un <b>capitaine pirate</b> animé par une idée simple : <b>vivre libre</b> et
+            <b>Monkey D. Luffy</b> est un <b>empereur pirate</b> animé par une idée simple : <b>vivre libre</b> et
             protéger ceux qu’il considère comme sa famille. Dans cet univers, il incarne la <b>force du lien</b>
             face aux empires, aux tyrans et à la <b>Justice de Domination</b>.
           </p>
@@ -92,19 +92,18 @@
 
           <div class="ibox-badges">
             <span class="ibadge danger">🏴‍☠️ Pirate</span>
-            <span class="ibadge">⭐ Capitaine</span>
+            <span class="ibadge">👑 Empereur</span>
           </div>
         </div>
 
         <div class="ibox-media">
-          <!-- IMPORTANT : ajoute l'image dans /images -->
           <img src="/royaumededraevorn/images/luffy.png" alt="Monkey D. Luffy">
         </div>
 
         <div class="ibox-table">
           <table>
             <tr><th>Nom</th><td>Monkey D. Luffy</td></tr>
-            <tr><th>Titre</th><td>Capitaine</td></tr>
+            <tr><th>Titre</th><td>Empereur</td></tr>
             <tr><th>Faction</th><td>Pirates</td></tr>
             <tr><th>Rôle</th><td>Symbole de liberté</td></tr>
             <tr><th>Style</th><td>Frontale • instinct • courage</td></tr>
@@ -136,63 +135,5 @@
     });
   </script>
 
-  <style>
-    /* =========================
-       PATCH PIRATE V2 (AFFINÉ)
-       Rouge royal assombri
-       ========================= */
-
-    body[data-faction="pirate"] .infobox{
-      border: 1px solid rgba(255,90,90,0.28) !important;
-      background:
-        linear-gradient(180deg,
-          rgba(140,30,30,0.28),
-          rgba(255,255,255,0.03)
-        ) !important;
-
-      box-shadow:
-        inset 0 0 0 1px rgba(255,90,90,0.18),
-        0 22px 55px rgba(0,0,0,0.55) !important;
-    }
-
-    body[data-faction="pirate"] .infobox .ibox-head{
-      background:
-        linear-gradient(135deg,
-          rgba(140,30,30,0.55),
-          rgba(40,10,10,0.25)
-        ) !important;
-
-      border-bottom: 1px solid rgba(255,90,90,0.22) !important;
-    }
-
-    body[data-faction="pirate"] .infobox .ibox-title,
-    body[data-faction="pirate"] .infobox .ibox-sub{
-      color: rgba(255,240,240,0.95);
-    }
-
-    body[data-faction="pirate"] .infobox .ibox-media img{
-      border: 1px solid rgba(255,90,90,0.32) !important;
-      box-shadow:
-        0 0 0 1px rgba(255,90,90,0.14),
-        0 18px 42px rgba(0,0,0,0.55) !important;
-    }
-
-    body[data-faction="pirate"] .infobox th,
-    body[data-faction="pirate"] .infobox td{
-      border-top: 1px solid rgba(255,90,90,0.20) !important;
-    }
-
-    body[data-faction="pirate"] .ibadge{
-      background: rgba(255,255,255,0.08) !important;
-      border-color: rgba(255,255,255,0.22) !important;
-      color: rgba(255,245,245,0.96) !important;
-    }
-
-    body[data-faction="pirate"] .ibadge.danger{
-      background: rgba(255,90,90,0.22) !important;
-      border-color: rgba(255,90,90,0.42) !important;
-      color: rgba(255,240,240,0.98) !important;
-    }
-  </style>
 </body>
 </html>
