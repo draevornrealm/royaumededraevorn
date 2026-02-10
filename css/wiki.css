@@ -1,451 +1,91 @@
-/* === RESET & BASE === */
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    background: #0b1020;
-    color: #e9eefc;
-}
-
-a {
-    color: #8db7ff;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-.infobox img {
-    width: 100%;
-    border-radius: 12px;
-    margin-bottom: 10px;
-    border: 1px solid rgba(255,255,255,0.15);
-}
-
-.infobox img {
-  border-radius: 10px;
-  box-shadow: 0 0 0 1px rgba(255,255,255,.08),
-              0 12px 30px rgba(0,0,0,.4);
-}
-
-/* === Wiki layout === */
-.wiki-container { max-width: 1150px; margin: 0 auto; padding: 24px; }
-.wiki-grid { display: grid; grid-template-columns: 260px 1fr 320px; gap: 18px; }
-@media (max-width: 1100px){ .wiki-grid{ grid-template-columns: 1fr; } }
-
-.wiki-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.10); border-radius: 12px; overflow: hidden; }
-.wiki-card h3 { margin: 0; padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,.10); font-size: 15px; }
-.wiki-card .content { padding: 14px; }
-
-.wiki-sidebar a { display:block; padding:10px 12px; border-radius:10px; text-decoration:none; margin: 6px 0; }
-.wiki-sidebar a:hover { background: rgba(255,255,255,.06); }
-
-.wiki-hero { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom: 18px; }
-.wiki-hero h1 { margin: 0; font-size: 28px; }
-.wiki-hero p { margin: 6px 0 0; opacity:.85; }
-
-.wiki-search { display:flex; gap:10px; }
-.wiki-search input { flex:1; padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.15); background: rgba(0,0,0,.25); color: inherit; }
-.wiki-search button { padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.15); background: rgba(255,255,255,.06); color: inherit; cursor:pointer; }
-.wiki-search button:hover { background: rgba(255,255,255,.10); }
-
-.wiki-article h2 { margin-top: 18px; }
-.wiki-article p { line-height: 1.6; opacity:.9; }
-
-.infobox { display:grid; grid-template-columns: 1fr; }
-.infobox img { width:100%; height:auto; display:block; }
-.infobox table { width:100%; border-collapse: collapse; font-size: 14px; }
-.infobox th, .infobox td { padding: 10px; border-top: 1px solid rgba(255,255,255,.10); vertical-align: top; }
-.infobox th { width: 40%; opacity:.85; text-align:left; }
-
-.badge { display:inline-block; padding:4px 8px; border-radius:999px; border:1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.06); font-size: 12px; margin-right: 6px; }
-.list-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
-.list-item { padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.04); text-decoration:none; display:block; }
-.list-item:hover { background: rgba(255,255,255,.07); }
-
 /* =========================
-   INFOBOX (FANDOM STYLE)
+   PATCH PREMIUM — IMAGES + INFOBOX
+   à coller TOUT EN BAS du fichier wiki.css
    ========================= */
 
-.infobox {
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-}
-
-.infobox .ibox-head {
-  padding: 14px 14px 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.10);
-  background: linear-gradient(135deg, rgba(141,183,255,0.18), rgba(255,255,255,0.04));
-}
-
-.infobox .ibox-title {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 800;
-  letter-spacing: 0.2px;
-}
-
-.infobox .ibox-sub {
-  margin-top: 6px;
-  opacity: 0.85;
-  font-size: 13px;
-}
-
-.infobox .ibox-badges {
-  margin-top: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.ibadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  border: 1px solid rgba(255,255,255,0.16);
-  background: rgba(255,255,255,0.06);
-}
-
-.ibadge.marine {
-  background: rgba(141,183,255,0.14);
-  border-color: rgba(141,183,255,0.30);
-}
-
-.ibadge.danger {
-  background: rgba(255,120,120,0.12);
-  border-color: rgba(255,120,120,0.25);
-}
-
-.infobox .ibox-media {
-  padding: 14px;
-}
-
-.infobox .ibox-media img {
-  width: 100%;
-  display: block;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.14);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.35);
-}
-
-.infobox .ibox-table {
-  padding: 0 14px 14px;
-}
-
-.infobox table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13.5px;
-}
-
-.infobox th, .infobox td {
-  padding: 10px 8px;
-  border-top: 1px solid rgba(255,255,255,0.10);
-  vertical-align: top;
-}
-
-.infobox th {
-  width: 42%;
-  opacity: 0.85;
-  font-weight: 700;
-}
-
-.infobox td {
-  opacity: 0.92;
-}
-
-.infobox td a {
-  font-weight: 700;
-}
-
-.infobox .ibox-footer {
-  padding: 12px 14px 14px;
-  border-top: 1px solid rgba(255,255,255,0.10);
-  display: grid;
-  gap: 8px;
-}
-
-.infobox .mini-note {
-  opacity: 0.80;
-  font-size: 12px;
-  line-height: 1.4;
-}
-
-/* ===== PATCH LARGEUR (Personnages trop étroit) ===== */
-
-/* ===== FORCE LARGE LAYOUT ===== */
-.wiki-container{
-  width: 100% !important;
-  max-width: min(1600px, calc(100vw - 48px)) !important;
-  margin: 0 auto !important;
-  padding: 24px !important;
-}
-
-.wiki-grid{
-  width: 100% !important;
-  display: grid !important;
-  grid-template-columns: 300px minmax(0, 1fr) 360px !important;
-  gap: 18px !important;
-}
-
-.wiki-card{ min-width: 0 !important; }
-
-@media (max-width: 1200px){
-  .wiki-grid{ grid-template-columns: 1fr !important; }
-  .wiki-container{ max-width: calc(100vw - 32px) !important; padding: 16px !important; }
-}
-
-/* =========================
-   NEUTRES — BLANC QUI RESSORT (FORCÉ)
-   ========================= */
-
-/* 1) Conteneur neutre : accepte plusieurs noms possibles */
-.neutral-wrap,
-.neutres,
-.neutral-panel,
-section.neutral,
-#wiki-neutrals{
-  background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.06)) !important;
-  border: 1px solid rgba(255,255,255,.38) !important;
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,.14),
-    0 22px 55px rgba(0,0,0,.55) !important;
-  border-radius: 16px !important;
-}
-
-/* 2) Titre neutre */
-.neutral-title,
-.neutres h3,
-.neutres h4{
-  color: #fff !important;
-  text-shadow: 0 0 14px rgba(255,255,255,.35) !important;
-}
-
-/* 3) Cartes neutres : marche avec data-camp OU data-tags contenant "neutre" */
-.char-card[data-camp="neutral"],
-.char-card[data-camp="neutre"],
-.char-card[data-tags*="neutre"],
-.char-card[data-tags*="neutres"]{
-  background: linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.07)) !important;
-  border: 1px solid rgba(255,255,255,.45) !important;
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,.12),
-    0 16px 34px rgba(0,0,0,.55) !important;
-}
-
-/* 4) Hover */
-.char-card[data-camp="neutral"]:hover,
-.char-card[data-camp="neutre"]:hover,
-.char-card[data-tags*="neutre"]:hover,
-.char-card[data-tags*="neutres"]:hover{
-  background: linear-gradient(135deg, rgba(255,255,255,.26), rgba(255,255,255,.10)) !important;
-  border-color: rgba(255,255,255,.65) !important;
-}
-
-/* 5) Portrait neutre = halo blanc */
-.char-card[data-camp="neutral"] .char-portrait,
-.char-card[data-camp="neutre"] .char-portrait,
-.char-card[data-tags*="neutre"] .char-portrait,
-.char-card[data-tags*="neutres"] .char-portrait{
-  box-shadow:
-    0 0 0 2px rgba(255,255,255,.40),
-    0 0 20px rgba(255,255,255,.30),
-    0 16px 34px rgba(0,0,0,.65) !important;
-}
-
-/* 6) Tags neutres (si tu les mets en class="tag neutral") */
-.tag.neutral{
-  background: rgba(255,255,255,.18) !important;
-  border-color: rgba(255,255,255,.70) !important;
-  color: #fff !important;
-  font-weight: 800 !important;
-}
-
-/* =========================
-   THEME FACTION (GLOBAL)
-   Usage: <body data-faction="marine|pirate|neutral">
-   ========================= */
-
-:root{
-  --fx: 141,183,255;         /* fallback bleu */
-  --fx-soft: 0.10;
-  --fx-mid: 0.22;
-  --fx-strong: 0.42;
-
-  --fx-text: #e9eefc;
-  --fx-glow: rgba(var(--fx), .35);
-}
-
-/* Définition par faction */
-body[data-faction="marine"]{
-  --fx: 79,156,255;
-  --fx-soft: 0.10;
-  --fx-mid: 0.22;
-  --fx-strong: 0.42;
-}
-body[data-faction="pirate"]{
-  --fx: 255,80,80;
-  --fx-soft: 0.10;
-  --fx-mid: 0.22;
-  --fx-strong: 0.42;
-}
-body[data-faction="neutral"]{
-  --fx: 255,255,255;
-  --fx-soft: 0.08;
-  --fx-mid: 0.18;
-  --fx-strong: 0.45;
-  --fx-glow: rgba(255,255,255,.25);
-}
-
-/* Accents automatiques (hero + cards) */
-body[data-faction] .wiki-hero h1{
-  text-shadow: 0 0 18px var(--fx-glow);
-}
-
-body[data-faction] .wiki-card{
-  border-color: rgba(var(--fx), var(--fx-soft));
-}
-
-body[data-faction] .wiki-card h3{
+/* ---------- 1) PORTRAITS "Personnages" : rectangle, sans découpe ---------- */
+/* (remplace le carré 68x68 et évite les images coupées) */
+.char-portrait{
+  width: 78px !important;
+  height: 110px !important;        /* ✅ rectangle vertical */
+  border-radius: 14px !important;
+  object-fit: contain !important;  /* ✅ pas de découpe */
   background: linear-gradient(
-    135deg,
-    rgba(var(--fx), var(--fx-mid)),
-    rgba(255,255,255,0.03)
-  );
-}
-
-/* Badges génériques teintés */
-body[data-faction] .badge{
-  border-color: rgba(var(--fx), .30);
-  background: rgba(var(--fx), .10);
-}
-
-/* =========================
-   INFOBOX — accent de faction
-   ========================= */
-body[data-faction] .infobox{
-  border-color: rgba(var(--fx), .30);
-  box-shadow:
-    inset 0 0 0 1px rgba(var(--fx), .10),
-    0 10px 30px rgba(0,0,0,.35);
-}
-
-body[data-faction] .infobox .ibox-head{
-  background: linear-gradient(
-    135deg,
-    rgba(var(--fx), .22),
-    rgba(255,255,255,0.04)
-  );
-  border-bottom-color: rgba(var(--fx), .18);
-}
-
-body[data-faction] .infobox .ibox-media img{
-  box-shadow:
-    0 0 0 1px rgba(var(--fx), .20),
-    0 10px 24px rgba(0,0,0,0.35);
-}
-
-/* =========================
-   IBADGE — versions couleur
-   ========================= */
-.ibadge.neutral{
-  background: rgba(255,255,255,0.14);
-  border-color: rgba(255,255,255,0.45);
-  color: #fff;
-  font-weight: 800;
-}
-
-.ibadge.marine{
-  background: rgba(79,156,255,0.16);
-  border-color: rgba(79,156,255,0.40);
-}
-.ibadge.pirate{
-  background: rgba(255,80,80,0.14);
-  border-color: rgba(255,80,80,0.38);
-}
-
-/* Tags neutres (si tu utilises class="tag neutral") */
-.tag.neutral{
-  background: rgba(255,255,255,.14);
-  border-color: rgba(255,255,255,.55);
-  color:#fff;
-  font-weight:800;
-}
-/* =========================
-   BADGE ROI — OR ROYAL
-   (remplacement du badge existant)
-   ========================= */
-
-body[data-faction="pirate"] .ibox-badges .ibadge:nth-child(2){
-  background: linear-gradient(
-    135deg,
-    rgba(255,215,120,0.38),
-    rgba(170,110,35,0.28)
+    180deg,
+    rgba(255,255,255,.06),
+    rgba(0,0,0,.28)
   ) !important;
-
-  border-color: rgba(255,215,120,0.70) !important;
-
-  color: rgba(255,248,215,0.98) !important;
-  font-weight: 900;
-  letter-spacing: 0.3px;
-
+  padding: 6px !important;
+  border: 1px solid rgba(255,255,255,.14) !important;
   box-shadow:
-    inset 0 0 0 1px rgba(255,215,120,0.38),
-    0 0 14px rgba(255,190,90,0.35);
+    inset 0 0 0 1px rgba(255,255,255,.06),
+    0 14px 32px rgba(0,0,0,.55) !important;
+  flex: 0 0 auto !important;
 }
 
-/* =========================
-   BADGE GRAND AMIRAL (OR)
-   ========================= */
+/* Option : sur mobile, un peu plus compact */
+@media (max-width: 520px){
+  .char-portrait{
+    width: 70px !important;
+    height: 100px !important;
+    padding: 5px !important;
+  }
+}
 
+/* ---------- 2) INFOBOX : une règle unique propre (évite tes doublons) ---------- */
+/* On cible seulement l'image dans .ibox-media (pas toutes les images) */
+.infobox .ibox-media img{
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  border-radius: 14px !important;
+  margin-bottom: 0 !important; /* évite les écarts chelous */
+  border: 1px solid rgba(255,255,255,.14) !important;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.08),
+    0 14px 32px rgba(0,0,0,.50) !important;
+}
+
+/* Sécurité : neutralise les anciens styles globaux .infobox img */
+.infobox > img{
+  border-radius: 14px !important;
+}
+
+/* ---------- 3) BADGE GOLD : rendu plus “royal” + lisible ---------- */
+.ibadge.gold,
 .ibadge.grand-amiral{
   background: linear-gradient(
     135deg,
-    rgba(255,215,120,0.35),
-    rgba(180,120,30,0.30)
-  );
-  border: 1px solid rgba(255,210,120,0.65);
-  color: #fff6d8;
+    rgba(255, 215, 120, 0.42),
+    rgba(150, 95, 20, 0.30)
+  ) !important;
 
-  font-weight: 900;
-  letter-spacing: 0.4px;
+  border: 1px solid rgba(255, 220, 140, 0.72) !important;
+  color: rgba(255, 248, 225, 0.98) !important;
+
+  font-weight: 900 !important;
+  letter-spacing: 0.35px !important;
 
   box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.25),
-    0 4px 12px rgba(0,0,0,0.35);
+    inset 0 0 0 1px rgba(255,255,255,0.20),
+    0 10px 22px rgba(0,0,0,0.40),
+    0 0 18px rgba(255, 200, 90, 0.18) !important;
 }
 
-/* =========================
-   BADGE OR ROYAL (Roi / Grand Amiral)
-   ========================= */
-
-.ibadge.gold{
+/* ---------- 4) Badge "Roi" : ne dépend PAS du nth-child (plus robuste) ---------- */
+/* ⚠️ Conseil : ajoute class="gold" au badge Roi dans le HTML, c’est mieux.
+   Mais si tu veux garder ton système actuel, on améliore sans casser :
+*/
+body[data-faction="pirate"] .ibox-badges .ibadge:nth-child(2){
   background: linear-gradient(
     135deg,
-    rgba(255,215,120,0.38),
-    rgba(180,120,30,0.32)
-  );
-  border: 1px solid rgba(255,215,140,0.65);
-  color: rgba(255,245,220,0.98);
-
-  font-weight: 900;
-  letter-spacing: 0.4px;
-
+    rgba(255,215,120,0.42),
+    rgba(150,95,20,0.30)
+  ) !important;
+  border-color: rgba(255,220,140,0.72) !important;
+  color: rgba(255,248,225,0.98) !important;
   box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.28),
-    0 6px 16px rgba(0,0,0,0.45);
+    inset 0 0 0 1px rgba(255,255,255,0.20),
+    0 10px 22px rgba(0,0,0,0.40),
+    0 0 18px rgba(255,200,90,0.18) !important;
 }
-
-
-
