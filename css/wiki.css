@@ -19,10 +19,7 @@ body{
   color: #e9eefc;
 }
 
-a{
-  color: #8db7ff;
-  text-decoration: none;
-}
+a{ color: #8db7ff; text-decoration: none; }
 a:hover{ text-decoration: underline; }
 
 /* =============== THEME TOKENS =============== */
@@ -36,6 +33,7 @@ a:hover{ text-decoration: underline; }
   --card-bg: rgba(255,255,255,.04);
   --card-border: rgba(255,255,255,.10);
   --card-sep: rgba(255,255,255,.10);
+
   --text-soft: rgba(233,238,252,.86);
   --shadow: 0 18px 45px rgba(0,0,0,.35);
 }
@@ -53,14 +51,14 @@ body[data-faction="neutral"]{
 /* =============== LAYOUT (LARGE) =============== */
 /* ✅ Large comme avant */
 .wiki-container{
-  max-width: 1500px;            /* <-- + large */
+  max-width: 1500px;
   margin: 0 auto;
   padding: 24px;
 }
 
 .wiki-grid{
   display: grid;
-  grid-template-columns: 280px minmax(0, 1fr) 340px;  /* <-- + large */
+  grid-template-columns: 280px minmax(0, 1fr) 340px;
   gap: 18px;
 }
 
@@ -91,9 +89,7 @@ body[data-faction="neutral"]{
   );
 }
 
-.wiki-card .content{
-  padding: 14px;
-}
+.wiki-card .content{ padding: 14px; }
 
 /* Sidebar */
 .wiki-sidebar a{
@@ -103,9 +99,7 @@ body[data-faction="neutral"]{
   margin: 6px 0;
   text-decoration: none;
 }
-.wiki-sidebar a:hover{
-  background: rgba(255,255,255,.06);
-}
+.wiki-sidebar a:hover{ background: rgba(255,255,255,.06); }
 
 /* Article basics */
 .wiki-article h2{ margin: 18px 0 8px; }
@@ -136,10 +130,7 @@ body[data-faction="neutral"]{
   text-shadow: 0 0 18px rgba(var(--fx), .22);
 }
 
-.wiki-hero p{
-  margin: 6px 0 0;
-  opacity: .85;
-}
+.wiki-hero p{ margin: 6px 0 0; opacity: .85; }
 
 .wiki-search{
   display: flex;
@@ -166,9 +157,7 @@ body[data-faction="neutral"]{
   color: inherit;
   cursor: pointer;
 }
-.wiki-search button:hover{
-  background: rgba(255,255,255,.10);
-}
+.wiki-search button:hover{ background: rgba(255,255,255,.10); }
 
 /* =============== BADGES + LISTS =============== */
 .badge{
@@ -195,17 +184,10 @@ body[data-faction="neutral"]{
   text-decoration: none;
   display: block;
 }
-.list-item:hover{
-  background: rgba(255,255,255,.07);
-}
-.list-item .title{
-  font-weight: 800;
-  margin-bottom: 4px;
-}
-.list-item .meta{
-  opacity: .80;
-  font-size: 13px;
-}
+.list-item:hover{ background: rgba(255,255,255,.07); }
+
+.list-item .title{ font-weight: 800; margin-bottom: 4px; }
+.list-item .meta{ opacity: .80; font-size: 13px; }
 
 /* =============== INFOBOX (FANDOM STYLE) =============== */
 .infobox{
@@ -255,14 +237,8 @@ body[data-faction="neutral"]{
   color: rgba(255,255,255,.92);
 }
 
-.ibadge.marine{
-  background: rgba(79,156,255,0.16);
-  border-color: rgba(79,156,255,0.40);
-}
-.ibadge.pirate{
-  background: rgba(255,90,90,0.14);
-  border-color: rgba(255,90,90,0.38);
-}
+.ibadge.marine{ background: rgba(79,156,255,0.16); border-color: rgba(79,156,255,0.40); }
+.ibadge.pirate{ background: rgba(255,90,90,0.14); border-color: rgba(255,90,90,0.38); }
 .ibadge.neutral{
   background: rgba(255,255,255,0.14);
   border-color: rgba(255,255,255,0.45);
@@ -291,9 +267,7 @@ body[data-faction="neutral"]{
     0 6px 16px rgba(0,0,0,0.45);
 }
 
-.infobox .ibox-media{
-  padding: 14px;
-}
+.infobox .ibox-media{ padding: 14px; }
 
 .infobox .ibox-media img{
   width: 100%;
@@ -306,9 +280,7 @@ body[data-faction="neutral"]{
     0 10px 24px rgba(0,0,0,0.35);
 }
 
-.infobox .ibox-table{
-  padding: 0 14px 14px;
-}
+.infobox .ibox-table{ padding: 0 14px 14px; }
 
 .infobox table{
   width: 100%;
@@ -316,8 +288,7 @@ body[data-faction="neutral"]{
   font-size: 13.5px;
 }
 
-.infobox th,
-.infobox td{
+.infobox th, .infobox td{
   padding: 10px 8px;
   border-top: 1px solid rgba(255,255,255,0.10);
   vertical-align: top;
@@ -345,7 +316,6 @@ body[data-faction="neutral"]{
 }
 
 /* =============== PERSONNAGES (cards) =============== */
-/* Ces classes existent sur personnages.html */
 .char-card{
   display:flex;
   gap: 12px;
@@ -364,13 +334,45 @@ body[data-faction="neutral"]{
   border-color: rgba(255,255,255,.16);
 }
 
-/* ✅ VIGNETTES RECTANGLE (FINI le carré)
-   - object-fit: cover = pas de bandes noires
-   - ratio 3:2, propre, lisible
-*/
-.char-card .char-portrait{
+/* ======================================================
+   ✅ PORTRAITS PERSONNAGES (RECTANGLE VERTICAL)
+   Format comme ton Bryworn (portrait)
+   - object-fit: cover = rempli (peut couper un peu)
+   - passe en contain si tu veux ZÉRO coupe
+   ====================================================== */
+.char-card img.char-portrait,
+.rank-card img.char-portrait{
+  width: 92px;
+  height: 132px;
+  aspect-ratio: 2 / 3;
+  object-fit: cover; /* mets "contain" si tu veux zéro coupe */
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: 0 12px 28px rgba(0,0,0,.50);
+  flex: 0 0 auto;
+  display:block;
+  background: rgba(0,0,0,.18);
+}
+
+/* Mobile */
+@media (max-width: 520px){
+  .char-card img.char-portrait,
+  .rank-card img.char-portrait{
+    width: 82px;
+    height: 118px;
+  }
+}
+
+/* ======================================================
+   (OPTION) Si tu veux l’ancien RECTANGLE HORIZONTAL 3:2,
+   remplace juste le bloc ci-dessus par celui-ci :
+   width:96px; height:64px; aspect-ratio:3/2;
+   ====================================================== */
+/*
+.char-card img.char-portrait,
+.rank-card img.char-portrait{
   width: 96px;
-  height: 64px;              /* <-- rectangle */
+  height: 64px;
   aspect-ratio: 3 / 2;
   object-fit: cover;
   border-radius: 12px;
@@ -380,28 +382,16 @@ body[data-faction="neutral"]{
   display:block;
   background: rgba(0,0,0,.18);
 }
-
-/* Si portraits dans rank-card (factions) */
-.rank-card .char-portrait{
-  width: 96px;
-  height: 64px;
-  aspect-ratio: 3 / 2;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.10);
-  box-shadow: 0 12px 28px rgba(0,0,0,.50);
-  display:block;
-  background: rgba(0,0,0,.18);
-}
-
 @media (max-width: 520px){
-  .char-card .char-portrait,
-  .rank-card .char-portrait{
+  .char-card img.char-portrait,
+  .rank-card img.char-portrait{
     width: 84px;
     height: 56px;
   }
 }
+*/
 
+/* Tags */
 .tag{
   display:inline-block;
   font-size: .72rem;
