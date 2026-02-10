@@ -409,3 +409,64 @@ body[data-faction="neutral"]{
   color: rgba(255,255,255,.95);
   font-weight: 800;
 }
+/* ======================================================
+   ✅ AURAS (OR PIRATE / ARGENT FROID MARINE)
+   À coller tout en bas du wiki.css
+   ====================================================== */
+
+/* OR + AURA (Empereur / Roi / Premium) */
+.ibadge.gold.aura{
+  background: linear-gradient(
+    135deg,
+    rgba(255,215,120,0.45),
+    rgba(180,120,30,0.38)
+  );
+  border-color: rgba(255,215,140,0.78);
+  color: rgba(255,245,220,0.98);
+
+  box-shadow:
+    0 0 10px rgba(255,200,90,0.55),
+    0 0 22px rgba(255,180,60,0.35),
+    inset 0 0 0 1px rgba(255,255,255,0.35);
+
+  font-weight: 900;
+  letter-spacing: .4px;
+}
+
+/* ARGENT FROID + AURA BLEUE (Marine prestige) */
+.ibadge.silver.aura-blue{
+  background: linear-gradient(
+    135deg,
+    rgba(210,230,255,0.40),
+    rgba(120,150,200,0.30)
+  );
+  border-color: rgba(150,190,255,0.78);
+  color: rgba(235,245,255,0.98);
+
+  box-shadow:
+    0 0 10px rgba(120,170,255,0.55),
+    0 0 22px rgba(80,130,220,0.35),
+    inset 0 0 0 1px rgba(255,255,255,0.30);
+
+  font-weight: 900;
+  letter-spacing: .4px;
+}
+
+/* ✅ Important : si un patch page pirate force .ibadge (avec !important),
+   ça peut écraser le gold. Ce “bouclier” garde le gold prioritaire. */
+body[data-faction="pirate"] .ibadge.gold,
+body[data-faction="pirate"] .ibadge.gold.aura{
+  background: linear-gradient(
+    135deg,
+    rgba(255,215,120,0.38),
+    rgba(180,120,30,0.32)
+  ) !important;
+
+  border-color: rgba(255,215,140,0.65) !important;
+  color: rgba(255,245,220,0.98) !important;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.28),
+    0 6px 16px rgba(0,0,0,0.45) !important;
+}
+
