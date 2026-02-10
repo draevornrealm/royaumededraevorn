@@ -11,186 +11,50 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
   <!-- CSS global -->
-  <link rel="stylesheet" href="/royaumededraevorn/css/wiki.css?v=20260210-2">
+  <link rel="stylesheet" href="/royaumededraevorn/css/wiki.css">
 
   <style>
-    /* =========================
-       PAGE PERSONNAGES : LARGE
-       ========================= */
+    /* =========
+       LAYOUT (corrige le "trop étroit" + évite l'écrasement)
+       ========= */
     .wiki-container{
-      max-width: min(1600px, calc(100vw - 48px)) !important;
+      max-width: 1500px !important;
+      margin: 0 auto !important;
+      padding: 24px !important;
     }
-    .wiki-grid{ align-items: start; }
-    .wiki-grid > *{ min-width: 0; }
-
-    /* main = colonnes 2->4 (milieu + droite) */
-    .wiki-article{ grid-column: 2 / 4; }
-    .filters-card{ grid-column: 2 / 4; }
+    .wiki-grid{
+      display:grid;
+      grid-template-columns: 260px minmax(0, 1fr) 320px;
+      gap: 18px;
+      align-items: start;
+    }
+    .wiki-card, .wiki-sidebar, .wiki-article{ min-width: 0; }
 
     @media (max-width: 1100px){
-      .wiki-article{ grid-column: auto; }
-      .filters-card{ grid-column: auto; }
+      .wiki-grid{ grid-template-columns: 1fr; }
+      .wiki-container{ padding: 16px !important; }
     }
 
-    /* =========================
-       THEME CAMPS (BLEU / ROUGE)
-       ========================= */
+    /* =========
+       THEME CAMPS (Marine bleu / Pirates rouge / Neutres blanc)
+       ========= */
     :root{
       --marine: #4f9cff;
-      --marine2:#2b65ff;
-      --pirate: #ff3b3b;
-      --pirate2:#ff8a00;
-      --ink: rgba(255,255,255,.08);
-      --ink2: rgba(255,255,255,.12);
+      --marine2:#1f5fff;
+      --pirate: #ff4d4d;
+      --pirate2:#ff8a3d;
+      --neutral:#ffffff;
     }
 
-    /* =========================
-       BANDEAU "WOW" MARINE VS PIRATES
-       ========================= */
-    .war-banner{
-      position: relative;
-      margin-top: 6px;
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: 0 20px 60px rgba(0,0,0,.45);
-      background: rgba(255,255,255,.02);
-    }
-    .war-banner .inner{
-      display:grid;
-      grid-template-columns: 1fr 120px 1fr;
-      align-items: stretch;
-      min-height: 120px;
-    }
-    @media (max-width: 980px){
-      .war-banner .inner{ grid-template-columns: 1fr; }
-      .war-banner .mid{ display:none; }
-    }
-
-    .war-side{
-      position: relative;
-      padding: 16px 16px 14px;
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      gap: 14px;
-      min-width: 0;
-    }
-    .war-side .left{
-      min-width: 0;
-    }
-    .war-title{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      font-weight: 900;
-      letter-spacing: .3px;
-      font-size: 18px;
-      margin: 0;
-      line-height: 1.1;
-    }
-    .war-sub{
-      margin-top: 6px;
-      opacity: .85;
-      font-size: 13px;
-      line-height: 1.35;
-      max-width: 520px;
-    }
-    .war-badge{
-      flex: 0 0 auto;
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.18);
-      white-space: nowrap;
-    }
-
-    .war-side.marine{
-      background:
-        radial-gradient(1200px 240px at 10% 50%, rgba(79,156,255,.22), transparent 60%),
-        linear-gradient(90deg, rgba(79,156,255,.16), rgba(255,255,255,.02));
-    }
-    .war-side.pirates{
-      background:
-        radial-gradient(1200px 240px at 90% 50%, rgba(255,59,59,.18), transparent 60%),
-        linear-gradient(270deg, rgba(255,59,59,.14), rgba(255,255,255,.02));
-    }
-    .war-side.marine:after,
-    .war-side.pirates:after{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      opacity:.9;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.10), transparent 35%, transparent 65%, rgba(0,0,0,.25));
-      mix-blend-mode: overlay;
-    }
-
-    .war-side.marine .war-badge{
-      border-color: rgba(79,156,255,.35);
-      background: rgba(79,156,255,.12);
-    }
-    .war-side.pirates .war-badge{
-      border-color: rgba(255,59,59,.35);
-      background: rgba(255,59,59,.10);
-    }
-
-    .war-banner .mid{
-      position: relative;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .war-banner .mid:before{
-      content:"";
-      position:absolute;
-      top: 10px;
-      bottom: 10px;
-      width: 2px;
-      background: linear-gradient(
-        180deg,
-        rgba(79,156,255,0),
-        rgba(255,255,255,.18),
-        rgba(255,59,59,0)
-      );
-    }
-    .war-vs{
-      width: 76px;
-      height: 76px;
-      border-radius: 999px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight: 1000;
-      letter-spacing: 1px;
-      border: 1px solid rgba(255,255,255,.16);
-      background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.14), rgba(255,255,255,.03));
-      box-shadow: 0 24px 55px rgba(0,0,0,.65);
-      position: relative;
-    }
-    .war-vs:before{
-      content:"";
-      position:absolute;
-      inset:-10px;
-      border-radius: 999px;
-      background: radial-gradient(circle, rgba(255,255,255,.10), transparent 60%);
-      filter: blur(2px);
-      opacity:.8;
-      z-index:-1;
-    }
-
-    /* =========================
-       PANELS + CARTES PERSOS
-       ========================= */
+    /* =========
+       SECTION "Conflit principal" (Marine VS Pirates)
+       ========= */
     .faction-split{
       display:grid;
       grid-template-columns: 1fr 92px 1fr;
       gap: 14px;
       align-items: stretch;
-      margin-top: 14px;
+      margin-top: 6px;
     }
     @media (max-width: 980px){
       .faction-split{ grid-template-columns: 1fr; }
@@ -199,17 +63,19 @@
 
     .faction-panel{
       border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.10);
       overflow:hidden;
       background: rgba(255,255,255,.02);
       box-shadow: 0 18px 45px rgba(0,0,0,.35);
+      position: relative;
     }
     .faction-head{
       padding: 12px 14px;
       display:flex;
       align-items:center;
       justify-content: space-between;
-      border-bottom: 1px solid rgba(255,255,255,.08);
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
     }
     .faction-title{
@@ -218,11 +84,13 @@
       display:flex;
       align-items:center;
       gap: 10px;
+      font-size: 1.05rem;
     }
     .faction-sub{
       font-size: .82rem;
       opacity: .82;
       margin-top: 2px;
+      max-width: 42ch;
     }
     .faction-body{ padding: 14px; }
 
@@ -230,19 +98,41 @@
       font-size: .72rem;
       padding: 6px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
       opacity: .95;
       white-space: nowrap;
     }
 
-    .faction-panel.marine{
-      box-shadow: inset 0 0 0 1px rgba(79,156,255,.16), 0 18px 45px rgba(0,0,0,.35);
+    /* Bandeau coloré (style "bannière") */
+    .faction-panel:before{
+      content:"";
+      position:absolute;
+      left: 0; top: 0;
+      height: 3px;
+      width: 100%;
+      opacity: .95;
     }
-    .faction-panel.pirates{
-      box-shadow: inset 0 0 0 1px rgba(255,59,59,.14), 0 18px 45px rgba(0,0,0,.35);
+    .faction-panel.marine:before{
+      background: linear-gradient(90deg, rgba(79,156,255,.0), rgba(79,156,255,.95), rgba(31,95,255,.0));
+    }
+    .faction-panel.pirates:before{
+      background: linear-gradient(90deg, rgba(255,77,77,.0), rgba(255,77,77,.95), rgba(255,138,61,.0));
     }
 
+    /* Ombre + liseré par camp */
+    .faction-panel.marine{
+      box-shadow:
+        inset 0 0 0 1px rgba(79,156,255,.16),
+        0 18px 45px rgba(0,0,0,.35);
+    }
+    .faction-panel.pirates{
+      box-shadow:
+        inset 0 0 0 1px rgba(255,77,77,.16),
+        0 18px 45px rgba(0,0,0,.35);
+    }
+
+    /* VS */
     .vs-col{
       display:flex;
       align-items:center;
@@ -255,7 +145,12 @@
       top: 0;
       bottom: 0;
       width: 2px;
-      background: linear-gradient(180deg, rgba(79,156,255,0), rgba(255,255,255,.14), rgba(255,59,59,0));
+      background: linear-gradient(
+        180deg,
+        rgba(79,156,255,.0),
+        rgba(255,255,255,.14),
+        rgba(255,77,77,.0)
+      );
       opacity: .9;
     }
     .vs-badge{
@@ -272,6 +167,9 @@
       box-shadow: 0 20px 45px rgba(0,0,0,.60);
     }
 
+    /* =========
+       CARTES PERSONNAGES (dans les camps)
+       ========= */
     .char-list{
       display:flex;
       flex-direction: column;
@@ -287,41 +185,24 @@
       text-decoration:none;
       color: inherit;
       background: rgba(255,255,255,.03);
-      border: 1px solid rgba(255,255,255,.08);
-      transition: transform .15s ease, border-color .15s ease, background .15s ease;
+      border: 1px solid rgba(255,255,255,.10);
+      transition: transform .15s ease, border-color .15s ease, background .15s ease, box-shadow .15s ease;
     }
     .char-card:hover{
       transform: translateY(-2px);
       background: rgba(255,255,255,.05);
-      border-color: rgba(255,255,255,.16);
+      border-color: rgba(255,255,255,.18);
+      box-shadow: 0 18px 48px rgba(0,0,0,.45);
     }
-
-    /* accent de camp (bordure + glow léger) */
-    .char-card[data-camp="marine"]{
-      border-color: rgba(79,156,255,.20);
-    }
-    .char-card[data-camp="marine"]:hover{
-      border-color: rgba(79,156,255,.35);
-      box-shadow: 0 12px 40px rgba(79,156,255,.10);
-    }
-    .char-card[data-camp="pirate"]{
-      border-color: rgba(255,59,59,.18);
-    }
-    .char-card[data-camp="pirate"]:hover{
-      border-color: rgba(255,59,59,.32);
-      box-shadow: 0 12px 40px rgba(255,59,59,.10);
-    }
-
     .char-portrait{
-      width: 70px;
-      height: 70px;
+      width: 68px;
+      height: 68px;
       border-radius: 14px;
       object-fit: cover;
       box-shadow: 0 12px 28px rgba(0,0,0,.50);
       border: 1px solid rgba(255,255,255,.10);
       flex: 0 0 auto;
     }
-
     .char-meta{ min-width: 0; flex: 1; }
     .char-name{
       font-weight: 1000;
@@ -333,7 +214,7 @@
       text-overflow: ellipsis;
     }
     .char-desc{
-      opacity: .86;
+      opacity: .85;
       font-size: .92rem;
       line-height: 1.25rem;
       margin-bottom: 8px;
@@ -347,12 +228,14 @@
       font-size: .72rem;
       padding: 4px 9px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
       opacity: .95;
+      white-space: nowrap;
     }
-    .tag.marine{ border-color: rgba(79,156,255,.32); }
-    .tag.pirate{ border-color: rgba(255,59,59,.30); }
+    .tag.marine{ border-color: rgba(79,156,255,.35); }
+    .tag.pirate{ border-color: rgba(255,77,77,.35); }
+    .tag.neutral{ border-color: rgba(255,255,255,.28); }
 
     .hint{
       margin-top: 10px;
@@ -361,10 +244,100 @@
       line-height: 1.35rem;
     }
 
+    /* =========
+       NEUTRES (Option 1 : panneau sous le VS)
+       ========= */
+    .neutral-panel{
+      margin-top: 14px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(900px 220px at 50% 0%, rgba(255,255,255,.10), transparent 60%),
+        rgba(255,255,255,.02);
+      box-shadow: 0 18px 45px rgba(0,0,0,.35);
+      position: relative;
+    }
+    .neutral-panel:before{
+      content:"";
+      position:absolute;
+      left: 0; top: 0;
+      height: 3px;
+      width: 100%;
+      background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.9), rgba(255,255,255,0));
+      opacity: .85;
+    }
+    .neutral-head{
+      padding: 12px 14px;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+    }
+    .neutral-title{
+      font-weight: 1000;
+      letter-spacing: .2px;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      font-size: 1.05rem;
+    }
+    .neutral-sub{
+      font-size: .82rem;
+      opacity: .82;
+      margin-top: 2px;
+    }
+    .neutral-pill{
+      font-size: .72rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      white-space: nowrap;
+    }
+    .neutral-body{ padding: 14px; }
+    .neutral-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    @media (max-width: 980px){
+      .neutral-grid{ grid-template-columns: 1fr; }
+    }
+
     .results-wrap{
       margin-top: 18px;
       padding-top: 14px;
       border-top: 1px solid rgba(255,255,255,.10);
+    }
+
+    /* =========
+       Filtres (colonne droite) : boutons de camps
+       ========= */
+    .filter-btns{ display:flex; gap: 8px; flex-wrap: wrap; }
+    .filter-btn{
+      cursor:pointer;
+      user-select:none;
+      display:inline-flex;
+      align-items:center;
+      gap: 6px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      font-size: .82rem;
+    }
+    .filter-btn:hover{ background: rgba(255,255,255,.08); }
+    .filter-btn.marine{ border-color: rgba(79,156,255,.35); }
+    .filter-btn.pirate{ border-color: rgba(255,77,77,.35); }
+    .filter-btn.neutral{ border-color: rgba(255,255,255,.28); }
+
+    .filter-btn.active{
+      background: rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.22);
+      box-shadow: 0 12px 30px rgba(0,0,0,.35);
     }
   </style>
 </head>
@@ -377,7 +350,7 @@
         <p>Liste des personnages importants de l’univers.</p>
       </div>
       <div class="wiki-search">
-        <input id="q" placeholder="Rechercher (ex: amiral, pirate, domination, lumière)..." />
+        <input id="q" placeholder="Rechercher (ex: amiral, pirate, domination, lumière, neutre)..." />
         <button id="go">Rechercher</button>
       </div>
     </div>
@@ -397,32 +370,6 @@
         <h3>Conflit principal</h3>
         <div class="content">
 
-          <!-- Bandeau WoW-like -->
-          <div class="war-banner" aria-label="Marine contre Pirates">
-            <div class="inner">
-              <div class="war-side marine">
-                <div class="left">
-                  <div class="war-title">⚓ Marine</div>
-                  <div class="war-sub">Justice, ordre, domination — la loi au-dessus de tout.</div>
-                </div>
-                <div class="war-badge">BLEU</div>
-              </div>
-
-              <div class="mid">
-                <div class="war-vs">VS</div>
-              </div>
-
-              <div class="war-side pirates">
-                <div class="left" style="text-align:right">
-                  <div class="war-title" style="justify-content:flex-end">🏴‍☠️ Pirates</div>
-                  <div class="war-sub" style="margin-left:auto">Liberté, conquête, empire — le monde appartient aux audacieux.</div>
-                </div>
-                <div class="war-badge">ROUGE</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Panels + cartes -->
           <div class="faction-split">
             <!-- MARINE -->
             <section class="faction-panel marine">
@@ -436,9 +383,8 @@
 
               <div class="faction-body">
                 <div class="char-list">
-
                   <a class="char-card" data-camp="marine" href="personnage-kaelros.html"
-                     data-tags="marine amiral supreme antagoniste domination regent mers kaelros viremont">
+                     data-tags="marine amiral supreme antagoniste domination regent mers kaelros">
                     <img class="char-portrait" src="/royaumededraevorn/images/kaelros.png" alt="Kaelros Viremont"
                          onerror="this.style.display='none'">
                     <div class="char-meta">
@@ -466,7 +412,6 @@
                       </div>
                     </div>
                   </a>
-
                 </div>
 
                 <div class="hint">Astuce : cherche “amiral”, “lumière”, “domination”…</div>
@@ -490,7 +435,6 @@
 
               <div class="faction-body">
                 <div class="char-list">
-
                   <a class="char-card" data-camp="pirate" href="personnage-bryworn.html"
                      data-tags="pirate roi des pirates draevorn dragon portail empire bryworn">
                     <img class="char-portrait" src="/royaumededraevorn/images/bryworn.png" alt="Roi Bryworn"
@@ -506,13 +450,58 @@
                       </div>
                     </div>
                   </a>
-
                 </div>
 
                 <div class="hint">Astuce : cherche “roi”, “dragon”, “portail”…</div>
               </div>
             </section>
           </div>
+
+          <!-- NEUTRES (Option 1) -->
+          <section class="neutral-panel">
+            <div class="neutral-head">
+              <div>
+                <div class="neutral-title">🏳️ Neutres</div>
+                <div class="neutral-sub">Indépendants, voyageurs, mercenaires</div>
+              </div>
+              <span class="neutral-pill">Camp</span>
+            </div>
+
+            <div class="neutral-body">
+              <div class="neutral-grid">
+                <!-- EXEMPLES (remplace par tes persos) -->
+                <a class="char-card" data-camp="neutral" href="personnage-neutre1.html"
+                   data-tags="neutre independant mercenaire chasseur prime">
+                  <img class="char-portrait" src="/royaumededraevorn/images/neutre1.png" alt="Neutre #1"
+                       onerror="this.style.display='none'">
+                  <div class="char-meta">
+                    <div class="char-name">Neutre #1</div>
+                    <div class="char-desc">Opère pour lui-même, vend ses services au plus offrant.</div>
+                    <div class="char-tags">
+                      <span class="tag neutral">Neutre</span>
+                      <span class="tag neutral">Indépendant</span>
+                    </div>
+                  </div>
+                </a>
+
+                <a class="char-card" data-camp="neutral" href="personnage-neutre2.html"
+                   data-tags="neutre voyageur explorateur ancien">
+                  <img class="char-portrait" src="/royaumededraevorn/images/neutre2.png" alt="Neutre #2"
+                       onerror="this.style.display='none'">
+                  <div class="char-meta">
+                    <div class="char-name">Neutre #2</div>
+                    <div class="char-desc">Voyage entre les camps, détient des informations rares.</div>
+                    <div class="char-tags">
+                      <span class="tag neutral">Neutre</span>
+                      <span class="tag neutral">Voyageur</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <div class="hint">Astuce : cherche “neutre”, “indépendant”, “mercenaire”…</div>
+            </div>
+          </section>
 
           <div class="results-wrap">
             <h2 style="margin: 0 0 10px;">Recherche rapide</h2>
@@ -522,37 +511,49 @@
         </div>
       </main>
 
-      <aside class="wiki-card filters-card">
+      <aside class="wiki-card">
         <h3>Filtres</h3>
         <div class="content">
-          <span class="badge" style="border-color: rgba(79,156,255,.35); background: rgba(79,156,255,.10);">⚓ Marine</span>
-          <span class="badge" style="border-color: rgba(255,59,59,.35); background: rgba(255,59,59,.10);">🏴‍☠️ Pirates</span>
-          <span class="badge">🤝 Alliés</span>
-          <p style="opacity:.85;margin-top:10px">
-            Astuce : utilise la recherche pour filtrer (ex: “amiral”, “lumière”, “dragon”, “portail”).
+          <div class="filter-btns">
+            <span class="filter-btn marine" data-filter="marine">⚓ Marine</span>
+            <span class="filter-btn pirate" data-filter="pirate">🏴‍☠️ Pirates</span>
+            <span class="filter-btn neutral" data-filter="neutral">🏳️ Neutres</span>
+            <span class="filter-btn" data-filter="all">Tout</span>
+          </div>
+
+          <p style="opacity:.85;margin-top:12px">
+            Astuce : recherche par tags (ex: “amiral”, “lumière”, “dragon”, “portail”, “neutre”).
           </p>
         </div>
       </aside>
     </div>
   </div>
 
+  <!-- Scripts uniquement en bas -->
   <script src="/royaumededraevorn/js/wiki-search.js"></script>
   <script>
     const q = document.getElementById("q");
     const go = document.getElementById("go");
     const results = document.getElementById("results");
+    let currentCamp = "all";
 
-    function filterCards(query){
+    function applyFilters(query){
       const v = (query || "").toLowerCase().trim();
-      document.querySelectorAll(".char-card").forEach(c => {
-        const hay = (c.textContent + " " + (c.getAttribute("data-tags") || "")).toLowerCase();
-        c.style.display = (!v || hay.includes(v)) ? "flex" : "none";
+      document.querySelectorAll(".char-card").forEach(card => {
+        const camp = (card.getAttribute("data-camp") || "").toLowerCase();
+        const hay = (card.textContent + " " + (card.getAttribute("data-tags") || "")).toLowerCase();
+
+        const campOk = (currentCamp === "all") || (camp === currentCamp);
+        const queryOk = (!v) || hay.includes(v);
+
+        card.style.display = (campOk && queryOk) ? "flex" : "none";
       });
     }
 
     function run(){
       const value = q.value;
-      filterCards(value);
+
+      applyFilters(value);
 
       if (typeof WIKI_SEARCH !== "undefined") {
         const res = WIKI_SEARCH.searchWiki(value);
@@ -560,9 +561,23 @@
       }
     }
 
+    // Boutons filtre camp
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        currentCamp = btn.getAttribute("data-filter") || "all";
+        if (currentCamp === "all") currentCamp = "all";
+
+        run();
+      });
+    });
+
     go.addEventListener("click", run);
     q.addEventListener("keydown", (e)=>{ if(e.key==="Enter") run(); });
 
+    // défaut : tout + résultats
     run();
   </script>
 </body>
