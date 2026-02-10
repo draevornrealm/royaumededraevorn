@@ -771,4 +771,13 @@ body[data-faction="neutral"]{
     animation: none !important;
   }
 }
+/* Alignement stable des badges (évite les petits décalages selon PC / rendu emoji) */
+.ibadge{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  vertical-align: middle;
+  white-space: nowrap;
+}
 
