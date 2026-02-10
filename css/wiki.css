@@ -1,11 +1,11 @@
 /* =========================================================
-   WIKI.CSS — CLEAN / STABLE
+   WIKI.CSS — CLEAN / STABLE (REFONTE PROPRE)
    - Base + Layout + Cards
    - Hero + Search
    - Badges + Lists
    - Infobox (Fandom-style)
    - Thème par faction (data-faction)
-   - Personnages (cards + portraits)
+   - Personnages (cards + portraits RECTANGLE)
    ========================================================= */
 
 /* =============== RESET =============== */
@@ -41,12 +41,8 @@ a:hover{ text-decoration: underline; }
 }
 
 /* Factions */
-body[data-faction="marine"]{
-  --fx: 79,156,255;
-}
-body[data-faction="pirate"]{
-  --fx: 255,90,90;
-}
+body[data-faction="marine"]{ --fx: 79,156,255; }
+body[data-faction="pirate"]{ --fx: 255,90,90; }
 body[data-faction="neutral"]{
   --fx: 255,255,255;
   --fx-soft: 0.10;
@@ -54,16 +50,17 @@ body[data-faction="neutral"]{
   --fx-strong: 0.45;
 }
 
-/* =============== LAYOUT =============== */
+/* =============== LAYOUT (LARGE) =============== */
+/* ✅ Large comme avant */
 .wiki-container{
-  max-width: 1150px;
+  max-width: 1500px;            /* <-- + large */
   margin: 0 auto;
   padding: 24px;
 }
 
 .wiki-grid{
   display: grid;
-  grid-template-columns: 260px minmax(0, 1fr) 320px;
+  grid-template-columns: 280px minmax(0, 1fr) 340px;  /* <-- + large */
   gap: 18px;
 }
 
@@ -333,10 +330,7 @@ body[data-faction="neutral"]{
   text-align: left;
 }
 
-.infobox td{
-  opacity: 0.92;
-}
-
+.infobox td{ opacity: 0.92; }
 .infobox td a{ font-weight: 800; }
 
 .infobox .ibox-footer{
@@ -351,7 +345,7 @@ body[data-faction="neutral"]{
 }
 
 /* =============== PERSONNAGES (cards) =============== */
-/* (Ne casse pas les autres pages : ces classes n'existent que sur personnages.html) */
+/* Ces classes existent sur personnages.html */
 .char-card{
   display:flex;
   gap: 12px;
@@ -370,17 +364,42 @@ body[data-faction="neutral"]{
   border-color: rgba(255,255,255,.16);
 }
 
-/* ✅ Portrait rectangle “sans découpe” */
-.char-portrait{
-  width: 86px;
-  height: 120px;
-  border-radius: 14px;
-  object-fit: contain;
-  background: rgba(0,0,0,.25);
-  padding: 6px;
+/* ✅ VIGNETTES RECTANGLE (FINI le carré)
+   - object-fit: cover = pas de bandes noires
+   - ratio 3:2, propre, lisible
+*/
+.char-card .char-portrait{
+  width: 96px;
+  height: 64px;              /* <-- rectangle */
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 12px;
   border: 1px solid rgba(255,255,255,.10);
   box-shadow: 0 12px 28px rgba(0,0,0,.50);
   flex: 0 0 auto;
+  display:block;
+  background: rgba(0,0,0,.18);
+}
+
+/* Si portraits dans rank-card (factions) */
+.rank-card .char-portrait{
+  width: 96px;
+  height: 64px;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: 0 12px 28px rgba(0,0,0,.50);
+  display:block;
+  background: rgba(0,0,0,.18);
+}
+
+@media (max-width: 520px){
+  .char-card .char-portrait,
+  .rank-card .char-portrait{
+    width: 84px;
+    height: 56px;
+  }
 }
 
 .tag{
@@ -400,36 +419,3 @@ body[data-faction="neutral"]{
   color: rgba(255,255,255,.95);
   font-weight: 800;
 }
-
-/* =========================
-   PATCH VIGNETTES RECTANGLE (personnages)
-   Ne touche PAS aux infobox.
-   ========================= */
-
-.char-card .char-portrait{
-  width: 96px !important;
-  height: 64px !important;        /* rectangle */
-  aspect-ratio: 3 / 2;
-  object-fit: cover;
-  border-radius: 12px;
-  flex: 0 0 auto;
-}
-
-/* Si tu as des mini portraits ailleurs (rank-card), même règle */
-.rank-card .char-portrait{
-  width: 96px !important;
-  height: 64px !important;
-  aspect-ratio: 3 / 2;
-  object-fit: cover;
-  border-radius: 12px;
-}
-
-/* Mobile : un poil plus petit */
-@media (max-width: 520px){
-  .char-card .char-portrait,
-  .rank-card .char-portrait{
-    width: 84px !important;
-    height: 56px !important;
-  }
-}
-
