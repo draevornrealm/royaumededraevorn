@@ -679,15 +679,21 @@ body[data-faction="neutral"]{
 }
 
 /* ======================================================
-   🐉 DIVINITÉ DRACONIQUE NEUTRE
-   - Blanc divin / perlé
-   - Aura céleste animée (douce, stable)
-   - Aucune couleur de faction
+   🐉 DIVINITÉ DRACONIQUE NEUTRE (FIX ALIGNEMENT)
+   - PAS de filter animé sur l'élément (cause de désalignement)
+   - Aura animée via pseudo-éléments uniquement
    Usage :
    <span class="tag deity-dragon">Divinité draconique</span>
    ====================================================== */
 
 .tag.deity-dragon{
+  /* alignement stable avec les autres tags */
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1;
+  vertical-align: middle;
+
   position: relative;
   isolation: isolate;
 
@@ -701,16 +707,12 @@ body[data-faction="neutral"]{
 
   font-weight: 900;
   letter-spacing: .35px;
-  /* PAS DE text-transform → le texte reste EXACTEMENT comme en HTML */
 
   box-shadow:
     inset 0 0 0 1px rgba(255,255,255,0.35),
-    0 0 10px rgba(230,235,255,0.35),
-    0 0 22px rgba(200,210,255,0.25);
-
-  animation: divinePulse 2.4s ease-in-out infinite;
+    0 0 10px rgba(230,235,255,0.25),
+    0 0 22px rgba(200,210,255,0.18);
 }
-
 
 /* Aura divine diffuse */
 .tag.deity-dragon::before{
@@ -728,8 +730,8 @@ body[data-faction="neutral"]{
   );
 
   filter: blur(12px);
-  opacity: 0.75;
-  transform: scale(0.95);
+  opacity: 0.65;
+  transform: scale(0.94);
 
   animation: divineGlow 2.4s ease-in-out infinite;
 }
@@ -756,44 +758,30 @@ body[data-faction="neutral"]{
   animation: divineShimmer 3.4s ease-in-out infinite;
 }
 
-/* Animations */
-@keyframes divinePulse{
+/* Animations (stables) */
+@keyframes divineGlow{
   0%,100%{
-    filter: brightness(1.00) saturate(1.05);
-    box-shadow:
-      inset 0 0 0 1px rgba(255,255,255,0.35),
-      0 0 10px rgba(230,235,255,0.35),
-      0 0 22px rgba(200,210,255,0.25);
+    opacity: 0.55;
+    transform: scale(0.92);
   }
   50%{
-    filter: brightness(1.10) saturate(1.15);
-    box-shadow:
-      inset 0 0 0 1px rgba(255,255,255,0.45),
-      0 0 18px rgba(235,240,255,0.65),
-      0 0 40px rgba(210,220,255,0.45);
+    opacity: 0.90;
+    transform: scale(1.02);
   }
-}
-
-@keyframes divineGlow{
-  0%,100%{ opacity: 0.55; transform: scale(0.92); }
-  50%{ opacity: 0.95; transform: scale(1.02); }
 }
 
 @keyframes divineShimmer{
-  0%   { opacity: 0; transform: translateX(-120%); }
+  0%   { opacity: 0;   transform: translateX(-120%); }
   25%  { opacity: 0.6; }
-  55%  { opacity: 0; transform: translateX(120%); }
-  100% { opacity: 0; transform: translateX(120%); }
+  55%  { opacity: 0;   transform: translateX(120%); }
+  100% { opacity: 0;   transform: translateX(120%); }
 }
 
 /* Accessibilité */
 @media (prefers-reduced-motion: reduce){
-  .tag.deity-dragon,
   .tag.deity-dragon::before,
   .tag.deity-dragon::after{
     animation: none !important;
   }
 }
-
-
 
