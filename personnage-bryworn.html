@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
-  <!-- CSS (GitHub Pages) -->
+  <!-- CSS -->
   <link rel="stylesheet" href="/royaumededraevorn/css/wiki.css">
 </head>
 
@@ -55,30 +55,27 @@
 
           <h2>Profil</h2>
           <p>
-            Stratège, audacieux et charismatique, Bryworn dirige ses forces avec une vision : un monde où
-            la mer appartient à ceux qui osent la conquérir. Il accepte l’alliance avec ceux qui partagent
-            l’honneur, mais n’accorde aucune pitié aux tyrans.
+            Stratège, audacieux et charismatique, Bryworn dirige ses forces avec une vision :
+            un monde où la mer appartient à ceux qui osent la conquérir.
           </p>
 
           <h2>Pouvoirs</h2>
           <p>
             <b>Fruit du Dragon</b> — puissance draconique, souffle destructeur, endurance hors norme.<br>
-            <b>Fruit du Portail</b> — ouverture de passages instantanés, mobilité tactique, attaques surprises,
-            extraction d’alliés et repositionnement en pleine bataille.
+            <b>Fruit du Portail</b> — ouverture de passages instantanés, mobilité tactique, attaques surprises.
           </p>
 
           <h2>Royaume & Flotte</h2>
           <p>
-            À la tête du <b>Royaume Pirate de Draevorn</b>, Bryworn étend son influence par des alliances,
-            des conquêtes et des opérations éclairs. Sa flotte est connue pour frapper vite et disparaître
-            avant la riposte.
+            À la tête du <b>Royaume Pirate de Draevorn</b>, Bryworn étend son influence par des alliances
+            et des opérations éclairs.
           </p>
 
           <h2>Relations</h2>
           <ul>
             <li><b>Monkey D. Luffy</b> : allié proche, esprit de liberté partagé.</li>
-            <li><b><a href="personnage-kaelros.html">Kaelros Viremont</a></b> : ennemi principal, veut l’humilier publiquement.</li>
-            <li><b><a href="personnage-kizaru.html">Kizaru</a></b> : menace directe, exécuteur de la Marine.</li>
+            <li><b><a href="personnage-kaelros.html">Kaelros Viremont</a></b> : ennemi principal.</li>
+            <li><b><a href="personnage-kizaru.html">Kizaru</a></b> : menace directe.</li>
           </ul>
         </div>
       </main>
@@ -107,14 +104,13 @@
             <tr><th>Royaume</th><td>Draevorn</td></tr>
             <tr><th>Faction</th><td>Pirates</td></tr>
             <tr><th>Pouvoirs</th><td>Dragon • Portail</td></tr>
-            <tr><th>Style</th><td>Conquête & tactique éclair</td></tr>
             <tr><th>Statut</th><td>Vivant</td></tr>
           </table>
         </div>
 
         <div class="ibox-footer">
           <div class="mini-note">
-            Conseil RP : Bryworn parle en roi, agit en pirate. Il négocie peu — il propose une voie… puis impose une issue.
+            Conseil RP : Bryworn parle en roi, agit en pirate.
           </div>
         </div>
       </aside>
@@ -129,78 +125,43 @@
       const res = WIKI_SEARCH.searchWiki(q.value);
       if (res[0]) location.href = res[0].url;
     });
-    q.addEventListener("keydown", (e) => {
+    q.addEventListener("keydown", e => {
       if (e.key === "Enter") document.getElementById("go").click();
     });
   </script>
-<style>
-  /* =========================
-     PATCH PIRATE V2 (AFFINÉ)
-     Rouge royal assombri
-     ========================= */
 
-  body[data-faction="pirate"] .infobox{
-    border: 1px solid rgba(255,90,90,0.28) !important;
-    background:
-      linear-gradient(180deg,
-        rgba(140,30,30,0.28),
-        rgba(255,255,255,0.03)
+  <!-- PATCH PIRATE + FIX GOLD -->
+  <style>
+    body[data-faction="pirate"] .ibadge{
+      background: rgba(255,255,255,0.08) !important;
+      border-color: rgba(255,255,255,0.22) !important;
+      color: rgba(255,245,245,0.96) !important;
+    }
+
+    body[data-faction="pirate"] .ibadge.danger{
+      background: rgba(255,90,90,0.22) !important;
+      border-color: rgba(255,90,90,0.42) !important;
+      color: rgba(255,240,240,0.98) !important;
+    }
+
+    /* ✅ FIX OR — ROI / EMPEREUR */
+    body[data-faction="pirate"] .ibadge.gold{
+      background: linear-gradient(
+        135deg,
+        rgba(255,215,120,0.38),
+        rgba(180,120,30,0.32)
       ) !important;
 
-    box-shadow:
-      inset 0 0 0 1px rgba(255,90,90,0.18),
-      0 22px 55px rgba(0,0,0,0.55) !important;
-  }
+      border-color: rgba(255,215,140,0.65) !important;
+      color: rgba(255,245,220,0.98) !important;
 
-  body[data-faction="pirate"] .infobox .ibox-head{
-    background:
-      linear-gradient(135deg,
-        rgba(140,30,30,0.55),
-        rgba(40,10,10,0.25)
-      ) !important;
+      font-weight: 900;
+      letter-spacing: .4px;
 
-    border-bottom: 1px solid rgba(255,90,90,0.22) !important;
-  }
-
-  /* Texte plus clair (lisibilité) */
-  body[data-faction="pirate"] .infobox .ibox-title,
-  body[data-faction="pirate"] .infobox .ibox-sub{
-    color: rgba(255,240,240,0.95);
-  }
-
-  /* Image : cadre rouge discret */
-  body[data-faction="pirate"] .infobox .ibox-media img{
-    border: 1px solid rgba(255,90,90,0.32) !important;
-    box-shadow:
-      0 0 0 1px rgba(255,90,90,0.14),
-      0 18px 42px rgba(0,0,0,0.55) !important;
-  }
-
-  /* Séparateurs tableau plus doux */
-  body[data-faction="pirate"] .infobox th,
-  body[data-faction="pirate"] .infobox td{
-    border-top: 1px solid rgba(255,90,90,0.20) !important;
-  }
-
-  /* ✅ BADGES : priorité visuelle conservée */
-  body[data-faction="pirate"] .ibadge{
-    background: rgba(255,255,255,0.08) !important;
-    border-color: rgba(255,255,255,0.22) !important;
-    color: rgba(255,245,245,0.96) !important;
-  }
-
-  body[data-faction="pirate"] .ibadge.danger{
-    background: rgba(255,90,90,0.22) !important;
-    border-color: rgba(255,90,90,0.42) !important;
-    color: rgba(255,240,240,0.98) !important;
-  }
-</style>
-
-
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.28),
+        0 6px 16px rgba(0,0,0,0.45);
+    }
+  </style>
 </body>
 </html>
-
-
-
-
-
