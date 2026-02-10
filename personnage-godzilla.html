@@ -5,16 +5,16 @@
   <title>Burning Godzilla — Wiki de l’Univers</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Police moderne -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
-  <!-- CSS global -->
   <link rel="stylesheet" href="/royaumededraevorn/css/wiki.css">
 </head>
 
-<body>
+<!-- ✅ THEME NEUTRE -->
+<body data-faction="neutral">
+
   <div class="wiki-container">
     <div class="wiki-hero">
       <div>
@@ -33,7 +33,6 @@
     </div>
 
     <div class="wiki-grid">
-      <!-- Sidebar -->
       <aside class="wiki-card wiki-sidebar">
         <h3>Navigation</h3>
         <div class="content">
@@ -44,7 +43,6 @@
         </div>
       </aside>
 
-      <!-- Article -->
       <main class="wiki-card wiki-article">
         <h3>Article</h3>
         <div class="content">
@@ -92,13 +90,12 @@
           <ul>
             <li><b>Marine</b> : menace de niveau “catastrophe”, à contenir plutôt qu’à vaincre.</li>
             <li><b>Pirates</b> : certains le voient comme un mythe, d’autres comme un “dieu” à défier.</li>
-            <li><b>Bryworn</b> : potentiel “facteur d’équilibre” (respect/affrontement selon les actes du Roi).</li>
-            <li><b>Kaelros</b> : obstacle logique : l’ordre absolu attire toujours le jugement de la nature.</li>
+            <li><b>Bryworn</b> : facteur d’équilibre (respect/affrontement selon les actes du Roi).</li>
+            <li><b>Kaelros</b> : l’ordre absolu attire toujours le jugement de la nature.</li>
           </ul>
         </div>
       </main>
 
-      <!-- Infobox (même style que Kaelros) -->
       <aside class="infobox">
         <div class="ibox-head">
           <h3 class="ibox-title">Informations</h3>
@@ -130,15 +127,15 @@
 
         <div class="ibox-footer">
           <div class="mini-note">
-            Conseil RP : Godzilla ne “parle” pas. Il impose. Les scènes sont courtes, lourdes, naturelles : grondement,
-            tempête, chaleur, panique… puis décision.
+            Conseil RP : Godzilla ne “parle” pas. Il impose. Les scènes sont courtes, lourdes, naturelles :
+            grondement, tempête, chaleur, panique… puis décision.
           </div>
         </div>
       </aside>
+
     </div>
   </div>
 
-  <!-- Scripts en bas -->
   <script src="/royaumededraevorn/js/wiki-search.js"></script>
   <script>
     const q = document.getElementById("q");
@@ -149,12 +146,5 @@
     q.addEventListener("keydown",(e)=>{ if(e.key==="Enter") document.getElementById("go").click(); });
   </script>
 
-  <style>
-    /* Petite extension de styles pour badges neutres dans l'infobox */
-    .ibadge.neutral{
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.20);
-    }
-  </style>
 </body>
 </html>
