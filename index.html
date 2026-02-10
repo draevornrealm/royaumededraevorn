@@ -13,75 +13,73 @@
   <!-- CSS WIKI -->
   <link rel="stylesheet" href="/royaumededraevorn/css/wiki.css">
 
-  <!-- Petits styles local (juste pour rendre "À la une" plus classe sans casser wiki.css) -->
+  <!-- Styles locaux (accueil only) -->
   <style>
     .spotlight{
-      display: grid;
-      gap: 10px;
       padding: 14px;
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
+      margin: 10px 0;
     }
-    .spotlight + .spotlight{ margin-top: 14px; }
-
-    .spotlight .badges{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 2px;
-    }
-
-    .spotlight h2{
-      margin: 0;
-      font-size: 20px;
-      line-height: 1.25;
-    }
+    .spotlight .badges{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom: 10px; }
+    .spotlight h2{ margin: 6px 0 10px; }
 
     .spotlight .row{
       display:flex;
-      gap: 12px;
+      gap: 14px;
       align-items: flex-start;
-      flex-wrap: wrap;
     }
-
     .spotlight .thumb{
-      width: 120px;
-      min-width: 120px;
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,.12);
-      box-shadow: 0 14px 34px rgba(0,0,0,.55);
+      width: 140px;
+      flex: 0 0 140px;
     }
     .spotlight .thumb img{
       width: 100%;
       height: auto;
       display:block;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 12px 30px rgba(0,0,0,.45);
     }
-
     .spotlight .txt{
-      flex: 1;
-      min-width: 240px;
+      min-width: 0;
       opacity: .92;
-      line-height: 1.6;
+      line-height: 1.55;
+    }
+    .spotlight .cta a{ font-weight: 800; }
+
+    /* Petites variantes visuelles par camp (discret, classe) */
+    .spotlight.marine{
+      border-color: rgba(79,156,255,.18);
+      box-shadow: inset 0 0 0 1px rgba(79,156,255,.10);
+    }
+    .spotlight.marine .thumb img{
+      border-color: rgba(79,156,255,.25);
+      box-shadow: 0 0 0 1px rgba(79,156,255,.10), 0 12px 30px rgba(0,0,0,.45);
     }
 
-    .spotlight .cta a{
-      font-weight: 800;
-      text-decoration: none;
+    .spotlight.pirate{
+      border-color: rgba(255,90,90,.18);
+      box-shadow: inset 0 0 0 1px rgba(255,90,90,.10);
     }
-    .spotlight .cta a:hover{ text-decoration: underline; }
-
-    .sep{
-      border:0;
-      border-top:1px solid rgba(255,255,255,.12);
-      margin: 16px 0;
+    .spotlight.pirate .thumb img{
+      border-color: rgba(255,90,90,.25);
+      box-shadow: 0 0 0 1px rgba(255,90,90,.10), 0 12px 30px rgba(0,0,0,.45);
     }
 
-    /* petit accent neutre pour Godzilla */
     .spotlight.neutral{
       border-color: rgba(255,255,255,.16);
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+    }
+    .spotlight.neutral .thumb img{
+      border-color: rgba(255,255,255,.22);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.10), 0 12px 30px rgba(0,0,0,.45);
+    }
+
+    @media (max-width: 720px){
+      .spotlight .row{ flex-direction: column; }
+      .spotlight .thumb{ width: 100%; flex: 0 0 auto; max-width: 280px; }
     }
   </style>
 </head>
@@ -100,7 +98,6 @@
     </div>
 
     <div class="wiki-grid">
-      <!-- Navigation -->
       <aside class="wiki-card wiki-sidebar">
         <h3>Navigation</h3>
         <div class="content">
@@ -115,13 +112,12 @@
         </div>
       </aside>
 
-      <!-- Main -->
       <main class="wiki-card wiki-article">
         <h3>À la une</h3>
         <div class="content">
 
-          <!-- À LA UNE : KAELROS -->
-          <section class="spotlight">
+          <!-- ✅ À LA UNE : KAELROS (image ajoutée) -->
+          <section class="spotlight marine">
             <div class="badges">
               <span class="badge">Marine</span>
               <span class="badge">Arc principal</span>
@@ -130,6 +126,13 @@
             <h2>Kaelros Viremont — “Le Régent des Mers”</h2>
 
             <div class="row">
+              <div class="thumb">
+                <img
+                  src="/royaumededraevorn/images/kaelros.png"
+                  alt="Kaelros Viremont"
+                  loading="lazy">
+              </div>
+
               <div class="txt">
                 Grand Amiral Suprême, incarnation de la <b>Justice de Domination</b>.
                 Antagoniste central face aux pirates et à la liberté.
@@ -140,10 +143,10 @@
             </div>
           </section>
 
-          <hr class="sep" />
+          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
 
-          <!-- À LA UNE : BRYWORN -->
-          <section class="spotlight">
+          <!-- ✅ À LA UNE : BRYWORN -->
+          <section class="spotlight pirate">
             <div class="badges">
               <span class="badge">Pirates</span>
               <span class="badge">Roi des Pirates</span>
@@ -153,11 +156,15 @@
 
             <div class="row">
               <div class="thumb">
-                <img src="/royaumededraevorn/images/bryworn.png" alt="Roi Bryworn">
+                <img
+                  src="/royaumededraevorn/images/bryworn.png"
+                  alt="Roi Bryworn"
+                  loading="lazy">
               </div>
+
               <div class="txt">
-                Roi des Pirates et chef du Royaume Pirate de Draevorn.
-                Porte l’étendard de la liberté face à la Justice de Domination.
+                Roi des Pirates et chef du Royaume Pirate de Draevorn. Porte l’étendard de la liberté
+                face à la Justice de Domination.
                 <div class="cta" style="margin-top:8px;">
                   <a href="personnage-bryworn.html">Lire l’article →</a>
                 </div>
@@ -165,25 +172,29 @@
             </div>
           </section>
 
-          <hr class="sep" />
+          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
 
-          <!-- ✅ À LA UNE : BURNING GODZILLA -->
+          <!-- ✅ À LA UNE : GODZILLA (découverte) -->
           <section class="spotlight neutral">
             <div class="badges">
               <span class="badge">🏳️ Neutre</span>
-              <span class="badge">Menace mondiale</span>
-              <span class="badge">Découverte récente</span>
+              <span class="badge">Découverte</span>
+              <span class="badge">Niveau Catastrophe</span>
             </div>
 
-            <h2>Burning Godzilla — “Le Cataclysme Endormi”</h2>
+            <h2>Burning Godzilla — “Le Jugement de la Nature”</h2>
 
             <div class="row">
               <div class="thumb">
-                <img src="/royaumededraevorn/images/godzilla.png" alt="Burning Godzilla">
+                <img
+                  src="/royaumededraevorn/images/godzilla.png"
+                  alt="Burning Godzilla"
+                  loading="lazy">
               </div>
+
               <div class="txt">
-                Une divinité draconique hors de tout camp : <b>protecteur et destructeur</b>.
-                Son réveil annonce un jugement naturel : tempêtes, déluge, chaleur anormale…
+                Une <b>divinité draconique</b> neutre, protecteur et destructeur.
+                Son réveil annonce un basculement : tempêtes, marées extrêmes et rayon atomique.
                 <div class="cta" style="margin-top:8px;">
                   <a href="personnage-godzilla.html">Lire l’article →</a>
                 </div>
@@ -191,10 +202,10 @@
             </div>
           </section>
 
-          <hr class="sep" />
+          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
 
           <!-- ✅ Accès rapide Factions -->
-          <h2 style="margin: 0 0 10px;">Accès rapide : Factions</h2>
+          <h2>Accès rapide : Factions</h2>
           <div class="list-grid" style="margin: 10px 0 4px;">
             <a class="list-item" href="faction-marine.html">
               <div class="title">⚓ Marine</div>
@@ -206,29 +217,28 @@
             </a>
           </div>
 
-          <hr class="sep" />
+          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
 
-          <!-- RECHERCHE RAPIDE -->
-          <h2 style="margin: 0 0 10px;">Recherche rapide</h2>
+          <!-- Recherche rapide -->
+          <h2>Recherche rapide</h2>
           <div id="results"></div>
-
         </div>
       </main>
 
-      <!-- Right -->
       <aside class="wiki-card">
         <h3>Catégories</h3>
         <div class="content">
           <div class="list-grid">
             <a class="list-item" href="personnages.html">
               <div class="title">Personnages</div>
-              <div class="meta">Amiraux, pirates, alliés, neutres</div>
+              <div class="meta">Amiraux, pirates, neutres</div>
             </a>
 
             <a class="list-item" href="faction-marine.html">
               <div class="title">Factions — Marine</div>
               <div class="meta">Structure, doctrine, liens</div>
             </a>
+
             <a class="list-item" href="faction-pirates.html">
               <div class="title">Factions — Pirates</div>
               <div class="meta">Flottes, code pirate, territoires</div>
@@ -244,7 +254,7 @@
     </div>
   </div>
 
-  <!-- JS (UNE SEULE FOIS + bon chemin) -->
+  <!-- JS : UNE SEULE FOIS (bon chemin) -->
   <script src="/royaumededraevorn/js/wiki-search.js"></script>
   <script>
     const q = document.getElementById("q");
@@ -252,7 +262,6 @@
     const results = document.getElementById("results");
 
     function run(){
-      if (typeof WIKI_SEARCH === "undefined") return;
       const res = WIKI_SEARCH.searchWiki(q.value);
       WIKI_SEARCH.renderResults(results, res.map(r => ({...r, url: r.url})));
     }
@@ -261,9 +270,7 @@
     q.addEventListener("keydown", (e)=>{ if(e.key==="Enter") run(); });
 
     // résultats par défaut
-    if (typeof WIKI_SEARCH !== "undefined") {
-      WIKI_SEARCH.renderResults(results, WIKI_SEARCH.searchWiki(""));
-    }
+    WIKI_SEARCH.renderResults(results, WIKI_SEARCH.searchWiki(""));
   </script>
 </body>
 </html>
