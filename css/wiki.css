@@ -795,27 +795,5 @@ body[data-faction="neutral"]{
   }
 }
 
-/* ======================================================
-   FIX ALIGNEMENT BADGES (emoji / icônes)
-   - évite le décalage selon PC/OS
-   ====================================================== */
-
-.badge,
-.tag{
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  line-height: 1;         /* baseline stable */
-  vertical-align: middle; /* alignement entre badges */
-}
-
-/* Optionnel : rend les emojis plus stables visuellement */
-.badge::first-letter,
-.tag::first-letter{
-  line-height: 1;
-.tag.deity-dragon{
-  line-height: 1;
-}
-
 
 
