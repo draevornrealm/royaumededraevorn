@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
-  <!-- CSS (GitHub Pages) -->
+  <!-- CSS global -->
   <link rel="stylesheet" href="/royaumededraevorn/css/wiki.css">
 </head>
 
@@ -55,7 +55,7 @@
 
           <h2>Rôle</h2>
           <p>
-            Il agit comme <b>exécuteur</b> des décisions de Kaelros Viremont.
+            Il agit comme <b>exécuteur</b> des décisions de <b><a href="personnage-kaelros.html">Kaelros Viremont</a></b>.
             Il applique les ordres sans émotion : ni cruauté, ni compassion — uniquement le résultat.
           </p>
 
@@ -82,12 +82,11 @@
 
           <div class="ibox-badges">
             <span class="ibadge marine">⚓ Marine</span>
-            <span class="ibadge">⭐ Amiral</span>
+            <span class="ibadge gold">⭐ Amiral</span>
           </div>
         </div>
 
         <div class="ibox-media">
-          <!-- IMPORTANT : image dans /images et chemin GitHub Pages -->
           <img src="/royaumededraevorn/images/kizaru.png" alt="Kizaru (Borsalino)">
         </div>
 
@@ -112,7 +111,7 @@
     </div>
   </div>
 
-  <!-- JS (UNE SEULE FOIS, au bon chemin) -->
+  <!-- JS -->
   <script src="/royaumededraevorn/js/wiki-search.js"></script>
   <script>
     const q = document.getElementById("q");
@@ -124,6 +123,79 @@
       if (e.key === "Enter") document.getElementById("go").click();
     });
   </script>
+
+  <!-- ✅ PATCH MARINE + BADGE OR (LOCAL PAGE, SAFE) -->
+  <style>
+    /* Marine theme infobox (même esprit que Kaelros) */
+    body[data-faction="marine"] .infobox{
+      border: 1px solid rgba(79,156,255,0.26) !important;
+      background:
+        linear-gradient(180deg,
+          rgba(30,70,140,0.22),
+          rgba(255,255,255,0.03)
+        ) !important;
+      box-shadow:
+        inset 0 0 0 1px rgba(79,156,255,0.14),
+        0 22px 55px rgba(0,0,0,0.55) !important;
+    }
+
+    body[data-faction="marine"] .infobox .ibox-head{
+      background:
+        linear-gradient(135deg,
+          rgba(30,70,140,0.50),
+          rgba(10,18,40,0.25)
+        ) !important;
+      border-bottom: 1px solid rgba(79,156,255,0.20) !important;
+    }
+
+    body[data-faction="marine"] .infobox .ibox-title,
+    body[data-faction="marine"] .infobox .ibox-sub{
+      color: rgba(245,250,255,0.95) !important;
+    }
+
+    body[data-faction="marine"] .infobox .ibox-media img{
+      border: 1px solid rgba(79,156,255,0.30) !important;
+      box-shadow:
+        0 0 0 1px rgba(79,156,255,0.12),
+        0 18px 42px rgba(0,0,0,0.55) !important;
+    }
+
+    body[data-faction="marine"] .infobox th,
+    body[data-faction="marine"] .infobox td{
+      border-top: 1px solid rgba(79,156,255,0.18) !important;
+    }
+
+    /* Badges base (lisibles sur fond bleu) */
+    body[data-faction="marine"] .ibadge{
+      background: rgba(255,255,255,0.08) !important;
+      border-color: rgba(255,255,255,0.22) !important;
+      color: rgba(245,250,255,0.96) !important;
+      font-weight: 800 !important;
+    }
+
+    /* Badge Marine */
+    body[data-faction="marine"] .ibadge.marine{
+      background: rgba(79,156,255,0.18) !important;
+      border-color: rgba(79,156,255,0.42) !important;
+      color: rgba(245,250,255,0.98) !important;
+      font-weight: 900 !important;
+    }
+
+    /* ✅ Badge OR (même vibe que Bryworn/Roi) */
+    body[data-faction="marine"] .ibadge.gold{
+      background: linear-gradient(
+        135deg,
+        rgba(255,215,120,0.38),
+        rgba(180,120,30,0.32)
+      ) !important;
+      border: 1px solid rgba(255,215,140,0.65) !important;
+      color: rgba(255,245,220,0.98) !important;
+      font-weight: 900 !important;
+      letter-spacing: 0.4px;
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.28),
+        0 6px 16px rgba(0,0,0,0.45);
+    }
+  </style>
 </body>
 </html>
-
