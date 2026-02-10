@@ -206,6 +206,83 @@ a:hover {
   .wiki-container{ max-width: calc(100vw - 32px) !important; padding: 16px !important; }
 }
 
+/* =========================
+   NEUTRES — STYLE BLANC / ARBITRE
+   ========================= */
+
+/* Conteneur Neutre */
+.neutral-wrap{
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 16px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.10),
+      rgba(255,255,255,0.04)
+    );
+  border: 1px solid rgba(255,255,255,0.25);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.12),
+    0 20px 45px rgba(0,0,0,0.45);
+}
+
+/* Titre Neutre */
+.neutral-title{
+  font-weight: 900;
+  letter-spacing: .3px;
+  color: #ffffff;
+  text-shadow:
+    0 0 12px rgba(255,255,255,0.35);
+}
+
+/* Sous-texte */
+.neutral-sub{
+  color: rgba(255,255,255,0.85);
+}
+
+/* Carte Neutre */
+.char-card[data-camp="neutral"]{
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.14),
+      rgba(255,255,255,0.05)
+    );
+  border: 1px solid rgba(255,255,255,0.35);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.12),
+    0 14px 30px rgba(0,0,0,0.45);
+}
+
+/* Hover Neutre */
+.char-card[data-camp="neutral"]:hover{
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.22),
+      rgba(255,255,255,0.08)
+    );
+  border-color: rgba(255,255,255,0.55);
+}
+
+/* Portrait Neutre (halo sacré) */
+.char-card[data-camp="neutral"] .char-portrait{
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,0.35),
+    0 0 18px rgba(255,255,255,0.35),
+    0 16px 30px rgba(0,0,0,0.6);
+}
+
+/* Tags Neutres (blanc pur) */
+.tag.neutral{
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.55);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+
 
 .list-item .title { font-weight: 700; }
 .list-item .meta { opacity:.8; font-size: 13px; margin-top: 6px; }
