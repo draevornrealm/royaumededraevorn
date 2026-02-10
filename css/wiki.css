@@ -182,5 +182,38 @@ a:hover {
   line-height: 1.4;
 }
 
+/* ===== PATCH LARGEUR (Personnages trop étroit) ===== */
+
+/* 1) Container global plus large */
+.wiki-container{
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  padding: 24px !important;
+}
+
+/* 2) Grille principale : sidebar / contenu / colonne droite */
+.wiki-grid{
+  grid-template-columns: 280px minmax(0, 1fr) 340px !important;
+  gap: 16px !important;
+}
+
+/* 3) Très important en CSS Grid : éviter le "squeeze" */
+.wiki-card,
+.wiki-article,
+.wiki-sidebar{
+  min-width: 0 !important;
+}
+
+/* 4) Responsive : quand l'écran est plus petit */
+@media (max-width: 1100px){
+  .wiki-grid{
+    grid-template-columns: 1fr !important;
+  }
+  .wiki-container{
+    padding: 16px !important;
+  }
+}
+
+
 .list-item .title { font-weight: 700; }
 .list-item .meta { opacity:.8; font-size: 13px; margin-top: 6px; }
