@@ -1,182 +1,402 @@
-/* =========================
-   PATCH PREMIUM — IMAGES + INFOBOX
-   à coller TOUT EN BAS du fichier wiki.css
-   ========================= */
+/* =========================================================
+   WIKI.CSS — CLEAN / STABLE
+   - Base + Layout + Cards
+   - Hero + Search
+   - Badges + Lists
+   - Infobox (Fandom-style)
+   - Thème par faction (data-faction)
+   - Personnages (cards + portraits)
+   ========================================================= */
 
-/* ---------- 1) PORTRAITS "Personnages" : rectangle, sans découpe ---------- */
-/* (remplace le carré 68x68 et évite les images coupées) */
-.char-portrait{
-  width: 78px !important;
-  height: 110px !important;        /* ✅ rectangle vertical */
-  border-radius: 14px !important;
-  object-fit: contain !important;  /* ✅ pas de découpe */
+/* =============== RESET =============== */
+*{ box-sizing: border-box; }
+html, body{ height: 100%; }
+
+body{
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #0b1020;
+  color: #e9eefc;
+}
+
+a{
+  color: #8db7ff;
+  text-decoration: none;
+}
+a:hover{ text-decoration: underline; }
+
+/* =============== THEME TOKENS =============== */
+:root{
+  /* fallback accent */
+  --fx: 141,183,255;        /* rgb */
+  --fx-soft: 0.12;
+  --fx-mid: 0.22;
+  --fx-strong: 0.42;
+
+  --card-bg: rgba(255,255,255,.04);
+  --card-border: rgba(255,255,255,.10);
+  --card-sep: rgba(255,255,255,.10);
+  --text-soft: rgba(233,238,252,.86);
+  --shadow: 0 18px 45px rgba(0,0,0,.35);
+}
+
+/* Factions */
+body[data-faction="marine"]{
+  --fx: 79,156,255;
+}
+body[data-faction="pirate"]{
+  --fx: 255,90,90;
+}
+body[data-faction="neutral"]{
+  --fx: 255,255,255;
+  --fx-soft: 0.10;
+  --fx-mid: 0.18;
+  --fx-strong: 0.45;
+}
+
+/* =============== LAYOUT =============== */
+.wiki-container{
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.wiki-grid{
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr) 320px;
+  gap: 18px;
+}
+
+@media (max-width: 1100px){
+  .wiki-container{ padding: 16px; }
+  .wiki-grid{ grid-template-columns: 1fr; }
+}
+
+/* =============== CARDS =============== */
+.wiki-card{
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  overflow: hidden;
+  min-width: 0;
+  box-shadow: none;
+}
+
+.wiki-card h3{
+  margin: 0;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--card-sep);
+  font-size: 15px;
   background: linear-gradient(
-    180deg,
-    rgba(255,255,255,.06),
-    rgba(0,0,0,.28)
-  ) !important;
-  padding: 6px !important;
-  border: 1px solid rgba(255,255,255,.14) !important;
+    135deg,
+    rgba(var(--fx), var(--fx-mid)),
+    rgba(255,255,255,0.03)
+  );
+}
+
+.wiki-card .content{
+  padding: 14px;
+}
+
+/* Sidebar */
+.wiki-sidebar a{
+  display: block;
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin: 6px 0;
+  text-decoration: none;
+}
+.wiki-sidebar a:hover{
+  background: rgba(255,255,255,.06);
+}
+
+/* Article basics */
+.wiki-article h2{ margin: 18px 0 8px; }
+.wiki-article p{
+  line-height: 1.6;
+  color: var(--text-soft);
+  margin: 0 0 10px;
+}
+.wiki-article ul{
+  margin: 8px 0 0;
+  padding-left: 20px;
+  color: var(--text-soft);
+}
+.wiki-article li{ margin: 6px 0; }
+
+/* =============== HERO + SEARCH =============== */
+.wiki-hero{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.wiki-hero h1{
+  margin: 0;
+  font-size: 28px;
+  text-shadow: 0 0 18px rgba(var(--fx), .22);
+}
+
+.wiki-hero p{
+  margin: 6px 0 0;
+  opacity: .85;
+}
+
+.wiki-search{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.wiki-search input{
+  flex: 1;
+  min-width: 180px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.15);
+  background: rgba(0,0,0,.25);
+  color: inherit;
+  outline: none;
+}
+
+.wiki-search button{
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.15);
+  background: rgba(255,255,255,.06);
+  color: inherit;
+  cursor: pointer;
+}
+.wiki-search button:hover{
+  background: rgba(255,255,255,.10);
+}
+
+/* =============== BADGES + LISTS =============== */
+.badge{
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--fx), .30);
+  background: rgba(var(--fx), .10);
+  font-size: 12px;
+  margin-right: 6px;
+}
+
+.list-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.list-item{
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  text-decoration: none;
+  display: block;
+}
+.list-item:hover{
+  background: rgba(255,255,255,.07);
+}
+.list-item .title{
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+.list-item .meta{
+  opacity: .80;
+  font-size: 13px;
+}
+
+/* =============== INFOBOX (FANDOM STYLE) =============== */
+.infobox{
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(var(--fx), .30);
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.infobox .ibox-head{
+  padding: 14px 14px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+  background: linear-gradient(135deg, rgba(var(--fx), .22), rgba(255,255,255,0.04));
+}
+
+.infobox .ibox-title{
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+.infobox .ibox-sub{
+  margin-top: 6px;
+  opacity: .85;
+  font-size: 13px;
+}
+
+.infobox .ibox-badges{
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ibadge{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,.92);
+}
+
+.ibadge.marine{
+  background: rgba(79,156,255,0.16);
+  border-color: rgba(79,156,255,0.40);
+}
+.ibadge.pirate{
+  background: rgba(255,90,90,0.14);
+  border-color: rgba(255,90,90,0.38);
+}
+.ibadge.neutral{
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.45);
+  color: #fff;
+  font-weight: 800;
+}
+.ibadge.danger{
+  background: rgba(255,120,120,0.14);
+  border-color: rgba(255,120,120,0.34);
+  color: rgba(255,245,245,0.98);
+}
+
+/* ✅ Badge OR “premium” */
+.ibadge.gold{
+  background: linear-gradient(
+    135deg,
+    rgba(255,215,120,0.38),
+    rgba(180,120,30,0.32)
+  );
+  border-color: rgba(255,215,140,0.65);
+  color: rgba(255,245,220,0.98);
+  font-weight: 900;
+  letter-spacing: .4px;
   box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,.06),
-    0 14px 32px rgba(0,0,0,.55) !important;
-  flex: 0 0 auto !important;
+    inset 0 0 0 1px rgba(255,255,255,0.28),
+    0 6px 16px rgba(0,0,0,0.45);
 }
 
-/* Option : sur mobile, un peu plus compact */
-@media (max-width: 520px){
-  .char-portrait{
-    width: 70px !important;
-    height: 100px !important;
-    padding: 5px !important;
-  }
+.infobox .ibox-media{
+  padding: 14px;
 }
 
-/* ---------- 2) INFOBOX : une règle unique propre (évite tes doublons) ---------- */
-/* On cible seulement l'image dans .ibox-media (pas toutes les images) */
 .infobox .ibox-media img{
-  width: 100% !important;
-  height: auto !important;
-  display: block !important;
-  border-radius: 14px !important;
-  margin-bottom: 0 !important; /* évite les écarts chelous */
-  border: 1px solid rgba(255,255,255,.14) !important;
+  width: 100%;
+  display: block;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(0,0,0,.18);
   box-shadow:
-    0 0 0 1px rgba(255,255,255,.08),
-    0 14px 32px rgba(0,0,0,.50) !important;
+    0 0 0 1px rgba(var(--fx), .12),
+    0 10px 24px rgba(0,0,0,0.35);
 }
 
-/* Sécurité : neutralise les anciens styles globaux .infobox img */
-.infobox > img{
-  border-radius: 14px !important;
+.infobox .ibox-table{
+  padding: 0 14px 14px;
 }
 
-/* ---------- 3) BADGE GOLD : rendu plus “royal” + lisible ---------- */
-.ibadge.gold,
-.ibadge.grand-amiral{
-  background: linear-gradient(
-    135deg,
-    rgba(255, 215, 120, 0.42),
-    rgba(150, 95, 20, 0.30)
-  ) !important;
-
-  border: 1px solid rgba(255, 220, 140, 0.72) !important;
-  color: rgba(255, 248, 225, 0.98) !important;
-
-  font-weight: 900 !important;
-  letter-spacing: 0.35px !important;
-
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.20),
-    0 10px 22px rgba(0,0,0,0.40),
-    0 0 18px rgba(255, 200, 90, 0.18) !important;
+.infobox table{
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
 }
 
-/* ---------- 4) Badge "Roi" : ne dépend PAS du nth-child (plus robuste) ---------- */
-/* ⚠️ Conseil : ajoute class="gold" au badge Roi dans le HTML, c’est mieux.
-   Mais si tu veux garder ton système actuel, on améliore sans casser :
-*/
-body[data-faction="pirate"] .ibox-badges .ibadge:nth-child(2){
-  background: linear-gradient(
-    135deg,
-    rgba(255,215,120,0.42),
-    rgba(150,95,20,0.30)
-  ) !important;
-  border-color: rgba(255,220,140,0.72) !important;
-  color: rgba(255,248,225,0.98) !important;
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.20),
-    0 10px 22px rgba(0,0,0,0.40),
-    0 0 18px rgba(255,200,90,0.18) !important;
+.infobox th,
+.infobox td{
+  padding: 10px 8px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+  vertical-align: top;
 }
-/* =========================
-   PATCH PREMIUM — IMAGES + INFOBOX
-   à coller TOUT EN BAS du fichier wiki.css
-   ========================= */
 
-/* ---------- 1) PORTRAITS "Personnages" : rectangle, sans découpe ---------- */
-/* (remplace le carré 68x68 et évite les images coupées) */
+.infobox th{
+  width: 42%;
+  opacity: 0.85;
+  font-weight: 800;
+  text-align: left;
+}
+
+.infobox td{
+  opacity: 0.92;
+}
+
+.infobox td a{ font-weight: 800; }
+
+.infobox .ibox-footer{
+  padding: 12px 14px 14px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+}
+
+.infobox .mini-note{
+  opacity: 0.80;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* =============== PERSONNAGES (cards) =============== */
+/* (Ne casse pas les autres pages : ces classes n'existent que sur personnages.html) */
+.char-card{
+  display:flex;
+  gap: 12px;
+  align-items:center;
+  padding: 12px;
+  border-radius: 14px;
+  text-decoration:none;
+  color: inherit;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  transition: transform .15s ease, border-color .15s ease, background .15s ease;
+}
+.char-card:hover{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,.05);
+  border-color: rgba(255,255,255,.16);
+}
+
+/* ✅ Portrait rectangle “sans découpe” */
 .char-portrait{
-  width: 78px !important;
-  height: 110px !important;        /* ✅ rectangle vertical */
-  border-radius: 14px !important;
-  object-fit: contain !important;  /* ✅ pas de découpe */
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,.06),
-    rgba(0,0,0,.28)
-  ) !important;
-  padding: 6px !important;
-  border: 1px solid rgba(255,255,255,.14) !important;
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,.06),
-    0 14px 32px rgba(0,0,0,.55) !important;
-  flex: 0 0 auto !important;
+  width: 86px;
+  height: 120px;
+  border-radius: 14px;
+  object-fit: contain;
+  background: rgba(0,0,0,.25);
+  padding: 6px;
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: 0 12px 28px rgba(0,0,0,.50);
+  flex: 0 0 auto;
 }
 
-/* Option : sur mobile, un peu plus compact */
-@media (max-width: 520px){
-  .char-portrait{
-    width: 70px !important;
-    height: 100px !important;
-    padding: 5px !important;
-  }
+.tag{
+  display:inline-block;
+  font-size: .72rem;
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.03);
+  opacity: .95;
 }
-
-/* ---------- 2) INFOBOX : une règle unique propre (évite tes doublons) ---------- */
-/* On cible seulement l'image dans .ibox-media (pas toutes les images) */
-.infobox .ibox-media img{
-  width: 100% !important;
-  height: auto !important;
-  display: block !important;
-  border-radius: 14px !important;
-  margin-bottom: 0 !important; /* évite les écarts chelous */
-  border: 1px solid rgba(255,255,255,.14) !important;
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,.08),
-    0 14px 32px rgba(0,0,0,.50) !important;
-}
-
-/* Sécurité : neutralise les anciens styles globaux .infobox img */
-.infobox > img{
-  border-radius: 14px !important;
-}
-
-/* ---------- 3) BADGE GOLD : rendu plus “royal” + lisible ---------- */
-.ibadge.gold,
-.ibadge.grand-amiral{
-  background: linear-gradient(
-    135deg,
-    rgba(255, 215, 120, 0.42),
-    rgba(150, 95, 20, 0.30)
-  ) !important;
-
-  border: 1px solid rgba(255, 220, 140, 0.72) !important;
-  color: rgba(255, 248, 225, 0.98) !important;
-
-  font-weight: 900 !important;
-  letter-spacing: 0.35px !important;
-
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.20),
-    0 10px 22px rgba(0,0,0,0.40),
-    0 0 18px rgba(255, 200, 90, 0.18) !important;
-}
-
-/* ---------- 4) Badge "Roi" : ne dépend PAS du nth-child (plus robuste) ---------- */
-/* ⚠️ Conseil : ajoute class="gold" au badge Roi dans le HTML, c’est mieux.
-   Mais si tu veux garder ton système actuel, on améliore sans casser :
-*/
-body[data-faction="pirate"] .ibox-badges .ibadge:nth-child(2){
-  background: linear-gradient(
-    135deg,
-    rgba(255,215,120,0.42),
-    rgba(150,95,20,0.30)
-  ) !important;
-  border-color: rgba(255,220,140,0.72) !important;
-  color: rgba(255,248,225,0.98) !important;
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.20),
-    0 10px 22px rgba(0,0,0,0.40),
-    0 0 18px rgba(255,200,90,0.18) !important;
+.tag.marine{ border-color: rgba(79,156,255,.35); background: rgba(79,156,255,.10); }
+.tag.pirate{ border-color: rgba(255,90,90,.35); background: rgba(255,90,90,.10); }
+.tag.neutral{
+  border-color: rgba(255,255,255,.45);
+  background: rgba(255,255,255,.14);
+  color: rgba(255,255,255,.95);
+  font-weight: 800;
 }
