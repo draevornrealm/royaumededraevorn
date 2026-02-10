@@ -173,15 +173,20 @@
       background: rgba(255,255,255,.05);
       border-color: rgba(255,255,255,.16);
     }
+
+    /* ✅ Portraits : rectangle (pas carré) */
     .char-portrait{
-      width: 68px;
-      height: 68px;
-      border-radius: 14px;
+      width: 96px;
+      height: 64px;
+      border-radius: 12px;
       object-fit: cover;
       box-shadow: 0 12px 28px rgba(0,0,0,.50);
       border: 1px solid rgba(255,255,255,.10);
       flex: 0 0 auto;
+      display:block;
+      background: rgba(0,0,0,.18);
     }
+
     .char-meta{ min-width: 0; flex: 1; }
     .char-name{
       font-weight: 900;
@@ -313,6 +318,14 @@
       border-color: rgba(255,255,255,.35) !important;
       background: rgba(255,255,255,.10) !important;
     }
+
+    /* Mobile : vignettes un peu plus petites */
+    @media (max-width: 520px){
+      .char-portrait{
+        width: 84px;
+        height: 56px;
+      }
+    }
   </style>
 </head>
 
@@ -425,9 +438,25 @@
                       </div>
                     </div>
                   </a>
+
+                  <!-- ✅ AJOUT : LUFFY -->
+                  <a class="char-card" data-camp="pirate" href="personnage-luffy.html"
+                     data-tags="pirate luffy monkey d luffy capitaine liberte chapeau de paille allié">
+                    <!-- Mets ton image ici : /royaumededraevorn/images/luffy.png -->
+                    <img class="char-portrait" src="/royaumededraevorn/images/luffy.png" alt="Monkey D. Luffy">
+                    <div class="char-meta">
+                      <div class="char-name">Monkey D. Luffy</div>
+                      <div class="char-desc">Capitaine pirate — symbole de liberté, détermination inébranlable.</div>
+                      <div class="char-tags">
+                        <span class="tag pirate">Capitaine</span>
+                        <span class="tag pirate">Liberté</span>
+                        <span class="tag pirate">Allié</span>
+                      </div>
+                    </div>
+                  </a>
                 </div>
 
-                <div class="hint">Astuce : cherche “roi”, “dragon”, “portail”…</div>
+                <div class="hint">Astuce : cherche “roi”, “capitaine”, “liberté”, “chapeau”…</div>
               </div>
             </section>
           </div>
@@ -483,7 +512,7 @@
           </div>
 
           <p style="opacity:.85;margin-top:10px">
-            Astuce : recherche par tags (ex: “amiral”, “lumière”, “dragon”, “portail”, “godzilla”, “déluge”…).
+            Astuce : recherche par tags (ex: “amiral”, “lumière”, “dragon”, “portail”, “luffy”, “godzilla”, “déluge”…).
           </p>
         </div>
       </aside>
