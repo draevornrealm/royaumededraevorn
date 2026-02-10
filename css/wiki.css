@@ -701,7 +701,7 @@ body[data-faction="neutral"]{
 
   font-weight: 900;
   letter-spacing: .35px;
-  text-transform: uppercase;
+  /* PAS DE text-transform → le texte reste EXACTEMENT comme en HTML */
 
   box-shadow:
     inset 0 0 0 1px rgba(255,255,255,0.35),
@@ -710,6 +710,7 @@ body[data-faction="neutral"]{
 
   animation: divinePulse 2.4s ease-in-out infinite;
 }
+
 
 /* Aura divine diffuse */
 .tag.deity-dragon::before{
