@@ -12,6 +12,78 @@
 
   <!-- CSS WIKI -->
   <link rel="stylesheet" href="/royaumededraevorn/css/wiki.css">
+
+  <!-- Petits styles local (juste pour rendre "À la une" plus classe sans casser wiki.css) -->
+  <style>
+    .spotlight{
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+    }
+    .spotlight + .spotlight{ margin-top: 14px; }
+
+    .spotlight .badges{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+
+    .spotlight h2{
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.25;
+    }
+
+    .spotlight .row{
+      display:flex;
+      gap: 12px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .spotlight .thumb{
+      width: 120px;
+      min-width: 120px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 14px 34px rgba(0,0,0,.55);
+    }
+    .spotlight .thumb img{
+      width: 100%;
+      height: auto;
+      display:block;
+    }
+
+    .spotlight .txt{
+      flex: 1;
+      min-width: 240px;
+      opacity: .92;
+      line-height: 1.6;
+    }
+
+    .spotlight .cta a{
+      font-weight: 800;
+      text-decoration: none;
+    }
+    .spotlight .cta a:hover{ text-decoration: underline; }
+
+    .sep{
+      border:0;
+      border-top:1px solid rgba(255,255,255,.12);
+      margin: 16px 0;
+    }
+
+    /* petit accent neutre pour Godzilla */
+    .spotlight.neutral{
+      border-color: rgba(255,255,255,.16);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+    }
+  </style>
 </head>
 
 <body>
@@ -28,6 +100,7 @@
     </div>
 
     <div class="wiki-grid">
+      <!-- Navigation -->
       <aside class="wiki-card wiki-sidebar">
         <h3>Navigation</h3>
         <div class="content">
@@ -42,39 +115,86 @@
         </div>
       </aside>
 
+      <!-- Main -->
       <main class="wiki-card wiki-article">
         <h3>À la une</h3>
         <div class="content">
 
           <!-- À LA UNE : KAELROS -->
-          <div class="badge">Marine</div>
-          <div class="badge">Arc principal</div>
-          <h2>Kaelros Viremont — “Le Régent des Mers”</h2>
-          <p>Grand Amiral Suprême, incarnation de la Justice de Domination. Antagoniste central face aux pirates et à la liberté.</p>
-          <p><a href="personnage-kaelros.html">Lire l’article →</a></p>
+          <section class="spotlight">
+            <div class="badges">
+              <span class="badge">Marine</span>
+              <span class="badge">Arc principal</span>
+            </div>
 
-          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
+            <h2>Kaelros Viremont — “Le Régent des Mers”</h2>
+
+            <div class="row">
+              <div class="txt">
+                Grand Amiral Suprême, incarnation de la <b>Justice de Domination</b>.
+                Antagoniste central face aux pirates et à la liberté.
+                <div class="cta" style="margin-top:8px;">
+                  <a href="personnage-kaelros.html">Lire l’article →</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <hr class="sep" />
 
           <!-- À LA UNE : BRYWORN -->
-          <div class="badge">Pirates</div>
-          <div class="badge">Roi des Pirates</div>
-          <h2>Roi Bryworn — “Souverain de Draevorn”</h2>
-          <p>Roi des Pirates et chef du Royaume Pirate de Draevorn. Porte l’étendard de la liberté face à la Justice de Domination.</p>
+          <section class="spotlight">
+            <div class="badges">
+              <span class="badge">Pirates</span>
+              <span class="badge">Roi des Pirates</span>
+            </div>
 
-          <p style="margin:12px 0;">
-            <img
-              src="/royaumededraevorn/images/bryworn.png"
-              alt="Roi Bryworn"
-              style="width:100%;max-width:320px;border-radius:12px;display:block;box-shadow:0 12px 30px rgba(0,0,0,.45);"
-            />
-          </p>
+            <h2>Roi Bryworn — “Souverain de Draevorn”</h2>
 
-          <p><a href="personnage-bryworn.html">Lire l’article →</a></p>
+            <div class="row">
+              <div class="thumb">
+                <img src="/royaumededraevorn/images/bryworn.png" alt="Roi Bryworn">
+              </div>
+              <div class="txt">
+                Roi des Pirates et chef du Royaume Pirate de Draevorn.
+                Porte l’étendard de la liberté face à la Justice de Domination.
+                <div class="cta" style="margin-top:8px;">
+                  <a href="personnage-bryworn.html">Lire l’article →</a>
+                </div>
+              </div>
+            </div>
+          </section>
 
-          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
+          <hr class="sep" />
+
+          <!-- ✅ À LA UNE : BURNING GODZILLA -->
+          <section class="spotlight neutral">
+            <div class="badges">
+              <span class="badge">🏳️ Neutre</span>
+              <span class="badge">Menace mondiale</span>
+              <span class="badge">Découverte récente</span>
+            </div>
+
+            <h2>Burning Godzilla — “Le Cataclysme Endormi”</h2>
+
+            <div class="row">
+              <div class="thumb">
+                <img src="/royaumededraevorn/images/godzilla.png" alt="Burning Godzilla">
+              </div>
+              <div class="txt">
+                Une divinité draconique hors de tout camp : <b>protecteur et destructeur</b>.
+                Son réveil annonce un jugement naturel : tempêtes, déluge, chaleur anormale…
+                <div class="cta" style="margin-top:8px;">
+                  <a href="personnage-godzilla.html">Lire l’article →</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <hr class="sep" />
 
           <!-- ✅ Accès rapide Factions -->
-          <h2>Accès rapide : Factions</h2>
+          <h2 style="margin: 0 0 10px;">Accès rapide : Factions</h2>
           <div class="list-grid" style="margin: 10px 0 4px;">
             <a class="list-item" href="faction-marine.html">
               <div class="title">⚓ Marine</div>
@@ -86,24 +206,25 @@
             </a>
           </div>
 
-          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
+          <hr class="sep" />
 
           <!-- RECHERCHE RAPIDE -->
-          <h2>Recherche rapide</h2>
+          <h2 style="margin: 0 0 10px;">Recherche rapide</h2>
           <div id="results"></div>
+
         </div>
       </main>
 
+      <!-- Right -->
       <aside class="wiki-card">
         <h3>Catégories</h3>
         <div class="content">
           <div class="list-grid">
             <a class="list-item" href="personnages.html">
               <div class="title">Personnages</div>
-              <div class="meta">Amiraux, pirates, alliés</div>
+              <div class="meta">Amiraux, pirates, alliés, neutres</div>
             </a>
 
-            <!-- ✅ Catégorie factions plus propre -->
             <a class="list-item" href="faction-marine.html">
               <div class="title">Factions — Marine</div>
               <div class="meta">Structure, doctrine, liens</div>
@@ -123,7 +244,7 @@
     </div>
   </div>
 
-  <!-- JS (UNE SEULE FOIS + bon chemin GitHub Pages) -->
+  <!-- JS (UNE SEULE FOIS + bon chemin) -->
   <script src="/royaumededraevorn/js/wiki-search.js"></script>
   <script>
     const q = document.getElementById("q");
@@ -131,14 +252,18 @@
     const results = document.getElementById("results");
 
     function run(){
+      if (typeof WIKI_SEARCH === "undefined") return;
       const res = WIKI_SEARCH.searchWiki(q.value);
       WIKI_SEARCH.renderResults(results, res.map(r => ({...r, url: r.url})));
     }
+
     go.addEventListener("click", run);
     q.addEventListener("keydown", (e)=>{ if(e.key==="Enter") run(); });
 
     // résultats par défaut
-    WIKI_SEARCH.renderResults(results, WIKI_SEARCH.searchWiki(""));
+    if (typeof WIKI_SEARCH !== "undefined") {
+      WIKI_SEARCH.renderResults(results, WIKI_SEARCH.searchWiki(""));
+    }
   </script>
 </body>
 </html>
