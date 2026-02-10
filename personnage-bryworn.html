@@ -131,48 +131,59 @@
     });
   </script>
 
-  <!-- PATCH PIRATE + FIX GOLD -->
-  <style>
-    body[data-faction="pirate"] .ibadge{
-      background: rgba(255,255,255,0.08) !important;
-      border-color: rgba(255,255,255,0.22) !important;
-      color: rgba(255,245,245,0.96) !important;
-    }
+<style>
+/* =========================
+   BADGES PIRATES – FIX FINAL
+   ========================= */
 
-    body[data-faction="pirate"] .ibadge.danger{
-      background: rgba(255,90,90,0.22) !important;
-      border-color: rgba(255,90,90,0.42) !important;
-      color: rgba(255,240,240,0.98) !important;
-    }
-
-    /* ✅ FIX OR — ROI / EMPEREUR */
-    body[data-faction="pirate"] .ibadge.gold{
-      background: linear-gradient(
-        135deg,
-        rgba(255,215,120,0.38),
-        rgba(180,120,30,0.32)
-      ) !important;
-
-      border-color: rgba(255,215,140,0.65) !important;
-      color: rgba(255,245,220,0.98) !important;
-
-      font-weight: 900;
-      letter-spacing: .4px;
-
-      box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,0.28),
-        0 6px 16px rgba(0,0,0,0.45);
-    }
-.ibadge.gold.aura{
-  box-shadow:
-    0 0 18px rgba(255,200,90,0.85),
-    0 0 40px rgba(255,170,40,0.55),
-    inset 0 0 0 1px rgba(255,255,255,0.40) !important;
-  transform: translateZ(0);
+body[data-faction="pirate"] .ibadge{
+  background: rgba(255,255,255,0.08) !important;
+  border-color: rgba(255,255,255,0.22) !important;
+  color: rgba(255,245,245,0.96) !important;
 }
-  </style>
+
+body[data-faction="pirate"] .ibadge.danger{
+  background: rgba(255,90,90,0.22) !important;
+  border-color: rgba(255,90,90,0.42) !important;
+  color: rgba(255,240,240,0.98) !important;
+}
+
+/* =========================
+   BADGE OR (ROI / EMPEREUR)
+   ========================= */
+body[data-faction="pirate"] .ibadge.gold{
+  background: linear-gradient(
+    135deg,
+    rgba(255,215,120,0.38),
+    rgba(180,120,30,0.32)
+  ) !important;
+
+  border-color: rgba(255,215,140,0.65) !important;
+  color: rgba(255,245,220,0.98) !important;
+
+  font-weight: 900;
+  letter-spacing: .4px;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.28),
+    0 6px 16px rgba(0,0,0,0.45) !important;
+}
+
+/* =========================
+   AURA OR (ROI / HAKI / EMPEREUR)
+   ========================= */
+body[data-faction="pirate"] .ibadge.gold.aura{
+  box-shadow:
+    0 0 16px rgba(255,215,120,0.95),
+    0 0 36px rgba(255,170,40,0.65),
+    0 0 60px rgba(255,120,20,0.35),
+    inset 0 0 0 1px rgba(255,255,255,0.45) !important;
+}
+</style>
+
 </body>
 </html>
+
 
 
 
