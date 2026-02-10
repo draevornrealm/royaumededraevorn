@@ -14,41 +14,35 @@
   <link rel="stylesheet" href="/royaumededraevorn/css/wiki.css">
 
   <style>
-    /* =========
-       LAYOUT (corrige le "trop étroit" + évite l'écrasement)
-       ========= */
+    :root{
+      --marine: rgba(79,156,255,1);
+      --marineSoft: rgba(79,156,255,.14);
+
+      --pirate: rgba(255,74,74,1);
+      --pirateSoft: rgba(255,74,74,.14);
+
+      --neutral: rgba(255,255,255,1);
+      --neutralSoft: rgba(255,255,255,.08);
+    }
+
+    /* ✅ FIX largeur (indépendant du cache CSS) */
     .wiki-container{
       max-width: 1500px !important;
       margin: 0 auto !important;
       padding: 24px !important;
     }
     .wiki-grid{
-      display:grid;
-      grid-template-columns: 260px minmax(0, 1fr) 320px;
-      gap: 18px;
-      align-items: start;
+      grid-template-columns: 280px minmax(0, 1fr) 340px !important;
+      gap: 16px !important;
     }
-    .wiki-card, .wiki-sidebar, .wiki-article{ min-width: 0; }
+    .wiki-card, .wiki-article, .wiki-sidebar{ min-width: 0 !important; }
 
     @media (max-width: 1100px){
-      .wiki-grid{ grid-template-columns: 1fr; }
+      .wiki-grid{ grid-template-columns: 1fr !important; }
       .wiki-container{ padding: 16px !important; }
     }
 
-    /* =========
-       THEME CAMPS (Marine bleu / Pirates rouge / Neutres blanc)
-       ========= */
-    :root{
-      --marine: #4f9cff;
-      --marine2:#1f5fff;
-      --pirate: #ff4d4d;
-      --pirate2:#ff8a3d;
-      --neutral:#ffffff;
-    }
-
-    /* =========
-       SECTION "Conflit principal" (Marine VS Pirates)
-       ========= */
+    /* Split Marine vs Pirates */
     .faction-split{
       display:grid;
       grid-template-columns: 1fr 92px 1fr;
@@ -63,19 +57,19 @@
 
     .faction-panel{
       border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.08);
       overflow:hidden;
       background: rgba(255,255,255,.02);
       box-shadow: 0 18px 45px rgba(0,0,0,.35);
       position: relative;
     }
+
     .faction-head{
       padding: 12px 14px;
       display:flex;
       align-items:center;
       justify-content: space-between;
-      gap: 12px;
-      border-bottom: 1px solid rgba(255,255,255,.10);
+      border-bottom: 1px solid rgba(255,255,255,.08);
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
     }
     .faction-title{
@@ -84,55 +78,45 @@
       display:flex;
       align-items:center;
       gap: 10px;
-      font-size: 1.05rem;
     }
     .faction-sub{
       font-size: .82rem;
-      opacity: .82;
+      opacity: .8;
       margin-top: 2px;
-      max-width: 42ch;
     }
-    .faction-body{ padding: 14px; }
+
+    /* Bannières couleur (style WoW-ish) */
+    .faction-panel.marine{
+      box-shadow: inset 0 0 0 1px rgba(79,156,255,.18), 0 18px 45px rgba(0,0,0,.35);
+    }
+    .faction-panel.marine .faction-head{
+      background:
+        linear-gradient(90deg, rgba(79,156,255,.22), rgba(255,255,255,.03));
+      border-bottom-color: rgba(79,156,255,.18);
+    }
+
+    .faction-panel.pirates{
+      box-shadow: inset 0 0 0 1px rgba(255,74,74,.18), 0 18px 45px rgba(0,0,0,.35);
+    }
+    .faction-panel.pirates .faction-head{
+      background:
+        linear-gradient(90deg, rgba(255,74,74,.22), rgba(255,255,255,.03));
+      border-bottom-color: rgba(255,74,74,.18);
+    }
 
     .camp-pill{
       font-size: .72rem;
       padding: 6px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
       opacity: .95;
       white-space: nowrap;
     }
 
-    /* Bandeau coloré (style "bannière") */
-    .faction-panel:before{
-      content:"";
-      position:absolute;
-      left: 0; top: 0;
-      height: 3px;
-      width: 100%;
-      opacity: .95;
-    }
-    .faction-panel.marine:before{
-      background: linear-gradient(90deg, rgba(79,156,255,.0), rgba(79,156,255,.95), rgba(31,95,255,.0));
-    }
-    .faction-panel.pirates:before{
-      background: linear-gradient(90deg, rgba(255,77,77,.0), rgba(255,77,77,.95), rgba(255,138,61,.0));
-    }
+    .faction-body{ padding: 14px; }
 
-    /* Ombre + liseré par camp */
-    .faction-panel.marine{
-      box-shadow:
-        inset 0 0 0 1px rgba(79,156,255,.16),
-        0 18px 45px rgba(0,0,0,.35);
-    }
-    .faction-panel.pirates{
-      box-shadow:
-        inset 0 0 0 1px rgba(255,77,77,.16),
-        0 18px 45px rgba(0,0,0,.35);
-    }
-
-    /* VS */
+    /* VS colonne */
     .vs-col{
       display:flex;
       align-items:center;
@@ -148,8 +132,8 @@
       background: linear-gradient(
         180deg,
         rgba(79,156,255,.0),
-        rgba(255,255,255,.14),
-        rgba(255,77,77,.0)
+        rgba(255,255,255,.16),
+        rgba(255,74,74,.0)
       );
       opacity: .9;
     }
@@ -160,16 +144,14 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      font-weight: 1000;
+      font-weight: 900;
       letter-spacing: 1px;
       border: 1px solid rgba(255,255,255,.14);
       background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.12), rgba(255,255,255,.03));
       box-shadow: 0 20px 45px rgba(0,0,0,.60);
     }
 
-    /* =========
-       CARTES PERSONNAGES (dans les camps)
-       ========= */
+    /* Cartes persos */
     .char-list{
       display:flex;
       flex-direction: column;
@@ -185,14 +167,13 @@
       text-decoration:none;
       color: inherit;
       background: rgba(255,255,255,.03);
-      border: 1px solid rgba(255,255,255,.10);
-      transition: transform .15s ease, border-color .15s ease, background .15s ease, box-shadow .15s ease;
+      border: 1px solid rgba(255,255,255,.08);
+      transition: transform .15s ease, border-color .15s ease, background .15s ease;
     }
     .char-card:hover{
       transform: translateY(-2px);
       background: rgba(255,255,255,.05);
-      border-color: rgba(255,255,255,.18);
-      box-shadow: 0 18px 48px rgba(0,0,0,.45);
+      border-color: rgba(255,255,255,.16);
     }
     .char-portrait{
       width: 68px;
@@ -205,7 +186,7 @@
     }
     .char-meta{ min-width: 0; flex: 1; }
     .char-name{
-      font-weight: 1000;
+      font-weight: 900;
       letter-spacing: .2px;
       margin-bottom: 4px;
       line-height: 1.1rem;
@@ -224,18 +205,18 @@
       overflow: hidden;
     }
     .char-tags{ display:flex; gap:6px; flex-wrap: wrap; }
+
     .tag{
       font-size: .72rem;
       padding: 4px 9px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
       opacity: .95;
-      white-space: nowrap;
     }
-    .tag.marine{ border-color: rgba(79,156,255,.35); }
-    .tag.pirate{ border-color: rgba(255,77,77,.35); }
-    .tag.neutral{ border-color: rgba(255,255,255,.28); }
+    .tag.marine{ border-color: rgba(79,156,255,.35); background: rgba(79,156,255,.08); }
+    .tag.pirate{ border-color: rgba(255,74,74,.35); background: rgba(255,74,74,.08); }
+    .tag.neutral{ border-color: rgba(255,255,255,.25); background: rgba(255,255,255,.06); }
 
     .hint{
       margin-top: 10px;
@@ -244,60 +225,27 @@
       line-height: 1.35rem;
     }
 
-    /* =========
-       NEUTRES (Option 1 : panneau sous le VS)
-       ========= */
-    .neutral-panel{
-      margin-top: 14px;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,.10);
-      background:
-        radial-gradient(900px 220px at 50% 0%, rgba(255,255,255,.10), transparent 60%),
-        rgba(255,255,255,.02);
-      box-shadow: 0 18px 45px rgba(0,0,0,.35);
-      position: relative;
-    }
-    .neutral-panel:before{
-      content:"";
-      position:absolute;
-      left: 0; top: 0;
-      height: 3px;
-      width: 100%;
-      background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.9), rgba(255,255,255,0));
-      opacity: .85;
+    /* Neutres (section en dessous, pleine largeur) */
+    .neutral-wrap{
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,.10);
     }
     .neutral-head{
-      padding: 12px 14px;
       display:flex;
-      align-items:center;
+      align-items: baseline;
       justify-content: space-between;
       gap: 12px;
-      border-bottom: 1px solid rgba(255,255,255,.10);
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      margin-bottom: 10px;
     }
     .neutral-title{
-      font-weight: 1000;
+      font-weight: 900;
       letter-spacing: .2px;
       display:flex;
       align-items:center;
       gap: 10px;
-      font-size: 1.05rem;
     }
-    .neutral-sub{
-      font-size: .82rem;
-      opacity: .82;
-      margin-top: 2px;
-    }
-    .neutral-pill{
-      font-size: .72rem;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.06);
-      white-space: nowrap;
-    }
-    .neutral-body{ padding: 14px; }
+    .neutral-sub{ opacity:.82; font-size:.92rem; }
     .neutral-grid{
       display:grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -307,38 +255,30 @@
       .neutral-grid{ grid-template-columns: 1fr; }
     }
 
-    .results-wrap{
-      margin-top: 18px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(255,255,255,.10);
+    /* Filtres (boutons) */
+    .filter-row{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
     }
-
-    /* =========
-       Filtres (colonne droite) : boutons de camps
-       ========= */
-    .filter-btns{ display:flex; gap: 8px; flex-wrap: wrap; }
     .filter-btn{
-      cursor:pointer;
-      user-select:none;
-      display:inline-flex;
-      align-items:center;
-      gap: 6px;
       padding: 7px 10px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.05);
-      font-size: .82rem;
+      color: inherit;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 12px;
+      opacity: .95;
     }
     .filter-btn:hover{ background: rgba(255,255,255,.08); }
-    .filter-btn.marine{ border-color: rgba(79,156,255,.35); }
-    .filter-btn.pirate{ border-color: rgba(255,77,77,.35); }
-    .filter-btn.neutral{ border-color: rgba(255,255,255,.28); }
+    .filter-btn.active{ box-shadow: inset 0 0 0 1px rgba(255,255,255,.18); }
 
-    .filter-btn.active{
-      background: rgba(255,255,255,.10);
-      border-color: rgba(255,255,255,.22);
-      box-shadow: 0 12px 30px rgba(0,0,0,.35);
-    }
+    .filter-btn.marine{ border-color: rgba(79,156,255,.30); background: rgba(79,156,255,.10); }
+    .filter-btn.pirate{ border-color: rgba(255,74,74,.30); background: rgba(255,74,74,.10); }
+    .filter-btn.neutral{ border-color: rgba(255,255,255,.25); background: rgba(255,255,255,.06); }
   </style>
 </head>
 
@@ -350,12 +290,13 @@
         <p>Liste des personnages importants de l’univers.</p>
       </div>
       <div class="wiki-search">
-        <input id="q" placeholder="Rechercher (ex: amiral, pirate, domination, lumière, neutre)..." />
+        <input id="q" placeholder="Rechercher (ex: amiral, pirate, domination, lumière, godzilla)..." />
         <button id="go">Rechercher</button>
       </div>
     </div>
 
     <div class="wiki-grid">
+      <!-- Sidebar -->
       <aside class="wiki-card wiki-sidebar">
         <h3>Navigation</h3>
         <div class="content">
@@ -366,27 +307,26 @@
         </div>
       </aside>
 
+      <!-- Main -->
       <main class="wiki-card wiki-article">
         <h3>Conflit principal</h3>
         <div class="content">
 
           <div class="faction-split">
             <!-- MARINE -->
-            <section class="faction-panel marine">
+            <section class="faction-panel marine" data-block="marine">
               <div class="faction-head">
                 <div>
-                  <div class="faction-title">⚓ Marine</div>
+                  <div class="faction-title">⚓ Marine <span class="camp-pill">Bleu</span></div>
                   <div class="faction-sub">Justice, ordre, domination</div>
                 </div>
-                <span class="camp-pill">Camp</span>
               </div>
 
               <div class="faction-body">
                 <div class="char-list">
                   <a class="char-card" data-camp="marine" href="personnage-kaelros.html"
                      data-tags="marine amiral supreme antagoniste domination regent mers kaelros">
-                    <img class="char-portrait" src="/royaumededraevorn/images/kaelros.png" alt="Kaelros Viremont"
-                         onerror="this.style.display='none'">
+                    <img class="char-portrait" src="/royaumededraevorn/images/kaelros.png" alt="Kaelros Viremont">
                     <div class="char-meta">
                       <div class="char-name">Kaelros Viremont</div>
                       <div class="char-desc">Grand Amiral Suprême — incarnation de la Justice de Domination.</div>
@@ -399,9 +339,8 @@
                   </a>
 
                   <a class="char-card" data-camp="marine" href="personnage-kizaru.html"
-                     data-tags="marine amiral executant lumiere pika pika borsalino kizaru">
-                    <img class="char-portrait" src="/royaumededraevorn/images/kizaru.png" alt="Kizaru (Borsalino)"
-                         onerror="this.style.display='none'">
+                     data-tags="marine amiral executant executant lumiere pika pika borsalino kizaru">
+                    <img class="char-portrait" src="/royaumededraevorn/images/kizaru.png" alt="Kizaru (Borsalino)">
                     <div class="char-meta">
                       <div class="char-name">Kizaru (Borsalino)</div>
                       <div class="char-desc">Amiral Exécuteur — la lumière au service des ordres.</div>
@@ -424,21 +363,19 @@
             </div>
 
             <!-- PIRATES -->
-            <section class="faction-panel pirates">
+            <section class="faction-panel pirates" data-block="pirates">
               <div class="faction-head">
                 <div>
-                  <div class="faction-title">🏴‍☠️ Pirates</div>
+                  <div class="faction-title">🏴‍☠️ Pirates <span class="camp-pill">Rouge</span></div>
                   <div class="faction-sub">Liberté, conquête, empire</div>
                 </div>
-                <span class="camp-pill">Camp</span>
               </div>
 
               <div class="faction-body">
                 <div class="char-list">
                   <a class="char-card" data-camp="pirate" href="personnage-bryworn.html"
                      data-tags="pirate roi des pirates draevorn dragon portail empire bryworn">
-                    <img class="char-portrait" src="/royaumededraevorn/images/bryworn.png" alt="Roi Bryworn"
-                         onerror="this.style.display='none'">
+                    <img class="char-portrait" src="/royaumededraevorn/images/bryworn.png" alt="Roi Bryworn">
                     <div class="char-meta">
                       <div class="char-name">Roi Bryworn</div>
                       <div class="char-desc">Roi des Pirates — souverain de Draevorn, puissance Dragon & Portail.</div>
@@ -457,53 +394,38 @@
             </section>
           </div>
 
-          <!-- NEUTRES (Option 1) -->
-          <section class="neutral-panel">
+          <!-- NEUTRES (en dessous) -->
+          <div class="neutral-wrap" data-block="neutral">
             <div class="neutral-head">
               <div>
                 <div class="neutral-title">🏳️ Neutres</div>
-                <div class="neutral-sub">Indépendants, voyageurs, mercenaires</div>
+                <div class="neutral-sub">Personnages hors camps (équilibre, juges, catastrophes, alliés temporaires)</div>
               </div>
-              <span class="neutral-pill">Camp</span>
             </div>
 
-            <div class="neutral-body">
-              <div class="neutral-grid">
-                <!-- EXEMPLES (remplace par tes persos) -->
-                <a class="char-card" data-camp="neutral" href="personnage-neutre1.html"
-                   data-tags="neutre independant mercenaire chasseur prime">
-                  <img class="char-portrait" src="/royaumededraevorn/images/neutre1.png" alt="Neutre #1"
-                       onerror="this.style.display='none'">
-                  <div class="char-meta">
-                    <div class="char-name">Neutre #1</div>
-                    <div class="char-desc">Opère pour lui-même, vend ses services au plus offrant.</div>
-                    <div class="char-tags">
-                      <span class="tag neutral">Neutre</span>
-                      <span class="tag neutral">Indépendant</span>
-                    </div>
+            <div class="neutral-grid">
+              <a class="char-card" data-camp="neutral" href="personnage-godzilla.html"
+                 data-tags="godzilla burning divinite draconique deluge rayon atomique protecteur destructeur hibernation neutre">
+                <img class="char-portrait" src="/royaumededraevorn/images/godzilla.png" alt="Burning Godzilla">
+                <div class="char-meta">
+                  <div class="char-name">Burning Godzilla</div>
+                  <div class="char-desc">
+                    Divinité draconique. Déluge & Rayon Atomique. Protecteur et destructeur. S’éveille quand l’équilibre tombe.
                   </div>
-                </a>
-
-                <a class="char-card" data-camp="neutral" href="personnage-neutre2.html"
-                   data-tags="neutre voyageur explorateur ancien">
-                  <img class="char-portrait" src="/royaumededraevorn/images/neutre2.png" alt="Neutre #2"
-                       onerror="this.style.display='none'">
-                  <div class="char-meta">
-                    <div class="char-name">Neutre #2</div>
-                    <div class="char-desc">Voyage entre les camps, détient des informations rares.</div>
-                    <div class="char-tags">
-                      <span class="tag neutral">Neutre</span>
-                      <span class="tag neutral">Voyageur</span>
-                    </div>
+                  <div class="char-tags">
+                    <span class="tag neutral">Neutre</span>
+                    <span class="tag neutral">Divinité</span>
+                    <span class="tag neutral">Déluge</span>
+                    <span class="tag neutral">Rayon Atomique</span>
+                    <span class="tag neutral">Hibernation</span>
                   </div>
-                </a>
-              </div>
-
-              <div class="hint">Astuce : cherche “neutre”, “indépendant”, “mercenaire”…</div>
+                </div>
+              </a>
             </div>
-          </section>
+          </div>
 
-          <div class="results-wrap">
+          <!-- Recherche rapide -->
+          <div style="margin-top:18px; padding-top:14px; border-top:1px solid rgba(255,255,255,.10);">
             <h2 style="margin: 0 0 10px;">Recherche rapide</h2>
             <div id="results"></div>
           </div>
@@ -511,74 +433,84 @@
         </div>
       </main>
 
+      <!-- Right column -->
       <aside class="wiki-card">
         <h3>Filtres</h3>
         <div class="content">
-          <div class="filter-btns">
-            <span class="filter-btn marine" data-filter="marine">⚓ Marine</span>
-            <span class="filter-btn pirate" data-filter="pirate">🏴‍☠️ Pirates</span>
-            <span class="filter-btn neutral" data-filter="neutral">🏳️ Neutres</span>
-            <span class="filter-btn" data-filter="all">Tout</span>
+          <div class="filter-row">
+            <button class="filter-btn active" data-filter="all">Tout</button>
+            <button class="filter-btn marine" data-filter="marine">⚓ Marine</button>
+            <button class="filter-btn pirate" data-filter="pirate">🏴‍☠️ Pirates</button>
+            <button class="filter-btn neutral" data-filter="neutral">🏳️ Neutres</button>
           </div>
 
-          <p style="opacity:.85;margin-top:12px">
-            Astuce : recherche par tags (ex: “amiral”, “lumière”, “dragon”, “portail”, “neutre”).
+          <p style="opacity:.85;margin-top:10px">
+            Astuce : recherche par tags (ex: “amiral”, “lumière”, “dragon”, “portail”, “godzilla”, “déluge”…).
           </p>
         </div>
       </aside>
     </div>
   </div>
 
-  <!-- Scripts uniquement en bas -->
+  <!-- Scripts en bas -->
   <script src="/royaumededraevorn/js/wiki-search.js"></script>
   <script>
     const q = document.getElementById("q");
     const go = document.getElementById("go");
     const results = document.getElementById("results");
-    let currentCamp = "all";
+    const filterBtns = Array.from(document.querySelectorAll(".filter-btn"));
 
-    function applyFilters(query){
-      const v = (query || "").toLowerCase().trim();
-      document.querySelectorAll(".char-card").forEach(card => {
-        const camp = (card.getAttribute("data-camp") || "").toLowerCase();
-        const hay = (card.textContent + " " + (card.getAttribute("data-tags") || "")).toLowerCase();
+    let activeCamp = "all";
 
-        const campOk = (currentCamp === "all") || (camp === currentCamp);
-        const queryOk = (!v) || hay.includes(v);
+    function applyFilters(){
+      const v = (q.value || "").toLowerCase().trim();
 
-        card.style.display = (campOk && queryOk) ? "flex" : "none";
+      // Filtrer les cartes (recherche + camp)
+      document.querySelectorAll(".char-card").forEach(c => {
+        const camp = (c.getAttribute("data-camp") || "").toLowerCase();
+        const hay = (c.textContent + " " + (c.getAttribute("data-tags") || "")).toLowerCase();
+
+        const okCamp = (activeCamp === "all") || (camp === activeCamp);
+        const okSearch = (!v) || hay.includes(v);
+
+        c.style.display = (okCamp && okSearch) ? "flex" : "none";
       });
-    }
 
-    function run(){
-      const value = q.value;
+      // Masquer blocs vides (marine/pirates/neutres) si aucun item visible
+      document.querySelectorAll("[data-block]").forEach(block => {
+        const hasVisible = !!block.querySelector('.char-card[style*="flex"], .char-card:not([style])');
+        // check plus fiable : au moins une carte affichée flex
+        const anyFlex = Array.from(block.querySelectorAll(".char-card")).some(el => getComputedStyle(el).display !== "none");
+        block.style.display = anyFlex ? "" : "none";
+      });
 
-      applyFilters(value);
-
+      // Résultats du moteur wiki (si tu l’utilises)
       if (typeof WIKI_SEARCH !== "undefined") {
-        const res = WIKI_SEARCH.searchWiki(value);
+        const res = WIKI_SEARCH.searchWiki(q.value);
         WIKI_SEARCH.renderResults(results, res);
       }
     }
 
-    // Boutons filtre camp
-    document.querySelectorAll(".filter-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
+    function setActiveFilter(btn){
+      filterBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeCamp = btn.getAttribute("data-filter") || "all";
+      applyFilters();
+    }
 
-        currentCamp = btn.getAttribute("data-filter") || "all";
-        if (currentCamp === "all") currentCamp = "all";
-
-        run();
-      });
+    filterBtns.forEach(btn => {
+      btn.addEventListener("click", () => setActiveFilter(btn));
     });
+
+    function run(){
+      applyFilters();
+    }
 
     go.addEventListener("click", run);
     q.addEventListener("keydown", (e)=>{ if(e.key==="Enter") run(); });
 
-    // défaut : tout + résultats
-    run();
+    // Initial
+    applyFilters();
   </script>
 </body>
 </html>
