@@ -382,4 +382,26 @@ body[data-faction] .infobox .ibox-media img{
   color:#fff;
   font-weight:800;
 }
+/* =========================
+   BADGE ROI — OR ROYAL
+   (remplacement du badge existant)
+   ========================= */
+
+body[data-faction="pirate"] .ibox-badges .ibadge:nth-child(2){
+  background: linear-gradient(
+    135deg,
+    rgba(255,215,120,0.38),
+    rgba(170,110,35,0.28)
+  ) !important;
+
+  border-color: rgba(255,215,120,0.70) !important;
+
+  color: rgba(255,248,215,0.98) !important;
+  font-weight: 900;
+  letter-spacing: 0.3px;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,215,120,0.38),
+    0 0 14px rgba(255,190,90,0.35);
+}
 
