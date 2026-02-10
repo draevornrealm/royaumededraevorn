@@ -90,8 +90,7 @@
       box-shadow: inset 0 0 0 1px rgba(79,156,255,.18), 0 18px 45px rgba(0,0,0,.35);
     }
     .faction-panel.marine .faction-head{
-      background:
-        linear-gradient(90deg, rgba(79,156,255,.22), rgba(255,255,255,.03));
+      background: linear-gradient(90deg, rgba(79,156,255,.22), rgba(255,255,255,.03));
       border-bottom-color: rgba(79,156,255,.18);
     }
 
@@ -99,8 +98,7 @@
       box-shadow: inset 0 0 0 1px rgba(255,74,74,.18), 0 18px 45px rgba(0,0,0,.35);
     }
     .faction-panel.pirates .faction-head{
-      background:
-        linear-gradient(90deg, rgba(255,74,74,.22), rgba(255,255,255,.03));
+      background: linear-gradient(90deg, rgba(255,74,74,.22), rgba(255,255,255,.03));
       border-bottom-color: rgba(255,74,74,.18);
     }
 
@@ -216,7 +214,6 @@
     }
     .tag.marine{ border-color: rgba(79,156,255,.35); background: rgba(79,156,255,.08); }
     .tag.pirate{ border-color: rgba(255,74,74,.35); background: rgba(255,74,74,.08); }
-    .tag.neutral{ border-color: rgba(255,255,255,.25); background: rgba(255,255,255,.06); }
 
     .hint{
       margin-top: 10px;
@@ -229,7 +226,8 @@
     .neutral-wrap{
       margin-top: 16px;
       padding-top: 16px;
-      border-top: 1px solid rgba(255,255,255,.10);
+      border-top: 1px solid rgba(255,255,255,.14);
+      position: relative;
     }
     .neutral-head{
       display:flex;
@@ -237,6 +235,33 @@
       justify-content: space-between;
       gap: 12px;
       margin-bottom: 10px;
+
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.20);
+      background:
+        linear-gradient(90deg,
+          rgba(255,255,255,.18),
+          rgba(255,255,255,.06) 60%,
+          rgba(255,255,255,.02)
+        );
+      box-shadow:
+        inset 0 0 0 1px rgba(0,0,0,.25),
+        0 12px 30px rgba(0,0,0,.35);
+    }
+    .neutral-head:after{
+      content:"";
+      display:block;
+      margin-top: 10px;
+      height: 2px;
+      border-radius: 99px;
+      background: linear-gradient(
+        90deg,
+        rgba(255,255,255,0),
+        rgba(255,255,255,.35),
+        rgba(255,255,255,0)
+      );
+      opacity: .9;
     }
     .neutral-title{
       font-weight: 900;
@@ -244,8 +269,15 @@
       display:flex;
       align-items:center;
       gap: 10px;
+      color: rgba(255,255,255,.95);
+      text-shadow: 0 0 18px rgba(255,255,255,.18);
+      filter: drop-shadow(0 8px 14px rgba(0,0,0,.35));
     }
-    .neutral-sub{ opacity:.82; font-size:.92rem; }
+    .neutral-sub{
+      opacity:.82;
+      font-size:.92rem;
+      color: rgba(255,255,255,.78);
+    }
     .neutral-grid{
       display:grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -253,6 +285,25 @@
     }
     @media (max-width: 980px){
       .neutral-grid{ grid-template-columns: 1fr; }
+    }
+
+    /* Cartes neutres : argent */
+    .char-card[data-camp="neutral"]{
+      border-color: rgba(255,255,255,.18) !important;
+      background: rgba(255,255,255,.035) !important;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+    }
+    .char-card[data-camp="neutral"]:hover{
+      border-color: rgba(255,255,255,.28) !important;
+      background: rgba(255,255,255,.055) !important;
+    }
+
+    /* Tags neutres vraiment blancs */
+    .tag.neutral{
+      border-color: rgba(255,255,255,.45) !important;
+      background: rgba(255,255,255,.14) !important;
+      color: rgba(255,255,255,.95) !important;
+      font-weight: 800;
     }
 
     /* Filtres (boutons) */
@@ -278,7 +329,13 @@
 
     .filter-btn.marine{ border-color: rgba(79,156,255,.30); background: rgba(79,156,255,.10); }
     .filter-btn.pirate{ border-color: rgba(255,74,74,.30); background: rgba(255,74,74,.10); }
-    .filter-btn.neutral{ border-color: rgba(255,255,255,.25); background: rgba(255,255,255,.06); }
+    .filter-btn.neutral{
+      border-color: rgba(255,255,255,.35) !important;
+      background: rgba(255,255,255,.10) !important;
+    }
+    .filter-btn.neutral:hover{
+      background: rgba(255,255,255,.14) !important;
+    }
   </style>
 </head>
 
@@ -339,7 +396,7 @@
                   </a>
 
                   <a class="char-card" data-camp="marine" href="personnage-kizaru.html"
-                     data-tags="marine amiral executant executant lumiere pika pika borsalino kizaru">
+                     data-tags="marine amiral executant lumiere pika pika borsalino kizaru">
                     <img class="char-portrait" src="/royaumededraevorn/images/kizaru.png" alt="Kizaru (Borsalino)">
                     <div class="char-meta">
                       <div class="char-name">Kizaru (Borsalino)</div>
@@ -465,7 +522,6 @@
     function applyFilters(){
       const v = (q.value || "").toLowerCase().trim();
 
-      // Filtrer les cartes (recherche + camp)
       document.querySelectorAll(".char-card").forEach(c => {
         const camp = (c.getAttribute("data-camp") || "").toLowerCase();
         const hay = (c.textContent + " " + (c.getAttribute("data-tags") || "")).toLowerCase();
@@ -476,15 +532,14 @@
         c.style.display = (okCamp && okSearch) ? "flex" : "none";
       });
 
-      // Masquer blocs vides (marine/pirates/neutres) si aucun item visible
+      // Masquer blocs vides
       document.querySelectorAll("[data-block]").forEach(block => {
-        const hasVisible = !!block.querySelector('.char-card[style*="flex"], .char-card:not([style])');
-        // check plus fiable : au moins une carte affichée flex
-        const anyFlex = Array.from(block.querySelectorAll(".char-card")).some(el => getComputedStyle(el).display !== "none");
-        block.style.display = anyFlex ? "" : "none";
+        const anyVisible = Array.from(block.querySelectorAll(".char-card"))
+          .some(el => getComputedStyle(el).display !== "none");
+        block.style.display = anyVisible ? "" : "none";
       });
 
-      // Résultats du moteur wiki (si tu l’utilises)
+      // Résultats wiki-search.js (si présent)
       if (typeof WIKI_SEARCH !== "undefined") {
         const res = WIKI_SEARCH.searchWiki(q.value);
         WIKI_SEARCH.renderResults(results, res);
@@ -498,18 +553,11 @@
       applyFilters();
     }
 
-    filterBtns.forEach(btn => {
-      btn.addEventListener("click", () => setActiveFilter(btn));
-    });
+    filterBtns.forEach(btn => btn.addEventListener("click", () => setActiveFilter(btn)));
 
-    function run(){
-      applyFilters();
-    }
+    go.addEventListener("click", applyFilters);
+    q.addEventListener("keydown", (e)=>{ if(e.key==="Enter") applyFilters(); });
 
-    go.addEventListener("click", run);
-    q.addEventListener("keydown", (e)=>{ if(e.key==="Enter") run(); });
-
-    // Initial
     applyFilters();
   </script>
 </body>
