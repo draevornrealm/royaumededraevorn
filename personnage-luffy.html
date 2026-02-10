@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Monkey D. Luffy — Wiki de l’Univers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Police -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- CSS (GitHub Pages) -->
+  <link rel="stylesheet" href="/royaumededraevorn/css/wiki.css">
+</head>
+
+<body data-faction="pirate">
+  <div class="wiki-container">
+    <div class="wiki-hero">
+      <div>
+        <h1>Monkey D. Luffy</h1>
+        <p>
+          <span class="badge">Pirate</span>
+          <span class="badge">Capitaine</span>
+          <span class="badge">Liberté</span>
+        </p>
+      </div>
+
+      <div class="wiki-search">
+        <input id="q" placeholder="Rechercher..." />
+        <button id="go">OK</button>
+      </div>
+    </div>
+
+    <div class="wiki-grid">
+      <!-- Sidebar -->
+      <aside class="wiki-card wiki-sidebar">
+        <h3>Navigation</h3>
+        <div class="content">
+          <a href="index.html">🏠 Accueil</a>
+          <a href="personnages.html">👤 Personnages</a>
+          <a href="faction-marine.html">⚓ Factions</a>
+          <a href="lore.html">📜 Lore & Chronologie</a>
+        </div>
+      </aside>
+
+      <!-- Article -->
+      <main class="wiki-card wiki-article">
+        <h3>Article</h3>
+        <div class="content">
+          <p>
+            <b>Monkey D. Luffy</b> est un <b>capitaine pirate</b> animé par une idée simple : <b>vivre libre</b> et
+            protéger ceux qu’il considère comme sa famille. Dans cet univers, il incarne la <b>force du lien</b>
+            face aux empires, aux tyrans et à la <b>Justice de Domination</b>.
+          </p>
+
+          <h2>Profil</h2>
+          <p>
+            Direct, imprévisible et incroyablement tenace, Luffy avance sans détour : il écoute son instinct,
+            suit son cœur et refuse de plier devant l’autorité. Sa présence galvanise : là où il passe,
+            des alliances naissent, des chaînes se brisent, et des ennemis tombent.
+          </p>
+
+          <h2>Forces</h2>
+          <p>
+            <b>Volonté</b> — endurance mentale hors norme, refus de céder, capacité à se relever.<br>
+            <b>Instinct de combat</b> — improvisation, adaptation rapide, lecture du danger.<br>
+            <b>Leadership</b> — fédère des alliés naturellement, inspire la loyauté.
+          </p>
+
+          <h2>Équipage & Route</h2>
+          <p>
+            Luffy n’est pas un conquérant “politique” : il progresse par <b>rencontres</b>, <b>défis</b> et
+            <b>affrontements</b>. Chaque île est une étape, chaque adversaire une marche de plus vers une mer
+            sans maîtres.
+          </p>
+
+          <h2>Relations</h2>
+          <ul>
+            <li><b><a href="personnage-bryworn.html">Roi Bryworn</a></b> : allié proche, même vision de la liberté, méthodes différentes.</li>
+            <li><b><a href="personnage-kaelros.html">Kaelros Viremont</a></b> : ennemi idéologique, symbole d’un ordre qui écrase.</li>
+            <li><b><a href="personnage-kizaru.html">Kizaru</a></b> : menace de la Marine, neutralisation prioritaire en opération.</li>
+          </ul>
+        </div>
+      </main>
+
+      <!-- Infobox -->
+      <aside class="infobox">
+        <div class="ibox-head">
+          <h3 class="ibox-title">Informations</h3>
+          <div class="ibox-sub">Fiche officielle</div>
+
+          <div class="ibox-badges">
+            <span class="ibadge danger">🏴‍☠️ Pirate</span>
+            <span class="ibadge">⭐ Capitaine</span>
+          </div>
+        </div>
+
+        <div class="ibox-media">
+          <!-- IMPORTANT : ajoute l'image dans /images -->
+          <img src="/royaumededraevorn/images/luffy.png" alt="Monkey D. Luffy">
+        </div>
+
+        <div class="ibox-table">
+          <table>
+            <tr><th>Nom</th><td>Monkey D. Luffy</td></tr>
+            <tr><th>Titre</th><td>Capitaine</td></tr>
+            <tr><th>Faction</th><td>Pirates</td></tr>
+            <tr><th>Rôle</th><td>Symbole de liberté</td></tr>
+            <tr><th>Style</th><td>Frontale • instinct • courage</td></tr>
+            <tr><th>Objectif</th><td>Être le plus libre en mer</td></tr>
+            <tr><th>Statut</th><td>Vivant</td></tr>
+          </table>
+        </div>
+
+        <div class="ibox-footer">
+          <div class="mini-note">
+            Conseil RP : Luffy parle simple et vrai. Il ne négocie pas longtemps — il ressent si quelqu’un ment,
+            et il agit. Fidèle aux siens, il pardonne rarement la trahison envers un ami.
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="/royaumededraevorn/js/wiki-search.js"></script>
+  <script>
+    const q = document.getElementById("q");
+    document.getElementById("go").addEventListener("click", () => {
+      const res = WIKI_SEARCH.searchWiki(q.value);
+      if (res[0]) location.href = res[0].url;
+    });
+    q.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") document.getElementById("go").click();
+    });
+  </script>
+
+  <style>
+    /* =========================
+       PATCH PIRATE V2 (AFFINÉ)
+       Rouge royal assombri
+       ========================= */
+
+    body[data-faction="pirate"] .infobox{
+      border: 1px solid rgba(255,90,90,0.28) !important;
+      background:
+        linear-gradient(180deg,
+          rgba(140,30,30,0.28),
+          rgba(255,255,255,0.03)
+        ) !important;
+
+      box-shadow:
+        inset 0 0 0 1px rgba(255,90,90,0.18),
+        0 22px 55px rgba(0,0,0,0.55) !important;
+    }
+
+    body[data-faction="pirate"] .infobox .ibox-head{
+      background:
+        linear-gradient(135deg,
+          rgba(140,30,30,0.55),
+          rgba(40,10,10,0.25)
+        ) !important;
+
+      border-bottom: 1px solid rgba(255,90,90,0.22) !important;
+    }
+
+    body[data-faction="pirate"] .infobox .ibox-title,
+    body[data-faction="pirate"] .infobox .ibox-sub{
+      color: rgba(255,240,240,0.95);
+    }
+
+    body[data-faction="pirate"] .infobox .ibox-media img{
+      border: 1px solid rgba(255,90,90,0.32) !important;
+      box-shadow:
+        0 0 0 1px rgba(255,90,90,0.14),
+        0 18px 42px rgba(0,0,0,0.55) !important;
+    }
+
+    body[data-faction="pirate"] .infobox th,
+    body[data-faction="pirate"] .infobox td{
+      border-top: 1px solid rgba(255,90,90,0.20) !important;
+    }
+
+    body[data-faction="pirate"] .ibadge{
+      background: rgba(255,255,255,0.08) !important;
+      border-color: rgba(255,255,255,0.22) !important;
+      color: rgba(255,245,245,0.96) !important;
+    }
+
+    body[data-faction="pirate"] .ibadge.danger{
+      background: rgba(255,90,90,0.22) !important;
+      border-color: rgba(255,90,90,0.42) !important;
+      color: rgba(255,240,240,0.98) !important;
+    }
+  </style>
+</body>
+</html>
