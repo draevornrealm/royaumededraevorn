@@ -271,3 +271,115 @@ section.neutral,
   color: #fff !important;
   font-weight: 800 !important;
 }
+
+/* =========================
+   THEME FACTION (GLOBAL)
+   Usage: <body data-faction="marine|pirate|neutral">
+   ========================= */
+
+:root{
+  --fx: 141,183,255;         /* fallback bleu */
+  --fx-soft: 0.10;
+  --fx-mid: 0.22;
+  --fx-strong: 0.42;
+
+  --fx-text: #e9eefc;
+  --fx-glow: rgba(var(--fx), .35);
+}
+
+/* Définition par faction */
+body[data-faction="marine"]{
+  --fx: 79,156,255;
+  --fx-soft: 0.10;
+  --fx-mid: 0.22;
+  --fx-strong: 0.42;
+}
+body[data-faction="pirate"]{
+  --fx: 255,80,80;
+  --fx-soft: 0.10;
+  --fx-mid: 0.22;
+  --fx-strong: 0.42;
+}
+body[data-faction="neutral"]{
+  --fx: 255,255,255;
+  --fx-soft: 0.08;
+  --fx-mid: 0.18;
+  --fx-strong: 0.45;
+  --fx-glow: rgba(255,255,255,.25);
+}
+
+/* Accents automatiques (hero + cards) */
+body[data-faction] .wiki-hero h1{
+  text-shadow: 0 0 18px var(--fx-glow);
+}
+
+body[data-faction] .wiki-card{
+  border-color: rgba(var(--fx), var(--fx-soft));
+}
+
+body[data-faction] .wiki-card h3{
+  background: linear-gradient(
+    135deg,
+    rgba(var(--fx), var(--fx-mid)),
+    rgba(255,255,255,0.03)
+  );
+}
+
+/* Badges génériques teintés */
+body[data-faction] .badge{
+  border-color: rgba(var(--fx), .30);
+  background: rgba(var(--fx), .10);
+}
+
+/* =========================
+   INFOBOX — accent de faction
+   ========================= */
+body[data-faction] .infobox{
+  border-color: rgba(var(--fx), .30);
+  box-shadow:
+    inset 0 0 0 1px rgba(var(--fx), .10),
+    0 10px 30px rgba(0,0,0,.35);
+}
+
+body[data-faction] .infobox .ibox-head{
+  background: linear-gradient(
+    135deg,
+    rgba(var(--fx), .22),
+    rgba(255,255,255,0.04)
+  );
+  border-bottom-color: rgba(var(--fx), .18);
+}
+
+body[data-faction] .infobox .ibox-media img{
+  box-shadow:
+    0 0 0 1px rgba(var(--fx), .20),
+    0 10px 24px rgba(0,0,0,0.35);
+}
+
+/* =========================
+   IBADGE — versions couleur
+   ========================= */
+.ibadge.neutral{
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.45);
+  color: #fff;
+  font-weight: 800;
+}
+
+.ibadge.marine{
+  background: rgba(79,156,255,0.16);
+  border-color: rgba(79,156,255,0.40);
+}
+.ibadge.pirate{
+  background: rgba(255,80,80,0.14);
+  border-color: rgba(255,80,80,0.38);
+}
+
+/* Tags neutres (si tu utilises class="tag neutral") */
+.tag.neutral{
+  background: rgba(255,255,255,.14);
+  border-color: rgba(255,255,255,.55);
+  color:#fff;
+  font-weight:800;
+}
+
