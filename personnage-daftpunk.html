@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Daft Punk — Wiki de l’Univers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Police -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- CSS (GitHub Pages) -->
+  <link rel="stylesheet" href="/royaumededraevorn/css/wiki.css">
+</head>
+
+<body data-faction="neutral">
+  <div class="wiki-container">
+    <div class="wiki-hero">
+      <div>
+        <h1>Daft Punk</h1>
+        <p>
+          <span class="badge">Neutres</span>
+          <span class="badge">Musiciens</span>
+          <span class="badge">Draevorn</span>
+        </p>
+      </div>
+
+      <div class="wiki-search">
+        <input id="q" placeholder="Rechercher..." />
+        <button id="go">OK</button>
+      </div>
+    </div>
+
+    <div class="wiki-grid">
+      <!-- Sidebar -->
+      <aside class="wiki-card wiki-sidebar">
+        <h3>Navigation</h3>
+        <div class="content">
+          <a href="index.html">🏠 Accueil</a>
+          <a href="personnages.html">👤 Personnages</a>
+
+          <!-- ✅ FIX : 2 boutons factions -->
+          <a href="faction-marine.html">⚓ Faction — Marine</a>
+          <a href="faction-pirates.html">🏴‍☠️ Faction — Pirates</a>
+
+          <a href="lore.html">📜 Lore & Chronologie</a>
+        </div>
+      </aside>
+
+      <!-- Article -->
+      <main class="wiki-card wiki-article">
+        <h3>Article</h3>
+        <div class="content">
+          <p>
+            <b>Daft Punk</b> est un duo de <b>musiciens neutres</b> présent dans le <b>Royaume du Roi des Pirates Bryworn</b>.
+            Leur rôle est simple : <b>faire vivre Draevorn</b> à travers la musique, les cérémonies, les fêtes de port,
+            et l’ambiance officielle du royaume.
+          </p>
+
+          <h2>Rôle dans Draevorn</h2>
+          <p>
+            Ils se produisent lors des rassemblements, des célébrations de victoire, des événements RP et des annonces majeures.
+            Leur présence est considérée comme un <b>symbole culturel</b> du royaume : un repère, une signature, une identité sonore.
+          </p>
+
+          <h2>Position</h2>
+          <p>
+            <b>Neutres</b> : ils ne participent pas à la guerre Marine vs Pirates, mais soutiennent la cohésion et l’image du royaume.
+            Ils restent protégés tant qu’ils respectent l’équilibre interne de Draevorn.
+          </p>
+
+          <h2>Relations</h2>
+          <ul>
+            <li><b><a href="personnage-bryworn.html">Roi Bryworn</a></b> : hôte et protecteur au sein du royaume.</li>
+            <li><b><a href="personnage-luffy.html">Monkey D. Luffy</a></b> : allié du royaume, présence amicale lors d’événements.</li>
+          </ul>
+        </div>
+      </main>
+
+      <!-- Infobox -->
+      <aside class="infobox">
+        <div class="ibox-head">
+          <h3 class="ibox-title">Informations</h3>
+          <div class="ibox-sub">Fiche officielle</div>
+
+          <div class="ibox-badges">
+            <span class="ibadge neutral">🏳️ Neutres</span>
+            <span class="ibadge">🎵 Musiciens</span>
+            <span class="ibadge">🏰 Draevorn</span>
+          </div>
+        </div>
+
+        <div class="ibox-media">
+          <img src="/royaumededraevorn/images/daftpunk.png" alt="Daft Punk">
+        </div>
+
+        <div class="ibox-table">
+          <table>
+            <tr><th>Nom</th><td>Daft Punk</td></tr>
+            <tr><th>Statut</th><td>Neutres</td></tr>
+            <tr><th>Rôle</th><td>Musiciens officiels du royaume</td></tr>
+            <tr><th>Lieu</th><td>Royaume de Draevorn</td></tr>
+            <tr><th>Allégeance</th><td>Culture & événements (aucun camp)</td></tr>
+            <tr><th>Spécialité</th><td>Performances • Ambiance • Cérémonies</td></tr>
+          </table>
+        </div>
+
+        <div class="ibox-footer">
+          <div class="mini-note">
+            Conseil RP : Daft Punk ne “commande” pas — ils marquent les moments. Leur musique peut annoncer une victoire,
+            une arrivée importante, une trêve… ou une tempête.
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="/royaumededraevorn/js/wiki-search.js"></script>
+  <script>
+    const q = document.getElementById("q");
+    document.getElementById("go").addEventListener("click", () => {
+      const res = WIKI_SEARCH.searchWiki(q.value);
+      if (res[0]) location.href = res[0].url;
+    });
+    q.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") document.getElementById("go").click();
+    });
+  </script>
+</body>
+</html>
