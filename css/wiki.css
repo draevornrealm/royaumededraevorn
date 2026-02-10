@@ -89,3 +89,94 @@ body[data-faction="pirate"] .ibox-badges .ibadge:nth-child(2){
     0 10px 22px rgba(0,0,0,0.40),
     0 0 18px rgba(255,200,90,0.18) !important;
 }
+/* =========================
+   PATCH PREMIUM — IMAGES + INFOBOX
+   à coller TOUT EN BAS du fichier wiki.css
+   ========================= */
+
+/* ---------- 1) PORTRAITS "Personnages" : rectangle, sans découpe ---------- */
+/* (remplace le carré 68x68 et évite les images coupées) */
+.char-portrait{
+  width: 78px !important;
+  height: 110px !important;        /* ✅ rectangle vertical */
+  border-radius: 14px !important;
+  object-fit: contain !important;  /* ✅ pas de découpe */
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.06),
+    rgba(0,0,0,.28)
+  ) !important;
+  padding: 6px !important;
+  border: 1px solid rgba(255,255,255,.14) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.06),
+    0 14px 32px rgba(0,0,0,.55) !important;
+  flex: 0 0 auto !important;
+}
+
+/* Option : sur mobile, un peu plus compact */
+@media (max-width: 520px){
+  .char-portrait{
+    width: 70px !important;
+    height: 100px !important;
+    padding: 5px !important;
+  }
+}
+
+/* ---------- 2) INFOBOX : une règle unique propre (évite tes doublons) ---------- */
+/* On cible seulement l'image dans .ibox-media (pas toutes les images) */
+.infobox .ibox-media img{
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  border-radius: 14px !important;
+  margin-bottom: 0 !important; /* évite les écarts chelous */
+  border: 1px solid rgba(255,255,255,.14) !important;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.08),
+    0 14px 32px rgba(0,0,0,.50) !important;
+}
+
+/* Sécurité : neutralise les anciens styles globaux .infobox img */
+.infobox > img{
+  border-radius: 14px !important;
+}
+
+/* ---------- 3) BADGE GOLD : rendu plus “royal” + lisible ---------- */
+.ibadge.gold,
+.ibadge.grand-amiral{
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 120, 0.42),
+    rgba(150, 95, 20, 0.30)
+  ) !important;
+
+  border: 1px solid rgba(255, 220, 140, 0.72) !important;
+  color: rgba(255, 248, 225, 0.98) !important;
+
+  font-weight: 900 !important;
+  letter-spacing: 0.35px !important;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.20),
+    0 10px 22px rgba(0,0,0,0.40),
+    0 0 18px rgba(255, 200, 90, 0.18) !important;
+}
+
+/* ---------- 4) Badge "Roi" : ne dépend PAS du nth-child (plus robuste) ---------- */
+/* ⚠️ Conseil : ajoute class="gold" au badge Roi dans le HTML, c’est mieux.
+   Mais si tu veux garder ton système actuel, on améliore sans casser :
+*/
+body[data-faction="pirate"] .ibox-badges .ibadge:nth-child(2){
+  background: linear-gradient(
+    135deg,
+    rgba(255,215,120,0.42),
+    rgba(150,95,20,0.30)
+  ) !important;
+  border-color: rgba(255,220,140,0.72) !important;
+  color: rgba(255,248,225,0.98) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.20),
+    0 10px 22px rgba(0,0,0,0.40),
+    0 0 18px rgba(255,200,90,0.18) !important;
+}
