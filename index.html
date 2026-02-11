@@ -1,3 +1,7 @@
+Mais nan je t'ai demander de fusionner les deux avec la correction avec ce code HTML de l'index :
+
+Tu peut refaire le HTML complet avec les modifications ?
+
 <!doctype html>
 <html lang="fr">
 <head>
@@ -5,280 +9,773 @@
   <title>Wiki de l’Univers</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Police -->
+  <!-- Police moderne -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
-  <!-- CSS global -->
+  <!-- CSS WIKI -->
   <link rel="stylesheet" href="/royaumededraevorn/css/wiki.css">
 
-  <!-- =========================
-       STYLES LOCAUX (INDEX)
-       ========================= -->
+  <!-- Styles locaux (accueil only) -->
   <style>
+    /* =========================
+       EVENT BOARD (INDEX)
+       ========================= */
+    .event-board{
+      margin: 14px 0 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      box-shadow: 0 18px 45px rgba(0,0,0,.40);
+      overflow: hidden;
+      position: relative;
+    }
 
-  /* =========================
-     EVENT BOARD
-     ========================= */
-  .event-board{
-    margin: 14px 0 18px;
-    border-radius: 16px;
-    border: 1px solid rgba(255,255,255,.12);
-    background: rgba(255,255,255,.035);
-    box-shadow: 0 18px 45px rgba(0,0,0,.45);
-    overflow: hidden;
-  }
+    .event-board::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      pointer-events:none;
+      opacity:.85;
+      background: radial-gradient(circle at 25% 15%, rgba(255,80,80,.22), rgba(0,0,0,0) 55%);
+    }
 
-  .event-board-head{
-    padding: 12px 14px;
-    display:flex;
-    justify-content: space-between;
-    align-items:center;
-    border-bottom: 1px solid rgba(255,255,255,.08);
-    background: linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-  }
+    .event-board-head{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    }
 
-  .event-board-title{
-    display:flex;
-    align-items:center;
-    gap: 10px;
-    font-weight: 900;
-  }
+    .event-board-title{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      font-weight: 900;
+      letter-spacing: .2px;
+    }
 
-  .event-ico{
-    width: 28px;
-    height: 28px;
-    border-radius: 10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border: 1px solid rgba(255,255,255,.14);
-    background: rgba(255,255,255,.08);
-  }
+    .event-ico{
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 10px 28px rgba(0,0,0,.35);
+    }
 
-  .event-board-pill{
-    font-size:.72rem;
-    padding: 5px 9px;
-    border-radius:999px;
-    border: 1px solid rgba(255,255,255,.14);
-    background: rgba(255,255,255,.06);
-  }
+    .event-board-pill{
+      margin-left: 6px;
+      font-size: .72rem;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      opacity:.95;
+    }
 
-  .event-board-body{
-    padding: 12px 14px;
-    display:flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+    .event-board-body{
+      padding: 12px 14px;
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+    }
 
-  /* Toggle */
-  .event-toggle{
-    display:flex;
-    align-items:center;
-    gap: 10px;
-    cursor:pointer;
-    font-weight: 800;
-  }
-  .event-toggle input{ display:none; }
+    /* Toggle */
+    .event-toggle{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      cursor:pointer;
+      user-select:none;
+      font-weight: 800;
+      opacity: .92;
+    }
 
-  .event-toggle-ui{
-    width: 46px;
-    height: 26px;
-    border-radius: 999px;
-    border: 1px solid rgba(255,255,255,.16);
-    background: rgba(255,255,255,.06);
-    position: relative;
-  }
-  .event-toggle-ui::after{
-    content:"";
-    position:absolute;
-    top:3px;
-    left:3px;
-    width:20px;
-    height:20px;
-    border-radius:999px;
-    background: rgba(255,255,255,.25);
-    transition: transform .2s ease;
-  }
-  .event-toggle input:checked + .event-toggle-ui::after{
-    transform: translateX(20px);
-    background: rgba(255,90,90,.45);
-  }
+    .event-toggle input{ display:none; }
 
-  /* Event card */
-  .event-card{
-    display:flex;
-    gap: 14px;
-    padding: 12px;
-    border-radius: 14px;
-    border: 1px solid rgba(255,255,255,.12);
-    background: rgba(255,255,255,.03);
-  }
+    .event-toggle-ui{
+      width: 46px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      position: relative;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.25);
+    }
 
-  .event-catastrophe{
-    border-color: rgba(255,90,90,.28);
-    animation: dangerPulse 1.3s infinite;
-  }
+    .event-toggle-ui::after{
+      content:"";
+      position:absolute;
+      top: 3px;
+      left: 3px;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.22);
+      transition: transform .18s ease, background .18s ease;
+    }
 
-  @keyframes dangerPulse{
-    0%,100%{ filter: brightness(1); }
-    50%{ filter: brightness(1.15); }
-  }
+    .event-toggle input:checked + .event-toggle-ui::after{
+      transform: translateX(20px);
+      background: rgba(255,90,90,.35);
+    }
 
-  .event-left{ flex:1; }
-  .event-title{ font-weight:900; margin:6px 0; }
-  .event-desc{ opacity:.88; }
+    .event-toggle-text{
+      font-size: .82rem;
+      opacity:.88;
+    }
 
-  .event-right{
-    flex:0 0 200px;
-    display:flex;
-    align-items:center;
-  }
+    /* Cartes */
+    .event-card{
+      display:flex;
+      gap: 12px;
+      align-items: stretch;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      position: relative;
+      overflow: hidden;
+    }
 
-  .event-timer{
-    width:100%;
-    padding:10px;
-    border-radius:12px;
-    border:1px solid rgba(255,255,255,.12);
-    background: rgba(0,0,0,.2);
-    text-align:right;
-  }
+    .event-left{ flex: 1; min-width: 0; }
+    .event-right{
+      flex: 0 0 210px;
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+    }
 
-  .event-timer-label{ font-size:.75rem; opacity:.8; }
-  .event-timer-value{ font-weight:900; font-size:1.1rem; }
-  .event-timer-sub{ font-size:.75rem; opacity:.8; }
+    .event-title{
+      font-weight: 900;
+      letter-spacing: .2px;
+      margin: 8px 0 6px;
+      line-height: 1.1rem;
+    }
 
-  @media (max-width:720px){
-    .event-card{ flex-direction:column; }
-    .event-right{ flex:1; text-align:left; }
-  }
+    .event-desc{
+      opacity:.88;
+      line-height: 1.4rem;
+    }
 
+    .event-actions{ margin-top: 8px; }
+    .event-link{
+      font-weight: 900;
+      text-decoration:none;
+      color: inherit;
+      opacity:.95;
+    }
+    .event-link:hover{ opacity: 1; text-decoration: underline; }
+
+    /* Badge danger */
+    .event-badge{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      font-size: .72rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      font-weight: 900;
+    }
+
+    .event-badge-ico{
+      width: 22px;
+      height: 22px;
+      border-radius: 8px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+    }
+
+    /* Timer */
+    .event-timer{
+      width: 100%;
+      text-align: right;
+      border-radius: 12px;
+      padding: 10px 10px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.25);
+    }
+
+    .event-timer-label{
+      font-size: .78rem;
+      opacity:.82;
+      margin-bottom: 4px;
+    }
+    .event-timer-value{
+      font-weight: 900;
+      letter-spacing: .8px;
+      font-size: 1.12rem;
+    }
+    .event-timer-sub{
+      margin-top: 4px;
+      font-size: .78rem;
+      opacity:.80;
+    }
+
+    /* Catastrophe rouge + brillance + clignotement */
+    .event-catastrophe{
+      border-color: rgba(255,90,90,.22);
+      box-shadow: inset 0 0 0 1px rgba(255,90,90,.10);
+      animation: catastrophePulse 1.25s ease-in-out infinite;
+    }
+
+    .event-catastrophe::before{
+      content:"";
+      position:absolute;
+      inset:-18px;
+      background: radial-gradient(circle at 30% 20%, rgba(255,60,60,.35), rgba(0,0,0,0) 62%);
+      filter: blur(16px);
+      opacity:.75;
+      pointer-events:none;
+    }
+
+    .event-catastrophe::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(110deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,.22) 18%,
+        rgba(255,255,255,0) 36%);
+      opacity: 0;
+      transform: translateX(-120%);
+      mix-blend-mode: screen;
+      pointer-events:none;
+      animation: catastropheShimmer 2.8s ease-in-out infinite;
+    }
+
+    .event-catastrophe .event-badge{
+      border-color: rgba(255,90,90,.45);
+      background: rgba(255,90,90,.12);
+    }
+    .event-catastrophe .event-badge-ico{
+      border-color: rgba(255,90,90,.45);
+      box-shadow: 0 0 18px rgba(255,60,60,.25);
+    }
+
+    @keyframes catastrophePulse{
+      0%,100%{ filter: brightness(1.00); }
+      50%{ filter: brightness(1.12); }
+    }
+
+    @keyframes catastropheShimmer{
+      0%   { opacity: 0; transform: translateX(-120%); }
+      22%  { opacity: .55; }
+      55%  { opacity: 0; transform: translateX(120%); }
+      100% { opacity: 0; transform: translateX(120%); }
+    }
+
+    @media (max-width: 720px){
+      .event-card{ flex-direction: column; }
+      .event-right{ flex: 1 1 auto; justify-content: flex-start; }
+      .event-timer{ text-align:left; }
+    }
+
+    /* =========================
+       SPOTLIGHTS (ton code)
+       ========================= */
+    .spotlight{
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      margin: 10px 0;
+    }
+    .spotlight .badges{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom: 10px; }
+    .spotlight h2{ margin: 6px 0 10px; }
+
+    .spotlight .row{
+      display:flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .spotlight .thumb{
+      width: 140px;
+      flex: 0 0 140px;
+    }
+    .spotlight .thumb img{
+      width: 100%;
+      height: auto;
+      display:block;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 12px 30px rgba(0,0,0,.45);
+    }
+    .spotlight .txt{
+      min-width: 0;
+      opacity: .92;
+      line-height: 1.55;
+    }
+    .spotlight .cta a{ font-weight: 800; }
+
+    .spotlight.marine{
+      border-color: rgba(79,156,255,.18);
+      box-shadow: inset 0 0 0 1px rgba(79,156,255,.10);
+    }
+    .spotlight.marine .thumb img{
+      border-color: rgba(79,156,255,.25);
+      box-shadow: 0 0 0 1px rgba(79,156,255,.10), 0 12px 30px rgba(0,0,0,.45);
+    }
+
+    .spotlight.pirate{
+      border-color: rgba(255,90,90,.18);
+      box-shadow: inset 0 0 0 1px rgba(255,90,90,.10);
+    }
+    .spotlight.pirate .thumb img{
+      border-color: rgba(255,90,90,.25);
+      box-shadow: 0 0 0 1px rgba(255,90,90,.10), 0 12px 30px rgba(0,0,0,.45);
+    }
+
+    .spotlight.neutral{
+      border-color: rgba(255,255,255,.16);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+    }
+    .spotlight.neutral .thumb img{
+      border-color: rgba(255,255,255,.22);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.10), 0 12px 30px rgba(0,0,0,.45);
+    }
+
+    @media (max-width: 720px){
+      .spotlight .row{ flex-direction: column; }
+      .spotlight .thumb{ width: 100%; flex: 0 0 auto; max-width: 280px; }
+    }
   </style>
 </head>
 
 <body>
-
-<div class="wiki-container">
-
-  <!-- HERO -->
-  <div class="wiki-hero">
-    <div>
-      <h1>Wiki de l’Univers</h1>
-      <p>Encyclopédie officielle : personnages, factions, chronologie et arcs RP.</p>
+  <div class="wiki-container">
+    <div class="wiki-hero">
+      <div>
+        <h1>Wiki de l’Univers</h1>
+        <p>Encyclopédie officielle : personnages, factions, chronologie et arcs RP.</p>
+      </div>
+      <div class="wiki-search">
+        <input id="q" placeholder="Rechercher un personnage, une faction..." />
+        <button id="go">Rechercher</button>
+      </div>
     </div>
-    <div class="wiki-search">
-      <input id="q" placeholder="Rechercher..." />
-      <button id="go">Rechercher</button>
-    </div>
-  </div>
 
-  <!-- =========================
-       EVENT BOARD (TOP)
-       ========================= -->
-  <section class="event-board" id="eventBoard">
-    <div class="event-board-head">
-      <div class="event-board-title">
-        <span class="event-ico">⚠️</span>
-        <span>Évènements</span>
-        <span class="event-board-pill">Live</span>
+    <!-- ✅ ICI : la zone ÉVÈNEMENTS (tout en haut de la page) -->
+    <section class="event-board" id="eventBoard" data-enabled="true">
+      <div class="event-board-head">
+        <div class="event-board-title">
+          <span class="event-ico">⚠️</span>
+          <span>Évènements</span>
+          <span class="event-board-pill">Live</span>
+        </div>
+
+        <label class="event-toggle" title="Activer / Désactiver les évènements">
+          <input type="checkbox" id="eventToggle" checked>
+          <span class="event-toggle-ui"></span>
+          <span class="event-toggle-text">Actif</span>
+        </label>
       </div>
 
-      <label class="event-toggle">
-        <input type="checkbox" id="eventToggle" checked>
-        <span class="event-toggle-ui"></span>
-        <span class="event-toggle-text">Actif</span>
-      </label>
-    </div>
+      <div class="event-board-body" id="eventList">
+        <!-- ✅ Exemple : Godzilla arrive -->
+        <article class="event-card event-catastrophe"
+                 data-event
+                 data-title="Burning Godzilla — Arrivée"
+                 data-target="2026-02-12T21:00:00+01:00"
+                 data-link="personnage-godzilla.html">
+          <div class="event-left">
+            <div class="event-badge">
+            <span class="ibadge menace">☢ Catastrophe</span>
+            </div>
+            <div class="event-title">Burning Godzilla — Arrivée</div>
+            <div class="event-desc">
+              Une présence colossale approche. Tempêtes, marées extrêmes… le monde retient son souffle.
+            </div>
+            <div class="event-actions">
+              <a class="event-link" href="personnage-godzilla.html">Voir la fiche →</a>
+            </div>
+          </div>
 
-    <div class="event-board-body" id="eventList">
+          <div class="event-right">
+            <div class="event-timer">
+              <div class="event-timer-label">Arrive dans</div>
+              <div class="event-timer-value" data-timer>--:--:--</div>
+              <div class="event-timer-sub" data-eta>—</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
 
-      <!-- Exemple actif -->
-      <article class="event-card event-catastrophe"
-        data-event
-        data-target="2026-02-12T21:00:00+01:00"
-        data-link="personnage-godzilla.html">
+    <div class="wiki-grid">
+      <aside class="wiki-card wiki-sidebar">
+        <h3>Navigation</h3>
+        <div class="content">
+          <a href="index.html">🏠 Accueil</a>
+          <a href="personnages.html">👤 Personnages</a>
+          <a href="faction-marine.html">⚓ Faction — Marine</a>
+          <a href="faction-pirates.html">🏴‍☠️ Faction — Pirates</a>
+          <a href="lore.html">📜 Lore & Chronologie</a>
+        </div>
+      </aside>
 
-        <div class="event-left">
-          <div class="event-title">Burning Godzilla — Arrivée</div>
-          <div class="event-desc">
-            Une présence colossale approche. Tempêtes, marées extrêmes… le monde retient son souffle.
+      <main class="wiki-card wiki-article">
+        <h3>À la une</h3>
+        <div class="content">
+
+          <!-- ✅ À LA UNE : KAELROS -->
+          <section class="spotlight marine">
+            <div class="badges">
+              <span class="badge">Marine</span>
+              <span class="badge">Arc principal</span>
+            </div>
+
+            <h2>Kaelros Viremont — “Le Régent des Mers”</h2>
+
+            <div class="row">
+              <div class="thumb">
+                <img src="/royaumededraevorn/images/kaelros.png" alt="Kaelros Viremont" loading="lazy">
+              </div>
+
+              <div class="txt">
+                Grand Amiral Suprême, incarnation de la <b>Justice de Domination</b>.
+                Antagoniste central face aux pirates et à la liberté.
+                <div class="cta" style="margin-top:8px;">
+                  <a href="personnage-kaelros.html">Lire l’article →</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
+
+          <!-- ✅ À LA UNE : BRYWORN -->
+          <section class="spotlight pirate">
+            <div class="badges">
+              <span class="badge">Pirates</span>
+              <span class="badge">Roi des Pirates</span>
+            </div>
+
+            <h2>Roi Bryworn — “Souverain de Draevorn”</h2>
+
+            <div class="row">
+              <div class="thumb">
+                <img src="/royaumededraevorn/images/bryworn.png" alt="Roi Bryworn" loading="lazy">
+              </div>
+
+              <div class="txt">
+                Roi des Pirates et chef du Royaume Pirate de Draevorn. Porte l’étendard de la liberté
+                face à la Justice de Domination.
+                <div class="cta" style="margin-top:8px;">
+                  <a href="personnage-bryworn.html">Lire l’article →</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
+
+          <!-- ✅ À LA UNE : LUFFY -->
+          <section class="spotlight pirate">
+            <div class="badges">
+              <span class="badge">Pirates</span>
+              <span class="badge">Allié</span>
+              <span class="badge">Liberté</span>
+            </div>
+
+            <h2>Monkey D. Luffy — “Le Chapeau de Paille”</h2>
+
+            <div class="row">
+              <div class="thumb">
+                <img src="/royaumededraevorn/images/luffy.png" alt="Monkey D. Luffy" loading="lazy">
+              </div>
+
+              <div class="txt">
+                Capitaine au sourire insolent, symbole de liberté et d’élan. Un allié majeur quand la mer bascule
+                entre domination et rêves.
+                <div class="cta" style="margin-top:8px;">
+                  <a href="personnage-luffy.html">Lire l’article →</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
+
+          <!-- ✅ À LA UNE : SANG DE BRUME -->
+          <section class="spotlight pirate">
+            <div class="badges">
+              <span class="badge">Pirates</span>
+              <span class="badge">Pavillon Noir</span>
+              <span class="badge">1ère Flotte</span>
+            </div>
+
+            <h2>Capitaine Sang de Brume — “Le Pavillon Noir”</h2>
+
+            <div class="row">
+              <div class="thumb">
+                <img src="/royaumededraevorn/images/sangdebrume.png" alt="Capitaine Sang de Brume" loading="lazy">
+              </div>
+
+              <div class="txt">
+                Capitaine du Roi des Pirates — <b>1ère Flotte</b> de Draevorn. En guerre contre la Marine,
+                il protège son équipage sans compromis.
+                <div class="cta" style="margin-top:8px;">
+                  <a href="personnage-sangdebrume.html">Lire l’article →</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
+
+          <!-- ✅ À LA UNE : MATHÉO -->
+          <section class="spotlight pirate">
+            <div class="badges">
+              <span class="badge">Pirates</span>
+              <span class="badge">Roi des Ténèbres</span>
+              <span class="badge">Fruit : Dark</span>
+            </div>
+
+            <h2>Mathéo — “Le Roi des Ténèbres”</h2>
+
+            <div class="row">
+              <div class="thumb">
+                <img src="/royaumededraevorn/images/matheo.png" alt="Mathéo le Roi des Ténèbres" loading="lazy">
+              </div>
+
+              <div class="txt">
+                Un pirate au charisme tranchant, maître du <b>Dark</b>. Là où il passe, la lumière recule :
+                pression, contrôle et autorité d’ombre sur le pont comme en duel.
+                <div class="cta" style="margin-top:8px;">
+                  <a href="personnage-matheo.html">Lire l’article →</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
+
+          <!-- ✅ À LA UNE : DAFT PUNK -->
+          <section class="spotlight neutral">
+            <div class="badges">
+              <span class="badge">🏳️ Neutre</span>
+              <span class="badge">Évènement</span>
+              <span class="badge">Musique</span>
+            </div>
+
+            <h2>Daft Punk — “Les DJ de Draevorn”</h2>
+
+            <div class="row">
+              <div class="thumb">
+                <img src="/royaumededraevorn/images/daftpunk.png" alt="Daft Punk" loading="lazy">
+              </div>
+
+              <div class="txt">
+                Duo légendaire invité à Draevorn : ils font vibrer le Royaume du Roi des Pirates Bryworn
+                lors des grands évènements, entre feux d’artifice et marées de foule.
+                <div class="cta" style="margin-top:8px;">
+                  <a href="personnage-daftpunk.html">Lire l’article →</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
+
+          <!-- ✅ À LA UNE : GODZILLA -->
+          <section class="spotlight neutral">
+            <div class="badges">
+              <span class="badge">🏳️ Neutre</span>
+              <span class="badge">Découverte</span>
+              <span class="badge">Niveau Catastrophe</span>
+            </div>
+
+            <h2>Burning Godzilla — “Le Jugement de la Nature”</h2>
+
+            <div class="row">
+              <div class="thumb">
+                <img src="/royaumededraevorn/images/godzilla.png" alt="Burning Godzilla" loading="lazy">
+              </div>
+
+              <div class="txt">
+                Une <b>divinité draconique</b> neutre, protecteur et destructeur.
+                Son réveil annonce un basculement : tempêtes, marées extrêmes et rayon atomique.
+                <div class="cta" style="margin-top:8px;">
+                  <a href="personnage-godzilla.html">Lire l’article →</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
+
+          <h2>Accès rapide : Factions</h2>
+          <div class="list-grid" style="margin: 10px 0 4px;">
+            <a class="list-item" href="faction-marine.html">
+              <div class="title">⚓ Marine</div>
+              <div class="meta">Ordre • Justice • Domination</div>
+            </a>
+            <a class="list-item" href="faction-pirates.html">
+              <div class="title">🏴‍☠️ Pirates</div>
+              <div class="meta">Liberté • Conquête • Empire</div>
+            </a>
+          </div>
+
+          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
+
+          <h2>Recherche rapide</h2>
+          <div id="results"></div>
+        </div>
+      </main>
+
+      <aside class="wiki-card">
+        <h3>Catégories</h3>
+        <div class="content">
+          <div class="list-grid">
+            <a class="list-item" href="personnages.html">
+              <div class="title">Personnages</div>
+              <div class="meta">Amiraux, pirates, neutres</div>
+            </a>
+
+            <a class="list-item" href="faction-marine.html">
+              <div class="title">Factions — Marine</div>
+              <div class="meta">Structure, doctrine, liens</div>
+            </a>
+
+            <a class="list-item" href="faction-pirates.html">
+              <div class="title">Factions — Pirates</div>
+              <div class="meta">Flottes, code pirate, territoires</div>
+            </a>
+
+            <a class="list-item" href="lore.html">
+              <div class="title">Lore</div>
+              <div class="meta">Chronologie, événements</div>
+            </a>
           </div>
         </div>
-
-        <div class="event-right">
-          <div class="event-timer">
-            <div class="event-timer-label">Arrive dans</div>
-            <div class="event-timer-value" data-timer>--:--:--</div>
-            <div class="event-timer-sub" data-eta>—</div>
-          </div>
-        </div>
-
-      </article>
-
+      </aside>
     </div>
-  </section>
-
-  <!-- CONTENU PRINCIPAL -->
-  <div class="wiki-grid">
-    <!-- (ton contenu spotlight / sidebar / etc reste inchangé ici) -->
   </div>
 
-</div>
+  <!-- ✅ 1) D'abord le script de recherche (comme tu fais déjà) -->
+  <script src="/royaumededraevorn/js/wiki-search.js"></script>
 
-<!-- =========================
-     SCRIPTS (ORDRE IMPORTANT)
-     ========================= -->
+  <!-- ✅ 2) ENSUITE ton JS de recherche de l’index -->
+  <script>
+    const q = document.getElementById("q");
+    const go = document.getElementById("go");
+    const results = document.getElementById("results");
 
-<!-- 1️⃣ Recherche -->
-<script src="/royaumededraevorn/js/wiki-search.js"></script>
+    function run(){
+      const res = WIKI_SEARCH.searchWiki(q.value);
+      WIKI_SEARCH.renderResults(results, res.map(r => ({...r, url: r.url})));
+    }
 
-<!-- 2️⃣ JS EVENT BOARD -->
-<script>
-(function(){
-  const board = document.getElementById("eventBoard");
-  const toggle = document.getElementById("eventToggle");
-  const list = document.getElementById("eventList");
-  if(!board || !toggle || !list) return;
+    go.addEventListener("click", run);
+    q.addEventListener("keydown", (e)=>{ if(e.key==="Enter") run(); });
 
-  const KEY = "wiki_events_enabled";
+    // résultats par défaut
+    WIKI_SEARCH.renderResults(results, WIKI_SEARCH.searchWiki(""));
+  </script>
 
-  function setEnabled(v){
-    toggle.checked = v;
-    list.style.display = v ? "" : "none";
-    localStorage.setItem(KEY, v ? "1" : "0");
-  }
+  <!-- ✅ 3) ET EN TOUT DERNIER : le JS des ÉVÈNEMENTS (juste avant </body>) -->
+  <script>
+    (function(){
+      const board = document.getElementById("eventBoard");
+      const toggle = document.getElementById("eventToggle");
+      const list = document.getElementById("eventList");
+      if(!board || !toggle || !list) return;
 
-  setEnabled(localStorage.getItem(KEY) !== "0");
+      const STORAGE_KEY = "wiki_events_enabled";
 
-  toggle.addEventListener("change", () => setEnabled(toggle.checked));
-
-  function pad(n){ return String(n).padStart(2,"0"); }
-
-  function tick(){
-    const now = Date.now();
-    document.querySelectorAll("[data-event]").forEach(card=>{
-      const t = new Date(card.dataset.target).getTime();
-      const diff = t - now;
-      const tEl = card.querySelector("[data-timer]");
-      const eta = card.querySelector("[data-eta]");
-      if(diff <= 0){
-        tEl.textContent = "ARRIVÉ";
-        eta.textContent = "— maintenant";
-        return;
+      function setEnabled(v){
+        board.dataset.enabled = v ? "true" : "false";
+        toggle.checked = !!v;
+        list.style.display = v ? "" : "none";
+        const txt = board.querySelector(".event-toggle-text");
+        if(txt) txt.textContent = v ? "Actif" : "Inactif";
+        try { localStorage.setItem(STORAGE_KEY, v ? "1" : "0"); } catch(e){}
       }
-      const s = Math.floor(diff/1000);
-      const h = Math.floor(s/3600);
-      const m = Math.floor((s%3600)/60);
-      const sec = s%60;
-      tEl.textContent = `${pad(h)}:${pad(m)}:${pad(sec)}`;
-    });
-  }
 
-  tick();
-  setInterval(tick,1000);
-})();
-</script>
+      // Restore
+      let enabled = true;
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if(saved === "0") enabled = false;
+      } catch(e){}
+      setEnabled(enabled);
 
+      toggle.addEventListener("change", () => setEnabled(toggle.checked));
+
+      function pad(n){ return String(n).padStart(2,"0"); }
+
+      function formatETA(targetDate){
+        const d = targetDate;
+        const dd = pad(d.getDate());
+        const mm = pad(d.getMonth()+1);
+        const hh = pad(d.getHours());
+        const mi = pad(d.getMinutes());
+        return `${dd}/${mm} • ${hh}:${mi}`;
+      }
+
+      function tick(){
+        const now = Date.now();
+        document.querySelectorAll("[data-event]").forEach(card => {
+          const targetRaw = card.getAttribute("data-target");
+          const link = card.getAttribute("data-link") || "";
+
+          const tEl = card.querySelector("[data-timer]");
+          const etaEl = card.querySelector("[data-eta]");
+          if(!targetRaw || !tEl) return;
+
+          const target = new Date(targetRaw).getTime();
+          const diff = target - now;
+
+          if(diff <= 0){
+            tEl.textContent = "ARRIVÉ";
+            if(etaEl) etaEl.textContent = "— maintenant";
+
+            if(link && !card.dataset.bound){
+              card.dataset.bound = "1";
+              card.style.cursor = "pointer";
+              card.addEventListener("click", (e) => {
+                const a = e.target.closest("a");
+                if(a) return;
+                location.href = link;
+              });
+            }
+            return;
+          }
+
+          const s = Math.floor(diff/1000);
+          const days = Math.floor(s / 86400);
+          const hrs = Math.floor((s % 86400) / 3600);
+          const mins = Math.floor((s % 3600) / 60);
+          const secs = s % 60;
+
+          tEl.textContent = (days > 0)
+            ? `${days}j ${pad(hrs)}:${pad(mins)}:${pad(secs)}`
+            : `${pad(hrs)}:${pad(mins)}:${pad(secs)}`;
+
+          if(etaEl){
+            etaEl.textContent = `ETA ${formatETA(new Date(target))}`;
+          }
+        });
+      }
+
+      tick();
+      setInterval(tick, 1000);
+    })();
+  </script>
 </body>
 </html>
