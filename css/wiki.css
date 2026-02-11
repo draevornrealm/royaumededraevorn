@@ -1858,30 +1858,30 @@ body[data-faction="neutral"]{
 
 /* (Option) si tu n'as pas de <span> interne, ça suffit quand même,
    car le texte du badge est rendu au-dessus dans la plupart des navigateurs. */
-/* ======================================================
-   FIX HALO BADGES (INFOBOX / BRYWORN)
-   - Empêche les halos de sortir des cadres
-   ====================================================== */
+/* =========================
+   FIX BADGES INFOBOX (Bryworn)
+   -> éviter l'effet "coupé" / bizarre
+   ========================= */
 
-/* 1) Si tes badges sont dans l'infobox */
+/* Le conteneur badges fait le clip (pas chaque badge) */
 .infobox .ibox-badges{
-  overflow: hidden;          /* clip les halos */
-  border-radius: 16px;       /* suit la forme de l'infobox */
-  padding: 2px;              /* évite de couper trop près */
-}
-
-/* 2) Option plus stricte : clip au niveau de chaque badge */
-.infobox .ibox-badges .ibadge{
-  overflow: hidden;
-  border-radius: 999px;
-}
-
-/* 3) Si tu as des badges dans d'autres conteneurs (sections spotlight etc.) */
-.badges{
   overflow: hidden;
   border-radius: 14px;
-  padding: 2px;
+  padding: 4px;              /* donne un peu d'air au halo */
+  gap: 8px;
 }
+
+/* IMPORTANT : ne PAS clipper chaque badge, sinon aura coupée */
+.infobox .ibox-badges .ibadge{
+  overflow: visible;
+}
+
+/* Option : si le halo est trop large dans l'infobox, on le réduit un peu */
+.infobox .ibox-badges .ibadge::before{
+  inset: -6px;               /* au lieu de -10/-12 */
+  filter: blur(8px);         /* au lieu de 10/14 */
+}
+
 
 
 
