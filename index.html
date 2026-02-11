@@ -365,23 +365,49 @@
       </div>
     </div>
 
-<article class="event-card event-orange">
-  <div class="event-left">
-    <div class="event-badge">
-      <span class="ibadge badge-orange fx">🟠 Alerte élevée</span>
+<!-- ✅ ZONE ÉVÈNEMENTS (avec toggle) -->
+<section class="event-board orange" id="eventBoard" data-enabled="true">
+  <div class="event-board-head">
+    <div class="event-board-title">
+      <span class="event-ico">⚠️</span>
+      <span>Évènements</span>
+      <span class="event-board-pill">Live</span>
     </div>
-    <div class="event-title">Tension croissante aux frontières</div>
-    <div class="event-desc">Des mouvements militaires inhabituels ont été observés. La situation pourrait dégénérer.</div>
+
+    <label class="event-toggle" title="Activer / Désactiver les évènements">
+      <input type="checkbox" id="eventToggle" checked>
+      <span class="event-toggle-ui"></span>
+      <span class="event-toggle-text">Actif</span>
+    </label>
   </div>
 
-  <div class="event-right">
-    <div class="event-timer">
-      <div class="event-timer-label">Statut</div>
-      <div class="event-timer-value">ALERTE</div>
-      <div class="event-timer-sub">— niveau élevé</div>
-    </div>
+  <!-- IMPORTANT : l'id doit rester eventList pour ton JS -->
+  <div class="event-board-body" id="eventList">
+
+    <!-- 🟠 ALERTE ORANGE -->
+    <article class="event-card event-orange">
+      <div class="event-left">
+        <div class="event-badge">
+          <span class="ibadge badge-orange fx">🟠 Alerte élevée</span>
+        </div>
+        <div class="event-title">Tension croissante aux frontières</div>
+        <div class="event-desc">
+          Des mouvements militaires inhabituels ont été observés. La situation pourrait dégénérer.
+        </div>
+      </div>
+
+      <div class="event-right">
+        <div class="event-timer">
+          <div class="event-timer-label">Statut</div>
+          <div class="event-timer-value">ALERTE</div>
+          <div class="event-timer-sub">— niveau élevé</div>
+        </div>
+      </div>
+    </article>
+
   </div>
-</article>
+</section>
+
 
     <div class="wiki-grid">
       <aside class="wiki-card wiki-sidebar">
@@ -746,6 +772,7 @@
   </script>
 </body>
 </html>
+
 
 
 
