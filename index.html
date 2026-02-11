@@ -381,25 +381,51 @@
         </label>
       </div>
 
-      <div class="event-board-body" id="eventList">
-        <!-- ✅ Exemple : Godzilla arrive -->
-        <article class="event-card event-catastrophe"
-                 data-event
-                 data-title="Burning Godzilla — Arrivée"
-                 data-target="2026-02-12T21:00:00+01:00"
-                 data-link="personnage-godzilla.html">
-          <div class="event-left">
-            <div class="event-badge">
-            <span class="ibadge menace">☢ Catastrophe</span>
-            </div>
-            <div class="event-title">Burning Godzilla — Arrivée</div>
-            <div class="event-desc">
-              Une présence colossale approche. Tempêtes, marées extrêmes… le monde retient son souffle.
-            </div>
-            <div class="event-actions">
-              <a class="event-link" href="personnage-godzilla.html">Voir la fiche →</a>
-            </div>
-          </div>
+<div class="event-board-body" id="eventList">
+
+  <!-- Catastrophe -->
+  <article class="event-card event-catastrophe"
+           data-event
+           data-title="Burning Godzilla — Arrivée"
+           data-target="2026-02-12T21:00:00+01:00"
+           data-link="personnage-godzilla.html">
+    <div class="event-left">
+      <div class="event-badge"><span>☢ Catastrophe</span></div>
+      <div class="event-title">Burning Godzilla — Arrivée</div>
+      <div class="event-desc">Tempêtes, marées extrêmes… une présence colossale approche.</div>
+      <div class="event-actions"><a class="event-link" href="personnage-godzilla.html">Voir la fiche →</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-timer">
+        <div class="event-timer-label">Arrive dans</div>
+        <div class="event-timer-value" data-timer>--:--:--</div>
+        <div class="event-timer-sub" data-eta>—</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Info / RP -->
+  <article class="event-card event-ok"
+           data-event
+           data-title="Conseil des Flottes — Briefing"
+           data-target="2026-02-11T23:30:00+01:00"
+           data-link="lore.html">
+    <div class="event-left">
+      <div class="event-badge"><span>📌 Info RP</span></div>
+      <div class="event-title">Conseil des Flottes — Briefing</div>
+      <div class="event-desc">Réunion stratégique à Draevorn. Présence des capitaines recommandée.</div>
+      <div class="event-actions"><a class="event-link" href="lore.html">Lire →</a></div>
+    </div>
+    <div class="event-right">
+      <div class="event-timer">
+        <div class="event-timer-label">Commence dans</div>
+        <div class="event-timer-value" data-timer>--:--:--</div>
+        <div class="event-timer-sub" data-eta>—</div>
+      </div>
+    </div>
+  </article>
+
+</div>
 
           <div class="event-right">
             <div class="event-timer">
@@ -775,4 +801,5 @@
   </script>
 </body>
 </html>
+
 
