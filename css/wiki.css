@@ -945,40 +945,23 @@ body[data-faction="neutral"]{
 .infobox .ibox-head{
   overflow: visible; /* override du patch précédent */
 }
-/* =========================================================
-   PATCH DEFINITIF — FIX "BANDE NOIRE" / AURA BADGES
-   À COLLER TOUT EN BAS de wiki.css
-   Objectif:
-   - Auras: pas coupées + pas "noircies"
-   - Shimmer: reste DANS la pilule
-   - FX event: restent clampés
-   ========================================================= */
+/* ======================================================
+   PATCH FINAL V2 — PLUS DE BANDE BLANCHE + PAS DE BANDE NOIRE
+   - shimmer reste dans la pilule
+   - aura reste "extérieur" via drop-shadow (non clippé)
+   À COLLER TOUT EN BAS
+   ====================================================== */
 
-/* 0) STOP conflits: la rangée badges ne doit PAS couper les halos */
-.infobox .ibox-badges{
-  overflow: visible !important;      /* au lieu de hidden */
-}
-
-/* 1) Base badge: NE PAS clipper globalement (sinon aura cassée) */
+/* 1) La pilule re-clippe tout ce qui est à l’intérieur (shimmer) */
 .ibadge{
+  overflow: hidden !important;
   position: relative;
-  overflow: visible !important;      /* override ton overflow hidden précédent */
   border-radius: 999px;
-  transform: translateZ(0);
-  isolation: isolate;                /* crée un contexte propre */
+  isolation: isolate;
 }
 
-/* 2) Les halos (aura) ne doivent JAMAIS être en z-index:-1
-      -> sinon ils passent derrière le parent et "noircissent" */
-.ibadge.gold.aura::before,
-.ibadge.silver.aura-blue::before,
-.ibadge.music.aura-violet::before,
-.ibadge.dark.aura-dark::before,
-.ibadge.menace::before{
-  z-index: 0 !important;             /* remplace ton -1 */
-}
-
-/* 3) Shimmer: clip DANS la pilule (sans overflow hidden) */
+/* 2) Le shimmer (bande blanche) est garanti DANS la pilule */
+.ibadge::after,
 .ibadge.gold.aura::after,
 .ibadge.silver.aura-blue::after,
 .ibadge.music.aura-violet::after,
@@ -989,48 +972,61 @@ body[data-faction="neutral"]{
 .ibadge.badge-orange.fx::after,
 .ibadge.badge-red.fx::after{
   clip-path: inset(0 round 999px);
+  border-radius: 999px;
   mix-blend-mode: normal !important;
 }
 
-/* 4) Aura "interne": on évite les débordements abusifs + rendu stable */
+/* 3) On empêche l’aura ::before de créer des artefacts :
+      -> on la rend "interne" (donc clippée proprement) */
 .ibadge.gold.aura::before,
 .ibadge.silver.aura-blue::before,
 .ibadge.music.aura-violet::before,
 .ibadge.dark.aura-dark::before,
 .ibadge.menace::before{
-  inset: -8px;                       /* halo présent mais raisonnable */
-  filter: blur(10px);
-  transform: scale(1.0);
+  inset: 0 !important;          /* plus de halo externe via ::before */
+  filter: blur(10px) !important;
+  transform: scale(1.18) !important;
+  z-index: 0 !important;
+  opacity: .55 !important;
 }
 
-/* 5) Réduction halos UNIQUEMENT dans l’infobox (garde ton style)
-      -> on garde mais on stabilise */
-.infobox .ibox-badges .ibadge.gold.aura::before,
-.infobox .ibox-badges .ibadge.silver.aura-blue::before,
-.infobox .ibox-badges .ibadge.music.aura-violet::before,
-.infobox .ibox-badges .ibadge.dark.aura-dark::before,
-.infobox .ibox-badges .ibadge.menace::before{
-  inset: -6px !important;
-  filter: blur(8px) !important;
-  opacity: .65 !important;
+/* 4) Aura EXTERNE (celle qu’on veut voir) via drop-shadow :
+      drop-shadow dépasse même si overflow:hidden */
+.ibadge.gold.aura{
+  filter:
+    drop-shadow(0 0 10px rgba(255,200,90,.45))
+    drop-shadow(0 0 22px rgba(255,180,60,.25));
 }
 
-/* 6) Les badges FX (event) restent clampés dans la pilule (OK) */
+.ibadge.silver.aura-blue{
+  filter:
+    drop-shadow(0 0 10px rgba(120,170,255,.45))
+    drop-shadow(0 0 22px rgba(80,130,220,.25));
+}
+
+.ibadge.music.aura-violet{
+  filter:
+    drop-shadow(0 0 10px rgba(200,140,255,.40))
+    drop-shadow(0 0 22px rgba(140,90,240,.22));
+}
+
+.ibadge.dark.aura-dark{
+  filter:
+    drop-shadow(0 0 12px rgba(170,120,255,.28))
+    drop-shadow(0 0 26px rgba(80,20,150,.22));
+}
+
+.ibadge.menace{
+  filter:
+    drop-shadow(0 0 12px rgba(255,70,70,.28))
+    drop-shadow(0 0 26px rgba(255,70,70,.18));
+}
+
+/* 5) Les FX event restent clampés (ok) */
 .ibadge.badge-green.fx,
 .ibadge.badge-yellow.fx,
 .ibadge.badge-orange.fx,
 .ibadge.badge-red.fx{
   overflow: hidden !important;
-}
-
-/* 7) Sécurité: ne coupe jamais les halos dans la hero */
-.wiki-hero,
-.wiki-hero p{
-  overflow: visible !important;
-}
-
-/* 8) Bonus: si tu as encore des coupes, on s'assure que le head ne clippe pas */
-.infobox .ibox-head{
-  overflow: visible !important;
 }
 
