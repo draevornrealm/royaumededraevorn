@@ -1242,116 +1242,413 @@ body[data-faction="neutral"]{
   100% { opacity: 0; transform: translateX(120%); }
 }
 
-/* =========================
-   BADGES FX (clignote + glow + shimmer)
-   Usage: <span class="ibadge badge-orange fx">...</span>
-   ========================= */
-.ibadge.fx{
+/* ======================================================
+   EVENT ALERT PACK (VERT / JAUNE / ORANGE / ROUGE)
+   - Rectangle (event-card) + Board glow
+   - Badge (ibadge) clignotant + glow + shimmer
+   ====================================================== */
+
+/* ---------- Board base: glow par niveau ---------- */
+.event-board.ras::before{
+  background: radial-gradient(circle at 25% 15%,
+    rgba(70,220,140,.22),
+    rgba(0,0,0,0) 55%);
+}
+
+.event-board.vigilance::before{
+  background: radial-gradient(circle at 25% 15%,
+    rgba(255,220,90,.22),
+    rgba(0,0,0,0) 55%);
+}
+
+.event-board.orange::before{
+  background: radial-gradient(circle at 25% 15%,
+    rgba(255,160,70,.22),
+    rgba(0,0,0,0) 55%);
+}
+
+.event-board.catastrophe::before{
+  background: radial-gradient(circle at 25% 15%,
+    rgba(255,80,80,.22),
+    rgba(0,0,0,0) 55%);
+}
+
+/* ---------- Carte base (safe) ---------- */
+.event-card{
   position: relative;
-  isolation: isolate;
-  will-change: transform, filter, box-shadow;
   overflow: hidden;
 }
 
-/* Shimmer overlay */
-.ibadge.fx::after{
+/* ======================================================
+   RAS (VERT)
+   ====================================================== */
+.event-card.event-ras{
+  border-color: rgba(70,220,140,.22);
+  box-shadow: inset 0 0 0 1px rgba(70,220,140,.10);
+  animation: greenPulse 2.2s ease-in-out infinite;
+}
+.event-card.event-ras::before{
+  content:"";
+  position:absolute;
+  inset:-18px;
+  background: radial-gradient(circle at 30% 20%,
+    rgba(70,220,140,.26),
+    rgba(0,0,0,0) 62%);
+  filter: blur(16px);
+  opacity:.60;
+  pointer-events:none;
+}
+.event-card.event-ras::after{
   content:"";
   position:absolute;
   inset:0;
-  border-radius:999px;
-  background: linear-gradient(
-    110deg,
+  background: linear-gradient(110deg,
     rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.28) 18%,
-    rgba(255,255,255,0) 36%
-  );
+    rgba(255,255,255,.16) 18%,
+    rgba(255,255,255,0) 36%);
   opacity: 0;
   transform: translateX(-120%);
   mix-blend-mode: screen;
   pointer-events:none;
-  animation: badgeShimmer 2.6s ease-in-out infinite;
+  animation: greenShimmer 3.2s ease-in-out infinite;
 }
 
-@keyframes badgeShimmer{
-  0%   { opacity: 0; transform: translateX(-120%); }
-  22%  { opacity: .55; }
-  55%  { opacity: 0; transform: translateX(120%); }
-  100% { opacity: 0; transform: translateX(120%); }
+.ibadge.badge-green.fx{
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(135deg,
+    rgba(90,255,140,0.22),
+    rgba(10,80,35,0.22));
+  border-color: rgba(90,255,140,0.70);
+  color: rgba(235,255,245,0.98);
+  font-weight: 900;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.14),
+    0 0 10px rgba(70,220,140,0.22);
+  animation: greenBadgeBlink 1.6s ease-in-out infinite;
+}
+.ibadge.badge-green.fx::before{
+  content:"";
+  position:absolute;
+  inset:-10px;
+  border-radius:999px;
+  z-index:-1;
+  background: radial-gradient(circle at 50% 50%,
+    rgba(70,220,140,0.40),
+    rgba(70,220,140,0.14) 55%,
+    rgba(0,0,0,0) 72%);
+  filter: blur(10px);
+  opacity: .55;
+  transform: scale(.95);
+  animation: greenBadgeGlow 1.6s ease-in-out infinite;
+}
+.ibadge.badge-green.fx::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:999px;
+  background: linear-gradient(110deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.22) 18%,
+    rgba(255,255,255,0) 36%);
+  opacity: 0;
+  transform: translateX(-120%);
+  mix-blend-mode: screen;
+  pointer-events:none;
+  animation: greenBadgeShimmer 2.8s ease-in-out infinite;
 }
 
-/* ✅ OK badge */
-.ibadge.badge-ok{
-  border-color: rgba(90,255,140,.55);
-  background: linear-gradient(135deg, rgba(90,255,140,.18), rgba(20,80,45,.16));
-  color: rgba(220,255,235,.98);
-  box-shadow: 0 0 12px rgba(90,255,140,.20);
+/* ======================================================
+   VIGILANCE (JAUNE)
+   ====================================================== */
+.event-card.event-vigilance{
+  border-color: rgba(255,220,90,.22);
+  box-shadow: inset 0 0 0 1px rgba(255,220,90,.10);
+  animation: yellowPulse 1.9s ease-in-out infinite;
 }
-.ibadge.badge-ok.fx{
-  animation: badgePulseOK 1.9s ease-in-out infinite;
+.event-card.event-vigilance::before{
+  content:"";
+  position:absolute;
+  inset:-18px;
+  background: radial-gradient(circle at 30% 20%,
+    rgba(255,220,90,.28),
+    rgba(0,0,0,0) 62%);
+  filter: blur(16px);
+  opacity:.65;
+  pointer-events:none;
 }
-@keyframes badgePulseOK{
-  0%,100%{ filter: brightness(1.00); box-shadow: 0 0 12px rgba(90,255,140,.20); }
-  50%{ filter: brightness(1.10); box-shadow: 0 0 18px rgba(90,255,140,.35); }
+.event-card.event-vigilance::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(110deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,.18) 18%,
+    rgba(255,255,255,0) 36%);
+  opacity: 0;
+  transform: translateX(-120%);
+  mix-blend-mode: screen;
+  pointer-events:none;
+  animation: yellowShimmer 3.0s ease-in-out infinite;
 }
 
-/* 🟡 Yellow badge */
-.ibadge.badge-yellow{
-  border-color: rgba(255,210,70,.60);
-  background: linear-gradient(135deg, rgba(255,210,70,.18), rgba(90,70,10,.16));
-  color: rgba(255,250,230,.98);
-  box-shadow: 0 0 12px rgba(255,210,70,.22);
-}
 .ibadge.badge-yellow.fx{
-  animation: badgeBlinkYellow 1.35s steps(2,end) infinite;
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(135deg,
+    rgba(255,230,120,0.24),
+    rgba(120,90,10,0.22));
+  border-color: rgba(255,230,120,0.78);
+  color: rgba(255,252,235,0.98);
+  font-weight: 900;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.14),
+    0 0 10px rgba(255,220,90,0.22);
+  animation: yellowBadgeBlink 1.35s steps(2,end) infinite;
 }
-@keyframes badgeBlinkYellow{
-  0%{ filter: brightness(1.00); box-shadow: 0 0 12px rgba(255,210,70,.22); }
-  100%{ filter: brightness(1.18); box-shadow: 0 0 22px rgba(255,210,70,.45); }
+.ibadge.badge-yellow.fx::before{
+  content:"";
+  position:absolute;
+  inset:-10px;
+  border-radius:999px;
+  z-index:-1;
+  background: radial-gradient(circle at 50% 50%,
+    rgba(255,220,90,0.45),
+    rgba(255,190,60,0.16) 55%,
+    rgba(0,0,0,0) 72%);
+  filter: blur(10px);
+  opacity: .55;
+  transform: scale(.95);
+  animation: yellowBadgeGlow 1.35s ease-in-out infinite;
+}
+.ibadge.badge-yellow.fx::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:999px;
+  background: linear-gradient(110deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.26) 18%,
+    rgba(255,255,255,0) 36%);
+  opacity: 0;
+  transform: translateX(-120%);
+  mix-blend-mode: screen;
+  pointer-events:none;
+  animation: yellowBadgeShimmer 2.2s ease-in-out infinite;
 }
 
-/* 🟠 Orange badge */
-.ibadge.badge-orange{
-  border-color: rgba(255,140,60,.62);
-  background: linear-gradient(135deg, rgba(255,140,60,.20), rgba(90,45,10,.16));
-  color: rgba(255,245,235,.98);
-  box-shadow: 0 0 12px rgba(255,140,60,.22);
+/* ======================================================
+   ALERTE (ORANGE)
+   ====================================================== */
+.event-card.event-orange{
+  border-color: rgba(255,160,70,.22);
+  box-shadow: inset 0 0 0 1px rgba(255,160,70,.10);
+  animation: orangePulse 1.8s ease-in-out infinite;
 }
+.event-card.event-orange::before{
+  content:"";
+  position:absolute;
+  inset:-18px;
+  background: radial-gradient(circle at 30% 20%,
+    rgba(255,150,60,.30),
+    rgba(0,0,0,0) 62%);
+  filter: blur(16px);
+  opacity:.70;
+  pointer-events:none;
+}
+.event-card.event-orange::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(110deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,.18) 18%,
+    rgba(255,255,255,0) 36%);
+  opacity: 0;
+  transform: translateX(-120%);
+  mix-blend-mode: screen;
+  pointer-events:none;
+  animation: orangeShimmer 3.0s ease-in-out infinite;
+}
+
 .ibadge.badge-orange.fx{
-  animation: badgeBlinkOrange 1.15s steps(2,end) infinite;
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(135deg,
+    rgba(255,170,90,0.28),
+    rgba(130,55,10,0.22));
+  border-color: rgba(255,170,90,0.78);
+  color: rgba(255,250,245,0.98);
+  font-weight: 900;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.14),
+    0 0 10px rgba(255,150,70,0.25);
+  animation: orangeBadgeBlink 1.2s steps(2,end) infinite;
 }
-@keyframes badgeBlinkOrange{
-  0%{ filter: brightness(1.00); box-shadow: 0 0 12px rgba(255,140,60,.22); }
-  100%{ filter: brightness(1.22); box-shadow: 0 0 24px rgba(255,140,60,.50); }
+.ibadge.badge-orange.fx::before{
+  content:"";
+  position:absolute;
+  inset:-10px;
+  border-radius:999px;
+  z-index:-1;
+  background: radial-gradient(circle at 50% 50%,
+    rgba(255,160,70,0.45),
+    rgba(255,120,40,0.16) 55%,
+    rgba(0,0,0,0) 72%);
+  filter: blur(10px);
+  opacity: 0.55;
+  transform: scale(0.95);
+  animation: orangeBadgeGlow 1.2s ease-in-out infinite;
+}
+.ibadge.badge-orange.fx::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:999px;
+  background: linear-gradient(110deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.28) 18%,
+    rgba(255,255,255,0) 36%);
+  opacity: 0;
+  transform: translateX(-120%);
+  mix-blend-mode: screen;
+  pointer-events:none;
+  animation: orangeBadgeShimmer 2.2s ease-in-out infinite;
 }
 
-/* 🔴 Red badge */
-.ibadge.badge-red{
-  border-color: rgba(255,80,80,.65);
-  background: linear-gradient(135deg, rgba(255,70,70,.22), rgba(90,10,10,.18));
-  color: rgba(255,245,245,.98);
-  box-shadow: 0 0 12px rgba(255,60,60,.25);
+/* ======================================================
+   CATASTROPHE (ROUGE)
+   ====================================================== */
+.event-card.event-catastrophe{
+  border-color: rgba(255,90,90,.22);
+  box-shadow: inset 0 0 0 1px rgba(255,90,90,.10);
+  animation: redPulse 1.25s ease-in-out infinite;
 }
+.event-card.event-catastrophe::before{
+  content:"";
+  position:absolute;
+  inset:-18px;
+  background: radial-gradient(circle at 30% 20%,
+    rgba(255,60,60,.35),
+    rgba(0,0,0,0) 62%);
+  filter: blur(16px);
+  opacity:.75;
+  pointer-events:none;
+}
+.event-card.event-catastrophe::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(110deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,.22) 18%,
+    rgba(255,255,255,0) 36%);
+  opacity: 0;
+  transform: translateX(-120%);
+  mix-blend-mode: screen;
+  pointer-events:none;
+  animation: redShimmer 2.8s ease-in-out infinite;
+}
+
 .ibadge.badge-red.fx{
-  animation: badgeBlinkRed 1.05s steps(2,end) infinite;
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(135deg,
+    rgba(255,70,70,0.28),
+    rgba(120,10,10,0.22));
+  border-color: rgba(255,80,80,0.80);
+  color: rgba(255,245,245,0.98);
+  font-weight: 900;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.14),
+    0 0 10px rgba(255,60,60,0.25);
+  animation: redBadgeBlink 1.05s steps(2,end) infinite;
 }
-@keyframes badgeBlinkRed{
-  0%{ filter: brightness(1.00); box-shadow: 0 0 12px rgba(255,60,60,.25); }
-  100%{ filter: brightness(1.26); box-shadow: 0 0 28px rgba(255,60,60,.60); }
+.ibadge.badge-red.fx::before{
+  content:"";
+  position:absolute;
+  inset:-10px;
+  border-radius:999px;
+  z-index:-1;
+  background: radial-gradient(circle at 50% 50%,
+    rgba(255,70,70,0.40),
+    rgba(255,70,70,0.16) 55%,
+    rgba(0,0,0,0) 72%);
+  filter: blur(10px);
+  opacity: 0.55;
+  transform: scale(0.95);
+  animation: redBadgeGlow 1.05s ease-in-out infinite;
+}
+.ibadge.badge-red.fx::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:999px;
+  background: linear-gradient(110deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.35) 18%,
+    rgba(255,255,255,0) 36%);
+  opacity: 0;
+  transform: translateX(-120%);
+  mix-blend-mode: screen;
+  pointer-events:none;
+  animation: redBadgeShimmer 1.8s ease-in-out infinite;
 }
 
-/* Accessibilité */
+/* ---------- Animations (cartes) ---------- */
+@keyframes greenPulse{ 0%,100%{ filter: brightness(1.00);} 50%{ filter: brightness(1.06);} }
+@keyframes yellowPulse{ 0%,100%{ filter: brightness(1.00);} 50%{ filter: brightness(1.10);} }
+@keyframes orangePulse{ 0%,100%{ filter: brightness(1.00);} 50%{ filter: brightness(1.10);} }
+@keyframes redPulse{ 0%,100%{ filter: brightness(1.00);} 50%{ filter: brightness(1.12);} }
+
+@keyframes greenShimmer{ 0%{opacity:0;transform:translateX(-120%);}22%{opacity:.45;}55%{opacity:0;transform:translateX(120%);}100%{opacity:0;transform:translateX(120%);} }
+@keyframes yellowShimmer{ 0%{opacity:0;transform:translateX(-120%);}22%{opacity:.50;}55%{opacity:0;transform:translateX(120%);}100%{opacity:0;transform:translateX(120%);} }
+@keyframes orangeShimmer{ 0%{opacity:0;transform:translateX(-120%);}22%{opacity:.50;}55%{opacity:0;transform:translateX(120%);}100%{opacity:0;transform:translateX(120%);} }
+@keyframes redShimmer{ 0%{opacity:0;transform:translateX(-120%);}22%{opacity:.55;}55%{opacity:0;transform:translateX(120%);}100%{opacity:0;transform:translateX(120%);} }
+
+/* ---------- Animations (badges) ---------- */
+@keyframes greenBadgeBlink{ 0%,100%{ filter:brightness(1.00) saturate(1.05);} 50%{ filter:brightness(1.10) saturate(1.15);} }
+@keyframes greenBadgeGlow{ 0%,100%{opacity:.35;transform:scale(.92);} 50%{opacity:.85;transform:scale(1.03);} }
+@keyframes greenBadgeShimmer{ 0%{opacity:0;transform:translateX(-120%);}20%{opacity:.55;}55%{opacity:0;transform:translateX(120%);}100%{opacity:0;transform:translateX(120%);} }
+
+@keyframes yellowBadgeBlink{ 0%{filter:brightness(1.00) saturate(1.05);} 100%{filter:brightness(1.18) saturate(1.18);} }
+@keyframes yellowBadgeGlow{ 0%,100%{opacity:.35;transform:scale(.92);} 50%{opacity:.85;transform:scale(1.03);} }
+@keyframes yellowBadgeShimmer{ 0%{opacity:0;transform:translateX(-120%);}20%{opacity:.55;}55%{opacity:0;transform:translateX(120%);}100%{opacity:0;transform:translateX(120%);} }
+
+@keyframes orangeBadgeBlink{ 0%{filter:brightness(1.00) saturate(1.05);} 100%{filter:brightness(1.18) saturate(1.20);} }
+@keyframes orangeBadgeGlow{ 0%,100%{opacity:.35;transform:scale(.92);} 50%{opacity:.85;transform:scale(1.03);} }
+@keyframes orangeBadgeShimmer{ 0%{opacity:0;transform:translateX(-120%);}20%{opacity:.55;}55%{opacity:0;transform:translateX(120%);}100%{opacity:0;transform:translateX(120%);} }
+
+@keyframes redBadgeBlink{ 0%{filter:brightness(1.00) saturate(1.05);} 100%{filter:brightness(1.22) saturate(1.25);} }
+@keyframes redBadgeGlow{ 0%,100%{opacity:.35;transform:scale(.92);} 50%{opacity:.85;transform:scale(1.03);} }
+@keyframes redBadgeShimmer{ 0%{opacity:0;transform:translateX(-120%);}20%{opacity:.55;}55%{opacity:0;transform:translateX(120%);}100%{opacity:0;transform:translateX(120%);} }
+
+/* ---------- Accessibilité ---------- */
 @media (prefers-reduced-motion: reduce){
-  .event-card.event-red,
-  .event-card.event-red::after,
-  .ibadge.fx,
-  .ibadge.fx::after,
-  .ibadge.badge-ok.fx,
+  .event-card.event-ras,
+  .event-card.event-vigilance,
+  .event-card.event-orange,
+  .event-card.event-catastrophe,
+  .event-card.event-ras::after,
+  .event-card.event-vigilance::after,
+  .event-card.event-orange::after,
+  .event-card.event-catastrophe::after,
+  .ibadge.badge-green.fx,
   .ibadge.badge-yellow.fx,
   .ibadge.badge-orange.fx,
-  .ibadge.badge-red.fx{
+  .ibadge.badge-red.fx,
+  .ibadge.badge-green.fx::before,
+  .ibadge.badge-yellow.fx::before,
+  .ibadge.badge-orange.fx::before,
+  .ibadge.badge-red.fx::before,
+  .ibadge.badge-green.fx::after,
+  .ibadge.badge-yellow.fx::after,
+  .ibadge.badge-orange.fx::after,
+  .ibadge.badge-red.fx::after{
     animation: none !important;
   }
 }
+
 
 
 
