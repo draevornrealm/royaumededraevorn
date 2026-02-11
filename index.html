@@ -365,33 +365,30 @@
       </div>
     </div>
 
-    <!-- ✅ ICI : la zone ÉVÈNEMENTS (tout en haut de la page) -->
-    <!-- ✅ MODIF : ajout de la classe "ras" -->
-    <section class="event-board ras" id="eventBoard" data-enabled="true">
-      <div class="event-board-head">
-        <div class="event-board-title">
-          <span class="event-ico">🟢</span>
-          <span>Évènements</span>
-          <span class="event-board-pill">Live</span>
-        </div>
+<section class="event-board vigilance">
 
-        <label class="event-toggle" title="Activer / Désactiver les évènements">
-          <input type="checkbox" id="eventToggle" checked>
-          <span class="event-toggle-ui"></span>
-          <span class="event-toggle-text">Actif</span>
-        </label>
+  <article class="event-card event-vigilance">
+    <div class="event-left">
+      <div class="event-badge">
+        <span class="ibadge">🟡 Vigilance</span>
       </div>
 
-      <!-- ✅ MODIF : contenu RAS (pas de data-event / data-target / data-timer) -->
-      <div class="event-board-body" id="eventList">
-        <article class="event-card event-ras">
-          <div class="event-left">
-            <div class="event-badge">✅ R.A.S</div>
-            <div class="event-title">Aucun évènement de danger</div>
-            <div class="event-desc">
-              Situation stable. Aucun signal de menace détecté.
-            </div>
-          </div>
+      <div class="event-title">Activité anormale détectée</div>
+      <div class="event-desc">
+        Des signes inhabituels ont été relevés. La situation est sous surveillance.
+      </div>
+    </div>
+
+    <div class="event-right">
+      <div class="event-timer">
+        <div class="event-timer-label">Statut</div>
+        <div class="event-timer-value">SURVEILLANCE</div>
+        <div class="event-timer-sub">— vigilance active</div>
+      </div>
+    </div>
+  </article>
+
+</section>
 
           <div class="event-right">
             <div class="event-timer">
@@ -767,5 +764,6 @@
   </script>
 </body>
 </html>
+
 
 
