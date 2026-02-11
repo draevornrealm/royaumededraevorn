@@ -1009,3 +1009,51 @@ body[data-faction="neutral"]{
     animation: none !important;
   }
 }
+/* ======================================================
+   FIX INFOBOX BADGES (Bryworn) : plus de tache blanche / glow bizarre
+   À coller tout en bas du CSS
+   ====================================================== */
+
+/* 1) On garde les effets DANS l'entête de l'infobox (zone badges incluse) */
+.infobox .ibox-head{
+  position: relative;
+  overflow: hidden;        /* clip propre dans la carte, pas sur toute la page */
+}
+
+/* 2) IMPORTANT : on ne clippe pas la ligne de badges (sinon "coupures" bizarres) */
+.infobox .ibox-badges{
+  overflow: visible;
+  padding: 10px 0 0;       /* un peu d’air pour les halos */
+}
+
+/* 3) On réduit les halos dans l'infobox (moins “agressifs”) */
+.infobox .ibox-badges .ibadge.gold.aura::before,
+.infobox .ibox-badges .ibadge.silver.aura-blue::before,
+.infobox .ibox-badges .ibadge.music.aura-violet::before,
+.infobox .ibox-badges .ibadge.dark.aura-dark::before,
+.infobox .ibox-badges .ibadge.deity-dragon::before,
+.infobox .ibox-badges .ibadge.menace::before{
+  inset: -6px !important;     /* au lieu de -10/-12 */
+  filter: blur(8px) !important;
+  opacity: .60 !important;
+}
+
+/* 4) Le “blanc” vient souvent de mix-blend-mode: screen -> on le coupe dans l'infobox */
+.infobox .ibox-badges .ibadge.gold.aura::after,
+.infobox .ibox-badges .ibadge.menace::after,
+.infobox .ibox-badges .ibadge.deity-dragon::after,
+.infobox .ibox-badges .ibadge.dark.aura-dark::after{
+  mix-blend-mode: normal !important;  /* STOP l’effet blanc */
+  opacity: 0.35 !important;           /* shimmer plus soft */
+}
+
+/* (Option) si tu veux carrément enlever le shimmer dans l'infobox uniquement */
+/*
+.infobox .ibox-badges .ibadge.gold.aura::after,
+.infobox .ibox-badges .ibadge.menace::after,
+.infobox .ibox-badges .ibadge.deity-dragon::after,
+.infobox .ibox-badges .ibadge.dark.aura-dark::after{
+  display: none !important;
+}
+*/
+
