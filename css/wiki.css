@@ -877,3 +877,72 @@ body[data-faction="neutral"]{
     animation: none !important;
   }
 }
+/* ======================================================
+   FIX INFOBOX BADGES (Bryworn & tous persos)
+   - supprime la "tache blanche"
+   - empêche les halos de déborder dans la page
+   - garde un rendu propre et stable
+   À mettre TOUT EN BAS de wiki.css
+   ====================================================== */
+
+/* Le head devient un "contenant" propre pour les effets */
+.infobox .ibox-head{
+  position: relative;
+  isolation: isolate; /* empêche les blend/filters de salir ailleurs */
+}
+
+/* La rangée badges : on clippe tout ce qui dépasse */
+.infobox .ibox-badges{
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;        /* <- stop fuite dans la page */
+  border-radius: 14px;
+  padding: 6px;            /* laisse respirer, sans dépasser */
+  background: rgba(0,0,0,0.08); /* option: stabilise le rendu */
+}
+
+/* Base : badge stable */
+.infobox .ibox-badges .ibadge{
+  position: relative;
+  isolation: isolate;
+  transform: translateZ(0); /* stabilise le blur sur certains GPU */
+}
+
+/* IMPORTANT : on neutralise le "screen" qui cause le blanc */
+.infobox .ibox-badges .ibadge::after{
+  mix-blend-mode: normal !important; /* <- FIX principal */
+}
+
+/* AURA: on fait un halo "interne" (pas de débordement) */
+.infobox .ibox-badges .ibadge.gold.aura::before,
+.infobox .ibox-badges .ibadge.silver.aura-blue::before,
+.infobox .ibox-badges .ibadge.music.aura-violet::before,
+.infobox .ibox-badges .ibadge.dark.aura-dark::before,
+.infobox .ibox-badges .ibadge.menace::before{
+  inset: 0 !important;         /* <- plus de -10/-12 */
+  transform: scale(1.22);      /* halo doux mais "dans" le cadre */
+  filter: blur(9px) !important;
+  opacity: 0.55 !important;
+  border-radius: 999px;
+}
+
+/* Shimmer: pareil, on empêche de dépasser */
+.infobox .ibox-badges .ibadge.gold.aura::after,
+.infobox .ibox-badges .ibadge.dark.aura-dark::after,
+.infobox .ibox-badges .ibadge.menace::after{
+  inset: 0 !important;
+  opacity: 0.0;                /* base */
+}
+
+/* (Option recommandé) si tu veux garder le shimmer sans tache :
+   on baisse l’intensité */
+.infobox .ibox-badges .ibadge.gold.aura::after{
+  opacity: 0.35;
+}
+.infobox .ibox-badges .ibadge.dark.aura-dark::after{
+  opacity: 0.30;
+}
+.infobox .ibox-badges .ibadge.menace::after{
+  opacity: 0.35;
+}
+
