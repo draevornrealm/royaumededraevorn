@@ -1166,6 +1166,24 @@ body[data-faction="neutral"]{
   margin: 0;
   opacity:.9;
 }
+/* ✅ Mode RAS (vert) */
+.event-board.ras::before{
+  background: radial-gradient(circle at 25% 15%, rgba(70,220,140,.22), rgba(0,0,0,0) 55%);
+}
+
+.event-board.ras .event-toggle input:checked + .event-toggle-ui::after{
+  background: rgba(70,220,140,.40);
+}
+
+.event-ras{
+  border-color: rgba(70,220,140,.22);
+  box-shadow: inset 0 0 0 1px rgba(70,220,140,.10);
+}
+
+.event-ras .event-badge{
+  border-color: rgba(70,220,140,.45);
+  background: rgba(70,220,140,.12);
+}
 
 
 
