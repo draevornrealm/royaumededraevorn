@@ -1274,5 +1274,78 @@ body[data-faction="neutral"]{
   color: #ffcc00;
   border: 1px solid rgba(255, 200, 0, 0.5);
 }
+/* ============================= */
+/* 🟡 EVENT CARD - ALERTE JAUNE  */
+/* ============================= */
+
+.event-card.event-alert-yellow {
+  position: relative;
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 200, 0, 0.4);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 200, 0, 0.08),
+    rgba(0, 0, 0, 0)
+  );
+
+  animation: pulseYellow 1.6s ease-in-out infinite;
+}
+
+/* Glow pulsé plus rapide que RAS */
+@keyframes pulseYellow {
+  0% {
+    box-shadow: 0 0 0px rgba(255, 200, 0, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 200, 0, 0.55);
+  }
+  100% {
+    box-shadow: 0 0 0px rgba(255, 200, 0, 0.25);
+  }
+}
+
+/* ============================= */
+/* 🌟 Bande lumineuse animée     */
+/* ============================= */
+
+.event-card.event-alert-yellow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+
+  transform: skewX(-20deg);
+  animation: shineYellow 2s linear infinite; /* plus rapide que RAS */
+}
+
+@keyframes shineYellow {
+  0% {
+    left: -120%;
+  }
+  100% {
+    left: 120%;
+  }
+}
+
+/* ============================= */
+/* Badge jaune cohérent          */
+/* ============================= */
+
+.badge-yellow {
+  background: rgba(255, 200, 0, 0.15);
+  color: #ffcc00;
+  border: 1px solid rgba(255, 200, 0, 0.5);
+}
+
 
 
