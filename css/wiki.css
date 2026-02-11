@@ -1246,4 +1246,33 @@ body[data-faction="neutral"]{
     rgba(255, 20, 20, 0.34),
     rgba(0,0,0,0) 55%) !important;
 }
+/* ============================= */
+/* 🟡 ALERTE JAUNE               */
+/* ============================= */
+
+.event-card.event-alert-yellow {
+  border: 1px solid rgba(255, 200, 0, 0.4);
+  background: linear-gradient(90deg, rgba(255, 200, 0, 0.06), rgba(0,0,0,0));
+  animation: pulseYellow 2.5s infinite ease-in-out;
+}
+
+@keyframes pulseYellow {
+  0% {
+    box-shadow: 0 0 0px rgba(255, 200, 0, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 200, 0, 0.45);
+  }
+  100% {
+    box-shadow: 0 0 0px rgba(255, 200, 0, 0.2);
+  }
+}
+
+/* Badge jaune */
+.badge-yellow {
+  background: rgba(255, 200, 0, 0.15);
+  color: #ffcc00;
+  border: 1px solid rgba(255, 200, 0, 0.5);
+}
+
 
