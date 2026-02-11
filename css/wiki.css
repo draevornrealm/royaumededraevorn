@@ -923,3 +923,18 @@ body[data-faction="neutral"]{
   position: relative;
   overflow: hidden;
 }
+/* ======================================================
+   HERO FIX — évite le "doré noirci" sur les badges du haut
+   ====================================================== */
+.wiki-hero p{
+  margin: 6px 0 0;
+  opacity: 1;
+  color: rgba(233,238,252,.85);
+}
+
+.wiki-hero .badge{ opacity: 1; }
+
+.wiki-hero{
+  overflow: visible; /* évite de couper glow/ombre */
+}
+
