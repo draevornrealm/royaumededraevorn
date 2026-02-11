@@ -1191,6 +1191,50 @@ body[data-faction="neutral"]{
   background: rgba(70,220,140,.12);
   color: #bfffe0;
 }
+/* =========================
+   EVENT VIGILANCE (JAUNE)
+   ========================= */
+
+/* Board en vigilance */
+.event-board.vigilance::before{
+  background: radial-gradient(
+    circle at 25% 15%,
+    rgba(255,210,90,.26),
+    rgba(0,0,0,0) 55%
+  );
+}
+
+/* Carte vigilance */
+.event-card.event-vigilance{
+  border-color: rgba(255,210,90,.32);
+  box-shadow: inset 0 0 0 1px rgba(255,210,90,.14);
+  background: rgba(255,210,90,.08);
+}
+
+/* Badge vigilance */
+.event-card.event-vigilance .event-badge{
+  border-color: rgba(255,210,90,.65);
+  background: rgba(255,210,90,.18);
+  color: #fff3c4;
+  font-weight: 900;
+}
+
+/* Lueur douce (pas de clignotement agressif) */
+.event-card.event-vigilance::before{
+  content:"";
+  position:absolute;
+  inset:-16px;
+  border-radius: 18px;
+  background: radial-gradient(
+    circle at 30% 25%,
+    rgba(255,210,90,.30),
+    rgba(0,0,0,0) 65%
+  );
+  filter: blur(16px);
+  opacity:.55;
+  pointer-events:none;
+}
+
 
 
 
