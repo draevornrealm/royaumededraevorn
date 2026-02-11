@@ -365,44 +365,75 @@
       </div>
     </div>
 
-    <!-- ✅ ICI : la zone ÉVÈNEMENTS (tout en haut de la page) -->
-    <section class="event-board" id="eventBoard" data-enabled="true">
-      <div class="event-board-head">
-        <div class="event-board-title">
-          <span class="event-ico">⚠️</span>
-          <span>Évènements</span>
-          <span class="event-board-pill">Live</span>
+<!-- ✅ ICI : la zone ÉVÈNEMENTS (tout en haut de la page) -->
+<section class="event-board" id="eventBoard" data-enabled="true">
+  <div class="event-board-head">
+    <div class="event-board-title">
+      <span class="event-ico">⚠️</span>
+      <span>Évènements</span>
+      <span class="event-board-pill">Live</span>
+    </div>
+
+    <label class="event-toggle" title="Activer / Désactiver les évènements">
+      <input type="checkbox" id="eventToggle" checked>
+      <span class="event-toggle-ui"></span>
+      <span class="event-toggle-text">Actif</span>
+    </label>
+  </div>
+
+  <div class="event-board-body" id="eventList">
+
+    <!-- Catastrophe -->
+    <article class="event-card event-catastrophe"
+             data-event
+             data-title="Burning Godzilla — Arrivée"
+             data-target="2026-02-12T21:00:00+01:00"
+             data-link="personnage-godzilla.html">
+      <div class="event-left">
+        <div class="event-badge"><span>☢ Catastrophe</span></div>
+        <div class="event-title">Burning Godzilla — Arrivée</div>
+        <div class="event-desc">Tempêtes, marées extrêmes… une présence colossale approche.</div>
+        <div class="event-actions">
+          <a class="event-link" href="personnage-godzilla.html">Voir la fiche →</a>
         </div>
-
-        <label class="event-toggle" title="Activer / Désactiver les évènements">
-          <input type="checkbox" id="eventToggle" checked>
-          <span class="event-toggle-ui"></span>
-          <span class="event-toggle-text">Actif</span>
-        </label>
       </div>
 
-<div class="event-board-body" id="eventList">
-
-  <!-- Catastrophe -->
-  <article class="event-card event-catastrophe"
-           data-event
-           data-title="Burning Godzilla — Arrivée"
-           data-target="2026-02-12T21:00:00+01:00"
-           data-link="personnage-godzilla.html">
-    <div class="event-left">
-      <div class="event-badge"><span>☢ Catastrophe</span></div>
-      <div class="event-title">Burning Godzilla — Arrivée</div>
-      <div class="event-desc">Tempêtes, marées extrêmes… une présence colossale approche.</div>
-      <div class="event-actions"><a class="event-link" href="personnage-godzilla.html">Voir la fiche →</a></div>
-    </div>
-    <div class="event-right">
-      <div class="event-timer">
-        <div class="event-timer-label">Arrive dans</div>
-        <div class="event-timer-value" data-timer>--:--:--</div>
-        <div class="event-timer-sub" data-eta>—</div>
+      <div class="event-right">
+        <div class="event-timer">
+          <div class="event-timer-label">Arrive dans</div>
+          <div class="event-timer-value" data-timer>--:--:--</div>
+          <div class="event-timer-sub" data-eta>—</div>
+        </div>
       </div>
-    </div>
-  </article>
+    </article>
+
+    <!-- Info / RP -->
+    <article class="event-card event-ok"
+             data-event
+             data-title="Conseil des Flottes — Briefing"
+             data-target="2026-02-11T23:30:00+01:00"
+             data-link="lore.html">
+      <div class="event-left">
+        <div class="event-badge"><span>📌 Info RP</span></div>
+        <div class="event-title">Conseil des Flottes — Briefing</div>
+        <div class="event-desc">Réunion stratégique à Draevorn. Présence des capitaines recommandée.</div>
+        <div class="event-actions">
+          <a class="event-link" href="lore.html">Lire →</a>
+        </div>
+      </div>
+
+      <div class="event-right">
+        <div class="event-timer">
+          <div class="event-timer-label">Commence dans</div>
+          <div class="event-timer-value" data-timer>--:--:--</div>
+          <div class="event-timer-sub" data-eta>—</div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
 
   <!-- Info / RP -->
   <article class="event-card event-ok"
@@ -801,5 +832,6 @@
   </script>
 </body>
 </html>
+
 
 
