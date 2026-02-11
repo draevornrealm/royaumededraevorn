@@ -937,4 +937,10 @@ body[data-faction="neutral"]{
 .wiki-hero{
   overflow: visible; /* évite de couper glow/ombre */
 }
+/* ======================================================
+   FIX GLOW BADGE EMPEREUR (ne pas couper le halo)
+   ====================================================== */
+.infobox .ibox-head{
+  overflow: visible; /* override du patch précédent */
+}
 
