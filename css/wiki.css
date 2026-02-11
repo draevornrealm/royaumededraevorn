@@ -943,4 +943,39 @@ body[data-faction="neutral"]{
 .infobox .ibox-head{
   overflow: visible; /* override du patch précédent */
 }
+/* ======================================================
+   FIX "BANDE NOIRE" SUR BADGES AURA (Empereur)
+   Cause: overflow:hidden sur .ibadge coupe le halo ::before
+   ====================================================== */
+
+/* 1) Les badges AURA doivent laisser sortir le halo */
+.ibadge.gold.aura,
+.ibadge.silver.aura-blue,
+.ibadge.music.aura-violet,
+.ibadge.dark.aura-dark,
+.ibadge.menace{
+  overflow: visible !important;
+}
+
+/* 2) Mais on garde le shimmer DANS la pilule (pas de débordement) */
+.ibadge.gold.aura::after,
+.ibadge.dark.aura-dark::after,
+.ibadge.menace::after{
+  clip-path: inset(0 round 999px);
+}
+
+/* 3) Les badges FX (event) restent clampés dans la pilule */
+.ibadge.badge-green.fx,
+.ibadge.badge-yellow.fx,
+.ibadge.badge-orange.fx,
+.ibadge.badge-red.fx{
+  overflow: hidden !important;
+}
+
+/* 4) Sécurité: ne coupe jamais les halos dans la hero */
+.wiki-hero,
+.wiki-hero p{
+  overflow: visible !important;
+}
+
 
