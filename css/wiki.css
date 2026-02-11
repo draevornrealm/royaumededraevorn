@@ -1246,179 +1246,344 @@ body[data-faction="neutral"]{
     rgba(255, 20, 20, 0.34),
     rgba(0,0,0,0) 55%) !important;
 }
-/* ============================= */
-/* 🟡 ALERTE JAUNE               */
-/* ============================= */
+/* =========================================================
+   PACK STATUTS — BOARD + EVENT CARDS + BADGES
+   Colle ce bloc TOUT EN BAS de ton CSS
+   ========================================================= */
 
-.event-card.event-alert-yellow {
-  border: 1px solid rgba(255, 200, 0, 0.4);
-  background: linear-gradient(90deg, rgba(255, 200, 0, 0.06), rgba(0,0,0,0));
-  animation: pulseYellow 2.5s infinite ease-in-out;
-}
-
-@keyframes pulseYellow {
-  0% {
-    box-shadow: 0 0 0px rgba(255, 200, 0, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(255, 200, 0, 0.45);
-  }
-  100% {
-    box-shadow: 0 0 0px rgba(255, 200, 0, 0.2);
-  }
-}
-
-/* Badge jaune */
-.badge-yellow {
-  background: rgba(255, 200, 0, 0.15);
-  color: #ffcc00;
-  border: 1px solid rgba(255, 200, 0, 0.5);
-}
-/* ============================= */
-/* 🟡 EVENT CARD - ALERTE JAUNE  */
-/* ============================= */
-
-.event-card.event-alert-yellow {
+/* -------------------------
+   BOARD: base de sécurité
+   ------------------------- */
+.event-board.ras,
+.event-board.alert-yellow,
+.event-board.alert-orange,
+.event-board.alert-red,
+.event-board.alert-black {
   position: relative;
   overflow: hidden;
-
-  border: 1px solid rgba(255, 200, 0, 0.4);
-  background: linear-gradient(
-    90deg,
-    rgba(255, 200, 0, 0.08),
-    rgba(0, 0, 0, 0)
-  );
-
-  animation: pulseYellow 1.6s ease-in-out infinite;
 }
 
-/* Glow pulsé plus rapide que RAS */
-@keyframes pulseYellow {
-  0% {
-    box-shadow: 0 0 0px rgba(255, 200, 0, 0.25);
-  }
-  50% {
-    box-shadow: 0 0 25px rgba(255, 200, 0, 0.55);
-  }
-  100% {
-    box-shadow: 0 0 0px rgba(255, 200, 0, 0.25);
-  }
+/* Pour éviter des overlays hérités */
+.event-board.ras::before,
+.event-board.ras::after,
+.event-board.alert-yellow::before,
+.event-board.alert-yellow::after,
+.event-board.alert-orange::before,
+.event-board.alert-orange::after,
+.event-board.alert-red::before,
+.event-board.alert-red::after,
+.event-board.alert-black::before,
+.event-board.alert-black::after {
+  box-shadow: none !important;
+  filter: none !important;
 }
 
-/* ============================= */
-/* 🌟 Bande lumineuse animée     */
-/* ============================= */
+/* -------------------------
+   BOARD: RAS (🟢)
+   ------------------------- */
+.event-board.ras {
+  border: 1px solid rgba(0, 255, 140, 0.18) !important;
+  background: linear-gradient(135deg, rgba(0, 255, 140, 0.06), rgba(8, 12, 22, 0.92)) !important;
+}
+.event-board.ras .event-board-head {
+  background: linear-gradient(90deg, rgba(0, 255, 140, 0.10), rgba(8, 12, 22, 0.92)) !important;
+  border-bottom: 1px solid rgba(0, 255, 140, 0.12) !important;
+}
 
-.event-card.event-alert-yellow::before {
+/* -------------------------
+   BOARD: JAUNE (🟡)
+   ------------------------- */
+.event-board.alert-yellow {
+  border: 1px solid rgba(255, 200, 0, 0.25) !important;
+  background: linear-gradient(135deg, rgba(255, 200, 0, 0.09), rgba(8, 12, 22, 0.92)) !important;
+}
+.event-board.alert-yellow .event-board-head {
+  background: linear-gradient(90deg, rgba(255, 200, 0, 0.14), rgba(8, 12, 22, 0.92)) !important;
+  border-bottom: 1px solid rgba(255, 200, 0, 0.16) !important;
+}
+
+/* -------------------------
+   BOARD: ORANGE (🟠)
+   ------------------------- */
+.event-board.alert-orange {
+  border: 1px solid rgba(255, 140, 0, 0.28) !important;
+  background: linear-gradient(135deg, rgba(255, 140, 0, 0.10), rgba(8, 12, 22, 0.92)) !important;
+}
+.event-board.alert-orange .event-board-head {
+  background: linear-gradient(90deg, rgba(255, 140, 0, 0.16), rgba(8, 12, 22, 0.92)) !important;
+  border-bottom: 1px solid rgba(255, 140, 0, 0.18) !important;
+}
+
+/* -------------------------
+   BOARD: ROUGE (🔴)
+   ------------------------- */
+.event-board.alert-red {
+  border: 1px solid rgba(255, 50, 50, 0.30) !important;
+  background: linear-gradient(135deg, rgba(255, 50, 50, 0.12), rgba(8, 12, 22, 0.92)) !important;
+}
+.event-board.alert-red .event-board-head {
+  background: linear-gradient(90deg, rgba(255, 50, 50, 0.18), rgba(8, 12, 22, 0.92)) !important;
+  border-bottom: 1px solid rgba(255, 50, 50, 0.20) !important;
+}
+
+/* -------------------------
+   BOARD: NOIR (⚫)
+   ------------------------- */
+.event-board.alert-black {
+  border: 1px solid rgba(220, 235, 255, 0.12) !important;
+  background: linear-gradient(135deg, rgba(10, 12, 18, 0.98), rgba(0, 0, 0, 0.92)) !important;
+}
+.event-board.alert-black .event-board-head {
+  background: linear-gradient(90deg, rgba(220, 235, 255, 0.06), rgba(0, 0, 0, 0.92)) !important;
+  border-bottom: 1px solid rgba(220, 235, 255, 0.10) !important;
+}
+
+
+/* =========================================================
+   EVENT CARDS — Base: bande lumineuse (comme ton RAS)
+   ========================================================= */
+
+.event-card.event-ras,
+.event-card.event-alert-yellow,
+.event-card.event-alert-orange,
+.event-card.event-alert-red,
+.event-card.event-alert-black {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Bande lumineuse générique (blanche) */
+.event-card.event-ras::before,
+.event-card.event-alert-yellow::before,
+.event-card.event-alert-orange::before,
+.event-card.event-alert-red::before,
+.event-card.event-alert-black::before {
   content: "";
   position: absolute;
   top: 0;
   left: -120%;
   width: 60%;
   height: 100%;
-
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255, 255, 255, 0.35),
-    transparent
-  );
-
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
   transform: skewX(-20deg);
-  animation: shineYellow 2s linear infinite; /* plus rapide que RAS */
 }
 
-@keyframes shineYellow {
-  0% {
-    left: -120%;
-  }
-  100% {
-    left: 120%;
-  }
+/* =========================================================
+   🟢 RAS — glow bande carte (ton style préféré: full band)
+   ========================================================= */
+
+.event-card.event-ras {
+  border: 1px solid rgba(0, 255, 140, 0.30);
+  background: linear-gradient(90deg, rgba(0, 255, 140, 0.06), rgba(0,0,0,0));
+  animation: pulseGreen 2.5s ease-in-out infinite;
+}
+@keyframes pulseGreen {
+  0% { box-shadow: 0 0 0px rgba(0, 255, 140, 0.18); }
+  50% { box-shadow: 0 0 18px rgba(0, 255, 140, 0.38); }
+  100% { box-shadow: 0 0 0px rgba(0, 255, 140, 0.18); }
+}
+.event-card.event-ras::before {
+  animation: shineGreen 2.6s linear infinite;
+}
+@keyframes shineGreen {
+  0% { left: -120%; }
+  100% { left: 120%; }
 }
 
-/* ============================= */
-/* Badge jaune cohérent          */
-/* ============================= */
-
-.badge-yellow {
-  background: rgba(255, 200, 0, 0.15);
-  color: #ffcc00;
-  border: 1px solid rgba(255, 200, 0, 0.5);
+/* Badge RAS */
+.badge-green {
+  background: rgba(0, 255, 140, 0.14);
+  color: #00ff8c;
+  border: 1px solid rgba(0, 255, 140, 0.45);
 }
-/* ============================= */
-/* 🟡 EVENT CARD - ALERTE JAUNE  */
-/* ============================= */
+
+
+/* =========================================================
+   🟡 JAUNE — (fond visible + clignotement badge)
+   ========================================================= */
 
 .event-card.event-alert-yellow {
-  position: relative;
-  overflow: hidden;
-
-  border: 1px solid rgba(255, 200, 0, 0.6);
-
-  /* Fond jaune visible */
-  background: linear-gradient(
-    135deg,
-    rgba(255, 200, 0, 0.18),
-    rgba(255, 200, 0, 0.05)
-  );
-
+  border: 1px solid rgba(255, 200, 0, 0.60);
+  background: linear-gradient(135deg, rgba(255, 200, 0, 0.18), rgba(255, 200, 0, 0.05));
   box-shadow: 0 0 25px rgba(255, 200, 0, 0.35);
+  animation: pulseYellow 1.6s ease-in-out infinite;
 }
-/* ============================= */
-/* 🟡 BADGE JAUNE CLIGNOTANT     */
-/* ============================= */
+@keyframes pulseYellow {
+  0% { box-shadow: 0 0 0px rgba(255, 200, 0, 0.25); }
+  50% { box-shadow: 0 0 25px rgba(255, 200, 0, 0.55); }
+  100% { box-shadow: 0 0 0px rgba(255, 200, 0, 0.25); }
+}
+.event-card.event-alert-yellow::before {
+  animation: shineYellow 2s linear infinite;
+}
+@keyframes shineYellow {
+  0% { left: -120%; }
+  100% { left: 120%; }
+}
 
 .badge-yellow {
   background: #ffcc00;
   color: #1a1a1a;
   font-weight: 600;
   border: 1px solid #ffdb4d;
-
   animation: blinkYellow 1s infinite;
 }
-
 @keyframes blinkYellow {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px rgba(255, 200, 0, 0.6); }
+  50% { opacity: 0.4; box-shadow: 0 0 2px rgba(255, 200, 0, 0.2); }
+}
+
+
+/* =========================================================
+   🟠 ORANGE — même chose que JAUNE, juste en orange
+   ========================================================= */
+
+.event-card.event-alert-orange {
+  border: 1px solid rgba(255, 140, 0, 0.60);
+  background: linear-gradient(135deg, rgba(255, 140, 0, 0.18), rgba(255, 140, 0, 0.05));
+  box-shadow: 0 0 25px rgba(255, 140, 0, 0.35);
+  animation: pulseOrange 1.6s ease-in-out infinite;
+}
+@keyframes pulseOrange {
+  0% { box-shadow: 0 0 0px rgba(255, 140, 0, 0.25); }
+  50% { box-shadow: 0 0 25px rgba(255, 140, 0, 0.55); }
+  100% { box-shadow: 0 0 0px rgba(255, 140, 0, 0.25); }
+}
+.event-card.event-alert-orange::before {
+  animation: shineOrange 2s linear infinite;
+}
+@keyframes shineOrange {
+  0% { left: -120%; }
+  100% { left: 120%; }
+}
+
+.badge-orange {
+  background: #ff8c00;
+  color: #1a1a1a;
+  font-weight: 600;
+  border: 1px solid #ffae42;
+  animation: blinkOrange 1s infinite;
+}
+@keyframes blinkOrange {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px rgba(255, 140, 0, 0.6); }
+  50% { opacity: 0.4; box-shadow: 0 0 2px rgba(255, 140, 0, 0.2); }
+}
+
+
+/* =========================================================
+   🔴 ROUGE — 3 effets en même temps:
+   - texte ROUGE clignote
+   - vibration légère
+   - bande lumineuse plus rapide
+   ========================================================= */
+
+.event-card.event-alert-red {
+  border: 1px solid rgba(255, 50, 50, 0.80);
+  background: linear-gradient(135deg, rgba(255, 50, 50, 0.28), rgba(40, 0, 0, 0.90));
+  animation: pulseRed 0.9s ease-in-out infinite, shakeRed 0.6s ease-in-out infinite;
+}
+@keyframes pulseRed {
+  0% { box-shadow: 0 0 0px rgba(255, 50, 50, 0.50); }
+  50% { box-shadow: 0 0 40px rgba(255, 50, 50, 0.95); }
+  100% { box-shadow: 0 0 0px rgba(255, 50, 50, 0.50); }
+}
+@keyframes shakeRed {
+  0%, 100% { transform: translateX(0px); }
+  25% { transform: translateX(-1px); }
+  75% { transform: translateX(1px); }
+}
+.event-card.event-alert-red::before {
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.60), transparent);
+  animation: shineRed 0.8s linear infinite;
+}
+@keyframes shineRed {
+  0% { left: -120%; }
+  100% { left: 120%; }
+}
+
+.badge-red {
+  background: #ff2a2a;
+  color: #ffffff;
+  font-weight: 700;
+  border: 1px solid #ff6666;
+  animation: blinkRed 0.8s infinite;
+}
+@keyframes blinkRed {
+  0%, 100% { opacity: 1; box-shadow: 0 0 15px rgba(255, 50, 50, 1); }
+  50% { opacity: 0.2; box-shadow: 0 0 4px rgba(255, 50, 50, 0.4); }
+}
+
+/* Texte "ROUGE" à droite (si .event-timer-value contient ROUGE) */
+.event-alert-red .event-timer-value {
+  color: #ff4d4d;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  animation: blinkTextRed 0.8s infinite;
+}
+@keyframes blinkTextRed {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+
+/* =========================================================
+   ⚫ NOIR — niveau ultime (rupture systémique)
+   ========================================================= */
+
+.event-card.event-alert-black {
+  border: 1px solid rgba(220, 235, 255, 0.14);
+  background: linear-gradient(135deg, rgba(10, 12, 18, 0.98), rgba(0, 0, 0, 0.92));
+  animation: pulseBlack 1.4s ease-in-out infinite, shakeBlack 0.9s ease-in-out infinite;
+}
+@keyframes pulseBlack {
+  0% { box-shadow: 0 0 0 rgba(0, 0, 0, 0.0); }
+  50% { box-shadow: 0 0 45px rgba(120, 160, 255, 0.20); }
+  100% { box-shadow: 0 0 0 rgba(0, 0, 0, 0.0); }
+}
+@keyframes shakeBlack {
+  0%, 100% { transform: translateX(0px); }
+  25% { transform: translateX(-0.6px); }
+  75% { transform: translateX(0.6px); }
+}
+.event-card.event-alert-black::before {
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+  animation: shineBlack 2.2s linear infinite;
+}
+@keyframes shineBlack {
+  0% { left: -140%; opacity: 0.35; }
+  100% { left: 140%; opacity: 0.35; }
+}
+
+.badge-black {
+  background: rgba(0, 0, 0, 0.85);
+  color: #eaeaea;
+  font-weight: 800;
+  border: 2px solid rgba(200, 220, 255, 0.35);
+  animation: borderBlinkBlack 0.75s infinite;
+}
+@keyframes borderBlinkBlack {
   0%, 100% {
-    opacity: 1;
-    box-shadow: 0 0 8px rgba(255, 200, 0, 0.6);
+    border-color: rgba(200, 220, 255, 0.55);
+    box-shadow: 0 0 12px rgba(200, 220, 255, 0.18);
   }
   50% {
-    opacity: 0.4;
-    box-shadow: 0 0 2px rgba(255, 200, 0, 0.2);
+    border-color: rgba(200, 220, 255, 0.10);
+    box-shadow: 0 0 2px rgba(200, 220, 255, 0.06);
   }
 }
-/* ============================= */
-/* 🟡 BOARD - ALERTE JAUNE (FORCE) */
-/* ============================= */
 
-/* Le fond global du bloc évènements */
-.event-board.alert-yellow {
-  border: 1px solid rgba(255, 200, 0, 0.45) !important;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 200, 0, 0.16),
-    rgba(8, 12, 22, 0.92)
-  ) !important;
+/* Texte "NOIR" à droite */
+.event-alert-black .event-timer-value {
+  color: #dfe8ff;
+  font-weight: 900;
+  letter-spacing: 0.6px;
+  animation: blinkTextBlack 0.9s infinite;
+}
+@keyframes blinkTextBlack {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
 }
 
-/* La bande/entête du board (souvent responsable du “rouge”) */
-.event-board.alert-yellow .event-board-head {
-  background: linear-gradient(
-    90deg,
-    rgba(255, 200, 0, 0.18),
-    rgba(8, 12, 22, 0.92)
-  ) !important;
-  border-bottom: 1px solid rgba(255, 200, 0, 0.28) !important;
-}
-
-/* Si tu as un overlay/pseudo-element rouge */
-.event-board.alert-yellow::before,
-.event-board.alert-yellow::after {
-  background: none !important;
-  box-shadow: none !important;
-  filter: none !important;
-}
 
 
 
