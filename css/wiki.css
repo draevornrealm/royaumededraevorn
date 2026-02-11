@@ -1388,6 +1388,38 @@ body[data-faction="neutral"]{
     box-shadow: 0 0 2px rgba(255, 200, 0, 0.2);
   }
 }
+/* ============================= */
+/* 🟡 BOARD - ALERTE JAUNE (FORCE) */
+/* ============================= */
+
+/* Le fond global du bloc évènements */
+.event-board.alert-yellow {
+  border: 1px solid rgba(255, 200, 0, 0.45) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 200, 0, 0.16),
+    rgba(8, 12, 22, 0.92)
+  ) !important;
+}
+
+/* La bande/entête du board (souvent responsable du “rouge”) */
+.event-board.alert-yellow .event-board-head {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 200, 0, 0.18),
+    rgba(8, 12, 22, 0.92)
+  ) !important;
+  border-bottom: 1px solid rgba(255, 200, 0, 0.28) !important;
+}
+
+/* Si tu as un overlay/pseudo-element rouge */
+.event-board.alert-yellow::before,
+.event-board.alert-yellow::after {
+  background: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
 
 
 
