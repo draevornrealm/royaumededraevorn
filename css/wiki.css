@@ -1029,4 +1029,43 @@ body[data-faction="neutral"]{
 .ibadge.badge-red.fx{
   overflow: hidden !important;
 }
+/* ======================================================
+   FIX FINAL — AURA OK + PLUS DE BANDE (NOIRE/BLANCHE)
+   ➜ À COLLER TOUT EN BAS de wiki.css
+   (ne casse pas tes autres styles)
+   ====================================================== */
+
+/* 1) On donne de l’air autour des badges pour que l’aura respire */
+.infobox .ibox-badges{
+  padding: 14px 12px !important; /* + espace = plus de “bande” */
+  overflow: visible !important;  /* l’aura peut sortir */
+  border-radius: 16px;
+}
+
+/* 2) Les badges aura ne doivent pas clipper le halo */
+.ibadge.gold.aura,
+.ibadge.silver.aura-blue,
+.ibadge.music.aura-violet,
+.ibadge.dark.aura-dark,
+.ibadge.menace{
+  overflow: visible !important;
+}
+
+/* 3) MAIS le shimmer doit rester DANS la pilule (sinon bande blanche) */
+.ibadge.gold.aura::after,
+.ibadge.dark.aura-dark::after,
+.ibadge.menace::after{
+  clip-path: inset(0 round 999px);
+  -webkit-clip-path: inset(0 round 999px);
+  mix-blend-mode: normal !important;
+}
+
+/* 4) Les FX “event” restent clampés dans leur pilule */
+.ibadge.badge-green.fx,
+.ibadge.badge-yellow.fx,
+.ibadge.badge-orange.fx,
+.ibadge.badge-red.fx{
+  overflow: hidden !important;
+}
+
 
