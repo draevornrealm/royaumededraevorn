@@ -1030,90 +1030,82 @@ body[data-faction="neutral"]{
   overflow: hidden !important;
 }
 /* ======================================================
-   FIX FINAL — RAS FX (ibadge badge-green fx)
-   - remet l'effet sur RAS
-   - shimmer/glow restent DANS la pilule (pas de bande blanche)
-   - n'impacte pas les auras (gold aura etc.)
+   PULSE SUR LES BANDES (event-card) — pas sur les badges
    À COLLER TOUT EN BAS
    ====================================================== */
 
-/* 1) Base FX : on force le clip UNIQUEMENT pour les badges .fx */
-.ibadge.fx{
+/* Pulse doux pour les cartes RAS */
+.event-card.event-ras{
   position: relative;
-  isolation: isolate;
-  overflow: hidden !important;         /* coupe la bande blanche */
-  border-radius: 999px;
+  overflow: hidden;
+  border-color: rgba(90,255,140,.16);
+  box-shadow: inset 0 0 0 1px rgba(90,255,140,.08);
+  animation: rasCardPulse 2.2s ease-in-out infinite;
 }
 
-/* 2) Glow interne (reste dans la pilule) */
-.ibadge.fx::before{
+/* Glow large (reste dans la carte) */
+.event-card.event-ras::before{
   content:"";
   position:absolute;
-  inset:0;                             /* pas de débordement */
-  border-radius:999px;
-  z-index:0;
-  filter: blur(10px);
-  transform: scale(1.25);
-  opacity:.60;
+  inset:-24px;
   pointer-events:none;
+  background: radial-gradient(circle at 30% 20%,
+    rgba(70,220,140,.22),
+    rgba(0,0,0,0) 60%);
+  filter: blur(16px);
+  opacity:.65;
+  animation: rasGlowPulse 2.2s ease-in-out infinite;
 }
 
-/* 3) Shimmer interne (reste dans la pilule) */
-.ibadge.fx::after{
+/* Shimmer discret dans la bande (optionnel, propre) */
+.event-card.event-ras::after{
   content:"";
   position:absolute;
   inset:0;
-  border-radius:999px;
-  z-index:1;
+  pointer-events:none;
   background: linear-gradient(110deg,
     rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.22) 18%,
+    rgba(255,255,255,.12) 18%,
     rgba(255,255,255,0) 36%);
   opacity: 0;
   transform: translateX(-120%);
-  pointer-events:none;
-  mix-blend-mode: normal !important;  /* évite le blanc sale */
-  clip-path: inset(0 round 999px);
-  -webkit-clip-path: inset(0 round 999px);
+  mix-blend-mode: normal;
+  animation: rasShimmer 3.4s ease-in-out infinite;
 }
 
-/* 4) Texte AU-DESSUS des effets */
-.ibadge.fx{
-  z-index: 2;
+/* Petit renfort visuel sur la board si elle est en mode RAS */
+.event-board.ras{
+  border-color: rgba(90,255,140,.14);
 }
-.ibadge.fx > *{
-  position: relative;
-  z-index: 2;
-}
-
-/* 5) Couleur + anim RAS (vert) */
-.ibadge.badge-green.fx{
-  background: linear-gradient(135deg, rgba(90,255,140,0.22), rgba(10,80,35,0.22));
-  border-color: rgba(90,255,140,0.70);
-  color: rgba(235,255,245,0.98);
-  font-weight: 900;
-  animation: badgePulseGreen 1.6s ease-in-out infinite;
-}
-.ibadge.badge-green.fx::before{
-  background: radial-gradient(circle at 50% 50%,
-    rgba(70,220,140,0.40),
-    rgba(70,220,140,0.14) 55%,
-    rgba(0,0,0,0) 72%);
-}
-.ibadge.badge-green.fx::after{
-  animation: badgeShimmerGreen 2.8s ease-in-out infinite;
+.event-board.ras::before{
+  background: radial-gradient(circle at 25% 15%,
+    rgba(70,220,140,.18),
+    rgba(0,0,0,0) 55%);
 }
 
-/* 6) Keyframes (au cas où elles ont été supprimées) */
-@keyframes badgePulseGreen{
-  0%,100%{ filter:brightness(1.00) saturate(1.05); }
-  50%{ filter:brightness(1.10) saturate(1.15); }
+/* Animations */
+@keyframes rasCardPulse{
+  0%,100%{ filter: brightness(1.00); }
+  50%{ filter: brightness(1.08); }
 }
-@keyframes badgeShimmerGreen{
-  0%{ opacity:0; transform:translateX(-120%); }
-  20%{ opacity:.45; }
-  55%{ opacity:0; transform:translateX(120%); }
-  100%{ opacity:0; transform:translateX(120%); }
+@keyframes rasGlowPulse{
+  0%,100%{ opacity:.45; }
+  50%{ opacity:.80; }
+}
+@keyframes rasShimmer{
+  0%{ opacity:0; transform: translateX(-120%); }
+  18%{ opacity:.35; }
+  45%{ opacity:0; transform: translateX(120%); }
+  100%{ opacity:0; transform: translateX(120%); }
+}
+
+/* Accessibilité */
+@media (prefers-reduced-motion: reduce){
+  .event-card.event-ras,
+  .event-card.event-ras::before,
+  .event-card.event-ras::after{
+    animation: none !important;
+  }
 }
 
 
