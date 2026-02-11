@@ -1112,6 +1112,60 @@ body[data-faction="neutral"]{
     animation: none !important;
   }
 }
+/* =========================
+   EVENT BOARD
+   ========================= */
+
+.event-board{
+  margin: 14px 0 18px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.04);
+  box-shadow: 0 14px 40px rgba(0,0,0,.45);
+}
+
+.event-header{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight: 900;
+  letter-spacing:.2px;
+}
+
+.event-board.event-safe{
+  border-color: rgba(90,255,140,.45);
+  background: rgba(90,255,140,.08);
+}
+
+.event-board.event-danger{
+  border-color: rgba(255,80,80,.55);
+  background: rgba(255,80,80,.10);
+  animation: dangerPulse 1.8s infinite;
+}
+
+@keyframes dangerPulse{
+  0%,100%{ box-shadow: 0 0 0 rgba(255,80,80,.0); }
+  50%{ box-shadow: 0 0 28px rgba(255,80,80,.45); }
+}
+
+.event-card{
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(0,0,0,.25);
+}
+
+.event-card h4{
+  margin: 0 0 6px;
+  font-weight: 900;
+}
+
+.event-card p{
+  margin: 0;
+  opacity:.9;
+}
 
 
 
