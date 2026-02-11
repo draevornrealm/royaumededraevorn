@@ -1,15 +1,5 @@
 {
   "enabled": true,
-  "events": [
-    {
-      "id": "godzilla",
-      "type": "catastrophe",
-      "title": "Burning Godzilla détecté",
-      "description": "Une signature énergétique massive approche des côtes.",
-      "icon": "☢",
-      "level": "danger",
-      "target": "2026-03-01T20:00:00",
-      "active": true
-    }
-  ]
+  "status": "safe",
+  "events": []
 }
