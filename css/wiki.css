@@ -1801,6 +1801,31 @@ body[data-faction="neutral"]{
     animation: none !important;
   }
 }
+/* =========================
+   FIX: halos badges qui débordent
+   ========================= */
+
+/* Le badge garde son halo, mais on limite la taille */
+.ibadge.badge-green.fx::before,
+.ibadge.badge-yellow.fx::before,
+.ibadge.badge-orange.fx::before,
+.ibadge.badge-red.fx::before{
+  inset: -6px;          /* au lieu de -10px */
+  filter: blur(8px);    /* au lieu de 10px */
+}
+
+/* Shimmer ok, mais on évite d'amplifier le débordement */
+.ibadge.badge-green.fx::after,
+.ibadge.badge-yellow.fx::after,
+.ibadge.badge-orange.fx::after,
+.ibadge.badge-red.fx::after{
+  border-radius: 999px;
+}
+
+/* Si tu veux que le halo ne sorte JAMAIS de la carte */
+.event-card{ overflow: hidden; } /* (tu l’as déjà) */
+.event-badge{ overflow: hidden; border-radius: 999px; }
+/* ↑ important: ça garde le halo “dans” la pastille event-badge */
 
 
 
