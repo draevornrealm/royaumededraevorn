@@ -1801,31 +1801,64 @@ body[data-faction="neutral"]{
     animation: none !important;
   }
 }
-/* =========================
-   FIX: halos badges qui débordent
-   ========================= */
+/* ======================================================
+   FIX DEFINITIF : FX badges qui restent DANS la pilule
+   (le glow ne déborde plus du badge)
+   ====================================================== */
 
-/* Le badge garde son halo, mais on limite la taille */
+/* 1) Le badge clippe tout ce qui dépasse */
+.ibadge.badge-green.fx,
+.ibadge.badge-yellow.fx,
+.ibadge.badge-orange.fx,
+.ibadge.badge-red.fx{
+  overflow: hidden;          /* <- clé */
+  position: relative;
+}
+
+/* 2) Glow INTERNE (plus de inset négatif) */
 .ibadge.badge-green.fx::before,
 .ibadge.badge-yellow.fx::before,
 .ibadge.badge-orange.fx::before,
 .ibadge.badge-red.fx::before{
-  inset: -6px;          /* au lieu de -10px */
-  filter: blur(8px);    /* au lieu de 10px */
+  inset: 0 !important;       /* <- plus de -10px */
+  z-index: 0 !important;     /* <- plus de -1 */
+  filter: blur(10px);        /* OK: sera clip par overflow */
+  transform: scale(1.25);    /* “halo” doux mais interne */
+  opacity: .65;
 }
 
-/* Shimmer ok, mais on évite d'amplifier le débordement */
+/* 3) Texte/emoji AU-DESSUS des effets */
+.ibadge.badge-green.fx,
+.ibadge.badge-yellow.fx,
+.ibadge.badge-orange.fx,
+.ibadge.badge-red.fx{
+  isolation: isolate;        /* garde un stack propre */
+}
 .ibadge.badge-green.fx::after,
 .ibadge.badge-yellow.fx::after,
 .ibadge.badge-orange.fx::after,
 .ibadge.badge-red.fx::after{
-  border-radius: 999px;
+  z-index: 1;                /* shimmer au-dessus du glow */
 }
 
-/* Si tu veux que le halo ne sorte JAMAIS de la carte */
-.event-card{ overflow: hidden; } /* (tu l’as déjà) */
-.event-badge{ overflow: hidden; border-radius: 999px; }
-/* ↑ important: ça garde le halo “dans” la pastille event-badge */
+/* 4) Assure que le contenu est tout devant */
+.ibadge.badge-green.fx,
+.ibadge.badge-yellow.fx,
+.ibadge.badge-orange.fx,
+.ibadge.badge-red.fx{
+  /* contenu devant pseudo-elements */
+}
+.ibadge.badge-green.fx > *,
+.ibadge.badge-yellow.fx > *,
+.ibadge.badge-orange.fx > *,
+.ibadge.badge-red.fx > *{
+  position: relative;
+  z-index: 2;
+}
+
+/* (Option) si tu n'as pas de <span> interne, ça suffit quand même,
+   car le texte du badge est rendu au-dessus dans la plupart des navigateurs. */
+
 
 
 
