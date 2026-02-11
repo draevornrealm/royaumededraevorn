@@ -883,20 +883,20 @@ body[data-faction="neutral"]{
    A COLLER TOUT EN BAS de wiki.css
    ====================================================== */
 
-/* 1) L'infobox head doit clipper les effets internes (shimmer/blur) */
+/* 1) Le head devient un contenant sûr (si un shimmer/blur sort) */
 .infobox .ibox-head{
   position: relative;
-  overflow: hidden;     /* <-- FIX: rien ne sort du cadre head */
-  border-radius: 16px;  /* doit matcher .infobox (16px) */
+  overflow: hidden;     /* rien ne sort du head */
+  border-radius: 16px;  /* doit matcher .infobox */
   isolation: isolate;
 }
 
-/* 2) Chaque ibadge devient un conteneur qui clippe ses pseudo-elements */
+/* 2) Chaque ibadge clippe ses pseudo-elements (FIX principal) */
 .ibadge{
-  position: relative;   /* sécurité (tu l’as déjà parfois) */
-  overflow: hidden;     /* <-- FIX principal: coupe ::before/::after */
+  position: relative;
+  overflow: hidden;        /* coupe ::before/::after */
   border-radius: 999px;
-  transform: translateZ(0); /* stabilise blur sur certains GPU */
+  transform: translateZ(0); /* stabilise blur/anim sur certains GPU */
 }
 
 /* 3) Verrouille le shimmer pour éviter le "blanc sale" */
@@ -908,20 +908,18 @@ body[data-faction="neutral"]{
   mix-blend-mode: normal !important;
 }
 
-/* 4) Aura "interne" : empêche les halos d’aller peindre en dehors
-      (si tu préfères garder inset:-10, commente ce bloc) */
+/* 4) Aura "interne" GLOBAL (sans !important pour laisser l'infobox override en -6px) */
 .ibadge.gold.aura::before,
 .ibadge.silver.aura-blue::before,
 .ibadge.music.aura-violet::before,
 .ibadge.dark.aura-dark::before,
 .ibadge.menace::before{
-  inset: 0 !important;
+  inset: 0;              /* <-- pas de !important */
   transform: scale(1.22);
 }
 
-/* 5) Option safe: si un jour tu ajoutes un effet décoratif à la hero */
+/* 5) Option safe si tu ajoutes un effet décoratif à la hero */
 .wiki-hero{
   position: relative;
   overflow: hidden;
 }
-
