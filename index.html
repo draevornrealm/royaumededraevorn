@@ -1,3 +1,5 @@
+Nan je répète les instruction je t'ai demander de fusionner la fonction que tu m'a mis en HTML dans l'index déjà existant. Tu me refait pas appart tu corrige :
+
 <!doctype html>
 <html lang="fr">
 <head>
@@ -383,23 +385,21 @@
 
       <div class="event-board-body" id="eventList">
         <!-- ✅ Exemple : Godzilla arrive -->
-<article class="event-card event-ras">
-  <div class="event-left">
-    <div class="event-badge"><span>✅ RAS</span></div>
-    <div class="event-title">Aucun évènement de danger</div>
-    <div class="event-desc">
-      Situation stable. Aucun signal de catastrophe, aucune alerte en cours.
-    </div>
-  </div>
-
-  <div class="event-right">
-    <div class="event-timer">
-      <div class="event-timer-label">Statut</div>
-      <div class="event-timer-value">OK</div>
-      <div class="event-timer-sub">—</div>
-    </div>
-  </div>
-</article>
+        <article class="event-card event-catastrophe"
+                 data-event
+                 data-title="Burning Godzilla — Arrivée"
+                 data-target="2026-02-12T21:00:00+01:00"
+                 data-link="personnage-godzilla.html">
+          <div class="event-left">
+            <div class="event-badge">
+            <span class="ibadge menace">☢ Catastrophe</span>
+            </div>
+            <div class="event-title">Burning Godzilla — Arrivée</div>
+            <div class="event-desc">
+              Une présence colossale approche. Tempêtes, marées extrêmes… le monde retient son souffle.
+            </div>
+            <div class="event-actions">
+              <a class="event-link" href="personnage-godzilla.html">Voir la fiche →</a>
             </div>
           </div>
 
@@ -777,5 +777,3 @@
   </script>
 </body>
 </html>
-
-
