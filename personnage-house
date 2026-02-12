@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>⚕️🏴‍☠️ Dr. Corvayn “Le Diagnosticien” — Wiki de l’Univers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Police -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/royaumededraevorn/css/wiki.css">
+</head>
+
+<body data-faction="pirate">
+  <div class="wiki-container">
+    <div class="wiki-hero">
+      <div>
+        <h1>⚕️🏴‍☠️ Dr. Corvayn “Le Diagnosticien”</h1>
+        <p>
+          <span class="badge">Pirate</span>
+          <span class="badge">Médecin de Draevorn</span>
+          <span class="badge">Diagnostic • Chirurgie</span>
+          <span class="badge">Canne • Caractère acide</span>
+        </p>
+      </div>
+
+      <div class="wiki-search">
+        <input id="q" placeholder="Rechercher..." />
+        <button id="go">OK</button>
+      </div>
+    </div>
+
+    <div class="wiki-grid">
+      <!-- Sidebar -->
+      <aside class="wiki-card wiki-sidebar">
+        <h3>Navigation</h3>
+        <div class="content">
+          <a href="index.html">🏠 Accueil</a>
+          <a href="personnages.html">👤 Personnages</a>
+          <a href="faction-marine.html">⚓ Factions</a>
+          <a href="lore.html">📜 Lore & Chronologie</a>
+        </div>
+      </aside>
+
+      <!-- Article -->
+      <main class="wiki-card wiki-article">
+        <h3>Article</h3>
+        <div class="content">
+          <p>
+            <b>Dr. Corvayn</b> est le <b>médecin diagnosticien</b> le plus redouté de <b>Draevorn</b>.
+            Génie médical au langage tranchant, il préfère la vérité brutale aux politesses…
+            et il n’hésite jamais à contredire un capitaine si la logique l’exige.
+          </p>
+
+          <h2>Profil</h2>
+          <p>
+            Cynique, brillant, impossible à impressionner : Corvayn lit les corps comme des cartes marines.
+            Il boite depuis un ancien affrontement (lame et infection), s’appuie sur une <b>canne</b> et
+            supporte la douleur avec des “remèdes” pas toujours recommandables.
+          </p>
+
+          <h2>Rôle à Draevorn</h2>
+          <p>
+            Officiellement : <b>médecin royal</b> affecté aux urgences de la flotte et aux cas “incompréhensibles”.<br>
+            Officieusement : l’homme qu’on envoie quand personne ne comprend pourquoi un équipage tombe malade,
+            quand un poison inconnu circule, ou quand une malédiction “prend la mer”.
+          </p>
+
+          <h2>Compétences</h2>
+          <p>
+            <b>Diagnostic extrême</b> — déduction, tests rapides, protocoles improvisés en mer.<br>
+            <b>Chirurgie de pont</b> — opérations en conditions hostiles, gestion de traumatismes.<br>
+            <b>Toxicologie & poisons</b> — antidotes, analyses, contre-mesures.<br>
+            <b>Psychologie de l’équipage</b> — il déteste “les gens”, mais comprend tout le monde.
+          </p>
+
+          <h2>Faiblesses</h2>
+          <ul>
+            <li><b>Douleur chronique</b> : mobilité réduite, fatigue, irritabilité accentuée.</li>
+            <li><b>Dépendance</b> : remèdes/fortifiants qui “calment” mais coûtent cher à long terme.</li>
+            <li><b>Social</b> : trop franc, provoque des conflits… même quand il a raison.</li>
+          </ul>
+
+          <h2>Citations</h2>
+          <ul>
+            <li>“Ce n’est pas un miracle. C’est un symptôme qu’on a raté.”</li>
+            <li>“La mer ment moins que les gens. Les corps, eux, ne mentent jamais.”</li>
+            <li>“Oui, ça va faire mal. Non, on n’a pas le temps d’être délicats.”</li>
+          </ul>
+
+          <h2>Relations</h2>
+          <ul>
+            <li><b>Roi Bryworn</b> : respect mutuel… tant qu’on laisse la logique gouverner la salle d’opération.</li>
+            <li><b>La Marine</b> : recherché pour “piraterie médicale”, soupçonné d’avoir neutralisé des agents par antidotes.</li>
+            <li><b>Les apothicaires</b> : il les méprise… et leur achète tout ce qui fonctionne.</li>
+          </ul>
+
+          <h2>Conseil RP</h2>
+          <p>
+            Corvayn ne “joue” pas au héros : il cherche la cause, pas la gloire.
+            Il parle court, coupe les phrases, pose des questions gênantes… et finit par sauver la vie quand même.
+          </p>
+        </div>
+      </main>
+
+      <!-- Infobox -->
+      <aside class="infobox">
+        <div class="ibox-head">
+          <h3 class="ibox-title">Informations</h3>
+          <div class="ibox-sub">Fiche officielle</div>
+
+          <div class="ibox-badges">
+            <span class="ibadge danger">🏴‍☠️ Pirate</span>
+            <span class="ibadge gold aura">⚕️ Médecin</span>
+            <span class="ibadge gold">🏰 Draevorn</span>
+            <span class="ibadge">🦯 Canne</span>
+          </div>
+        </div>
+
+        <div class="ibox-media">
+          <!-- Mets ton image ici (celle que tu viens de générer par ex.) -->
+          <img src="/royaumededraevorn/images/dr-corvayn.png" alt="Dr. Corvayn">
+        </div>
+
+        <div class="ibox-table">
+          <table>
+            <tr><th>Nom</th><td>Corvayn</td></tr>
+            <tr><th>Surnom</th><td>“Le Diagnosticien”</td></tr>
+            <tr><th>Rôle</th><td>Médecin de la flotte</td></tr>
+            <tr><th>Royaume</th><td>Draevorn</td></tr>
+            <tr><th>Faction</th><td>Pirates</td></tr>
+            <tr><th>Spécialités</th><td>Diagnostic • Chirurgie • Toxicologie</td></tr>
+            <tr><th>Équipement</th><td>Canne • Trousse • Instruments</td></tr>
+            <tr><th>Statut</th><td>Vivant</td></tr>
+          </table>
+        </div>
+
+        <div class="ibox-footer">
+          <div class="mini-note">
+            Conseil RP : sarcasme contrôlé, intelligence froide, efficacité brutale.
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="/royaumededraevorn/js/wiki-search.js"></script>
+  <script>
+    const q = document.getElementById("q");
+    document.getElementById("go").addEventListener("click", () => {
+      const res = WIKI_SEARCH.searchWiki(q.value);
+      if (res[0]) location.href = res[0].url;
+    });
+    q.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") document.getElementById("go").click();
+    });
+  </script>
+</body>
+</html>
