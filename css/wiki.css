@@ -1631,6 +1631,34 @@ body[data-faction="neutral"]{
     rgba(200,220,255,.10),
     rgba(0,0,0,0) 60%) !important;
 }
+/* =========================
+   BADGE MÉDECINE — Draevorn
+   ========================= */
+
+.ibadge.medicine{
+  border-color: rgba(46, 213, 160, .45);
+  background: rgba(46, 213, 160, .14);
+  color: #eafff7;
+  box-shadow: 0 0 0 1px rgba(46, 213, 160, .12);
+}
+
+.ibadge.medicine.aura{
+  box-shadow:
+    0 0 0 1px rgba(46, 213, 160, .18),
+    0 0 18px rgba(46, 213, 160, .28),
+    inset 0 0 12px rgba(46, 213, 160, .08);
+}
+
+/* Variante FX (si tu veux léger pulse comme tes alertes) */
+.ibadge.medicine.fx{
+  animation: medicinePulse 2.2s ease-in-out infinite;
+}
+
+@keyframes medicinePulse{
+  0%,100%{ filter: brightness(1); }
+  50%{ filter: brightness(1.12); }
+}
+
 
 
 
