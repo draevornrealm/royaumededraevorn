@@ -792,135 +792,224 @@
   </script>
 
   <!-- ✅ 3) ET EN TOUT DERNIER : le JS des ÉVÈNEMENTS (juste avant </body>) -->
-  <script>
-    (function(){
-      const board = document.getElementById("eventBoard");
-      const toggle = document.getElementById("eventToggle");
-      const list = document.getElementById("eventList");
-      if(!board || !toggle || !list) return;
+<script>
+(function(){
+  const board  = document.getElementById("eventBoard");
+  const toggle = document.getElementById("eventToggle");
+  const list   = document.getElementById("eventList");
+  if(!board || !toggle || !list) return;
 
-      const STORAGE_KEY = "wiki_events_enabled";
+  const STORAGE_KEY = "wiki_events_enabled";
 
-      function setEnabled(v){
-        board.dataset.enabled = v ? "true" : "false";
-        toggle.checked = !!v;
-        list.style.display = v ? "" : "none";
-        const txt = board.querySelector(".event-toggle-text");
-        if(txt) txt.textContent = v ? "Actif" : "Inactif";
-        try { localStorage.setItem(STORAGE_KEY, v ? "1" : "0"); } catch(e){}
+  // =========================
+  // AUDIO LOOP (ALERTE)
+  // =========================
+  // Tes fichiers (dossier /royaumededraevorn/audio/)
+  // Jaune/Orange = tes vrais .wav
+  // Rouge/Noir = fallback sur orange tant que tu n'as pas les fichiers
+  const loopSrc = {
+    ras:    "",
+
+    yellow: "/royaumededraevorn/audio/alert-jaune.wav",
+    orange: "/royaumededraevorn/audio/alert-orange.wav",
+
+    // Si tu as ces fichiers, remplace les 2 lignes ci-dessous :
+    // red:   "/royaumededraevorn/audio/alert-red.wav",
+    // black: "/royaumededraevorn/audio/alert-black.wav",
+    red:    "/royaumededraevorn/audio/alert-orange.wav",
+    black:  "/royaumededraevorn/audio/alert-orange.wav",
+  };
+
+  let audioUnlocked = false;
+
+  // Un seul lecteur, en boucle
+  const loop = new Audio();
+  loop.loop = true;
+  loop.volume = 0.55;
+
+  function unlockAudioOnce(){
+    if(audioUnlocked) return;
+    audioUnlocked = true;
+
+    // Warm-up : débloque play() après geste utilisateur
+    try{
+      loop.muted = true;
+      loop.src = loopSrc.yellow || "";
+      loop.play().then(() => {
+        loop.pause();
+        loop.currentTime = 0;
+        loop.muted = false;
+        syncLoop(); // si alerte active, ça démarre direct
+      }).catch(()=>{ loop.muted = false; });
+    }catch(e){}
+  }
+
+  // Débloque au 1er clic / touche
+  window.addEventListener("pointerdown", unlockAudioOnce, { once:true });
+  window.addEventListener("keydown", unlockAudioOnce, { once:true });
+
+  function getAlertLevel(){
+    // Priorité : data-alert
+    const d = (board.getAttribute("data-alert") || "").trim().toLowerCase();
+    if(d) return d;
+
+    // Sinon : déduction via class (au cas où)
+    const cl = board.classList;
+    if(cl.contains("alert-black"))  return "black";
+    if(cl.contains("alert-red"))    return "red";
+    if(cl.contains("alert-orange")) return "orange";
+    if(cl.contains("alert-yellow")) return "yellow";
+    return "ras";
+  }
+
+  function isEventsEnabled(){
+    return board.dataset.enabled !== "false" && toggle.checked;
+  }
+
+  function stopLoop(){
+    try{
+      loop.pause();
+      loop.currentTime = 0;
+    }catch(e){}
+  }
+
+  function playLoopFor(level){
+    const src = loopSrc[level] || "";
+    if(!src){ stopLoop(); return; }
+
+    // Si déjà le bon son et déjà en lecture : rien
+    const alreadySame = loop.src && loop.src.includes(src);
+    if(alreadySame && !loop.paused) return;
+
+    try{
+      loop.pause();
+      loop.currentTime = 0;
+      loop.src = src;
+
+      // Nécessite un geste utilisateur au moins une fois
+      if(!audioUnlocked) return;
+
+      loop.play().catch(()=>{});
+    }catch(e){}
+  }
+
+  function syncLoop(){
+    const lvl = getAlertLevel();
+    const on = isEventsEnabled();
+
+    // Si onglet caché, on coupe (évite bugs + gêne)
+    if(document.hidden){ stopLoop(); return; }
+
+    // Si events OFF => stop
+    if(!on){ stopLoop(); return; }
+
+    // Si RAS => stop
+    if(lvl === "ras"){ stopLoop(); return; }
+
+    // Sinon => boucle au niveau
+    playLoopFor(lvl);
+  }
+
+  // Observe changements de niveau (class / data-alert / enabled)
+  const obs = new MutationObserver(syncLoop);
+  obs.observe(board, { attributes:true, attributeFilter:["class","data-alert","data-enabled"] });
+
+  document.addEventListener("visibilitychange", syncLoop);
+
+  // =========================
+  // TOGGLE (actif/inactif)
+  // =========================
+  function setEnabled(v){
+    board.dataset.enabled = v ? "true" : "false";
+    toggle.checked = !!v;
+    list.style.display = v ? "" : "none";
+
+    const txt = board.querySelector(".event-toggle-text");
+    if(txt) txt.textContent = v ? "Actif" : "Inactif";
+
+    try { localStorage.setItem(STORAGE_KEY, v ? "1" : "0"); } catch(e){}
+    syncLoop();
+  }
+
+  // Restore enabled
+  let enabled = true;
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if(saved === "0") enabled = false;
+  } catch(e){}
+  setEnabled(enabled);
+
+  toggle.addEventListener("change", () => setEnabled(toggle.checked));
+
+  // =========================
+  // TIMER (ton code, inchangé)
+  // =========================
+  function pad(n){ return String(n).padStart(2,"0"); }
+
+  function formatETA(targetDate){
+    const d = targetDate;
+    const dd = pad(d.getDate());
+    const mm = pad(d.getMonth()+1);
+    const hh = pad(d.getHours());
+    const mi = pad(d.getMinutes());
+    return `${dd}/${mm} • ${hh}:${mi}`;
+  }
+
+  function tick(){
+    const now = Date.now();
+    document.querySelectorAll("[data-event]").forEach(card => {
+      const targetRaw = card.getAttribute("data-target");
+      const link = card.getAttribute("data-link") || "";
+
+      const tEl = card.querySelector("[data-timer]");
+      const etaEl = card.querySelector("[data-eta]");
+      if(!targetRaw || !tEl) return;
+
+      const target = new Date(targetRaw).getTime();
+      const diff = target - now;
+
+      if(diff <= 0){
+        tEl.textContent = "ARRIVÉ";
+        if(etaEl) etaEl.textContent = "— maintenant";
+
+        if(link && !card.dataset.bound){
+          card.dataset.bound = "1";
+          card.style.cursor = "pointer";
+          card.addEventListener("click", (e) => {
+            const a = e.target.closest("a");
+            if(a) return;
+            location.href = link;
+          });
+        }
+        return;
       }
 
-      // Restore
-      let enabled = true;
-      try {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if(saved === "0") enabled = false;
-      } catch(e){}
-      setEnabled(enabled);
+      const s = Math.floor(diff/1000);
+      const days = Math.floor(s / 86400);
+      const hrs = Math.floor((s % 86400) / 3600);
+      const mins = Math.floor((s % 3600) / 60);
+      const secs = s % 60;
 
-      toggle.addEventListener("change", () => setEnabled(toggle.checked));
+      tEl.textContent = (days > 0)
+        ? `${days}j ${pad(hrs)}:${pad(mins)}:${pad(secs)}`
+        : `${pad(hrs)}:${pad(mins)}:${pad(secs)}`;
 
-      function pad(n){ return String(n).padStart(2,"0"); }
-
-      function formatETA(targetDate){
-        const d = targetDate;
-        const dd = pad(d.getDate());
-        const mm = pad(d.getMonth()+1);
-        const hh = pad(d.getHours());
-        const mi = pad(d.getMinutes());
-        return `${dd}/${mm} • ${hh}:${mi}`;
+      if(etaEl){
+        etaEl.textContent = `ETA ${formatETA(new Date(target))}`;
       }
+    });
+  }
 
-      function tick(){
-        const now = Date.now();
-        document.querySelectorAll("[data-event]").forEach(card => {
-          const targetRaw = card.getAttribute("data-target");
-          const link = card.getAttribute("data-link") || "";
+  tick();
+  setInterval(tick, 1000);
 
-          const tEl = card.querySelector("[data-timer]");
-          const etaEl = card.querySelector("[data-eta]");
-          if(!targetRaw || !tEl) return;
+  // Sync au chargement (ne jouera qu’après 1 clic)
+  syncLoop();
+})();
+</script>
 
-          const target = new Date(targetRaw).getTime();
-          const diff = target - now;
-
-          if(diff <= 0){
-            tEl.textContent = "ARRIVÉ";
-            if(etaEl) etaEl.textContent = "— maintenant";
-
-            if(link && !card.dataset.bound){
-              card.dataset.bound = "1";
-              card.style.cursor = "pointer";
-              card.addEventListener("click", (e) => {
-                const a = e.target.closest("a");
-                if(a) return;
-                location.href = link;
-              });
-            }
-            return;
-          }
-
-          const s = Math.floor(diff/1000);
-          const days = Math.floor(s / 86400);
-          const hrs = Math.floor((s % 86400) / 3600);
-          const mins = Math.floor((s % 3600) / 60);
-          const secs = s % 60;
-
-          tEl.textContent = (days > 0)
-            ? `${days}j ${pad(hrs)}:${pad(mins)}:${pad(secs)}`
-            : `${pad(hrs)}:${pad(mins)}:${pad(secs)}`;
-
-          if(etaEl){
-            etaEl.textContent = `ETA ${formatETA(new Date(target))}`;
-          }
-        });
-      }
-
-      tick();
-      setInterval(tick, 1000);
-    })();
-  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
