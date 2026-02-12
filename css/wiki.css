@@ -1658,6 +1658,69 @@ body[data-faction="neutral"]{
   0%,100%{ filter: brightness(1); }
   50%{ filter: brightness(1.12); }
 }
+/* =========================
+   BADGE MÉDECIN D’ÉLITE
+   ========================= */
+
+.ibadge.medicine-elite{
+  position: relative;
+  border-color: rgba(0, 255, 190, .55);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 190, .18),
+    rgba(0, 120, 90, .25)
+  );
+  color: #f3fffb;
+  font-weight: 900;
+  letter-spacing: .4px;
+  box-shadow:
+    0 0 0 1px rgba(0,255,190,.18),
+    0 0 18px rgba(0,255,190,.22),
+    inset 0 0 10px rgba(0,0,0,.35);
+  overflow: hidden;
+}
+
+/* Halo doux autour */
+.ibadge.medicine-elite::before{
+  content:"";
+  position:absolute;
+  inset:-6px;
+  border-radius:999px;
+  background: radial-gradient(
+    circle,
+    rgba(0,255,190,.25),
+    rgba(0,0,0,0) 70%
+  );
+  filter: blur(8px);
+  opacity:.55;
+  pointer-events:none;
+}
+
+/* Brillance qui traverse */
+.ibadge.medicine-elite::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    110deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,.35) 20%,
+    rgba(255,255,255,0) 40%
+  );
+  transform: translateX(-120%);
+  opacity:0;
+  mix-blend-mode: screen;
+  pointer-events:none;
+  animation: medicineEliteShimmer 3.8s ease-in-out infinite;
+}
+
+@keyframes medicineEliteShimmer{
+  0%   { opacity:0; transform: translateX(-120%); }
+  25%  { opacity:.6; }
+  55%  { opacity:0; transform: translateX(120%); }
+  100% { opacity:0; transform: translateX(120%); }
+}
+
 
 
 
