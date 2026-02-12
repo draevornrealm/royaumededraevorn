@@ -1720,6 +1720,73 @@ body[data-faction="neutral"]{
   55%  { opacity:0; transform: translateX(120%); }
   100% { opacity:0; transform: translateX(120%); }
 }
+/* ==========================================
+   BADGE BOSS FINAL (KAEL UNIQUE)
+   ========================================== */
+
+.ibadge.boss-final{
+  position: relative;
+  background: linear-gradient(135deg, #140000, #4d0000 50%, #a30000);
+  color: #fff;
+  border: 1px solid rgba(255,0,0,.7);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+
+  box-shadow:
+    0 0 10px rgba(255,0,0,.6),
+    0 0 25px rgba(255,0,0,.4),
+    inset 0 0 12px rgba(0,0,0,.9);
+
+  animation: bossFinalPulse 2.5s ease-in-out infinite;
+  overflow: hidden;
+}
+
+/* Reflet qui traverse */
+.ibadge.boss-final::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-60%;
+  width:60%;
+  height:100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,.35),
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: bossFinalShine 3s infinite;
+}
+
+/* Pulse abyssal */
+@keyframes bossFinalPulse{
+  0%{
+    box-shadow:
+      0 0 10px rgba(255,0,0,.6),
+      0 0 25px rgba(255,0,0,.4),
+      inset 0 0 12px rgba(0,0,0,.9);
+  }
+  50%{
+    box-shadow:
+      0 0 18px rgba(255,0,0,1),
+      0 0 40px rgba(255,0,0,.7),
+      inset 0 0 18px rgba(0,0,0,1);
+  }
+  100%{
+    box-shadow:
+      0 0 10px rgba(255,0,0,.6),
+      0 0 25px rgba(255,0,0,.4),
+      inset 0 0 12px rgba(0,0,0,.9);
+  }
+}
+
+@keyframes bossFinalShine{
+  0%{ left:-60%; }
+  100%{ left:120%; }
+}
+
 
 
 
