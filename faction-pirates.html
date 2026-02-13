@@ -537,10 +537,199 @@
   border-color: rgba(255,215,140,.30);
   background: rgba(255,215,140,.09);
 }
+/* =========================
+   CONFLITS (progress + animé)
+   ========================= */
+
+.panel-conflicts .panel-head{
+  background: linear-gradient(135deg, rgba(120,20,20,0.55), rgba(30,10,10,0.25));
+}
+
+.conflict-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.conflict-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  padding:12px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.03);
+  transition: transform .15s ease, background .15s ease, border-color .15s ease;
+  overflow:hidden;
+  position:relative;
+}
+
+.conflict-item:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.05);
+  border-color: rgba(255,255,255,.16);
+}
+
+.conflict-left{ flex:1; min-width:0; }
+.conflict-right{ display:flex; align-items:flex-start; }
+
+.conflict-name{
+  font-weight:900;
+  margin-bottom:4px;
+}
+
+.conflict-desc{
+  opacity:.86;
+  font-size:.92rem;
+  line-height:1.35rem;
+  margin-bottom:10px;
+}
+
+/* ===== Status pill ===== */
+.conflict-status{
+  font-weight:900;
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:.78rem;
+  white-space:nowrap;
+  border:1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.06);
+}
+
+/* ===== Meter ===== */
+.conflict-meter{ margin-top:6px; }
+.meter-track{
+  height:10px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  overflow:hidden;
+  position:relative;
+}
+
+.meter-fill{
+  height:100%;
+  width:0%;
+  border-radius:999px;
+  background: rgba(255,255,255,.18);
+  position:relative;
+  transition: width .6s ease;
+}
+
+/* texte en dessous */
+.meter-meta{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:6px;
+  font-size:.78rem;
+  opacity:.88;
+}
+.meter-label{ font-weight:800; }
+.meter-value{ font-weight:900; opacity:.95; }
+
+/* =========================
+   COULEURS + ANIMS PAR STATE
+   Tu changes juste data-state="..."
+   ========================= */
+
+/* --- WAR --- */
+.conflict-item[data-state="war"] .conflict-status{
+  border-color: rgba(255,70,70,.45);
+  background: rgba(255,70,70,.14);
+  color: rgba(255,220,220,.98);
+}
+.conflict-item[data-state="war"] .meter-fill{
+  background: linear-gradient(90deg, rgba(255,70,70,.25), rgba(255,150,90,.22));
+}
+.conflict-item[data-state="war"]::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: radial-gradient(circle at 30% 20%, rgba(255,70,70,.18), transparent 55%);
+  opacity:.65;
+  pointer-events:none;
+  animation: warPulse 1.35s ease-in-out infinite;
+}
+
+/* --- TENSION --- */
+.conflict-item[data-state="tension"] .conflict-status{
+  border-color: rgba(255,180,60,.45);
+  background: rgba(255,180,60,.14);
+  color: rgba(255,235,190,.98);
+}
+.conflict-item[data-state="tension"] .meter-fill{
+  background: linear-gradient(90deg, rgba(255,180,60,.22), rgba(255,230,120,.18));
+}
+.conflict-item[data-state="tension"] .meter-track::after{
+  content:"";
+  position:absolute;
+  inset:-30% -40%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent);
+  transform: translateX(-35%);
+  animation: shimmer 2.2s linear infinite;
+  pointer-events:none;
+}
+
+/* --- SECRET --- */
+.conflict-item[data-state="secret"] .conflict-status{
+  border-color: rgba(150,120,255,.45);
+  background: rgba(150,120,255,.14);
+  color: rgba(235,230,255,.98);
+}
+.conflict-item[data-state="secret"] .meter-fill{
+  background: linear-gradient(90deg, rgba(150,120,255,.22), rgba(110,180,255,.18));
+}
+.conflict-item[data-state="secret"] .meter-track::after{
+  content:"";
+  position:absolute;
+  top:-120%;
+  left:-20%;
+  width:140%;
+  height:240%;
+  background: linear-gradient(180deg, transparent, rgba(255,255,255,.10), transparent);
+  animation: scan 2.6s ease-in-out infinite;
+  pointer-events:none;
+}
+
+/* --- RESOLVED --- */
+.conflict-item[data-state="resolved"] .conflict-status{
+  border-color: rgba(80,220,140,.45);
+  background: rgba(80,220,140,.12);
+  color: rgba(210,255,235,.98);
+}
+.conflict-item[data-state="resolved"] .meter-fill{
+  background: linear-gradient(90deg, rgba(80,220,140,.22), rgba(120,255,200,.18));
+}
+.conflict-item[data-state="resolved"]::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: radial-gradient(circle at 70% 10%, rgba(80,220,140,.12), transparent 55%);
+  opacity:.55;
+  pointer-events:none;
+}
+
+/* Animations */
+@keyframes warPulse{
+  0%,100%{ opacity:.35; transform: scale(1); }
+  50%{ opacity:.80; transform: scale(1.02); }
+}
+@keyframes shimmer{
+  0%{ transform: translateX(-35%); }
+  100%{ transform: translateX(35%); }
+}
+@keyframes scan{
+  0%,100%{ transform: translateY(-18%); opacity:.40; }
+  50%{ transform: translateY(18%); opacity:.85; }
+}
+
 
   </style>
 </body>
 </html>
+
 
 
 
