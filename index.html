@@ -62,70 +62,92 @@
     <!-- ======================================================
          EVENTS (UNIQUE) — IDs: eventBoard / eventToggle / eventList
          ====================================================== -->
-    <section class="event-board" id="eventBoard" data-enabled="true">
-      <div class="event-board-head">
-        <div class="event-board-title">
-          <span class="event-ico">⚠️</span>
-          <span>Évènements</span>
-          <span class="event-board-pill">Live</span>
+<section class="event-board" id="eventBoard" data-enabled="true">
+  <div class="event-board-head">
+    <div class="event-board-title">
+      <span class="event-ico">⚠️</span>
+      <span>Évènements</span>
+      <span class="event-board-pill">Live</span>
+    </div>
+
+    <label class="event-toggle">
+      <input type="checkbox" id="eventToggle" checked>
+      <span class="event-toggle-ui"></span>
+      <span class="event-toggle-text">Actif</span>
+    </label>
+  </div>
+
+  <div class="event-board-body" id="eventList">
+
+    <!-- 🟡 Pirates Draevorn -->
+    <article class="event-card event-alert-yellow">
+      <div class="event-left">
+        <div class="event-badge">
+          <span class="ibadge danger">🏴‍☠️ Pirates Draevorn</span>
+          <span class="ibadge badge-yellow fx">🟡 Surveillance</span>
         </div>
-
-        <label class="event-toggle" title="Activer / Désactiver les évènements (son + affichage)">
-          <input type="checkbox" id="eventToggle" checked />
-          <span class="event-toggle-ui"></span>
-          <span class="event-toggle-text">Actif</span>
-        </label>
+        <div class="event-title">Trêve de Guerre en cours</div>
+        <div class="event-desc">
+          Surveillance du périmètre extérieur. Trêve de guerre en cours.
+          | Code Jaune — Ordonné par Bryworn.
+        </div>
       </div>
+      <div class="event-right">
+        <div class="event-timer">
+          <div class="event-timer-label">Niveau</div>
+          <div class="event-timer-value">JAUNE</div>
+          <div class="event-timer-sub">— vigilance accrue</div>
+        </div>
+      </div>
+    </article>
 
-      <div class="event-board-body" id="eventList">
+    <!-- 🟡 Marines Kaelros (RESTORE) -->
+    <article class="event-card event-alert-yellow">
+      <div class="event-left">
+        <div class="event-badge">
+          <span class="ibadge marine">⚓ Marines Kaelros</span>
+          <span class="ibadge badge-yellow fx">🟡 Surveillance</span>
+        </div>
+        <div class="event-title">Trêve de Guerre en cours</div>
+        <div class="event-desc">
+          Trêve de guerre en cours. Surveillance stratégique renforcée.
+          | Code Jaune — Ordonné par Kaelros Viremont.
+        </div>
+      </div>
+      <div class="event-right">
+        <div class="event-timer">
+          <div class="event-timer-label">Niveau</div>
+          <div class="event-timer-value">JAUNE</div>
+          <div class="event-timer-sub">— surveillance active</div>
+        </div>
+      </div>
+    </article>
 
-        <!-- 🟡 Pirates Draevorn -->
-        <article class="event-card event-alert-yellow">
-          <div class="event-left">
-            <div class="event-badge">
-              <span class="ibadge danger">🏴‍☠️ Pirates Draevorn</span>
-              <span class="ibadge badge-yellow fx">🟡 Surveillance</span>
-            </div>
+    <!-- 🔴 Marines Mondiale -->
+    <article class="event-card event-alert-red">
+      <div class="event-left">
+        <div class="event-badge">
+          <span class="ibadge marine">⚓ Marines Mondiale</span>
+          <span class="ibadge badge-red fx">🔴 Alerte Maximale</span>
+        </div>
+        <div class="event-title">Opération navale déclenchée</div>
+        <div class="event-desc">
+          Intervention stratégique engagée. Déploiement immédiat des escadrons d’élite.
+          | Code Rouge — Ordonné par Kael D. Abyss.
+        </div>
+      </div>
+      <div class="event-right">
+        <div class="event-timer">
+          <div class="event-timer-label">Niveau</div>
+          <div class="event-timer-value">ROUGE</div>
+          <div class="event-timer-sub">— état d’urgence absolu</div>
+        </div>
+      </div>
+    </article>
 
-            <div class="event-title">Trêve de Guerre en cours</div>
-            <div class="event-desc">
-              Surveillance du périmètre extérieur. Les forces pirates restent en veille renforcée.
-              | Code Jaune — Ordonné par Bryworn.
-            </div>
-          </div>
+  </div>
+</section>
 
-          <div class="event-right">
-            <div class="event-timer">
-              <div class="event-timer-label">Niveau</div>
-              <div class="event-timer-value">JAUNE</div>
-              <div class="event-timer-sub">— vigilance accrue</div>
-            </div>
-          </div>
-        </article>
-
-        <!-- 🟡 Marines Kaelros (✅ RESTAURÉ) -->
-        <article class="event-card event-alert-yellow">
-          <div class="event-left">
-            <div class="event-badge">
-              <span class="ibadge marine">⚓ Marines Kaelros</span>
-              <span class="ibadge badge-yellow fx">🟡 Surveillance</span>
-            </div>
-
-            <div class="event-title">Trêve de Guerre en cours</div>
-            <div class="event-desc">
-              Trêve de guerre en cours. Surveillance stratégique renforcée.
-              | Code Jaune — Ordonné par Kaelros Viremont.
-            </div>
-          </div>
-
-          <div class="event-right">
-            <div class="event-timer">
-              <div class="event-timer-label">Niveau</div>
-              <div class="event-timer-value">JAUNE</div>
-              <div class="event-timer-sub">— surveillance active</div>
-            </div>
-          </div>
-        </article>
 
         <!-- 🔴 Marines Mondiale -->
         <article class="event-card event-alert-red">
@@ -463,3 +485,4 @@
   </script>
 </body>
 </html>
+
