@@ -438,9 +438,230 @@
       border-color: rgba(79,156,255,.30);
       background: rgba(79,156,255,.09);
     }
+/* =========================================================
+   CONFLITS MARINE — Progress + Anim + Style institutionnel
+   (à coller TOUT EN BAS du <style>)
+   ========================================================= */
+
+.marine-conflicts .panel-head{
+  background: linear-gradient(135deg, rgba(30,70,140,0.52), rgba(10,18,40,0.22));
+}
+
+/* Base item */
+.marine-conflicts .conflict-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  padding:12px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.11);
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  transition: transform .15s ease, background .15s ease, border-color .15s ease;
+  position:relative;
+  overflow:hidden;
+}
+
+.marine-conflicts .conflict-item:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.05);
+  border-color: rgba(255,255,255,.18);
+}
+
+.marine-conflicts .conflict-left{ flex:1; min-width:0; }
+.marine-conflicts .conflict-right{ display:flex; align-items:flex-start; }
+
+.marine-conflicts .conflict-name{
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+.marine-conflicts .conflict-desc{
+  opacity:.86;
+  font-size:.92rem;
+  line-height:1.35rem;
+  margin-bottom:10px;
+}
+
+/* Badge status (forcé, comme pirates) */
+.marine-conflicts .conflict-status{
+  font-weight: 900;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: .78rem;
+  white-space: nowrap;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.06);
+  color: rgba(245,248,255,.92);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.10), 0 8px 18px rgba(0,0,0,.22);
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+
+/* ===== Meter (visible) ===== */
+.marine-conflicts .meter-track{
+  height: 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+  overflow: hidden;
+  position: relative;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    inset 0 -1px 0 rgba(0,0,0,.35),
+    0 10px 22px rgba(0,0,0,.25);
+}
+
+.marine-conflicts .meter-fill{
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  position: relative;
+  transition: width .75s cubic-bezier(.22,.9,.2,1);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.10) inset,
+    0 0 16px rgba(255,255,255,.10);
+}
+
+/* Reflet */
+.marine-conflicts .meter-fill::before{
+  content:"";
+  position:absolute;
+  inset: 1px 1px auto 1px;
+  height: 45%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,0));
+  opacity: .95;
+  pointer-events:none;
+}
+
+/* Texture */
+.marine-conflicts .meter-fill::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255,255,255,.12) 0px,
+    rgba(255,255,255,.12) 8px,
+    rgba(255,255,255,.04) 8px,
+    rgba(255,255,255,.04) 16px
+  );
+  opacity: .28;
+  pointer-events:none;
+}
+
+.marine-conflicts .meter-meta{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:7px;
+  font-size:.80rem;
+  opacity:.92;
+}
+.marine-conflicts .meter-label{ font-weight:900; opacity:.92; }
+.marine-conflicts .meter-value{ font-weight:900; opacity:1; }
+
+/* =========================
+   COULEURS + ANIMS PAR STATE
+   ========================= */
+
+/* 🚨 ALERT (clignote) */
+.marine-conflicts .conflict-item[data-state="alert"] .conflict-status{
+  border-color: rgba(90,170,255,.62);
+  background: linear-gradient(135deg, rgba(90,170,255,.20), rgba(20,40,80,.16));
+  color: rgba(235,245,255,.98);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.08) inset,
+    0 0 22px rgba(90,170,255,.22),
+    0 10px 22px rgba(0,0,0,.25);
+}
+
+.marine-conflicts .conflict-item[data-state="alert"] .meter-fill{
+  background: linear-gradient(90deg, rgba(90,170,255,.62), rgba(120,230,255,.40));
+  box-shadow: 0 0 20px rgba(90,170,255,.22), 0 0 0 1px rgba(255,255,255,.10) inset;
+  animation: marineAlertFill 1.05s ease-in-out infinite;
+}
+
+.marine-conflicts .conflict-item[data-state="alert"] .conflict-status{
+  animation: marineAlertBadge 1.0s ease-in-out infinite;
+}
+
+/* ⛓️ BLOCKADE */
+.marine-conflicts .conflict-item[data-state="blockade"] .conflict-status{
+  border-color: rgba(120,210,255,.55);
+  background: linear-gradient(135deg, rgba(120,210,255,.18), rgba(10,18,40,.16));
+  color: rgba(235,250,255,.98);
+}
+.marine-conflicts .conflict-item[data-state="blockade"] .meter-fill{
+  background: linear-gradient(90deg, rgba(120,210,255,.58), rgba(160,245,255,.32));
+  box-shadow: 0 0 18px rgba(120,210,255,.18), 0 0 0 1px rgba(255,255,255,.10) inset;
+}
+.marine-conflicts .conflict-item[data-state="blockade"] .meter-track::after{
+  content:"";
+  position:absolute;
+  inset:-30% -40%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent);
+  transform: translateX(-35%);
+  animation: marineShimmer 2.2s linear infinite;
+  pointer-events:none;
+}
+
+/* 🎯 HUNT */
+.marine-conflicts .conflict-item[data-state="hunt"] .conflict-status{
+  border-color: rgba(160,140,255,.55);
+  background: linear-gradient(135deg, rgba(160,140,255,.18), rgba(10,18,40,.16));
+  color: rgba(245,240,255,.98);
+}
+.marine-conflicts .conflict-item[data-state="hunt"] .meter-fill{
+  background: linear-gradient(90deg, rgba(160,140,255,.55), rgba(120,200,255,.30));
+  box-shadow: 0 0 18px rgba(160,140,255,.16), 0 0 0 1px rgba(255,255,255,.10) inset;
+}
+.marine-conflicts .conflict-item[data-state="hunt"] .meter-track::after{
+  content:"";
+  position:absolute;
+  top:-120%;
+  left:-20%;
+  width:140%;
+  height:240%;
+  background: linear-gradient(180deg, transparent, rgba(255,255,255,.10), transparent);
+  animation: marineScan 2.6s ease-in-out infinite;
+  pointer-events:none;
+}
+
+/* ✅ STABLE */
+.marine-conflicts .conflict-item[data-state="stable"] .conflict-status{
+  border-color: rgba(80,220,180,.55);
+  background: linear-gradient(135deg, rgba(80,220,180,.14), rgba(10,18,40,.16));
+  color: rgba(230,255,248,.98);
+}
+.marine-conflicts .conflict-item[data-state="stable"] .meter-fill{
+  background: linear-gradient(90deg, rgba(80,220,180,.50), rgba(140,255,230,.26));
+  box-shadow: 0 0 16px rgba(80,220,180,.14), 0 0 0 1px rgba(255,255,255,.10) inset;
+}
+
+/* Animations */
+@keyframes marineAlertBadge{
+  0%,100%{ filter: brightness(1); box-shadow: 0 0 18px rgba(90,170,255,.18), 0 8px 18px rgba(0,0,0,.22); }
+  50%{ filter: brightness(1.18); box-shadow: 0 0 32px rgba(90,170,255,.28), 0 8px 18px rgba(0,0,0,.22); }
+}
+@keyframes marineAlertFill{
+  0%,100%{ filter: brightness(1); }
+  50%{ filter: brightness(1.20); }
+}
+@keyframes marineShimmer{
+  0%{ transform: translateX(-35%); }
+  100%{ transform: translateX(35%); }
+}
+@keyframes marineScan{
+  0%,100%{ transform: translateY(-18%); opacity:.40; }
+  50%{ transform: translateY(18%); opacity:.85; }
+}
+
   </style>
 </body>
 </html>
+
 
 
 
