@@ -837,6 +837,19 @@
       0 0 0 1px rgba(255,70,70,.05);
   }
 }
+/* WAR : accent sur la barre + léger sweep */
+.panel-conflicts .conflict-item[data-state="war"] .meter-fill{
+  animation: warFillPulse 1.15s ease-in-out infinite;
+}
+
+.panel-conflicts .conflict-item[data-state="war"] .meter-fill::after{
+  opacity: .38; /* texture un peu plus visible */
+}
+
+@keyframes warFillPulse{
+  0%,100%{ filter: brightness(1); }
+  50%{ filter: brightness(1.18); }
+}
 
 
 
@@ -854,6 +867,7 @@
 </script>
 </body>
 </html>
+
 
 
 
