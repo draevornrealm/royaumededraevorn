@@ -2028,96 +2028,180 @@ body[data-faction="neutral"]{
 }
 
 /* =========================================================
-   🟢 BADGE RAS — FUSION PROPRE
-   (n'affecte PAS la carte)
+   FIX FINAL — RAS VERT + BADGE RAS (sans éteindre les couleurs)
+   À COLLER TOUT EN BAS
    ========================================================= */
 
-.ibadge.badge-ras{
+/* ---------- 1) Rétablit les halos de la BOARD si un reset les a éteints ---------- */
+.event-board::before{
+  opacity: .85 !important;              /* ton reset final met opacity:0 */
+  pointer-events: none !important;
+}
+
+/* Support des 2 conventions : .ras ET .alert-ras */
+.event-board.ras::before,
+.event-board.alert-ras::before{
+  background: radial-gradient(circle at 25% 15%,
+    rgba(0,255,140,.18),
+    rgba(0,0,0,0) 55%) !important;
+}
+
+/* ---------- 2) CARTE RAS : on garde ton effet, mais on sécurise les layers ---------- */
+.event-card.event-alert-ras{
   position: relative;
   overflow: hidden;
-  isolation: isolate;
+
+  border: 1px solid rgba(0, 255, 140, 0.35) !important;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 255, 140, 0.08),
+    rgba(8, 12, 22, 0.10) 55%,
+    rgba(0,0,0,0)
+  ) !important;
+
+  animation: pulseRasGreen 2.4s ease-in-out infinite !important;
+}
+
+/* halo vert large (reste DANS la bande) — derrière le contenu */
+.event-card.event-alert-ras::after{
+  content:"" !important;
+  position:absolute !important;
+  inset:-26px !important;
+  pointer-events:none !important;
+
+  background: radial-gradient(circle at 30% 20%,
+    rgba(0, 255, 140, 0.22),
+    rgba(0,0,0,0) 62%) !important;
+
+  filter: blur(16px) !important;
+  opacity: .65 !important;
+  z-index: 0 !important;
+}
+
+/* bande blanche qui passe — derrière le texte (sinon ça “grise”) */
+.event-card.event-alert-ras::before{
+  content:"" !important;
+  position:absolute !important;
+  top:0 !important;
+  left:-120% !important;
+  width: 60% !important;
+  height: 100% !important;
+  pointer-events:none !important;
 
   background: linear-gradient(
-    135deg,
+    120deg,
+    transparent,
+    rgba(255,255,255,0.32),
+    transparent
+  ) !important;
+
+  transform: skewX(-20deg) !important;
+  animation: shineRasGreen 2.8s linear infinite !important;
+  z-index: 0 !important;
+}
+
+/* assure que le contenu de la carte reste AU-DESSUS */
+.event-card.event-alert-ras > *{
+  position: relative;
+  z-index: 1;
+}
+
+/* Pulse vert doux */
+@keyframes pulseRasGreen{
+  0%   { box-shadow: 0 0 0 rgba(0,255,140,0.16); filter: brightness(1.00); }
+  50%  { box-shadow: 0 0 18px rgba(0,255,140,0.28); filter: brightness(1.06); }
+  100% { box-shadow: 0 0 0 rgba(0,255,140,0.16); filter: brightness(1.00); }
+}
+@keyframes shineRasGreen{
+  0%   { left: -120%; }
+  100% { left: 120%; }
+}
+
+/* ---------- 3) BADGE RAS : “allumé” + clignotement léger + shine, SANS éteindre ---------- */
+.ibadge.badge-ras{
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+
+  /* force la couleur (sinon .ibadge de base reprend le gris) */
+  background: linear-gradient(135deg,
     rgba(0,255,140,0.22),
     rgba(0,110,70,0.28)
-  );
-  border: 1px solid rgba(0,255,140,0.70);
-  color: #eafff6;
-  font-weight: 900;
+  ) !important;
 
-  /* glow externe SANS filter global */
+  border-color: rgba(0,255,140,0.70) !important;
+  color: rgba(235,255,245,0.98) !important;
+  font-weight: 900 !important;
+
+  /* glow externe doux (sans filter pour éviter les interactions) */
   box-shadow:
-    0 0 8px rgba(0,255,140,.25),
-    0 0 18px rgba(0,255,140,.12);
+    0 0 8px rgba(0,255,140,.22),
+    0 0 18px rgba(0,255,140,.12) !important;
 
-  animation: badgeRasPulse 2.2s ease-in-out infinite;
+  animation: badgeRasPulse 2.2s ease-in-out infinite !important;
 }
 
-/* Halo interne */
+/* halo interne (DERRIÈRE le texte) */
 .ibadge.badge-ras::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:999px;
-  z-index:0;
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  border-radius:999px !important;
+  pointer-events:none !important;
 
-  background: radial-gradient(
-    circle at 50% 50%,
-    rgba(0,255,140,0.38),
-    rgba(0,255,140,0.12) 55%,
-    rgba(0,0,0,0) 72%
-  );
+  background: radial-gradient(circle at 50% 50%,
+    rgba(0,255,140,0.40),
+    rgba(0,255,140,0.14) 55%,
+    rgba(0,0,0,0) 72%) !important;
 
-  filter: blur(8px);
-  opacity:.6;
-  pointer-events:none;
+  filter: blur(10px) !important;
+  transform: scale(1.18) !important;
+  opacity: .62 !important;
+
+  z-index: -1 !important; /* <- clé : ne pas “manger” la couleur */
 }
 
-/* Bande blanche */
+/* bande blanche (au-dessus du halo mais sous le texte) */
 .ibadge.badge-ras::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:999px;
-  z-index:1;
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  border-radius:999px !important;
+  pointer-events:none !important;
 
-  background: linear-gradient(
-    110deg,
+  background: linear-gradient(110deg,
     rgba(255,255,255,0) 0%,
     rgba(255,255,255,.28) 18%,
-    rgba(255,255,255,0) 36%
-  );
+    rgba(255,255,255,0) 36%) !important;
 
-  opacity:0;
-  transform: translateX(-120%);
-  pointer-events:none;
-  mix-blend-mode: normal;
+  opacity:0 !important;
+  transform: translateX(-120%) !important;
+  mix-blend-mode: normal !important;
 
-  animation: badgeRasShimmer 3s ease-in-out infinite;
+  animation: badgeRasShimmer 3s ease-in-out infinite !important;
+  z-index: 0 !important;
 }
 
-/* Pulse léger (SANS filter) */
+/* texte au-dessus */
+.ibadge.badge-ras{
+  z-index: 1;
+}
+
 @keyframes badgeRasPulse{
   0%,100%{
-    box-shadow:
-      0 0 8px rgba(0,255,140,.20),
-      0 0 18px rgba(0,255,140,.10);
+    box-shadow: 0 0 8px rgba(0,255,140,.18), 0 0 18px rgba(0,255,140,.10);
   }
   50%{
-    box-shadow:
-      0 0 14px rgba(0,255,140,.35),
-      0 0 28px rgba(0,255,140,.18);
+    box-shadow: 0 0 14px rgba(0,255,140,.32), 0 0 28px rgba(0,255,140,.16);
   }
 }
-
-/* Shine */
 @keyframes badgeRasShimmer{
   0%   { opacity:0; transform: translateX(-120%); }
   22%  { opacity:.45; }
   55%  { opacity:0; transform: translateX(120%); }
   100% { opacity:0; transform: translateX(120%); }
 }
+
 
 
 
