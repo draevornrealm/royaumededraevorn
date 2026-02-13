@@ -686,81 +686,29 @@
    ========================= */
 
 /* --- WAR --- */
-.conflict-item[data-state="war"] .conflict-status{
-  border-color: rgba(255,70,70,.45);
-  background: rgba(255,70,70,.14);
-  color: rgba(255,220,220,.98);
-}
 .conflict-item[data-state="war"] .meter-fill{
-  background: linear-gradient(90deg, rgba(255,70,70,.25), rgba(255,150,90,.22));
-}
-.conflict-item[data-state="war"]::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: radial-gradient(circle at 30% 20%, rgba(255,70,70,.18), transparent 55%);
-  opacity:.65;
-  pointer-events:none;
-  animation: warPulse 1.35s ease-in-out infinite;
+  background: linear-gradient(90deg, rgba(255,70,70,.55), rgba(255,170,90,.45));
+  box-shadow: 0 0 18px rgba(255,70,70,.22), 0 0 0 1px rgba(255,255,255,.10) inset;
 }
 
 /* --- TENSION --- */
-.conflict-item[data-state="tension"] .conflict-status{
-  border-color: rgba(255,180,60,.45);
-  background: rgba(255,180,60,.14);
-  color: rgba(255,235,190,.98);
-}
 .conflict-item[data-state="tension"] .meter-fill{
-  background: linear-gradient(90deg, rgba(255,180,60,.22), rgba(255,230,120,.18));
-}
-.conflict-item[data-state="tension"] .meter-track::after{
-  content:"";
-  position:absolute;
-  inset:-30% -40%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent);
-  transform: translateX(-35%);
-  animation: shimmer 2.2s linear infinite;
-  pointer-events:none;
+  background: linear-gradient(90deg, rgba(255,180,60,.55), rgba(255,235,120,.40));
+  box-shadow: 0 0 18px rgba(255,180,60,.20), 0 0 0 1px rgba(255,255,255,.10) inset;
 }
 
 /* --- SECRET --- */
-.conflict-item[data-state="secret"] .conflict-status{
-  border-color: rgba(150,120,255,.45);
-  background: rgba(150,120,255,.14);
-  color: rgba(235,230,255,.98);
-}
 .conflict-item[data-state="secret"] .meter-fill{
-  background: linear-gradient(90deg, rgba(150,120,255,.22), rgba(110,180,255,.18));
-}
-.conflict-item[data-state="secret"] .meter-track::after{
-  content:"";
-  position:absolute;
-  top:-120%;
-  left:-20%;
-  width:140%;
-  height:240%;
-  background: linear-gradient(180deg, transparent, rgba(255,255,255,.10), transparent);
-  animation: scan 2.6s ease-in-out infinite;
-  pointer-events:none;
+  background: linear-gradient(90deg, rgba(150,120,255,.55), rgba(110,180,255,.40));
+  box-shadow: 0 0 18px rgba(150,120,255,.20), 0 0 0 1px rgba(255,255,255,.10) inset;
 }
 
 /* --- RESOLVED --- */
-.conflict-item[data-state="resolved"] .conflict-status{
-  border-color: rgba(80,220,140,.45);
-  background: rgba(80,220,140,.12);
-  color: rgba(210,255,235,.98);
-}
 .conflict-item[data-state="resolved"] .meter-fill{
-  background: linear-gradient(90deg, rgba(80,220,140,.22), rgba(120,255,200,.18));
+  background: linear-gradient(90deg, rgba(80,220,140,.55), rgba(140,255,200,.40));
+  box-shadow: 0 0 18px rgba(80,220,140,.18), 0 0 0 1px rgba(255,255,255,.10) inset;
 }
-.conflict-item[data-state="resolved"]::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: radial-gradient(circle at 70% 10%, rgba(80,220,140,.12), transparent 55%);
-  opacity:.55;
-  pointer-events:none;
-}
+
 
 /* Animations */
 @keyframes warPulse{
@@ -791,6 +739,7 @@
 </script>
 </body>
 </html>
+
 
 
 
