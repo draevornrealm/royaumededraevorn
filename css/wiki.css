@@ -2027,47 +2027,80 @@ body[data-faction="neutral"]{
   background: radial-gradient(circle at 25% 15%, rgba(255,255,255,.10), rgba(0,0,0,0) 55%) !important;
 }
 
-/* --- RAS (alias ras + alert-ras) --- */
-.event-board.ras::before,
-.event-board.alert-ras::before{
-  background: radial-gradient(circle at 25% 15%, rgba(0,255,140,.18), rgba(0,0,0,0) 55%) !important;
-}
-.event-board.ras .event-toggle input:checked + .event-toggle-ui::after,
-.event-board.alert-ras .event-toggle input:checked + .event-toggle-ui::after{
-  background: rgba(0,255,140,.35) !important;
+/* =========================================================
+   🟢 RAS — effet "LIVE" (comme les autres mais pas alerte)
+   - bande blanche qui passe
+   - pulse vert doux
+   - bande/halo vert sur la carte
+   IMPORTANT: s'applique sur la carte, pas sur les badges
+   ========================================================= */
+
+.event-card.event-alert-ras{
+  position: relative;
+  overflow: hidden;
+
+  border: 1px solid rgba(0, 255, 140, 0.35);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 255, 140, 0.08),
+    rgba(8, 12, 22, 0.10) 55%,
+    rgba(0,0,0,0)
+  );
+
+  /* pulse doux (pas "alerte") */
+  animation: pulseRasGreen 2.4s ease-in-out infinite;
 }
 
-/* --- JAUNE --- */
-.event-board.alert-yellow::before{
-  background: radial-gradient(circle at 25% 15%, rgba(255,200,0,.22), rgba(0,0,0,0) 55%) !important;
-}
-.event-board.alert-yellow .event-toggle input:checked + .event-toggle-ui::after{
-  background: rgba(255,200,0,.35) !important;
+/* halo vert large (reste DANS la bande) */
+.event-card.event-alert-ras::after{
+  content:"";
+  position:absolute;
+  inset:-26px;
+  pointer-events:none;
+
+  background: radial-gradient(
+    circle at 30% 20%,
+    rgba(0, 255, 140, 0.22),
+    rgba(0,0,0,0) 62%
+  );
+
+  filter: blur(16px);
+  opacity: .65;
 }
 
-/* --- ORANGE --- */
-.event-board.alert-orange::before{
-  background: radial-gradient(circle at 25% 15%, rgba(255,140,0,.24), rgba(0,0,0,0) 55%) !important;
-}
-.event-board.alert-orange .event-toggle input:checked + .event-toggle-ui::after{
-  background: rgba(255,140,0,.35) !important;
+/* bande blanche qui passe */
+.event-card.event-alert-ras::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-120%;
+  width: 60%;
+  height: 100%;
+  pointer-events:none;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.32),
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: shineRasGreen 2.8s linear infinite;
 }
 
-/* --- ROUGE --- */
-.event-board.alert-red::before{
-  background: radial-gradient(circle at 25% 15%, rgba(255,50,50,.26), rgba(0,0,0,0) 55%) !important;
-}
-.event-board.alert-red .event-toggle input:checked + .event-toggle-ui::after{
-  background: rgba(255,90,90,.35) !important;
+/* Pulse vert doux */
+@keyframes pulseRasGreen{
+  0%   { box-shadow: 0 0 0 rgba(0,255,140,0.16); filter: brightness(1.00); }
+  50%  { box-shadow: 0 0 18px rgba(0,255,140,0.28); filter: brightness(1.06); }
+  100% { box-shadow: 0 0 0 rgba(0,255,140,0.16); filter: brightness(1.00); }
 }
 
-/* --- NOIR --- */
-.event-board.alert-black::before{
-  background: radial-gradient(circle at 25% 15%, rgba(200,220,255,.10), rgba(0,0,0,0) 60%) !important;
+/* Shine */
+@keyframes shineRasGreen{
+  0%   { left: -120%; }
+  100% { left: 120%; }
 }
-.event-board.alert-black .event-toggle input:checked + .event-toggle-ui::after{
-  background: rgba(180,180,180,.28) !important;
-}
+
 
 
 
