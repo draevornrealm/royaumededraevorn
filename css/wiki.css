@@ -2028,89 +2028,77 @@ body[data-faction="neutral"]{
 }
 
 /* =========================================================
-   🟢 BADGE RAS — FUSION DES EFFETS
-   (pulse + halo + shine + glow externe)
+   🟢 RAS — effet "LIVE" (comme les autres mais pas alerte)
+   - bande blanche qui passe
+   - pulse vert doux
+   - bande/halo vert sur la carte
+   IMPORTANT: s'applique sur la carte, pas sur les badges
    ========================================================= */
 
-.ibadge.badge-ras{
+.event-card.event-alert-ras{
   position: relative;
   overflow: hidden;
-  isolation: isolate;
 
-  /* on garde ton style de base */
-  animation: badgeRasPulse 2.2s ease-in-out infinite;
+  border: 1px solid rgba(0, 255, 140, 0.35);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 255, 140, 0.08),
+    rgba(8, 12, 22, 0.10) 55%,
+    rgba(0,0,0,0)
+  );
 
-  /* glow externe doux (comme les autres niveaux) */
-  filter:
-    drop-shadow(0 0 10px rgba(0,255,140,.28))
-    drop-shadow(0 0 22px rgba(0,255,140,.16));
+  /* pulse doux (pas "alerte") */
+  animation: pulseRasGreen 2.4s ease-in-out infinite;
 }
 
-/* Halo interne (reste dans la pilule) */
-.ibadge.badge-ras::before{
+/* halo vert large (reste DANS la bande) */
+.event-card.event-alert-ras::after{
   content:"";
   position:absolute;
-  inset:0;
-  border-radius:999px;
-  z-index:0;
+  inset:-26px;
+  pointer-events:none;
 
   background: radial-gradient(
-    circle at 50% 50%,
-    rgba(0,255,140,0.40),
-    rgba(0,255,140,0.14) 55%,
-    rgba(0,0,0,0) 72%
+    circle at 30% 20%,
+    rgba(0, 255, 140, 0.22),
+    rgba(0,0,0,0) 62%
   );
 
-  filter: blur(10px);
-  opacity:.65;
-  transform: scale(1.15);
+  filter: blur(16px);
+  opacity: .65;
 }
 
-/* Bande blanche qui traverse (comme jaune/orange/rouge) */
-.ibadge.badge-ras::after{
+/* bande blanche qui passe */
+.event-card.event-alert-ras::before{
   content:"";
   position:absolute;
-  inset:0;
-  border-radius:999px;
-  z-index:1;
+  top:0;
+  left:-120%;
+  width: 60%;
+  height: 100%;
+  pointer-events:none;
 
   background: linear-gradient(
-    110deg,
-    rgba(255,255,255,0) 0%,
-    rgba(255,255,255,.30) 18%,
-    rgba(255,255,255,0) 36%
+    120deg,
+    transparent,
+    rgba(255,255,255,0.32),
+    transparent
   );
-
-  opacity:0;
-  transform: translateX(-120%);
-  pointer-events:none;
-  mix-blend-mode: normal;
-
-  animation: badgeRasShimmer 3s ease-in-out infinite;
+  transform: skewX(-20deg);
+  animation: shineRasGreen 2.8s linear infinite;
 }
 
-/* Pulse vert (identique esprit aux autres, pas alerte) */
-@keyframes badgeRasPulse{
-  0%,100%{
-    filter:
-      brightness(1.00) saturate(1.05)
-      drop-shadow(0 0 10px rgba(0,255,140,.25))
-      drop-shadow(0 0 22px rgba(0,255,140,.14));
-  }
-  50%{
-    filter:
-      brightness(1.12) saturate(1.18)
-      drop-shadow(0 0 14px rgba(0,255,140,.40))
-      drop-shadow(0 0 30px rgba(0,255,140,.22));
-  }
+/* Pulse vert doux */
+@keyframes pulseRasGreen{
+  0%   { box-shadow: 0 0 0 rgba(0,255,140,0.16); filter: brightness(1.00); }
+  50%  { box-shadow: 0 0 18px rgba(0,255,140,0.28); filter: brightness(1.06); }
+  100% { box-shadow: 0 0 0 rgba(0,255,140,0.16); filter: brightness(1.00); }
 }
 
 /* Shine */
-@keyframes badgeRasShimmer{
-  0%   { opacity:0; transform: translateX(-120%); }
-  22%  { opacity:.50; }
-  55%  { opacity:0; transform: translateX(120%); }
-  100% { opacity:0; transform: translateX(120%); }
+@keyframes shineRasGreen{
+  0%   { left: -120%; }
+  100% { left: 120%; }
 }
 
 
