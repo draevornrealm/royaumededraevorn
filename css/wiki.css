@@ -1786,6 +1786,215 @@ body[data-faction="neutral"]{
   0%{ left:-60%; }
   100%{ left:120%; }
 }
+/* =========================================================
+   INDEX — CONFLITS LIVE (style natif wiki)
+   ========================================================= */
+.conflicts-live .content{ padding-top: 8px; }
+
+.clive-grid{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+/* item = carte native */
+.clive-item{
+  display:block;
+  text-decoration:none;
+  color: inherit;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.03);
+  padding: 10px;
+  position: relative;
+  overflow:hidden;
+  transition: transform .15s ease, border-color .15s ease, background .15s ease;
+}
+.clive-item:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.05);
+  border-color: rgba(255,255,255,.16);
+}
+
+/* top row */
+.clive-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom: 8px;
+}
+
+.clive-tag{
+  font-size:.72rem;
+  font-weight: 900;
+  padding: 5px 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  opacity:.92;
+}
+.clive-tag.live{
+  border-color: rgba(255,255,255,.20);
+  background: rgba(255,255,255,.08);
+}
+.clive-status{
+  font-size:.72rem;
+  font-weight: 900;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(0,0,0,.18);
+  opacity:.95;
+  white-space: nowrap;
+}
+
+/* duel */
+.clive-duel{
+  display:grid;
+  grid-template-columns: 1fr 44px 1fr;
+  gap:10px;
+  align-items:center;
+  margin-bottom: 10px;
+}
+
+.clive-side{
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.16);
+  padding: 8px 10px;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  min-width: 0;
+}
+
+.clive-badge{
+  font-weight: 900;
+  letter-spacing:.2px;
+  font-size:.78rem;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  white-space: nowrap;
+  overflow:hidden;
+  text-overflow: ellipsis;
+}
+
+.clive-sub{
+  opacity:.82;
+  font-weight: 800;
+  font-size:.78rem;
+}
+
+.clive-vs{
+  text-align:center;
+  font-weight: 1000;
+  letter-spacing: 1px;
+  opacity:.55;
+  font-size:.78rem;
+}
+
+/* side accents */
+.clive-side.pirate{
+  border-color: rgba(255,90,90,.18);
+  box-shadow: inset 0 0 0 1px rgba(255,90,90,.06);
+}
+.clive-side.marine{
+  border-color: rgba(79,156,255,.18);
+  box-shadow: inset 0 0 0 1px rgba(79,156,255,.06);
+}
+.clive-side.neutral{
+  border-color: rgba(255,255,255,.16);
+}
+
+/* meter */
+.clive-track{
+  height: 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  overflow:hidden;
+  position: relative;
+}
+.clive-fill{
+  height:100%;
+  width:0%;
+  border-radius: 999px;
+  transition: width .75s cubic-bezier(.22,.9,.2,1);
+  position:relative;
+}
+.clive-fill::before{
+  content:"";
+  position:absolute;
+  inset:1px 1px auto 1px;
+  height:45%;
+  border-radius:999px;
+  background: linear-gradient(180deg, rgba(255,255,255,.20), rgba(255,255,255,0));
+  opacity:.95;
+  pointer-events:none;
+}
+
+.clive-meta{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:6px;
+  font-size:.78rem;
+  opacity:.90;
+  font-weight: 900;
+}
+.clive-val{ opacity:1; }
+
+/* ===== States ===== */
+.clive-item[data-state="war"] .clive-fill{
+  background: linear-gradient(90deg, rgba(255,70,70,.58), rgba(255,170,90,.38));
+  box-shadow: 0 0 18px rgba(255,70,70,.18);
+}
+.clive-item[data-state="war"] .clive-status{
+  border-color: rgba(255,70,70,.40);
+  background: rgba(255,70,70,.10);
+}
+/* clignote uniquement pour war (propre) */
+.clive-item[data-state="war"]{
+  animation: cliveWarPulse 1.25s ease-in-out infinite;
+}
+@keyframes cliveWarPulse{
+  0%,100%{ filter: brightness(1); }
+  50%{ filter: brightness(1.10); }
+}
+
+.clive-item[data-state="truce"] .clive-fill{
+  background: linear-gradient(90deg, rgba(255,200,60,.52), rgba(255,240,140,.30));
+  box-shadow: 0 0 14px rgba(255,200,60,.14);
+}
+.clive-item[data-state="truce"] .clive-status{
+  border-color: rgba(255,200,60,.38);
+  background: rgba(255,200,60,.10);
+}
+
+.clive-item[data-state="secret"] .clive-fill{
+  background: linear-gradient(90deg, rgba(150,120,255,.52), rgba(110,180,255,.28));
+  box-shadow: 0 0 14px rgba(150,120,255,.14);
+}
+.clive-item[data-state="secret"] .clive-status{
+  border-color: rgba(150,120,255,.38);
+  background: rgba(150,120,255,.10);
+}
+.clive-item[data-state="secret"] .clive-track::after{
+  content:"";
+  position:absolute;
+  inset:-30% -40%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent);
+  transform: translateX(-35%);
+  animation: cliveShimmer 2.4s linear infinite;
+  pointer-events:none;
+}
+@keyframes cliveShimmer{
+  0%{ transform: translateX(-35%); }
+  100%{ transform: translateX(35%); }
+}
+
 
 
 
