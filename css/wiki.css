@@ -2028,34 +2028,33 @@ body[data-faction="neutral"]{
 }
 
 /* =========================================================
-   🟢 BADGE RAS — FUSION (allumé + clignotement léger + shine)
-   Usage HTML: <span class="ibadge badge-ras">🟢 RAS</span>
+   🟢 BADGE RAS — FUSION PROPRE
+   (n'affecte PAS la carte)
    ========================================================= */
 
 .ibadge.badge-ras{
   position: relative;
-  overflow: hidden;      /* garde le shimmer dans la pilule */
+  overflow: hidden;
   isolation: isolate;
 
-  /* Base "allumé" */
-  background: linear-gradient(135deg,
+  background: linear-gradient(
+    135deg,
     rgba(0,255,140,0.22),
-    rgba(0,110,70,0.26)
+    rgba(0,110,70,0.28)
   );
-  border-color: rgba(0,255,140,0.70);
-  color: rgba(235,255,245,0.98);
+  border: 1px solid rgba(0,255,140,0.70);
+  color: #eafff6;
   font-weight: 900;
 
-  /* halo externe doux (comme les autres niveaux) */
-  filter:
-    drop-shadow(0 0 10px rgba(0,255,140,.22))
-    drop-shadow(0 0 22px rgba(0,255,140,.12));
+  /* glow externe SANS filter global */
+  box-shadow:
+    0 0 8px rgba(0,255,140,.25),
+    0 0 18px rgba(0,255,140,.12);
 
-  /* clignotement léger (pas alerte) */
-  animation: badgeRasGlow 2.2s ease-in-out infinite;
+  animation: badgeRasPulse 2.2s ease-in-out infinite;
 }
 
-/* Halo interne vert (reste DANS le badge) */
+/* Halo interne */
 .ibadge.badge-ras::before{
   content:"";
   position:absolute;
@@ -2063,19 +2062,19 @@ body[data-faction="neutral"]{
   border-radius:999px;
   z-index:0;
 
-  background: radial-gradient(circle at 50% 50%,
-    rgba(0,255,140,0.42),
-    rgba(0,255,140,0.14) 55%,
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(0,255,140,0.38),
+    rgba(0,255,140,0.12) 55%,
     rgba(0,0,0,0) 72%
   );
 
-  filter: blur(10px);
-  transform: scale(1.18);
-  opacity: .62;
+  filter: blur(8px);
+  opacity:.6;
   pointer-events:none;
 }
 
-/* Bande blanche qui passe (comme les autres) */
+/* Bande blanche */
 .ibadge.badge-ras::after{
   content:"";
   position:absolute;
@@ -2083,38 +2082,37 @@ body[data-faction="neutral"]{
   border-radius:999px;
   z-index:1;
 
-  background: linear-gradient(110deg,
+  background: linear-gradient(
+    110deg,
     rgba(255,255,255,0) 0%,
     rgba(255,255,255,.28) 18%,
     rgba(255,255,255,0) 36%
   );
 
-  opacity: 0;
+  opacity:0;
   transform: translateX(-120%);
   pointer-events:none;
   mix-blend-mode: normal;
 
-  animation: badgeRasShine 3.0s ease-in-out infinite;
+  animation: badgeRasShimmer 3s ease-in-out infinite;
 }
 
-/* Clignotement léger (brightness + glow externe) */
-@keyframes badgeRasGlow{
+/* Pulse léger (SANS filter) */
+@keyframes badgeRasPulse{
   0%,100%{
-    filter:
-      brightness(1.00) saturate(1.05)
-      drop-shadow(0 0 10px rgba(0,255,140,.20))
-      drop-shadow(0 0 22px rgba(0,255,140,.10));
+    box-shadow:
+      0 0 8px rgba(0,255,140,.20),
+      0 0 18px rgba(0,255,140,.10);
   }
   50%{
-    filter:
-      brightness(1.10) saturate(1.14)
-      drop-shadow(0 0 14px rgba(0,255,140,.34))
-      drop-shadow(0 0 30px rgba(0,255,140,.18));
+    box-shadow:
+      0 0 14px rgba(0,255,140,.35),
+      0 0 28px rgba(0,255,140,.18);
   }
 }
 
-/* Shine du badge */
-@keyframes badgeRasShine{
+/* Shine */
+@keyframes badgeRasShimmer{
   0%   { opacity:0; transform: translateX(-120%); }
   22%  { opacity:.45; }
   55%  { opacity:0; transform: translateX(120%); }
