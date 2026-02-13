@@ -28,6 +28,8 @@
       position: relative;
     }
 
+    /* NOTE : ce halo est rouge par défaut chez toi. On le laisse,
+       mais le board changera de classe (alert-yellow/orange/red/black) via JS/CSS global si tu l'as. */
     .event-board::before{
       content:"";
       position:absolute;
@@ -93,7 +95,6 @@
       font-weight: 800;
       opacity: .92;
     }
-
     .event-toggle input{ display:none; }
 
     .event-toggle-ui{
@@ -162,16 +163,7 @@
       line-height: 1.4rem;
     }
 
-    .event-actions{ margin-top: 8px; }
-    .event-link{
-      font-weight: 900;
-      text-decoration:none;
-      color: inherit;
-      opacity:.95;
-    }
-    .event-link:hover{ opacity: 1; text-decoration: underline; }
-
-    /* Badge danger */
+    /* Badge */
     .event-badge{
       display:inline-flex;
       align-items:center;
@@ -182,17 +174,6 @@
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
       font-weight: 900;
-    }
-
-    .event-badge-ico{
-      width: 22px;
-      height: 22px;
-      border-radius: 8px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.18);
     }
 
     /* Timer */
@@ -222,138 +203,17 @@
       opacity:.80;
     }
 
-    /* Catastrophe rouge + brillance + clignotement */
-    .event-catastrophe{
-      border-color: rgba(255,90,90,.22);
-      box-shadow: inset 0 0 0 1px rgba(255,90,90,.10);
-      animation: catastrophePulse 1.25s ease-in-out infinite;
-    }
-
-    .event-catastrophe::before{
-      content:"";
-      position:absolute;
-      inset:-18px;
-      background: radial-gradient(circle at 30% 20%, rgba(255,60,60,.35), rgba(0,0,0,0) 62%);
-      filter: blur(16px);
-      opacity:.75;
-      pointer-events:none;
-    }
-
-    .event-catastrophe::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background: linear-gradient(110deg,
-        rgba(255,255,255,0) 0%,
-        rgba(255,255,255,.22) 18%,
-        rgba(255,255,255,0) 36%);
-      opacity: 0;
-      transform: translateX(-120%);
-      mix-blend-mode: screen;
-      pointer-events:none;
-      animation: catastropheShimmer 2.8s ease-in-out infinite;
-    }
-
-    .event-catastrophe .event-badge{
-      border-color: rgba(255,90,90,.45);
-      background: rgba(255,90,90,.12);
-    }
-    .event-catastrophe .event-badge-ico{
-      border-color: rgba(255,90,90,.45);
-      box-shadow: 0 0 18px rgba(255,60,60,.25);
-    }
-
-    @keyframes catastrophePulse{
-      0%,100%{ filter: brightness(1.00); }
-      50%{ filter: brightness(1.12); }
-    }
-
-    @keyframes catastropheShimmer{
-      0%   { opacity: 0; transform: translateX(-120%); }
-      22%  { opacity: .55; }
-      55%  { opacity: 0; transform: translateX(120%); }
-      100% { opacity: 0; transform: translateX(120%); }
-    }
-
     @media (max-width: 720px){
       .event-card{ flex-direction: column; }
       .event-right{ flex: 1 1 auto; justify-content: flex-start; }
       .event-timer{ text-align:left; }
-    }
-
-    /* =========================
-       SPOTLIGHTS (ton code)
-       ========================= */
-    .spotlight{
-      padding: 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      margin: 10px 0;
-    }
-    .spotlight .badges{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom: 10px; }
-    .spotlight h2{ margin: 6px 0 10px; }
-
-    .spotlight .row{
-      display:flex;
-      gap: 14px;
-      align-items: flex-start;
-    }
-    .spotlight .thumb{
-      width: 140px;
-      flex: 0 0 140px;
-    }
-    .spotlight .thumb img{
-      width: 100%;
-      height: auto;
-      display:block;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.14);
-      box-shadow: 0 12px 30px rgba(0,0,0,.45);
-    }
-    .spotlight .txt{
-      min-width: 0;
-      opacity: .92;
-      line-height: 1.55;
-    }
-    .spotlight .cta a{ font-weight: 800; }
-
-    .spotlight.marine{
-      border-color: rgba(79,156,255,.18);
-      box-shadow: inset 0 0 0 1px rgba(79,156,255,.10);
-    }
-    .spotlight.marine .thumb img{
-      border-color: rgba(79,156,255,.25);
-      box-shadow: 0 0 0 1px rgba(79,156,255,.10), 0 12px 30px rgba(0,0,0,.45);
-    }
-
-    .spotlight.pirate{
-      border-color: rgba(255,90,90,.18);
-      box-shadow: inset 0 0 0 1px rgba(255,90,90,.10);
-    }
-    .spotlight.pirate .thumb img{
-      border-color: rgba(255,90,90,.25);
-      box-shadow: 0 0 0 1px rgba(255,90,90,.10), 0 12px 30px rgba(0,0,0,.45);
-    }
-
-    .spotlight.neutral{
-      border-color: rgba(255,255,255,.16);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
-    }
-    .spotlight.neutral .thumb img{
-      border-color: rgba(255,255,255,.22);
-      box-shadow: 0 0 0 1px rgba(255,255,255,.10), 0 12px 30px rgba(0,0,0,.45);
-    }
-
-    @media (max-width: 720px){
-      .spotlight .row{ flex-direction: column; }
-      .spotlight .thumb{ width: 100%; flex: 0 0 auto; max-width: 280px; }
     }
   </style>
 </head>
 
 <body>
   <div class="wiki-container">
+
     <div class="wiki-hero">
       <div>
         <h1>Wiki de l’Univers</h1>
@@ -365,271 +225,104 @@
       </div>
     </div>
 
-<!-- ======================================================
-     ✅ ZONE ÉVÈNEMENTS (READY COPY/PASTE)
-     - Board auto: BLACK > RED > ORANGE > YELLOW > RAS
-     - Audio loop + toggle ON/OFF
-     ====================================================== -->
-
-<section class="event-board alert-red" id="eventBoard" data-enabled="true" data-alert="red">
-  <div class="event-board-head">
-    <div class="event-board-title">
-      <span class="event-ico">⚠️</span>
-      <span>Évènements</span>
-      <span class="event-board-pill">Live</span>
-    </div>
-
-    <label class="event-toggle" title="Activer / Désactiver les évènements">
-      <input type="checkbox" id="eventToggle" checked>
-      <span class="event-toggle-ui"></span>
-      <span class="event-toggle-text">Actif</span>
-    </label>
-  </div>
-
-  <!-- IMPORTANT : l'id doit rester eventList -->
-  <div class="event-board-body" id="eventList">
-
-    <!-- 🟡 ALERTE JAUNE - Pirates -->
-    <article class="event-card event-alert-yellow">
-      <div class="event-left">
-        <div class="event-badge">
-          <span class="ibadge danger">🏴‍☠️ Pirates Draevorn</span>
-          <span class="ibadge badge-yellow fx">🟡 Surveillance</span>
+    <!-- =========================
+         ✅ ZONE ÉVÈNEMENTS
+         ========================= -->
+    <section class="event-board alert-red" id="eventBoard" data-enabled="true" data-alert="red">
+      <div class="event-board-head">
+        <div class="event-board-title">
+          <span class="event-ico">⚠️</span>
+          <span>Évènements</span>
+          <span class="event-board-pill">Live</span>
         </div>
 
-        <div class="event-title">Trêve de Guerre en cours</div>
-        <div class="event-desc">
-          Surveillance du périmètre extérieur. Trêve de guerre en cours. Les forces pirates restent en veille renforcée.
-          | Code Jaune — Ordonné par Bryworn.
-        </div>
+        <label class="event-toggle" title="Activer / Désactiver les évènements">
+          <input type="checkbox" id="eventToggle" checked>
+          <span class="event-toggle-ui"></span>
+          <span class="event-toggle-text">Actif</span>
+        </label>
       </div>
 
-      <div class="event-right">
-        <div class="event-timer">
-          <div class="event-timer-label">Niveau</div>
-          <div class="event-timer-value">JAUNE</div>
-          <div class="event-timer-sub">— vigilance accrue</div>
-        </div>
+      <div class="event-board-body" id="eventList">
+
+        <!-- 🟡 JAUNE - Pirates -->
+        <article class="event-card event-alert-yellow">
+          <div class="event-left">
+            <div class="event-badge">
+              <span class="ibadge danger">🏴‍☠️ Pirates Draevorn</span>
+              <span class="ibadge badge-yellow fx">🟡 Surveillance</span>
+            </div>
+
+            <div class="event-title">Trêve de Guerre en cours</div>
+            <div class="event-desc">
+              Surveillance du périmètre extérieur. Trêve de guerre en cours. Les forces pirates restent en veille renforcée.
+              | Code Jaune — Ordonné par Bryworn.
+            </div>
+          </div>
+
+          <div class="event-right">
+            <div class="event-timer">
+              <div class="event-timer-label">Niveau</div>
+              <div class="event-timer-value">JAUNE</div>
+              <div class="event-timer-sub">— vigilance accrue</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 🟡 JAUNE - Marines Kaelros -->
+        <article class="event-card event-alert-yellow">
+          <div class="event-left">
+            <div class="event-badge">
+              <span class="ibadge marine">⚓ Marines Kaelros</span>
+              <span class="ibadge badge-yellow fx">🟡 Surveillance</span>
+            </div>
+
+            <div class="event-title">Trêve de Guerre en cours</div>
+            <div class="event-desc">
+              Trêve de guerre en cours. Surveillance stratégique renforcée.
+              | Code Jaune — Ordonné par Kaelros Viremont.
+            </div>
+          </div>
+
+          <div class="event-right">
+            <div class="event-timer">
+              <div class="event-timer-label">Niveau</div>
+              <div class="event-timer-value">JAUNE</div>
+              <div class="event-timer-sub">— surveillance active</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 🔴 ROUGE - Marines Mondiale -->
+        <article class="event-card event-alert-red">
+          <div class="event-left">
+            <div class="event-badge">
+              <span class="ibadge marine">⚓ Marines Mondiale</span>
+              <span class="ibadge badge-red fx">🔴 Alerte Maximale</span>
+            </div>
+
+            <div class="event-title">Opération navale déclenchée</div>
+            <div class="event-desc">
+              Intervention stratégique engagée. Déploiement immédiat des escadrons d’élite et verrouillage des zones maritimes.
+              | Code Rouge — Ordonné par Kael D. Abyss.
+            </div>
+          </div>
+
+          <div class="event-right">
+            <div class="event-timer">
+              <div class="event-timer-label">Niveau</div>
+              <div class="event-timer-value">ROUGE</div>
+              <div class="event-timer-sub">— état d’urgence absolu</div>
+            </div>
+          </div>
+        </article>
+
       </div>
-    </article>
+    </section>
 
-    <!-- 🟡 ALERTE JAUNE - Marines Kaelros -->
-    <article class="event-card event-alert-yellow">
-      <div class="event-left">
-        <div class="event-badge">
-          <span class="ibadge marine">⚓ Marines Kaelros</span>
-          <span class="ibadge badge-yellow fx">🟡 Surveillance</span>
-        </div>
-
-        <div class="event-title">Trêve de Guerre en cours</div>
-        <div class="event-desc">
-          Trêve de guerre en cours. Surveillance stratégique renforcée.
-          | Code Jaune — Ordonné par Kaelros Viremont.
-        </div>
-      </div>
-
-      <div class="event-right">
-        <div class="event-timer">
-          <div class="event-timer-label">Niveau</div>
-          <div class="event-timer-value">JAUNE</div>
-          <div class="event-timer-sub">— surveillance active</div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 🔴 ALERTE ROUGE - Marines Mondiale -->
-    <article class="event-card event-alert-red">
-      <div class="event-left">
-        <div class="event-badge">
-          <span class="ibadge marine">⚓ Marines Mondiale</span>
-          <span class="ibadge badge-red fx">🔴 Alerte Maximale</span>
-        </div>
-
-        <div class="event-title">Opération navale déclenchée</div>
-        <div class="event-desc">
-          Intervention stratégique engagée. Déploiement immédiat des escadrons d’élite et verrouillage des zones maritimes.
-          | Code Rouge — Ordonné par Kael D. Abyss.
-        </div>
-      </div>
-
-      <div class="event-right">
-        <div class="event-timer">
-          <div class="event-timer-label">Niveau</div>
-          <div class="event-timer-value">ROUGE</div>
-          <div class="event-timer-sub">— état d’urgence absolu</div>
-        </div>
-      </div>
-    </article>
-
-  </div>
-</section>
-
-<!-- ======================================================
-     ✅ SCRIPT ÉVÈNEMENTS (TOUT EN BAS, avant </body>)
-     - Toggle + Audio loop + Auto override niveau
-     ====================================================== -->
-<script>
-(function(){
-  const board  = document.getElementById("eventBoard");
-  const toggle = document.getElementById("eventToggle");
-  const list   = document.getElementById("eventList");
-  if(!board || !toggle || !list) return;
-
-  const STORAGE_KEY = "wiki_events_enabled";
-
-  // =========================
-  // AUDIO LOOP (ALERTE)
-  // =========================
-  const loopSrc = {
-    ras:    "",
-    yellow: "/royaumededraevorn/audio/alert-jaune.wav",
-    orange: "/royaumededraevorn/audio/alert-orange.wav",
-    // Remplace si tu as les vrais fichiers :
-    // red:   "/royaumededraevorn/audio/alert-red.wav",
-    // black: "/royaumededraevorn/audio/alert-black.wav",
-    red:    "/royaumededraevorn/audio/alert-orange.wav",
-    black:  "/royaumededraevorn/audio/alert-orange.wav",
-  };
-
-  let audioUnlocked = false;
-  const loop = new Audio();
-  loop.loop = true;
-  loop.volume = 0.55;
-
-  function unlockAudioOnce(){
-    if(audioUnlocked) return;
-    audioUnlocked = true;
-
-    try{
-      loop.muted = true;
-      loop.src = loopSrc.yellow || "";
-      loop.play().then(() => {
-        loop.pause();
-        loop.currentTime = 0;
-        loop.muted = false;
-        syncLoop();
-      }).catch(()=>{ loop.muted = false; });
-    }catch(e){}
-  }
-
-  window.addEventListener("pointerdown", unlockAudioOnce, { once:true });
-  window.addEventListener("keydown", unlockAudioOnce, { once:true });
-
-  // =========================
-  // NIVEAU GLOBAL (override)
-  // BLACK > RED > ORANGE > YELLOW > RAS
-  // =========================
-  function levelFromCards(){
-    if(document.querySelector(".event-card.event-alert-black"))  return "black";
-    if(document.querySelector(".event-card.event-alert-red"))    return "red";
-    if(document.querySelector(".event-card.event-alert-orange")) return "orange";
-    if(document.querySelector(".event-card.event-alert-yellow")) return "yellow";
-    if(document.querySelector(".event-card.event-ras"))          return "ras";
-    return "ras";
-  }
-
-  function applyBoardLevelFromCards(){
-    const lvl = levelFromCards();
-
-    board.setAttribute("data-alert", lvl);
-    board.classList.remove("ras","alert-yellow","alert-orange","alert-red","alert-black");
-
-    if(lvl === "yellow") board.classList.add("alert-yellow");
-    else if(lvl === "orange") board.classList.add("alert-orange");
-    else if(lvl === "red") board.classList.add("alert-red");
-    else if(lvl === "black") board.classList.add("alert-black");
-    else board.classList.add("ras");
-
-    return lvl;
-  }
-
-  function isEventsEnabled(){
-    return board.dataset.enabled !== "false" && toggle.checked;
-  }
-
-  function stopLoop(){
-    try{
-      loop.pause();
-      loop.currentTime = 0;
-    }catch(e){}
-  }
-
-  function playLoopFor(level){
-    const src = loopSrc[level] || "";
-    if(!src){ stopLoop(); return; }
-
-    const alreadySame = loop.src && loop.src.includes(src);
-    if(alreadySame && !loop.paused) return;
-
-    try{
-      loop.pause();
-      loop.currentTime = 0;
-      loop.src = src;
-
-      if(!audioUnlocked) return;
-      loop.play().catch(()=>{});
-    }catch(e){}
-  }
-
-  function syncLoop(){
-    const lvl = applyBoardLevelFromCards();
-    const on  = isEventsEnabled();
-
-    if(document.hidden){ stopLoop(); return; }
-    if(!on){ stopLoop(); return; }
-    if(lvl === "ras"){ stopLoop(); return; }
-
-    playLoopFor(lvl);
-  }
-
-  // Observe changements de classes/attributs du board
-  const obs = new MutationObserver(syncLoop);
-  obs.observe(board, { attributes:true, attributeFilter:["class","data-alert","data-enabled"] });
-
-  // Observe ajout/suppression de cartes (override automatique)
-  const listObs = new MutationObserver(() => {
-    applyBoardLevelFromCards();
-    syncLoop();
-  });
-  listObs.observe(list, { childList:true, subtree:true });
-
-  document.addEventListener("visibilitychange", syncLoop);
-
-  // =========================
-  // TOGGLE (actif/inactif)
-  // =========================
-  function setEnabled(v){
-    board.dataset.enabled = v ? "true" : "false";
-    toggle.checked = !!v;
-    list.style.display = v ? "" : "none";
-
-    const txt = board.querySelector(".event-toggle-text");
-    if(txt) txt.textContent = v ? "Actif" : "Inactif";
-
-    try { localStorage.setItem(STORAGE_KEY, v ? "1" : "0"); } catch(e){}
-    syncLoop();
-  }
-
-  // Restore enabled
-  let enabled = true;
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if(saved === "0") enabled = false;
-  } catch(e){}
-  setEnabled(enabled);
-
-  toggle.addEventListener("change", () => setEnabled(toggle.checked));
-
-  // Initial
-  applyBoardLevelFromCards();
-  syncLoop();
-})();
-</script>
-
-
-  </div>
-</section>
-    
+    <!-- =========================
+         ✅ GRILLE PRINCIPALE
+         ========================= -->
     <div class="wiki-grid">
       <aside class="wiki-card wiki-sidebar">
         <h3>Navigation</h3>
@@ -645,405 +338,19 @@
       <main class="wiki-card wiki-article">
         <h3>À la une</h3>
         <div class="content">
-
-<hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
-
-<hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
-
-<!-- ✅ À LA UNE : HOUSE -->
-<section class="spotlight pirate">
-  <div class="badges">
-    <span class="badge">Pirates</span>
-    <span class="badge">Médecin</span>
-    <span class="badge">Diagnostic</span>
-  </div>
-
-  <h2>House — “Le Diagnosticien”</h2>
-
-  <div class="row">
-    <div class="thumb">
-      <img src="/royaumededraevorn/images/house.png" alt="House" loading="lazy">
-    </div>
-
-    <div class="txt">
-      Médecin de Draevorn, cynique et brillant. Spécialiste des <b>cas impossibles</b> en mer :
-      poisons, infections, malédictions et chirurgies de fortune.
-      <div class="cta" style="margin-top:8px;">
-        <a href="personnage-house.html">Lire l’article →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ✅ À LA UNE : KAEL D. ABYSS -->
-<section class="spotlight marine">
-  <div class="badges">
-    <span class="badge">Marine</span>
-    <span class="badge">Gouvernement Mondial</span>
-    <span class="badge">Boss Final</span>
-  </div>
-
-  <h2>Kael D. Abyss — “Le Souverain des Marées Noires”</h2>
-
-  <div class="row">
-    <div class="thumb">
-      <img src="/royaumededraevorn/images/abyss.png" alt="Kael D. Abyss" loading="lazy">
-    </div>
-
-    <div class="txt">
-      Amiral-Impérial affilié directement au <b>Gouvernement Mondial</b>.
-      On dit que sa présence <b>noircit la mer</b> et étouffe le vent.
-      Sabre noir <b>“Leviathan”</b>, <b>Haki des Rois</b> écrasant, pouvoir des abysses (gravité / obscurité marine).
-      <div class="cta" style="margin-top:8px;">
-        <a href="personnage-abyss.html">Lire l’article →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
-
-
-<!-- ✅ À LA UNE : ORIGINS -->
-<section class="spotlight pirate">
-  <div class="badges">
-    <span class="badge">Pirates</span>
-    <span class="badge">Yonkō</span>
-    <span class="badge">Dieu Solaire</span>
-  </div>
-
-  <h2>Origins — “Le Dieu Solaire”</h2>
-
-  <div class="row">
-    <div class="thumb">
-      <img src="/royaumededraevorn/images/origins.png" alt="Origins" loading="lazy">
-    </div>
-
-    <div class="txt">
-      Empereur des Mers (Yonkō) maniant le <b>Hito Hito no Mi, Modèle : Nika</b> (Zoan Mythique).
-      Une présence solaire, imprévisible, qui refuse toute justice imposée.
-      <div class="cta" style="margin-top:8px;">
-        <a href="personnage-origins.html">Lire l’article →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-          <!-- ✅ À LA UNE : KAELROS -->
-          <section class="spotlight marine">
-            <div class="badges">
-              <span class="badge">Marine</span>
-              <span class="badge">Arc principal</span>
-            </div>
-
-            <h2>Kaelros Viremont — “Le Régent des Mers”</h2>
-
-            <div class="row">
-              <div class="thumb">
-                <img src="/royaumededraevorn/images/kaelros.png" alt="Kaelros Viremont" loading="lazy">
-              </div>
-
-              <div class="txt">
-                Grand Amiral Suprême, incarnation de la <b>Justice de Domination</b>.
-                Antagoniste central face aux pirates et à la liberté.
-                <div class="cta" style="margin-top:8px;">
-                  <a href="personnage-kaelros.html">Lire l’article →</a>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
-
-          <!-- ✅ À LA UNE : BRYWORN -->
-          <section class="spotlight pirate">
-            <div class="badges">
-              <span class="badge">Pirates</span>
-              <span class="badge">Roi des Pirates</span>
-            </div>
-
-            <h2>Roi Bryworn — “Souverain de Draevorn”</h2>
-
-            <div class="row">
-              <div class="thumb">
-                <img src="/royaumededraevorn/images/bryworn.png" alt="Roi Bryworn" loading="lazy">
-              </div>
-
-              <div class="txt">
-                Roi des Pirates et chef du Royaume Pirate de Draevorn. Porte l’étendard de la liberté
-                face à la Justice de Domination.
-                <div class="cta" style="margin-top:8px;">
-                  <a href="personnage-bryworn.html">Lire l’article →</a>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
-
-          <!-- ✅ À LA UNE : LUFFY -->
-          <section class="spotlight pirate">
-            <div class="badges">
-              <span class="badge">Pirates</span>
-              <span class="badge">Allié</span>
-              <span class="badge">Liberté</span>
-            </div>
-
-            <h2>Monkey D. Luffy — “Le Chapeau de Paille”</h2>
-
-            <div class="row">
-              <div class="thumb">
-                <img src="/royaumededraevorn/images/luffy.png" alt="Monkey D. Luffy" loading="lazy">
-              </div>
-
-              <div class="txt">
-                Capitaine au sourire insolent, symbole de liberté et d’élan. Un allié majeur quand la mer bascule
-                entre domination et rêves.
-                <div class="cta" style="margin-top:8px;">
-                  <a href="personnage-luffy.html">Lire l’article →</a>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
-
-          <!-- ✅ À LA UNE : SANG DE BRUME -->
-          <section class="spotlight pirate">
-            <div class="badges">
-              <span class="badge">Pirates</span>
-              <span class="badge">Pavillon Noir</span>
-              <span class="badge">1ère Flotte</span>
-            </div>
-
-            <h2>Capitaine Sang de Brume — “Le Pavillon Noir”</h2>
-
-            <div class="row">
-              <div class="thumb">
-                <img src="/royaumededraevorn/images/sangdebrume.png" alt="Capitaine Sang de Brume" loading="lazy">
-              </div>
-
-              <div class="txt">
-                Capitaine du Roi des Pirates — <b>1ère Flotte</b> de Draevorn. En guerre contre la Marine,
-                il protège son équipage sans compromis.
-                <div class="cta" style="margin-top:8px;">
-                  <a href="personnage-sangdebrume.html">Lire l’article →</a>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
-
-          <!-- ✅ À LA UNE : MATHÉO -->
-          <section class="spotlight pirate">
-            <div class="badges">
-              <span class="badge">Pirates</span>
-              <span class="badge">Roi des Ténèbres</span>
-              <span class="badge">Fruit : Dark</span>
-            </div>
-
-            <h2>Mathéo — “Le Roi des Ténèbres”</h2>
-
-            <div class="row">
-              <div class="thumb">
-                <img src="/royaumededraevorn/images/matheo.png" alt="Mathéo le Roi des Ténèbres" loading="lazy">
-              </div>
-
-              <div class="txt">
-                Un pirate au charisme tranchant, maître du <b>Dark</b>. Là où il passe, la lumière recule :
-                pression, contrôle et autorité d’ombre sur le pont comme en duel.
-                <div class="cta" style="margin-top:8px;">
-                  <a href="personnage-matheo.html">Lire l’article →</a>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
-
-          <!-- ✅ À LA UNE : DAFT PUNK -->
-          <section class="spotlight neutral">
-            <div class="badges">
-              <span class="badge">🏳️ Neutre</span>
-              <span class="badge">Évènement</span>
-              <span class="badge">Musique</span>
-            </div>
-
-            <h2>Daft Punk — “Les DJ de Draevorn”</h2>
-
-            <div class="row">
-              <div class="thumb">
-                <img src="/royaumededraevorn/images/daftpunk.png" alt="Daft Punk" loading="lazy">
-              </div>
-
-              <div class="txt">
-                Duo légendaire invité à Draevorn : ils font vibrer le Royaume du Roi des Pirates Bryworn
-                lors des grands évènements, entre feux d’artifice et marées de foule.
-                <div class="cta" style="margin-top:8px;">
-                  <a href="personnage-daftpunk.html">Lire l’article →</a>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
-
-          <!-- ✅ À LA UNE : GODZILLA -->
-          <section class="spotlight neutral">
-            <div class="badges">
-              <span class="badge">🏳️ Neutre</span>
-              <span class="badge">Découverte</span>
-              <span class="badge">Niveau Catastrophe</span>
-            </div>
-
-            <h2>Burning Godzilla — “Le Jugement de la Nature”</h2>
-
-            <div class="row">
-              <div class="thumb">
-                <img src="/royaumededraevorn/images/godzilla.png" alt="Burning Godzilla" loading="lazy">
-              </div>
-
-              <div class="txt">
-                Une <b>divinité draconique</b> neutre, protecteur et destructeur.
-                Son réveil annonce un basculement : tempêtes, marées extrêmes et rayon atomique.
-                <div class="cta" style="margin-top:8px;">
-                  <a href="personnage-godzilla.html">Lire l’article →</a>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
-
-          <h2>Accès rapide : Factions</h2>
-          <div class="list-grid" style="margin: 10px 0 4px;">
-            <a class="list-item" href="faction-marine.html">
-              <div class="title">⚓ Marine</div>
-              <div class="meta">Ordre • Justice • Domination</div>
-            </a>
-            <a class="list-item" href="faction-pirates.html">
-              <div class="title">🏴‍☠️ Pirates</div>
-              <div class="meta">Liberté • Conquête • Empire</div>
-            </a>
-          </div>
-
-          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
-
-          <h2>Recherche rapide</h2>
           <div id="results"></div>
         </div>
       </main>
 
-<aside class="wiki-card conflicts-live">
-  <h3>⚔️ Conflits — Live</h3>
-
-  <div class="content">
-    <div class="clive-grid">
-
-      <!-- item -->
-      <a class="clive-item" href="lore.html" data-state="war" data-progress="85">
-        <div class="clive-top">
-          <span class="clive-tag live">Live</span>
-          <span class="clive-status">🔥 Guerre ouverte</span>
-        </div>
-
-        <div class="clive-duel">
-          <div class="clive-side pirate">
-            <span class="clive-badge">🏴‍☠️ Pirates</span>
-            <span class="clive-sub">Draevorn</span>
-          </div>
-
-          <div class="clive-vs">VS</div>
-
-          <div class="clive-side marine">
-            <span class="clive-badge">⚓ Marines</span>
-            <span class="clive-sub">Mondiale</span>
-          </div>
-        </div>
-
-        <div class="clive-meter">
-          <div class="clive-track"><div class="clive-fill"></div></div>
-          <div class="clive-meta">
-            <span>Pression</span>
-            <span class="clive-val">85%</span>
-          </div>
-        </div>
-      </a>
-
-      <!-- item -->
-      <a class="clive-item" href="lore.html" data-state="truce" data-progress="59">
-        <div class="clive-top">
-          <span class="clive-tag">Live</span>
-          <span class="clive-status">🟡 Trêve surveillée</span>
-        </div>
-
-        <div class="clive-duel">
-          <div class="clive-side pirate">
-            <span class="clive-badge">🏴‍☠️ Pirates</span>
-            <span class="clive-sub">Draevorn</span>
-          </div>
-
-          <div class="clive-vs">VS</div>
-
-          <div class="clive-side marine">
-            <span class="clive-badge">⚓ Marine</span>
-            <span class="clive-sub">Kaelros</span>
-          </div>
-        </div>
-
-        <div class="clive-meter">
-          <div class="clive-track"><div class="clive-fill"></div></div>
-          <div class="clive-meta">
-            <span>Pression</span>
-            <span class="clive-val">59%</span>
-          </div>
-        </div>
-      </a>
-
-      <!-- item -->
-      <a class="clive-item" href="lore.html" data-state="secret" data-progress="45">
-        <div class="clive-top">
-          <span class="clive-tag">Live</span>
-          <span class="clive-status">🕶️ Conflit latent</span>
-        </div>
-
-        <div class="clive-duel">
-          <div class="clive-side neutral">
-            <span class="clive-badge">🏳️ Barbares</span>
-            <span class="clive-sub">Sucrés</span>
-          </div>
-
-          <div class="clive-vs">VS</div>
-
-          <div class="clive-side pirate">
-            <span class="clive-badge">⚓ Marines</span>
-            <span class="clive-sub">Mondiale</span>
-          </div>
-        </div>
-
-        <div class="clive-meter">
-          <div class="clive-track"><div class="clive-fill"></div></div>
-          <div class="clive-meta">
-            <span>Pression</span>
-            <span class="clive-val">45%</span>
-          </div>
-        </div>
-      </a>
-
+      <!-- Exemple : tu remets ton aside conflits ici si besoin -->
+      <!-- <aside class="wiki-card conflicts-live"> ... </aside> -->
     </div>
-  </div>
-</aside>
 
-
-    </div>
   </div>
 
-  <!-- ✅ 1) D'abord le script de recherche (comme tu fais déjà) -->
+  <!-- ✅ 1) Recherche -->
   <script src="/royaumededraevorn/js/wiki-search.js"></script>
 
-  <!-- ✅ 2) ENSUITE ton JS de recherche de l’index -->
   <script>
     const q = document.getElementById("q");
     const go = document.getElementById("go");
@@ -1057,35 +364,142 @@
     go.addEventListener("click", run);
     q.addEventListener("keydown", (e)=>{ if(e.key==="Enter") run(); });
 
-    // résultats par défaut
     WIKI_SEARCH.renderResults(results, WIKI_SEARCH.searchWiki(""));
   </script>
-  
-<script>
-  document.querySelectorAll(".clive-item").forEach((item)=>{
-    const p = Math.max(0, Math.min(100, parseInt(item.dataset.progress || "0", 10)));
-    const fill = item.querySelector(".clive-fill");
-    const val  = item.querySelector(".clive-val");
-    if(fill) fill.style.width = p + "%";
-    if(val)  val.textContent = p + "%";
-  });
-</script>
 
+  <!-- ✅ 2) ÉVÈNEMENTS : Toggle + Audio + Override auto -->
+  <script>
+  (function(){
+    const board  = document.getElementById("eventBoard");
+    const toggle = document.getElementById("eventToggle");
+    const list   = document.getElementById("eventList");
+    if(!board || !toggle || !list) return;
+
+    const STORAGE_KEY = "wiki_events_enabled";
+
+    const loopSrc = {
+      ras:    "",
+      yellow: "/royaumededraevorn/audio/alert-jaune.wav",
+      orange: "/royaumededraevorn/audio/alert-orange.wav",
+      // Remplace si tu as les vrais fichiers :
+      // red:   "/royaumededraevorn/audio/alert-red.wav",
+      // black: "/royaumededraevorn/audio/alert-black.wav",
+      red:    "/royaumededraevorn/audio/alert-orange.wav",
+      black:  "/royaumededraevorn/audio/alert-orange.wav",
+    };
+
+    let audioUnlocked = false;
+    const loop = new Audio();
+    loop.loop = true;
+    loop.volume = 0.55;
+
+    function unlockAudioOnce(){
+      if(audioUnlocked) return;
+      audioUnlocked = true;
+
+      try{
+        loop.muted = true;
+        loop.src = loopSrc.yellow || "";
+        loop.play().then(() => {
+          loop.pause();
+          loop.currentTime = 0;
+          loop.muted = false;
+          syncLoop();
+        }).catch(()=>{ loop.muted = false; });
+      }catch(e){}
+    }
+
+    window.addEventListener("pointerdown", unlockAudioOnce, { once:true });
+    window.addEventListener("keydown", unlockAudioOnce, { once:true });
+
+    function levelFromCards(){
+      if(document.querySelector(".event-card.event-alert-black"))  return "black";
+      if(document.querySelector(".event-card.event-alert-red"))    return "red";
+      if(document.querySelector(".event-card.event-alert-orange")) return "orange";
+      if(document.querySelector(".event-card.event-alert-yellow")) return "yellow";
+      if(document.querySelector(".event-card.event-ras"))          return "ras";
+      return "ras";
+    }
+
+    function applyBoardLevelFromCards(){
+      const lvl = levelFromCards();
+
+      board.setAttribute("data-alert", lvl);
+      board.classList.remove("ras","alert-yellow","alert-orange","alert-red","alert-black");
+
+      if(lvl === "yellow") board.classList.add("alert-yellow");
+      else if(lvl === "orange") board.classList.add("alert-orange");
+      else if(lvl === "red") board.classList.add("alert-red");
+      else if(lvl === "black") board.classList.add("alert-black");
+      else board.classList.add("ras");
+
+      return lvl;
+    }
+
+    function isEventsEnabled(){
+      return board.dataset.enabled !== "false" && toggle.checked;
+    }
+
+    function stopLoop(){
+      try{ loop.pause(); loop.currentTime = 0; }catch(e){}
+    }
+
+    function playLoopFor(level){
+      const src = loopSrc[level] || "";
+      if(!src){ stopLoop(); return; }
+
+      const alreadySame = loop.src && loop.src.includes(src);
+      if(alreadySame && !loop.paused) return;
+
+      try{
+        loop.pause();
+        loop.currentTime = 0;
+        loop.src = src;
+        if(!audioUnlocked) return;
+        loop.play().catch(()=>{});
+      }catch(e){}
+    }
+
+    function syncLoop(){
+      const lvl = applyBoardLevelFromCards();
+      const on  = isEventsEnabled();
+
+      if(document.hidden){ stopLoop(); return; }
+      if(!on){ stopLoop(); return; }
+      if(lvl === "ras"){ stopLoop(); return; }
+
+      playLoopFor(lvl);
+    }
+
+    const obs = new MutationObserver(syncLoop);
+    obs.observe(board, { attributes:true, attributeFilter:["class","data-alert","data-enabled"] });
+
+    const listObs = new MutationObserver(syncLoop);
+    listObs.observe(list, { childList:true, subtree:true });
+
+    document.addEventListener("visibilitychange", syncLoop);
+
+    function setEnabled(v){
+      board.dataset.enabled = v ? "true" : "false";
+      toggle.checked = !!v;
+      list.style.display = v ? "" : "none";
+
+      const txt = board.querySelector(".event-toggle-text");
+      if(txt) txt.textContent = v ? "Actif" : "Inactif";
+
+      try { localStorage.setItem(STORAGE_KEY, v ? "1" : "0"); } catch(e){}
+      syncLoop();
+    }
+
+    let enabled = true;
+    try { if(localStorage.getItem(STORAGE_KEY) === "0") enabled = false; } catch(e){}
+    setEnabled(enabled);
+
+    toggle.addEventListener("change", () => setEnabled(toggle.checked));
+
+    syncLoop();
+  })();
+  </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
