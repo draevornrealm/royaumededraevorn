@@ -664,6 +664,17 @@
 .marine-conflicts .conflict-meter{
   width: 100%;
 }
+.marine-conflicts .conflict-item{
+  display: grid;
+  grid-template-columns: 1fr auto; /* gauche flexible + badge fixe */
+  align-items: start;
+}
+
+.marine-conflicts .conflict-right{
+  min-width: 150px;  /* largeur constante pour les badges */
+  display: flex;
+  justify-content: flex-end;
+}
 
 
   </style>
@@ -680,6 +691,7 @@
 
 </body>
 </html>
+
 
 
 
