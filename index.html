@@ -5,7 +5,7 @@
   <title>Wiki de l’Univers</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Police moderne -->
+  <!-- Police -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
@@ -13,9 +13,216 @@
   <!-- CSS global -->
   <link rel="stylesheet" href="/royaumededraevorn/css/wiki.css" />
 
-  <!-- (Optionnel) mini styles locaux uniquement si nécessaire -->
+  <!-- Styles locaux (accueil only) -->
   <style>
-    /* Si ton wiki.css contient déjà tout, tu peux supprimer ce <style>. */
+    /* =========================
+       EVENT BOARD (INDEX)
+       ========================= */
+    .event-board{
+      margin: 14px 0 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      box-shadow: 0 18px 45px rgba(0,0,0,.40);
+      overflow: hidden;
+      position: relative;
+    }
+    .event-board::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      pointer-events:none;
+      opacity:.85;
+      background: radial-gradient(circle at 25% 15%, rgba(255,80,80,.22), rgba(0,0,0,0) 55%);
+    }
+    .event-board-head{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      position: relative;
+      z-index: 1;
+    }
+    .event-board-title{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      font-weight: 900;
+      letter-spacing: .2px;
+    }
+    .event-ico{
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 10px 28px rgba(0,0,0,.35);
+    }
+    .event-board-pill{
+      margin-left: 6px;
+      font-size: .72rem;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      opacity:.95;
+    }
+    .event-board-body{
+      padding: 12px 14px;
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Toggle */
+    .event-toggle{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      cursor:pointer;
+      user-select:none;
+      font-weight: 800;
+      opacity: .92;
+    }
+    .event-toggle input{ display:none; }
+    .event-toggle-ui{
+      width: 46px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      position: relative;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.25);
+    }
+    .event-toggle-ui::after{
+      content:"";
+      position:absolute;
+      top: 3px;
+      left: 3px;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.22);
+      transition: transform .18s ease, background .18s ease;
+    }
+    .event-toggle input:checked + .event-toggle-ui::after{
+      transform: translateX(20px);
+      background: rgba(255,90,90,.35);
+    }
+    .event-toggle-text{ font-size: .82rem; opacity:.88; }
+
+    /* Cartes */
+    .event-card{
+      display:flex;
+      gap: 12px;
+      align-items: stretch;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      position: relative;
+      overflow: hidden;
+    }
+    .event-left{ flex: 1; min-width: 0; }
+    .event-right{
+      flex: 0 0 210px;
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+    }
+    .event-title{
+      font-weight: 900;
+      letter-spacing: .2px;
+      margin: 8px 0 6px;
+      line-height: 1.1rem;
+    }
+    .event-desc{ opacity:.88; line-height: 1.4rem; }
+    .event-link{
+      font-weight: 900;
+      text-decoration:none;
+      color: inherit;
+      opacity:.95;
+    }
+    .event-link:hover{ opacity: 1; text-decoration: underline; }
+
+    /* Badge */
+    .event-badge{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items:center;
+      font-size: .72rem;
+      font-weight: 900;
+    }
+
+    /* Timer */
+    .event-timer{
+      width: 100%;
+      text-align: right;
+      border-radius: 12px;
+      padding: 10px 10px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.25);
+    }
+    .event-timer-label{ font-size: .78rem; opacity:.82; margin-bottom: 4px; }
+    .event-timer-value{ font-weight: 900; letter-spacing: .8px; font-size: 1.12rem; }
+    .event-timer-sub{ margin-top: 4px; font-size: .78rem; opacity:.80; }
+
+    /* Catastrophe rouge (pulse sur la bande / carte) */
+    .event-catastrophe{
+      border-color: rgba(255,90,90,.22);
+      box-shadow: inset 0 0 0 1px rgba(255,90,90,.10);
+      animation: catastrophePulse 1.25s ease-in-out infinite;
+    }
+    .event-catastrophe::before{
+      content:"";
+      position:absolute;
+      inset:-18px;
+      background: radial-gradient(circle at 30% 20%, rgba(255,60,60,.35), rgba(0,0,0,0) 62%);
+      filter: blur(16px);
+      opacity:.75;
+      pointer-events:none;
+    }
+    .event-catastrophe::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(110deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.22) 18%, rgba(255,255,255,0) 36%);
+      opacity: 0;
+      transform: translateX(-120%);
+      mix-blend-mode: screen;
+      pointer-events:none;
+      animation: catastropheShimmer 2.8s ease-in-out infinite;
+    }
+    @keyframes catastrophePulse{
+      0%,100%{ filter: brightness(1.00); }
+      50%{ filter: brightness(1.12); }
+    }
+    @keyframes catastropheShimmer{
+      0%   { opacity: 0; transform: translateX(-120%); }
+      22%  { opacity: .55; }
+      55%  { opacity: 0; transform: translateX(120%); }
+      100% { opacity: 0; transform: translateX(120%); }
+    }
+
+    @media (max-width: 720px){
+      .event-card{ flex-direction: column; }
+      .event-right{ flex: 1 1 auto; justify-content: flex-start; }
+      .event-timer{ text-align:left; }
+    }
+
+    /* =========================
+       SPOTLIGHTS (ton code)
+       ========================= */
     .spotlight{
       padding: 14px;
       border-radius: 14px;
@@ -23,30 +230,176 @@
       background: rgba(255,255,255,.03);
       margin: 10px 0;
     }
-    .spotlight .badges{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom: 10px; }
+    .spotlight .badges{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom: 10px;
+    }
     .spotlight h2{ margin: 6px 0 10px; }
     .spotlight .row{ display:flex; gap: 14px; align-items: flex-start; }
     .spotlight .thumb{ width: 140px; flex: 0 0 140px; }
     .spotlight .thumb img{
-      width: 100%; height: auto; display:block;
-      border-radius: 12px; border: 1px solid rgba(255,255,255,.14);
+      width: 100%;
+      height: auto;
+      display:block;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
       box-shadow: 0 12px 30px rgba(0,0,0,.45);
     }
     .spotlight .txt{ min-width: 0; opacity: .92; line-height: 1.55; }
     .spotlight .cta a{ font-weight: 800; }
-    .spotlight.marine{ border-color: rgba(79,156,255,.18); box-shadow: inset 0 0 0 1px rgba(79,156,255,.10); }
-    .spotlight.pirate{ border-color: rgba(255,90,90,.18); box-shadow: inset 0 0 0 1px rgba(255,90,90,.10); }
-    .spotlight.neutral{ border-color: rgba(255,255,255,.16); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
+
+    .spotlight.marine{
+      border-color: rgba(79,156,255,.18);
+      box-shadow: inset 0 0 0 1px rgba(79,156,255,.10);
+    }
+    .spotlight.marine .thumb img{
+      border-color: rgba(79,156,255,.25);
+      box-shadow: 0 0 0 1px rgba(79,156,255,.10), 0 12px 30px rgba(0,0,0,.45);
+    }
+    .spotlight.pirate{
+      border-color: rgba(255,90,90,.18);
+      box-shadow: inset 0 0 0 1px rgba(255,90,90,.10);
+    }
+    .spotlight.pirate .thumb img{
+      border-color: rgba(255,90,90,.25);
+      box-shadow: 0 0 0 1px rgba(255,90,90,.10), 0 12px 30px rgba(0,0,0,.45);
+    }
+    .spotlight.neutral{
+      border-color: rgba(255,255,255,.16);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+    }
+    .spotlight.neutral .thumb img{
+      border-color: rgba(255,255,255,.22);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.10), 0 12px 30px rgba(0,0,0,.45);
+    }
     @media (max-width: 720px){
       .spotlight .row{ flex-direction: column; }
       .spotlight .thumb{ width: 100%; flex: 0 0 auto; max-width: 280px; }
+    }
+
+    /* =========================
+       CONFLITS — LIVE (sidebar)
+       ========================= */
+    .conflicts-live .content{ padding-top: 8px; }
+    .clive-grid{ display:flex; flex-direction: column; gap: 10px; }
+    .clive-item{
+      display:block;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow:hidden;
+      transition: transform .12s ease, opacity .12s ease;
+    }
+    .clive-item:hover{ transform: translateY(-1px); opacity: 1; }
+
+    .clive-top{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+      opacity: .95;
+      font-weight: 900;
+    }
+    .clive-tag{
+      font-size: .72rem;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+    }
+    .clive-tag.live{
+      border-color: rgba(255,90,90,.35);
+      background: rgba(255,90,90,.10);
+      box-shadow: 0 0 0 1px rgba(255,90,90,.10);
+    }
+    .clive-status{ font-size: .82rem; opacity: .9; }
+
+    .clive-duel{
+      display:flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .clive-side{
+      flex: 1;
+      min-width: 0;
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.16);
+    }
+    .clive-badge{ font-weight: 900; display:block; }
+    .clive-sub{ font-size: .78rem; opacity: .82; margin-top: 2px; display:block; }
+    .clive-vs{
+      flex: 0 0 auto;
+      font-weight: 900;
+      opacity: .6;
+      letter-spacing: .6px;
+    }
+
+    .clive-side.pirate{ border-color: rgba(255,90,90,.22); box-shadow: inset 0 0 0 1px rgba(255,90,90,.08); }
+    .clive-side.marine{ border-color: rgba(79,156,255,.22); box-shadow: inset 0 0 0 1px rgba(79,156,255,.08); }
+    .clive-side.neutral{ border-color: rgba(255,255,255,.18); box-shadow: inset 0 0 0 1px rgba(255,255,255,.06); }
+
+    .clive-meter{ margin-top: 4px; }
+    .clive-track{
+      height: 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      overflow:hidden;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.25);
+    }
+    .clive-fill{
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      background: rgba(255,255,255,.25);
+      box-shadow: 0 0 24px rgba(255,255,255,.08);
+      transition: width .35s ease;
+    }
+    .clive-meta{
+      display:flex;
+      justify-content: space-between;
+      margin-top: 6px;
+      font-size: .78rem;
+      opacity: .82;
+    }
+
+    /* Petit accent selon état */
+    .clive-item[data-state="war"]::before,
+    .clive-item[data-state="truce"]::before,
+    .clive-item[data-state="secret"]::before{
+      content:"";
+      position:absolute;
+      inset:-18px;
+      filter: blur(18px);
+      opacity:.55;
+      pointer-events:none;
+    }
+    .clive-item[data-state="war"]::before{
+      background: radial-gradient(circle at 20% 10%, rgba(255,60,60,.35), rgba(0,0,0,0) 60%);
+    }
+    .clive-item[data-state="truce"]::before{
+      background: radial-gradient(circle at 20% 10%, rgba(255,210,60,.22), rgba(0,0,0,0) 60%);
+    }
+    .clive-item[data-state="secret"]::before{
+      background: radial-gradient(circle at 20% 10%, rgba(140,140,255,.20), rgba(0,0,0,0) 60%);
     }
   </style>
 </head>
 
 <body>
   <div class="wiki-container">
-    <!-- HERO -->
+
     <div class="wiki-hero">
       <div>
         <h1>Wiki de l’Univers</h1>
@@ -59,100 +412,101 @@
       </div>
     </div>
 
-    <!-- ======================================================
-         EVENTS (UNIQUE) — IDs: eventBoard / eventToggle / eventList
-         ====================================================== -->
-<section class="event-board" id="eventBoard" data-enabled="true">
-  <div class="event-board-head">
-    <div class="event-board-title">
-      <span class="event-ico">⚠️</span>
-      <span>Évènements</span>
-      <span class="event-board-pill">Live</span>
-    </div>
-
-    <label class="event-toggle">
-      <input type="checkbox" id="eventToggle" checked>
-      <span class="event-toggle-ui"></span>
-      <span class="event-toggle-text">Actif</span>
-    </label>
-  </div>
-
-  <div class="event-board-body" id="eventList">
-
-    <!-- 🟡 Pirates Draevorn -->
-    <article class="event-card event-alert-yellow">
-      <div class="event-left">
-        <div class="event-badge">
-          <span class="ibadge danger">🏴‍☠️ Pirates Draevorn</span>
-          <span class="ibadge badge-yellow fx">🟡 Surveillance</span>
+    <!-- =========================
+         EVENTS / ALERTS
+         (data-alert : ras | yellow | orange | red | black)
+         ========================= -->
+    <section class="event-board alert-red" id="eventBoard" data-alert="red" data-enabled="true">
+      <div class="event-board-head">
+        <div class="event-board-title">
+          <span class="event-ico">⚠️</span>
+          <span>Évènements</span>
+          <span class="event-board-pill">Live</span>
         </div>
-        <div class="event-title">Trêve de Guerre en cours</div>
-        <div class="event-desc">
-          Surveillance du périmètre extérieur. Trêve de guerre en cours.
-          | Code Jaune — Ordonné par Bryworn.
-        </div>
+
+        <label class="event-toggle" title="Activer / Désactiver les évènements">
+          <input type="checkbox" id="eventToggle" checked />
+          <span class="event-toggle-ui"></span>
+          <span class="event-toggle-text">Actif</span>
+        </label>
       </div>
-      <div class="event-right">
-        <div class="event-timer">
-          <div class="event-timer-label">Niveau</div>
-          <div class="event-timer-value">JAUNE</div>
-          <div class="event-timer-sub">— vigilance accrue</div>
-        </div>
-      </div>
-    </article>
 
-    <!-- 🟡 Marines Kaelros (RESTORE) -->
-    <article class="event-card event-alert-yellow">
-      <div class="event-left">
-        <div class="event-badge">
-          <span class="ibadge marine">⚓ Marines Kaelros</span>
-          <span class="ibadge badge-yellow fx">🟡 Surveillance</span>
-        </div>
-        <div class="event-title">Trêve de Guerre en cours</div>
-        <div class="event-desc">
-          Trêve de guerre en cours. Surveillance stratégique renforcée.
-          | Code Jaune — Ordonné par Kaelros Viremont.
-        </div>
-      </div>
-      <div class="event-right">
-        <div class="event-timer">
-          <div class="event-timer-label">Niveau</div>
-          <div class="event-timer-value">JAUNE</div>
-          <div class="event-timer-sub">— surveillance active</div>
-        </div>
-      </div>
-    </article>
+      <div class="event-board-body" id="eventList">
 
-    <!-- 🔴 Marines Mondiale -->
-    <article class="event-card event-alert-red">
-      <div class="event-left">
-        <div class="event-badge">
-          <span class="ibadge marine">⚓ Marines Mondiale</span>
-          <span class="ibadge badge-red fx">🔴 Alerte Maximale</span>
-        </div>
-        <div class="event-title">Opération navale déclenchée</div>
-        <div class="event-desc">
-          Intervention stratégique engagée. Déploiement immédiat des escadrons d’élite.
-          | Code Rouge — Ordonné par Kael D. Abyss.
-        </div>
-      </div>
-      <div class="event-right">
-        <div class="event-timer">
-          <div class="event-timer-label">Niveau</div>
-          <div class="event-timer-value">ROUGE</div>
-          <div class="event-timer-sub">— état d’urgence absolu</div>
-        </div>
-      </div>
-    </article>
+        <!-- 🟡 JAUNE - Pirates -->
+        <article class="event-card event-alert-yellow">
+          <div class="event-left">
+            <div class="event-badge">
+              <span class="ibadge danger">🏴‍☠️ Pirates Draevorn</span>
+              <span class="ibadge badge-yellow fx">🟡 Surveillance</span>
+            </div>
+            <div class="event-title">Trêve de guerre en cours</div>
+            <div class="event-desc">
+              Surveillance du périmètre extérieur. Trêve de guerre en cours. Les forces pirates restent en veille renforcée.
+              | Code Jaune — Ordonné par Bryworn.
+            </div>
+          </div>
 
-  </div>
-</section>
+          <div class="event-right">
+            <div class="event-timer">
+              <div class="event-timer-label">Niveau</div>
+              <div class="event-timer-value">JAUNE</div>
+              <div class="event-timer-sub">— vigilance accrue</div>
+            </div>
+          </div>
+        </article>
 
-    <!-- ======================================================
-         GRID
-         ====================================================== -->
+        <!-- 🟡 JAUNE - Marines -->
+        <article class="event-card event-alert-yellow">
+          <div class="event-left">
+            <div class="event-badge">
+              <span class="ibadge marine">⚓ Marines Kaelros</span>
+              <span class="ibadge badge-yellow fx">🟡 Surveillance</span>
+            </div>
+            <div class="event-title">Trêve de guerre en cours</div>
+            <div class="event-desc">
+              Trêve de guerre en cours. Surveillance stratégique renforcée.
+              | Code Jaune — Ordonné par Kaelros Viremont.
+            </div>
+          </div>
+
+          <div class="event-right">
+            <div class="event-timer">
+              <div class="event-timer-label">Niveau</div>
+              <div class="event-timer-value">JAUNE</div>
+              <div class="event-timer-sub">— vigilance accrue</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 🔴 ROUGE - Marines Mondiale -->
+        <article class="event-card event-alert-red event-catastrophe">
+          <div class="event-left">
+            <div class="event-badge">
+              <span class="ibadge marine">⚓ Marines Mondiale</span>
+              <span class="ibadge badge-red fx">🔴 Alerte Maximale</span>
+            </div>
+            <div class="event-title">Opération navale déclenchée</div>
+            <div class="event-desc">
+              Intervention stratégique engagée. Déploiement immédiat des escadrons d’élite et verrouillage des zones maritimes.
+              | Code Rouge — Ordonné par Kael D. Abyss.
+            </div>
+          </div>
+
+          <div class="event-right">
+            <div class="event-timer">
+              <div class="event-timer-label">Niveau</div>
+              <div class="event-timer-value">ROUGE</div>
+              <div class="event-timer-sub">— état d’urgence absolu</div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
     <div class="wiki-grid">
-      <!-- Sidebar -->
+      <!-- SIDEBAR NAV -->
       <aside class="wiki-card wiki-sidebar">
         <h3>Navigation</h3>
         <div class="content">
@@ -164,11 +518,11 @@
         </div>
       </aside>
 
-      <!-- Main -->
+      <!-- MAIN -->
       <main class="wiki-card wiki-article">
         <h3>À la une</h3>
-        <div class="content">
 
+        <div class="content">
           <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
 
           <!-- ✅ À LA UNE : HOUSE -->
@@ -178,17 +532,13 @@
               <span class="badge">Médecin</span>
               <span class="badge">Diagnostic</span>
             </div>
-
             <h2>House — “Le Diagnosticien”</h2>
-
             <div class="row">
               <div class="thumb">
                 <img src="/royaumededraevorn/images/house.png" alt="House" loading="lazy" />
               </div>
-
               <div class="txt">
-                Médecin de Draevorn, cynique et brillant. Spécialiste des <b>cas impossibles</b> en mer :
-                poisons, infections, malédictions et chirurgies de fortune.
+                Médecin de Draevorn, cynique et brillant. Spécialiste des <b>cas impossibles</b> en mer : poisons, infections, malédictions et chirurgies de fortune.
                 <div class="cta" style="margin-top:8px;">
                   <a href="personnage-house.html">Lire l’article →</a>
                 </div>
@@ -203,17 +553,14 @@
               <span class="badge">Gouvernement Mondial</span>
               <span class="badge">Boss Final</span>
             </div>
-
             <h2>Kael D. Abyss — “Le Souverain des Marées Noires”</h2>
-
             <div class="row">
               <div class="thumb">
                 <img src="/royaumededraevorn/images/abyss.png" alt="Kael D. Abyss" loading="lazy" />
               </div>
-
               <div class="txt">
-                Amiral-Impérial affilié directement au <b>Gouvernement Mondial</b>.
-                Sabre noir <b>“Leviathan”</b>, pouvoir des abysses (gravité / obscurité marine).
+                Amiral-Impérial affilié directement au <b>Gouvernement Mondial</b>. On dit que sa présence <b>noircit la mer</b> et étouffe le vent.
+                Sabre noir <b>“Leviathan”</b>, <b>Haki des Rois</b> écrasant, pouvoir des abysses (gravité / obscurité marine).
                 <div class="cta" style="margin-top:8px;">
                   <a href="personnage-abyss.html">Lire l’article →</a>
                 </div>
@@ -223,19 +570,94 @@
 
           <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
 
-          <!-- Résultats recherche -->
+          <!-- ✅ À LA UNE : ORIGINS -->
+          <section class="spotlight pirate">
+            <div class="badges">
+              <span class="badge">Pirates</span>
+              <span class="badge">Yonkō</span>
+              <span class="badge">Dieu Solaire</span>
+            </div>
+            <h2>Origins — “Le Dieu Solaire”</h2>
+            <div class="row">
+              <div class="thumb">
+                <img src="/royaumededraevorn/images/origins.png" alt="Origins" loading="lazy" />
+              </div>
+              <div class="txt">
+                Empereur des Mers (Yonkō) maniant le <b>Hito Hito no Mi, Modèle : Nika</b> (Zoan Mythique). Une présence solaire, imprévisible, qui refuse toute justice imposée.
+                <div class="cta" style="margin-top:8px;">
+                  <a href="personnage-origins.html">Lire l’article →</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ✅ À LA UNE : KAELROS -->
+          <section class="spotlight marine">
+            <div class="badges">
+              <span class="badge">Marine</span>
+              <span class="badge">Arc principal</span>
+            </div>
+            <h2>Kaelros Viremont — “Le Régent des Mers”</h2>
+            <div class="row">
+              <div class="thumb">
+                <img src="/royaumededraevorn/images/kaelros.png" alt="Kaelros Viremont" loading="lazy" />
+              </div>
+              <div class="txt">
+                Grand Amiral Suprême, incarnation de la <b>Justice de Domination</b>. Antagoniste central face aux pirates et à la liberté.
+                <div class="cta" style="margin-top:8px;">
+                  <a href="personnage-kaelros.html">Lire l’article →</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ✅ À LA UNE : BRYWORN -->
+          <section class="spotlight pirate">
+            <div class="badges">
+              <span class="badge">Pirates</span>
+              <span class="badge">Roi des Pirates</span>
+            </div>
+            <h2>Roi Bryworn — “Souverain de Draevorn”</h2>
+            <div class="row">
+              <div class="thumb">
+                <img src="/royaumededraevorn/images/bryworn.png" alt="Roi Bryworn" loading="lazy" />
+              </div>
+              <div class="txt">
+                Roi des Pirates et chef du Royaume Pirate de Draevorn. Porte l’étendard de la liberté face à la Justice de Domination.
+                <div class="cta" style="margin-top:8px;">
+                  <a href="personnage-bryworn.html">Lire l’article →</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
+
+          <h2>Accès rapide : Factions</h2>
+          <div class="list-grid" style="margin: 10px 0 4px;">
+            <a class="list-item" href="faction-marine.html">
+              <div class="title">⚓ Marine</div>
+              <div class="meta">Ordre • Justice • Domination</div>
+            </a>
+            <a class="list-item" href="faction-pirates.html">
+              <div class="title">🏴‍☠️ Pirates</div>
+              <div class="meta">Liberté • Conquête • Empire</div>
+            </a>
+          </div>
+
+          <hr style="border:0;border-top:1px solid rgba(255,255,255,.12);margin:16px 0" />
+
           <h2>Recherche rapide</h2>
           <div id="results"></div>
-
         </div>
       </main>
 
-      <!-- Conflicts Live -->
+      <!-- CONFLICTS LIVE -->
       <aside class="wiki-card conflicts-live">
         <h3>⚔️ Conflits — Live</h3>
         <div class="content">
           <div class="clive-grid">
-
+            <!-- item -->
             <a class="clive-item" href="lore.html" data-state="war" data-progress="85">
               <div class="clive-top">
                 <span class="clive-tag live">Live</span>
@@ -263,6 +685,7 @@
               </div>
             </a>
 
+            <!-- item -->
             <a class="clive-item" href="lore.html" data-state="truce" data-progress="59">
               <div class="clive-top">
                 <span class="clive-tag">Live</span>
@@ -290,54 +713,61 @@
               </div>
             </a>
 
+            <!-- item -->
+            <a class="clive-item" href="lore.html" data-state="secret" data-progress="45">
+              <div class="clive-top">
+                <span class="clive-tag">Live</span>
+                <span class="clive-status">🕶️ Conflit latent</span>
+              </div>
+
+              <div class="clive-duel">
+                <div class="clive-side neutral">
+                  <span class="clive-badge">🏳️ Barbares</span>
+                  <span class="clive-sub">Sucrés</span>
+                </div>
+                <div class="clive-vs">VS</div>
+                <div class="clive-side pirate">
+                  <span class="clive-badge">⚓ Marines</span>
+                  <span class="clive-sub">Mondiale</span>
+                </div>
+              </div>
+
+              <div class="clive-meter">
+                <div class="clive-track"><div class="clive-fill"></div></div>
+                <div class="clive-meta">
+                  <span>Pression</span>
+                  <span class="clive-val">45%</span>
+                </div>
+              </div>
+            </a>
           </div>
         </div>
       </aside>
     </div>
   </div>
 
-  <!-- ======================================================
-       Scripts (FIN de page)
-       ====================================================== -->
-
-  <!-- 1) Recherche -->
+  <!-- 1) recherche globale -->
   <script src="/royaumededraevorn/js/wiki-search.js"></script>
+
+  <!-- 2) recherche index -->
   <script>
-    (function(){
-      const q = document.getElementById("q");
-      const go = document.getElementById("go");
-      const results = document.getElementById("results");
-      if(!q || !go || !results) return;
+    const q = document.getElementById("q");
+    const go = document.getElementById("go");
+    const results = document.getElementById("results");
 
-      function run(){
-        if(!window.WIKI_SEARCH) return;
-        const res = WIKI_SEARCH.searchWiki(q.value);
-        WIKI_SEARCH.renderResults(results, res.map(r => ({...r, url: r.url})));
-      }
+    function run(){
+      const res = WIKI_SEARCH.searchWiki(q.value);
+      WIKI_SEARCH.renderResults(results, res.map(r => ({ ...r, url: r.url })));
+    }
 
-      go.addEventListener("click", run);
-      q.addEventListener("keydown", (e)=>{ if(e.key === "Enter") run(); });
+    go.addEventListener("click", run);
+    q.addEventListener("keydown", (e) => { if(e.key === "Enter") run(); });
 
-      if(window.WIKI_SEARCH){
-        WIKI_SEARCH.renderResults(results, WIKI_SEARCH.searchWiki(""));
-      }
-    })();
+    // résultats par défaut
+    WIKI_SEARCH.renderResults(results, WIKI_SEARCH.searchWiki(""));
   </script>
 
-  <!-- 2) Conflits — progress -->
-  <script>
-    (function(){
-      document.querySelectorAll(".clive-item").forEach((item)=>{
-        const p = Math.max(0, Math.min(100, parseInt(item.dataset.progress || "0", 10)));
-        const fill = item.querySelector(".clive-fill");
-        const val  = item.querySelector(".clive-val");
-        if(fill) fill.style.width = p + "%";
-        if(val)  val.textContent = p + "%";
-      });
-    })();
-  </script>
-
-  <!-- 3) Events — priorité + audio (ROUGE override JAUNE) -->
+  <!-- 3) EVENTS + AUDIO LOOP -->
   <script>
     (function(){
       const board  = document.getElementById("eventBoard");
@@ -347,116 +777,193 @@
 
       const STORAGE_KEY = "wiki_events_enabled";
 
-      // Audio (fallback si rouge/noir absent)
-      const audioCandidates = {
-        yellow: ["/royaumededraevorn/audio/alert-jaune.wav"],
-        orange: ["/royaumededraevorn/audio/alert-orange.wav", "/royaumededraevorn/audio/alert-jaune.wav"],
-        red:    ["/royaumededraevorn/audio/alert-rouge.wav", "/royaumededraevorn/audio/alert-orange.wav", "/royaumededraevorn/audio/alert-jaune.wav"],
-        black:  ["/royaumededraevorn/audio/alert-noir.wav", "/royaumededraevorn/audio/alert-rouge.wav", "/royaumededraevorn/audio/alert-orange.wav"]
+      // =========================
+      // AUDIO LOOP (ALERTE)
+      // =========================
+      const loopSrc = {
+        ras:    "",
+        yellow: "/royaumededraevorn/audio/alert-jaune.wav",
+        orange: "/royaumededraevorn/audio/alert-orange.wav",
+        // Remplace quand tu as les vrais fichiers :
+        // red:   "/royaumededraevorn/audio/alert-red.wav",
+        // black: "/royaumededraevorn/audio/alert-black.wav",
+        red:   "/royaumededraevorn/audio/alert-orange.wav",
+        black: "/royaumededraevorn/audio/alert-orange.wav",
       };
 
+      let audioUnlocked = false;
       const loop = new Audio();
       loop.loop = true;
       loop.volume = 0.55;
 
-      let audioUnlocked = false;
-      let rafScheduled = false;
+      function getAlertLevel(){
+        const d = (board.getAttribute("data-alert") || "").trim().toLowerCase();
+        if(d) return d;
 
-      function topLevel(){
-        // PRIORITÉ: BLACK > RED > ORANGE > YELLOW > RAS
-        if(list.querySelector(".event-alert-black"))  return "black";
-        if(list.querySelector(".event-alert-red"))    return "red";
-        if(list.querySelector(".event-alert-orange")) return "orange";
-        if(list.querySelector(".event-alert-yellow")) return "yellow";
-        if(list.querySelector(".event-ras"))          return "ras";
+        const cl = board.classList;
+        if(cl.contains("alert-black"))  return "black";
+        if(cl.contains("alert-red"))    return "red";
+        if(cl.contains("alert-orange")) return "orange";
+        if(cl.contains("alert-yellow")) return "yellow";
         return "ras";
       }
 
-      function setBoardClass(level){
-        board.classList.remove("ras","alert-yellow","alert-orange","alert-red","alert-black");
-        if(level === "ras") board.classList.add("ras");
-        else board.classList.add("alert-" + level);
+      function isEventsEnabled(){
+        return board.dataset.enabled !== "false" && toggle.checked;
       }
 
-      function stop(){
-        try { loop.pause(); loop.currentTime = 0; } catch(e){}
+      function stopLoop(){
+        try{ loop.pause(); loop.currentTime = 0; }catch(e){}
       }
 
-      function pickSrc(level){
-        const arr = audioCandidates[level] || [];
-        return arr[0] || "";
+      function playLoopFor(level){
+        const src = loopSrc[level] || "";
+        if(!src){ stopLoop(); return; }
+
+        const alreadySame = loop.src && loop.src.includes(src);
+        if(alreadySame && !loop.paused) return;
+
+        try{
+          loop.pause();
+          loop.currentTime = 0;
+          loop.src = src;
+          if(!audioUnlocked) return;
+          loop.play().catch(()=>{});
+        }catch(e){}
       }
 
-      function sync(){
-        rafScheduled = false;
+      function syncLoop(){
+        const lvl = getAlertLevel();
+        const on  = isEventsEnabled();
 
-        const enabled = (board.dataset.enabled !== "false") && toggle.checked;
-        const level = topLevel();
+        if(document.hidden){ stopLoop(); return; }
+        if(!on){ stopLoop(); return; }
+        if(lvl === "ras"){ stopLoop(); return; }
 
-        setBoardClass(level);
-
-        if(document.hidden) return stop();
-        if(!enabled) return stop();
-        if(level === "ras") return stop();
-        if(!audioUnlocked) return stop();
-
-        const src = pickSrc(level);
-        if(!src) return stop();
-
-        // Change src only if needed
-        if(!loop.src || !loop.src.includes(src)){
-          try{
-            loop.pause();
-            loop.currentTime = 0;
-            loop.src = src;
-          }catch(e){}
-        }
-
-        loop.play().catch(()=>{});
+        playLoopFor(lvl);
       }
 
-      function scheduleSync(){
-        if(rafScheduled) return;
-        rafScheduled = true;
-        requestAnimationFrame(sync);
-      }
-
-      function unlock(){
+      function unlockAudioOnce(){
         if(audioUnlocked) return;
         audioUnlocked = true;
-        scheduleSync();
+
+        try{
+          loop.muted = true;
+          loop.src = loopSrc.yellow || "";
+          loop.play().then(() => {
+            loop.pause();
+            loop.currentTime = 0;
+            loop.muted = false;
+            syncLoop();
+          }).catch(()=>{ loop.muted = false; });
+        }catch(e){}
       }
 
-      window.addEventListener("pointerdown", unlock, { once:true });
-      window.addEventListener("keydown", unlock, { once:true });
+      window.addEventListener("pointerdown", unlockAudioOnce, { once:true });
+      window.addEventListener("keydown", unlockAudioOnce, { once:true });
 
+      const obs = new MutationObserver(syncLoop);
+      obs.observe(board, { attributes:true, attributeFilter:["class","data-alert","data-enabled"] });
+      document.addEventListener("visibilitychange", syncLoop);
+
+      // =========================
+      // TOGGLE (actif/inactif)
+      // =========================
       function setEnabled(v){
         board.dataset.enabled = v ? "true" : "false";
         toggle.checked = !!v;
         list.style.display = v ? "" : "none";
+
         const txt = board.querySelector(".event-toggle-text");
         if(txt) txt.textContent = v ? "Actif" : "Inactif";
-        try { localStorage.setItem(STORAGE_KEY, v ? "1" : "0"); } catch(e){}
-        scheduleSync();
+
+        try{ localStorage.setItem(STORAGE_KEY, v ? "1" : "0"); }catch(e){}
+        syncLoop();
       }
 
-      // Restore enabled state
       let enabled = true;
-      try { if(localStorage.getItem(STORAGE_KEY) === "0") enabled = false; } catch(e){}
+      try{
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if(saved === "0") enabled = false;
+      }catch(e){}
+
       setEnabled(enabled);
-
       toggle.addEventListener("change", () => setEnabled(toggle.checked));
-      document.addEventListener("visibilitychange", scheduleSync);
 
-      // Observe only the cards container
-      new MutationObserver(scheduleSync).observe(list, { childList:true, subtree:true });
+      // =========================
+      // TIMER (si tu utilises data-event / data-target)
+      // =========================
+      function pad(n){ return String(n).padStart(2,"0"); }
+      function formatETA(targetDate){
+        const d  = targetDate;
+        const dd = pad(d.getDate());
+        const mm = pad(d.getMonth()+1);
+        const hh = pad(d.getHours());
+        const mi = pad(d.getMinutes());
+        return `${dd}/${mm} • ${hh}:${mi}`;
+      }
+      function tick(){
+        const now = Date.now();
 
-      // Initial
-      scheduleSync();
+        document.querySelectorAll("[data-event]").forEach(card => {
+          const targetRaw = card.getAttribute("data-target");
+          const link = card.getAttribute("data-link") || "";
+          const tEl = card.querySelector("[data-timer]");
+          const etaEl = card.querySelector("[data-eta]");
+          if(!targetRaw || !tEl) return;
+
+          const target = new Date(targetRaw).getTime();
+          const diff = target - now;
+
+          if(diff <= 0){
+            tEl.textContent = "ARRIVÉ";
+            if(etaEl) etaEl.textContent = "— maintenant";
+
+            if(link && !card.dataset.bound){
+              card.dataset.bound = "1";
+              card.style.cursor = "pointer";
+              card.addEventListener("click", (e) => {
+                const a = e.target.closest("a");
+                if(a) return;
+                location.href = link;
+              });
+            }
+            return;
+          }
+
+          const s = Math.floor(diff/1000);
+          const days = Math.floor(s / 86400);
+          const hrs  = Math.floor((s % 86400) / 3600);
+          const mins = Math.floor((s % 3600) / 60);
+          const secs = s % 60;
+
+          tEl.textContent = (days > 0)
+            ? `${days}j ${pad(hrs)}:${pad(mins)}:${pad(secs)}`
+            : `${pad(hrs)}:${pad(mins)}:${pad(secs)}`;
+
+          if(etaEl){
+            etaEl.textContent = `ETA ${formatETA(new Date(target))}`;
+          }
+        });
+      }
+
+      tick();
+      setInterval(tick, 1000);
+
+      // Sync au chargement (ne jouera qu’après 1 clic)
+      syncLoop();
     })();
+  </script>
+
+  <!-- Conflits live progress -->
+  <script>
+    document.querySelectorAll(".clive-item").forEach((item) => {
+      const p = Math.max(0, Math.min(100, parseInt(item.dataset.progress || "0", 10)));
+      const fill = item.querySelector(".clive-fill");
+      const val  = item.querySelector(".clive-val");
+      if(fill) fill.style.width = p + "%";
+      if(val)  val.textContent  = p + "%";
+    });
   </script>
 </body>
 </html>
-
-
-
