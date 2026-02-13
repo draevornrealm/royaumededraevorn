@@ -181,126 +181,113 @@
   </script>
 
   <!-- ✅ Events : override + audio SAFE (ne charge pas l’audio sans clic) -->
-  <script>
-  (function(){
-    try{
-      const board  = document.getElementById("eventBoard");
-      const toggle = document.getElementById("eventToggle");
-      const list   = document.getElementById("eventList");
-      if(!board || !toggle || !list) return;
+<script>
+(function(){
 
-      const STORAGE_KEY = "wiki_events_enabled";
+  const board  = document.getElementById("eventBoard");
+  const toggle = document.getElementById("eventToggle");
+  const list   = document.getElementById("eventList");
+  if(!board || !toggle || !list) return;
 
-      const loopSrc = {
-        yellow: "/royaumededraevorn/audio/alert-jaune.wav",
-        orange: "/royaumededraevorn/audio/alert-orange.wav",
-        red:    "/royaumededraevorn/audio/alert-red.wav",
-        black:  "/royaumededraevorn/audio/alert-black.wav",
-      };
+  const STORAGE_KEY = "wiki_events_enabled";
 
-      const loop = new Audio();
-      loop.loop = true;
-      loop.volume = 0.55;
+  const loopSrc = {
+    yellow: "/royaumededraevorn/audio/alert-jaune.wav",
+    orange: "/royaumededraevorn/audio/alert-orange.wav",
+    red:    "/royaumededraevorn/audio/alert-red.wav",
+    black:  "/royaumededraevorn/audio/alert-black.wav",
+  };
 
-      let audioUnlocked = false;
+  const loop = new Audio();
+  loop.loop = true;
+  loop.volume = 0.55;
 
-      function levelFromCards(){
-        if(document.querySelector(".event-card.event-alert-black"))  return "black";
-        if(document.querySelector(".event-card.event-alert-red"))    return "red";
-        if(document.querySelector(".event-card.event-alert-orange")) return "orange";
-        if(document.querySelector(".event-card.event-alert-yellow")) return "yellow";
-        if(document.querySelector(".event-card.event-ras"))          return "ras";
-        return "ras";
-      }
+  let audioUnlocked = false;
 
-      function applyBoardLevel(){
-        const lvl = levelFromCards();
-        board.dataset.alert = lvl;
+  function levelFromCards(){
+    if(list.querySelector(".event-alert-black"))  return "black";
+    if(list.querySelector(".event-alert-red"))    return "red";
+    if(list.querySelector(".event-alert-orange")) return "orange";
+    if(list.querySelector(".event-alert-yellow")) return "yellow";
+    return "ras";
+  }
 
-        board.classList.remove("ras","alert-yellow","alert-orange","alert-red","alert-black");
-        if(lvl === "yellow") board.classList.add("alert-yellow");
-        else if(lvl === "orange") board.classList.add("alert-orange");
-        else if(lvl === "red") board.classList.add("alert-red");
-        else if(lvl === "black") board.classList.add("alert-black");
-        else board.classList.add("ras");
+  function applyBoardLevel(){
+    const lvl = levelFromCards();
 
-        return lvl;
-      }
+    board.className = "event-board";
+    if(lvl !== "ras") board.classList.add("alert-" + lvl);
 
-      function isEnabled(){
-        return board.dataset.enabled !== "false" && toggle.checked;
-      }
+    return lvl;
+  }
 
-      function stop(){
-        try{ loop.pause(); loop.currentTime = 0; }catch(e){}
-      }
+  function stop(){
+    loop.pause();
+    loop.currentTime = 0;
+  }
 
-      function sync(){
-        const lvl = applyBoardLevel();
-        if(document.hidden) return stop();
-        if(!isEnabled()) return stop();
-        if(lvl === "ras") return stop();
+  function sync(){
+    const lvl = applyBoardLevel();
 
-        // ✅ IMPORTANT : on ne charge/assigne jamais de src tant que pas unlock
-        if(!audioUnlocked) return;
+    if(document.hidden) return stop();
+    if(board.dataset.enabled === "false") return stop();
+    if(lvl === "ras") return stop();
+    if(!audioUnlocked) return;
 
-        const src = loopSrc[lvl];
-        if(!src) return stop();
+    const src = loopSrc[lvl];
+    if(!src) return stop();
 
-        const same = loop.src && loop.src.includes(src);
-        if(!same){
-          loop.pause();
-          loop.currentTime = 0;
-          loop.src = src;
-        }
-        if(loop.paused) loop.play().catch(()=>{});
-      }
-
-      function unlockOnce(){
-        if(audioUnlocked) return;
-        audioUnlocked = true;
-
-        // Warm-up très court (facultatif)
-        const lvl = applyBoardLevel();
-        const src = loopSrc[lvl] || loopSrc.yellow;
-        if(src){
-          loop.src = src;
-          loop.play().then(()=>{ loop.pause(); loop.currentTime=0; sync(); }).catch(()=>{});
-        }else{
-          sync();
-        }
-      }
-
-      window.addEventListener("pointerdown", unlockOnce, { once:true });
-      window.addEventListener("keydown", unlockOnce, { once:true });
-
-      function setEnabled(v){
-        board.dataset.enabled = v ? "true" : "false";
-        toggle.checked = !!v;
-        list.style.display = v ? "" : "none";
-        const txt = board.querySelector(".event-toggle-text");
-        if(txt) txt.textContent = v ? "Actif" : "Inactif";
-        try{ localStorage.setItem(STORAGE_KEY, v ? "1" : "0"); }catch(e){}
-        sync();
-      }
-
-      let enabled = true;
-      try{ if(localStorage.getItem(STORAGE_KEY) === "0") enabled = false; }catch(e){}
-      setEnabled(enabled);
-
-      toggle.addEventListener("change", ()=> setEnabled(toggle.checked));
-      document.addEventListener("visibilitychange", sync);
-
-      new MutationObserver(sync).observe(list, { childList:true, subtree:true });
-      new MutationObserver(sync).observe(board, { attributes:true, attributeFilter:["class","data-enabled","data-alert"] });
-
-      sync();
-    }catch(err){
-      // ✅ ne bloque jamais la page
-      console.error("Events script error:", err);
+    if(!loop.src.includes(src)){
+      loop.pause();
+      loop.currentTime = 0;
+      loop.src = src;
     }
-  })();
-  </script>
+
+    if(loop.paused){
+      loop.play().catch(()=>{});
+    }
+  }
+
+  function unlock(){
+    if(audioUnlocked) return;
+    audioUnlocked = true;
+    sync();
+  }
+
+  window.addEventListener("pointerdown", unlock, { once:true });
+  window.addEventListener("keydown", unlock, { once:true });
+
+  function setEnabled(v){
+    board.dataset.enabled = v ? "true" : "false";
+    toggle.checked = v;
+    list.style.display = v ? "" : "none";
+
+    try { localStorage.setItem(STORAGE_KEY, v ? "1" : "0"); } catch(e){}
+    sync();
+  }
+
+  let enabled = true;
+  try {
+    if(localStorage.getItem(STORAGE_KEY) === "0") enabled = false;
+  } catch(e){}
+
+  setEnabled(enabled);
+
+  toggle.addEventListener("change", () => setEnabled(toggle.checked));
+  document.addEventListener("visibilitychange", sync);
+
+  // ⚠️ On observe UNIQUEMENT les cartes
+  new MutationObserver(sync).observe(list, {
+    childList:true,
+    subtree:true
+  });
+
+  sync();
+
+})();
+</script>
+
 
 </body>
 </html>
+
