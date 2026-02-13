@@ -2028,10 +2028,8 @@ body[data-faction="neutral"]{
 }
 
 /* =========================================================
-   🟢 BADGE RAS — version LIVE verte (pas alerte)
-   - pulse doux
-   - halo interne vert
-   - bande blanche qui passe
+   🟢 BADGE RAS — FUSION DES EFFETS
+   (pulse + halo + shine + glow externe)
    ========================================================= */
 
 .ibadge.badge-ras{
@@ -2039,19 +2037,16 @@ body[data-faction="neutral"]{
   overflow: hidden;
   isolation: isolate;
 
-  background: linear-gradient(
-    135deg,
-    rgba(0,255,140,0.22),
-    rgba(0,120,70,0.28)
-  );
-  border: 1px solid rgba(0,255,140,0.60);
-  color: #eafff6;
-  font-weight: 900;
-
+  /* on garde ton style de base */
   animation: badgeRasPulse 2.2s ease-in-out infinite;
+
+  /* glow externe doux (comme les autres niveaux) */
+  filter:
+    drop-shadow(0 0 10px rgba(0,255,140,.28))
+    drop-shadow(0 0 22px rgba(0,255,140,.16));
 }
 
-/* Halo interne vert (reste dans la pilule) */
+/* Halo interne (reste dans la pilule) */
 .ibadge.badge-ras::before{
   content:"";
   position:absolute;
@@ -2061,16 +2056,17 @@ body[data-faction="neutral"]{
 
   background: radial-gradient(
     circle at 50% 50%,
-    rgba(0,255,140,0.35),
-    rgba(0,255,140,0.12) 55%,
+    rgba(0,255,140,0.40),
+    rgba(0,255,140,0.14) 55%,
     rgba(0,0,0,0) 72%
   );
 
-  filter: blur(8px);
-  opacity:.55;
+  filter: blur(10px);
+  opacity:.65;
+  transform: scale(1.15);
 }
 
-/* Bande blanche qui traverse */
+/* Bande blanche qui traverse (comme jaune/orange/rouge) */
 .ibadge.badge-ras::after{
   content:"";
   position:absolute;
@@ -2081,35 +2077,42 @@ body[data-faction="neutral"]{
   background: linear-gradient(
     110deg,
     rgba(255,255,255,0) 0%,
-    rgba(255,255,255,.28) 18%,
+    rgba(255,255,255,.30) 18%,
     rgba(255,255,255,0) 36%
   );
 
-  transform: translateX(-120%);
   opacity:0;
+  transform: translateX(-120%);
   pointer-events:none;
   mix-blend-mode: normal;
 
   animation: badgeRasShimmer 3s ease-in-out infinite;
 }
 
-/* Pulse doux */
+/* Pulse vert (identique esprit aux autres, pas alerte) */
 @keyframes badgeRasPulse{
   0%,100%{
-    filter: brightness(1.00) saturate(1.05);
+    filter:
+      brightness(1.00) saturate(1.05)
+      drop-shadow(0 0 10px rgba(0,255,140,.25))
+      drop-shadow(0 0 22px rgba(0,255,140,.14));
   }
   50%{
-    filter: brightness(1.10) saturate(1.15);
+    filter:
+      brightness(1.12) saturate(1.18)
+      drop-shadow(0 0 14px rgba(0,255,140,.40))
+      drop-shadow(0 0 30px rgba(0,255,140,.22));
   }
 }
 
 /* Shine */
 @keyframes badgeRasShimmer{
   0%   { opacity:0; transform: translateX(-120%); }
-  22%  { opacity:.45; }
+  22%  { opacity:.50; }
   55%  { opacity:0; transform: translateX(120%); }
   100% { opacity:0; transform: translateX(120%); }
 }
+
 
 
 
