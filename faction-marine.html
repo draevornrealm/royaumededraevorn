@@ -659,8 +659,20 @@
 }
 
   </style>
+<script>
+  // Conflits : applique automatiquement la progression + % affiché
+  document.querySelectorAll(".conflict-item").forEach((item) => {
+    const progress = Math.max(0, Math.min(100, parseInt(item.dataset.progress || "0", 10)));
+    const fill = item.querySelector(".meter-fill");
+    const value = item.querySelector(".meter-value");
+    if (fill) fill.style.width = progress + "%";
+    if (value) value.textContent = progress + "%";
+  });
+</script>
+
 </body>
 </html>
+
 
 
 
