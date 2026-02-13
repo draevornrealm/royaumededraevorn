@@ -741,32 +741,91 @@
         </div>
       </main>
 
-      <aside class="wiki-card">
-        <h3>Catégories</h3>
-        <div class="content">
-          <div class="list-grid">
-            <a class="list-item" href="personnages.html">
-              <div class="title">Personnages</div>
-              <div class="meta">Amiraux, pirates, neutres</div>
-            </a>
+<aside class="wiki-card conflict-mini">
+  <h3>⚔️ Conflits en cours</h3>
 
-            <a class="list-item" href="faction-marine.html">
-              <div class="title">Factions — Marine</div>
-              <div class="meta">Structure, doctrine, liens</div>
-            </a>
+  <div class="content">
+    <div class="conf-mini-head">
+      <div class="conf-mini-pill">Live</div>
+      <div class="conf-mini-note">Multi-camps</div>
+    </div>
 
-            <a class="list-item" href="faction-pirates.html">
-              <div class="title">Factions — Pirates</div>
-              <div class="meta">Flottes, code pirate, territoires</div>
-            </a>
+    <div class="conf-mini-list">
 
-            <a class="list-item" href="lore.html">
-              <div class="title">Lore</div>
-              <div class="meta">Chronologie, événements</div>
-            </a>
+      <!-- Conflit 1 -->
+      <div class="conf-mini-item" data-state="war" data-progress="78">
+        <div class="conf-mini-top">
+          <div class="conf-camp left pirate">🏴‍☠️ Pirates</div>
+          <div class="conf-vs">vs</div>
+          <div class="conf-camp right marine">⚓ Marine</div>
+        </div>
+
+        <div class="conf-mini-title">Front de Draevorn</div>
+        <div class="conf-mini-meta">Escarmouches navales • Interceptions • Pression constante</div>
+
+        <div class="conf-mini-meter">
+          <div class="conf-mini-track">
+            <div class="conf-mini-fill"></div>
+          </div>
+          <div class="conf-mini-bottom">
+            <span class="conf-mini-status">🔥 Guerre ouverte</span>
+            <span class="conf-mini-val">78%</span>
           </div>
         </div>
-      </aside>
+      </div>
+
+      <!-- Conflit 2 -->
+      <div class="conf-mini-item" data-state="truce" data-progress="30">
+        <div class="conf-mini-top">
+          <div class="conf-camp left pirate">🏴‍☠️ Pirates</div>
+          <div class="conf-vs">vs</div>
+          <div class="conf-camp right marine">⚓ Marine</div>
+        </div>
+
+        <div class="conf-mini-title">Trêve de Guerre</div>
+        <div class="conf-mini-meta">Surveillance renforcée • Négociations fragiles</div>
+
+        <div class="conf-mini-meter">
+          <div class="conf-mini-track">
+            <div class="conf-mini-fill"></div>
+          </div>
+          <div class="conf-mini-bottom">
+            <span class="conf-mini-status">🟡 Trêve surveillée</span>
+            <span class="conf-mini-val">30%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conflit 3 (exemple neutre) -->
+      <div class="conf-mini-item" data-state="secret" data-progress="45">
+        <div class="conf-mini-top">
+          <div class="conf-camp left neutral">🏳️ Neutres</div>
+          <div class="conf-vs">vs</div>
+          <div class="conf-camp right pirate">🏴‍☠️ Pirates</div>
+        </div>
+
+        <div class="conf-mini-title">Artefact inconnu</div>
+        <div class="conf-mini-meta">Rumeurs • Espionnage • Détournements</div>
+
+        <div class="conf-mini-meter">
+          <div class="conf-mini-track">
+            <div class="conf-mini-fill"></div>
+          </div>
+          <div class="conf-mini-bottom">
+            <span class="conf-mini-status">🕶️ Conflit latent</span>
+            <span class="conf-mini-val">45%</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="conf-mini-footer">
+      <a class="conf-mini-link" href="lore.html">Voir la chronologie →</a>
+    </div>
+  </div>
+</aside>
+
     </div>
   </div>
 
@@ -1010,6 +1069,7 @@
 
 </body>
 </html>
+
 
 
 
