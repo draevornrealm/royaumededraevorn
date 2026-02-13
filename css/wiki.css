@@ -2028,78 +2028,99 @@ body[data-faction="neutral"]{
 }
 
 /* =========================================================
-   🟢 RAS — effet "LIVE" (comme les autres mais pas alerte)
-   - bande blanche qui passe
-   - pulse vert doux
-   - bande/halo vert sur la carte
-   IMPORTANT: s'applique sur la carte, pas sur les badges
+   🟢 BADGE RAS — FUSION (allumé + clignotement léger + shine)
+   Usage HTML: <span class="ibadge badge-ras">🟢 RAS</span>
    ========================================================= */
 
-.event-card.event-alert-ras{
+.ibadge.badge-ras{
   position: relative;
-  overflow: hidden;
+  overflow: hidden;      /* garde le shimmer dans la pilule */
+  isolation: isolate;
 
-  border: 1px solid rgba(0, 255, 140, 0.35);
-  background: linear-gradient(
-    90deg,
-    rgba(0, 255, 140, 0.08),
-    rgba(8, 12, 22, 0.10) 55%,
-    rgba(0,0,0,0)
+  /* Base "allumé" */
+  background: linear-gradient(135deg,
+    rgba(0,255,140,0.22),
+    rgba(0,110,70,0.26)
   );
+  border-color: rgba(0,255,140,0.70);
+  color: rgba(235,255,245,0.98);
+  font-weight: 900;
 
-  /* pulse doux (pas "alerte") */
-  animation: pulseRasGreen 2.4s ease-in-out infinite;
+  /* halo externe doux (comme les autres niveaux) */
+  filter:
+    drop-shadow(0 0 10px rgba(0,255,140,.22))
+    drop-shadow(0 0 22px rgba(0,255,140,.12));
+
+  /* clignotement léger (pas alerte) */
+  animation: badgeRasGlow 2.2s ease-in-out infinite;
 }
 
-/* halo vert large (reste DANS la bande) */
-.event-card.event-alert-ras::after{
+/* Halo interne vert (reste DANS le badge) */
+.ibadge.badge-ras::before{
   content:"";
   position:absolute;
-  inset:-26px;
-  pointer-events:none;
+  inset:0;
+  border-radius:999px;
+  z-index:0;
 
-  background: radial-gradient(
-    circle at 30% 20%,
-    rgba(0, 255, 140, 0.22),
-    rgba(0,0,0,0) 62%
+  background: radial-gradient(circle at 50% 50%,
+    rgba(0,255,140,0.42),
+    rgba(0,255,140,0.14) 55%,
+    rgba(0,0,0,0) 72%
   );
 
-  filter: blur(16px);
-  opacity: .65;
+  filter: blur(10px);
+  transform: scale(1.18);
+  opacity: .62;
+  pointer-events:none;
 }
 
-/* bande blanche qui passe */
-.event-card.event-alert-ras::before{
+/* Bande blanche qui passe (comme les autres) */
+.ibadge.badge-ras::after{
   content:"";
   position:absolute;
-  top:0;
-  left:-120%;
-  width: 60%;
-  height: 100%;
-  pointer-events:none;
+  inset:0;
+  border-radius:999px;
+  z-index:1;
 
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255,255,255,0.32),
-    transparent
+  background: linear-gradient(110deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,.28) 18%,
+    rgba(255,255,255,0) 36%
   );
-  transform: skewX(-20deg);
-  animation: shineRasGreen 2.8s linear infinite;
+
+  opacity: 0;
+  transform: translateX(-120%);
+  pointer-events:none;
+  mix-blend-mode: normal;
+
+  animation: badgeRasShine 3.0s ease-in-out infinite;
 }
 
-/* Pulse vert doux */
-@keyframes pulseRasGreen{
-  0%   { box-shadow: 0 0 0 rgba(0,255,140,0.16); filter: brightness(1.00); }
-  50%  { box-shadow: 0 0 18px rgba(0,255,140,0.28); filter: brightness(1.06); }
-  100% { box-shadow: 0 0 0 rgba(0,255,140,0.16); filter: brightness(1.00); }
+/* Clignotement léger (brightness + glow externe) */
+@keyframes badgeRasGlow{
+  0%,100%{
+    filter:
+      brightness(1.00) saturate(1.05)
+      drop-shadow(0 0 10px rgba(0,255,140,.20))
+      drop-shadow(0 0 22px rgba(0,255,140,.10));
+  }
+  50%{
+    filter:
+      brightness(1.10) saturate(1.14)
+      drop-shadow(0 0 14px rgba(0,255,140,.34))
+      drop-shadow(0 0 30px rgba(0,255,140,.18));
+  }
 }
 
-/* Shine */
-@keyframes shineRasGreen{
-  0%   { left: -120%; }
-  100% { left: 120%; }
+/* Shine du badge */
+@keyframes badgeRasShine{
+  0%   { opacity:0; transform: translateX(-120%); }
+  22%  { opacity:.45; }
+  55%  { opacity:0; transform: translateX(120%); }
+  100% { opacity:0; transform: translateX(120%); }
 }
+
 
 
 
