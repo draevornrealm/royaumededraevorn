@@ -1082,9 +1082,20 @@
   syncLoop();
 })();
 </script>
+<script>
+  document.querySelectorAll(".clive-item").forEach((item)=>{
+    const p = Math.max(0, Math.min(100, parseInt(item.dataset.progress || "0", 10)));
+    const fill = item.querySelector(".clive-fill");
+    const val  = item.querySelector(".clive-val");
+    if(fill) fill.style.width = p + "%";
+    if(val)  val.textContent = p + "%";
+  });
+</script>
+
 
 </body>
 </html>
+
 
 
 
